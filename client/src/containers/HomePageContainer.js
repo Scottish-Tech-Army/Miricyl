@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
+import Results from "../components/Results";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const INITIAL_STATE = {
   tags: [],
   question1: [
-    { id: 1, title: "Addiction", tags: ["addiction"] },
-    { id: 2, title: "Pregnancy and Parenting", tags: ["parenting"] },
+    { id: 1, title: "Addiction", tags: "addiction" },
+    { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
   ],
 };
 
@@ -24,14 +26,19 @@ export default class HomePageContainer extends Component {
 
   render() {
     return (
-      <div>
-        <h1>How can we help you?</h1>
-        <p>Search for personalised resources and services that can help you</p>
-        <Question1Component
-          questions={this.state.question1}
-          addTag={this.addTag}
-        />
-      </div>
+      <Router>
+        <React.Fragment>
+          <Route exact path="/">
+            <Question1Component
+              questions={this.state.question1}
+              addTag={this.addTag}
+            />
+          </Route>
+          <Route exact path="/results">
+            <Results />
+          </Route>
+        </React.Fragment>
+      </Router>
     );
   }
 }

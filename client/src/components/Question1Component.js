@@ -1,9 +1,11 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 const Question1Component = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addTag(e.target.q1.value);
+    props.history.push("/results");
   };
 
   const questions = props.questions.map((question) => (
@@ -14,6 +16,8 @@ const Question1Component = (props) => {
 
   return (
     <div>
+      <h1>How can we help you?</h1>
+      <p>Search for personalised resources and services that can help you</p>
       <form onSubmit={handleSubmit}>
         <select name="q1">
           <option key="0" value="" defaultValue>
@@ -27,4 +31,4 @@ const Question1Component = (props) => {
   );
 };
 
-export default Question1Component;
+export default withRouter(Question1Component);
