@@ -9,6 +9,13 @@ const INITIAL_STATE = {
     { id: 1, title: "Addiction", tags: "addiction" },
     { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
   ],
+  charities: [
+    { id: 1, name: "Turning Point Scotland", tags: "addiction" },
+    { id: 2, name: "Pregnancy Counselling & Care", tags: "parenting" },
+    { id: 3, name: "Mind", tags: "addiction" },
+    { id: 4, name: "Stepping Stones", tags: "parenting" },
+  ],
+  charityResults: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -16,12 +23,31 @@ export default class HomePageContainer extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
     this.addTag = this.addTag.bind(this);
+    this.selectResults = this.selectResults.bind(this);
   }
 
   addTag(tag) {
-    const newTags = this.state.tags;
-    newTags.push(tag);
-    this.setState({ tags: newTags });
+    if (tag) {
+      const newTags = this.state.tags;
+      newTags.push(tag);
+      this.setState({ tags: newTags });
+    }
+  }
+
+  selectResults() {
+    if (this.state.tags.length === 0) {
+      this.setState({ charityResults: this.state.charities });
+    } else {
+      const results = [];
+      this.state.tags.map((tags) => {
+        this.state.charities.map((charity) => {
+          if (charity.tags === tags) {
+            results.push(charity);
+          }
+        });
+      });
+      this.setState({ charityResults: results });
+    }
   }
 
   render() {
@@ -32,10 +58,11 @@ export default class HomePageContainer extends Component {
             <Question1Component
               questions={this.state.question1}
               addTag={this.addTag}
+              selectResults={this.selectResults}
             />
           </Route>
           <Route exact path="/results">
-            <Results />
+            <Results results={this.state.charityResults} />
           </Route>
         </React.Fragment>
       </Router>

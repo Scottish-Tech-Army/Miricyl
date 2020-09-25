@@ -6,6 +6,7 @@ const Question1Component = (props) => {
     e.preventDefault();
     props.addTag(e.target.q1.value);
     props.history.push("/results");
+    props.selectResults();
   };
 
   const questions = props.questions.map((question) => (
