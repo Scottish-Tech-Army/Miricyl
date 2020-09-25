@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import "../styles/global.css";
 
 const Question1Component = (props) => {
   const handleSubmit = (e) => {
@@ -16,9 +17,12 @@ const Question1Component = (props) => {
   ));
 
   return (
-    <div>
-      <h1>How can we help you?</h1>
-      <p>Search for personalised resources and services that can help you</p>
+    <div className="question-title">
+      <h1>
+        Search mental health resources & services that can help you feel better
+      </h1>
+      <p>What can we help you with?</p>
+
       <form onSubmit={handleSubmit}>
         <select name="q1">
           <option key="0" value="" defaultValue>

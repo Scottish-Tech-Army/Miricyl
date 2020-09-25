@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+.question-title p {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+}
