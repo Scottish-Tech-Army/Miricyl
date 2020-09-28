@@ -12,8 +12,13 @@ font-style:  normal; */
 
 .question-one-container {
   margin: 0;
-  background-color: #FF6E43;
   background: linear-gradient(#FCD432, #FF6E43);
+  height: 100vh;
+}
+
+.results-container {
+  margin: 0;
+  background: linear-gradient(#C974FF, #9026FC);
   height: 100vh;
 }
 .question-title {
@@ -25,6 +30,25 @@ font-style:  normal; */
   line-height: 29px;
   letter-spacing: 0.6px; 
   color: #FFFFFF;
+}
+
+.results-list {
+  border: solid 0.5px #BCBCBC;
+  margin: 15px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  text-align: left;
+  padding: 15px 10px;
+  text-decoration: none;
+}
+
+.results-list-name {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+  
 }
 
 .select-container {
