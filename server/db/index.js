@@ -35,4 +35,28 @@ miricyldb.charities = () => {
   });
 };
 
+miricyldb.charitySelect = (tags) => {
+  let finalResults = [];
+  let finalTags = [];
+  let splitTags = tags.split(",");
+  splitTags.forEach((tag) => {
+    finalTags.push(tag);
+  });
+  console.log("finalTags", finalTags);
+
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT * FROM charities WHERE tags IN (?)`,
+      [finalTags],
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(results);
+      }
+    );
+  });
+};
+
 module.exports = miricyldb;
