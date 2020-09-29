@@ -1,9 +1,89 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://use.typekit.net/sfj2qxn.css");
 
-.question-title p {
+/* font-family:  clone-rounded-latin,   sans-serif;
+font-weight:  700;
+font-style:  normal;
+Clone Rounded Latin Regular
+font-family:  clone-rounded-latin,   sans-serif;
+font-weight:  400;
+font-style:  normal; */
+
+
+.question-one-container {
+  margin: 0;
+  background: linear-gradient(#FCD432, #FF6E43);
+  height: 100vh;
+}
+
+.results-container {
+  margin: 0;
+  background: linear-gradient(#C974FF, #9026FC);
+  height: 100vh;
+}
+.question-title {
+  margin: 0;
+  padding: 50px 20px 20px 20px;
+  font-family: "clone-rounded-latin", sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 29px;
+  letter-spacing: 0.6px; 
+  color: #FFFFFF;
+}
+
+.results-list {
+  border: solid 0.5px #BCBCBC;
+  margin: 15px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  text-align: left;
+  padding: 15px 10px;
+  text-decoration: none;
+}
+
+.results-list-name {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.1px;
   color: #2e3192;
+  
+}
+
+.select-container {
+  border: solid 0.5px #BCBCBC;
+  margin: 15px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  text-align: center;
+  padding: 15px 10px;
+
+}
+
+.question-one-text {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+}
+
+.question-one-subtext{
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  color: #BCBCBC;
+}
+input[type=submit] {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 16px;
+  color: #2e3192;
+  text-align: Center;
+  letter-spacing: 0.4px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: none;
+  margin: 35px 0px 10px 0px;
+  float: right;
 }
