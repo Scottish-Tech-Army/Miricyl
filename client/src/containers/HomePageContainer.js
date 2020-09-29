@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import nodeServer from "../api/nodeServer";
 
 const INITIAL_STATE = {
   tags: [],
   question1: [
-    { id: 1, title: "Addiction", tags: "addiction" },
-    { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
+    // { id: 1, title: "Addiction", tags: "addiction" },
+    // { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
   ],
   charities: [
     { id: 1, name: "Turning Point Scotland", tags: "addiction" },
@@ -24,6 +25,7 @@ export default class HomePageContainer extends Component {
     this.state = { ...INITIAL_STATE };
     this.addTag = this.addTag.bind(this);
     this.selectResults = this.selectResults.bind(this);
+    this.getQuestion1 = this.getQuestion1.bind(this);
   }
 
   addTag(tag) {
@@ -48,6 +50,18 @@ export default class HomePageContainer extends Component {
       });
       this.setState({ charityResults: results });
     }
+  }
+
+  getQuestion1() {
+    nodeServer.get("/tags").then((res) => {
+      const question1Api = res.data;
+      console.log(question1Api);
+      this.setState({ question1: question1Api });
+    });
+  }
+
+  componentDidMount() {
+    this.getQuestion1();
   }
 
   render() {
