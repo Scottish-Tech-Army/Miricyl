@@ -8,6 +8,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema Miricyl
 -- -----------------------------------------------------
 -- Database for storing Mental health service provider details
+DROP SCHEMA IF EXISTS `Miricyl` ;
 
 -- -----------------------------------------------------
 -- Schema Miricyl
@@ -20,6 +21,8 @@ USE `Miricyl` ;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Needs`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Needs` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Needs` (
   `NeedsID` INT NOT NULL AUTO_INCREMENT,
   `NeedsDesc` VARCHAR(100) NOT NULL,
@@ -32,6 +35,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Type`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Type` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Type` (
   `ServiceTypeID` INT NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(200) NOT NULL,
@@ -43,6 +48,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Country`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Country` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Country` (
   `CountryID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(100) NULL,
@@ -55,6 +62,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Organisation`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Organisation` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Organisation` (
   `OrgID` INT NOT NULL AUTO_INCREMENT,
   `OrgName` VARCHAR(255) NOT NULL,
@@ -64,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`Organisation` (
   `OrgURL` VARCHAR(100) NULL,
   `PlaceID` VARCHAR(100) NULL,
   `Country_CountryID` INT NOT NULL,
+  `NationalService` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`OrgID`),
   UNIQUE INDEX `OrgID_UNIQUE` (`OrgID` ASC) VISIBLE,
   INDEX `fk_Organisation_Country1_idx` (`Country_CountryID` ASC) VISIBLE,
@@ -78,6 +88,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Gender`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Gender` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Gender` (
   `GenderID` INT NOT NULL AUTO_INCREMENT,
   `Gender` VARCHAR(45) NOT NULL,
@@ -89,6 +101,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`OrgService`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`OrgService` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `OrgServiceID` INT NOT NULL AUTO_INCREMENT,
   `ServiceName` VARCHAR(100) NULL,
@@ -101,10 +115,14 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `OpeningTime` VARCHAR(200) NULL,
   `Organisation_OrgID` INT NOT NULL,
   `Gender_GenderID` INT NOT NULL,
+  `ServiceURL` VARCHAR(200) NULL,
+  `ServiceEmail` VARCHAR(200) NULL,
+  `Country_CountryID` INT NOT NULL,
   PRIMARY KEY (`OrgServiceID`),
   UNIQUE INDEX `OrgServiceID_UNIQUE` (`OrgServiceID` ASC) VISIBLE,
   INDEX `fk_OrgService_Organisation_idx` (`Organisation_OrgID` ASC) VISIBLE,
   INDEX `fk_OrgService_Gender1_idx` (`Gender_GenderID` ASC) VISIBLE,
+  INDEX `fk_OrgService_Country1_idx` (`Country_CountryID` ASC) VISIBLE,
   CONSTRAINT `fk_OrgService_Organisation`
     FOREIGN KEY (`Organisation_OrgID`)
     REFERENCES `Miricyl`.`Organisation` (`OrgID`)
@@ -114,6 +132,11 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
     FOREIGN KEY (`Gender_GenderID`)
     REFERENCES `Miricyl`.`Gender` (`GenderID`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_OrgService_Country1`
+    FOREIGN KEY (`Country_CountryID`)
+    REFERENCES `Miricyl`.`Country` (`CountryID`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -121,6 +144,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`Personalisation`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Personalisation` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Personalisation` (
   `PersonalisationID` INT NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(100) NOT NULL,
@@ -133,6 +158,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Miricyl`.`ServiceNeeds`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`ServiceNeeds` ;
+
 CREATE TABLE IF NOT EXISTS `Miricyl`.`ServiceNeeds` (
   `OrgService_OrgServiceID` INT NOT NULL,
   `Needs_NeedsID` INT NOT NULL,
@@ -169,22 +196,45 @@ USE `Miricyl` ;
 -- -----------------------------------------------------
 -- Placeholder table for view `Miricyl`.`ServiceDetails`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Miricyl`.`ServiceDetails` (`NeedsDesc` INT, `UserOption` INT, `OrgServiceID` INT, `ServiceName` INT, `Description` INT, `Address1` INT, `Address2` INT, `OuterCode` INT, `InnerCode` INT, `PhoneNo` INT, `OpeningTime` INT, `Organisation_OrgID` INT, `Gender_GenderID` INT, `OrgName` INT, `LogoURL` INT, `ServiceArea` INT);
+CREATE TABLE IF NOT EXISTS `Miricyl`.`ServiceDetails` (`OrgName` INT, `NationalService` INT, `SpecificArea` INT, `PostCode` INT, `OuterCode` INT, `InnerCode` INT, `PlaceID` INT, `Logo` INT, `OrgDescription` INT, `ServiceDescription` INT, `PhysicalAddress` INT, `EmailAddress` INT, `ServiceURL` INT, `PhoneNo` INT, `OpeningTime` INT, `Gender` INT, `Needs` INT, `UserOption` INT, `TypeOfSupport` INT, `Personalisation` INT);
 
 -- -----------------------------------------------------
 -- View `Miricyl`.`ServiceDetails`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Miricyl`.`ServiceDetails`;
+DROP VIEW IF EXISTS `Miricyl`.`ServiceDetails` ;
 USE `Miricyl`;
 CREATE  OR REPLACE VIEW `ServiceDetails` AS
-SELECT B.NeedsDesc, B.UserOption, C.*, D.OrgName, D.LogoURL, E.Name as ServiceArea
-FROM ServiceNeeds A
-Inner Join Needs B on A.Needs_NeedsID = B.NeedsID
-Inner Join OrgService C on C.OrgServiceID = A.OrgService_OrgServiceID
-Inner Join Organisation D on D.OrgID = C.Organisation_OrgID
-Inner Join Country E on E.CountryID = D.Country_CountryID
-Left Join Personalisation F on F.PersonalisationID = A.Personalisation_PersonalisationID
-Left Join Type G on G.ServiceTypeID = A.Type_ServiceTypeID;
+SELECT 
+	O.OrgName, 
+    CASE WHEN O.NationalService THEN 'YES' ELSE 'NO' END NationalService,
+    C.Name SpecificArea,
+    CONCAT(OS.OuterCode,' ',OS.InnerCode) PostCode,
+    OS.OuterCode,
+    OS.InnerCode,
+    O.PlaceID,
+    O.LogoURl as Logo,
+    O.ServiceDesc as OrgDescription,
+    OS.Description AS ServiceDescription,
+    CONCAT(OS.Address1, ', ', OS.Address2 ) AS PhysicalAddress,
+    OS.ServiceEmail as EmailAddress,
+    OS.ServiceURL ,
+    OS.PhoneNo,
+    OS.OpeningTime,
+    G.Gender,
+    N.NeedsDesc as Needs,
+    N.UserOption,
+    T.Description as TypeOfSupport,
+    P.Description as Personalisation
+
+FROM miricyl.serviceneeds SN
+INNER JOIN miricyl.orgservice OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
+inner join miricyl.organisation O on O.OrgID = OS.Organisation_OrgID
+INNER JOIN miricyl.country C on C.CountryID = OS.Country_CountryID
+INNER JOIN miricyl.gender G on G.GenderID = OS.Gender_GenderID
+INNER JOIN miricyl.needs N on N.NeedsID = SN.Needs_NeedsID
+LEFT JOIN miricyl.type T on T.ServiceTypeID = SN.Type_ServiceTypeID
+LEFT JOIN miricyl.personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
