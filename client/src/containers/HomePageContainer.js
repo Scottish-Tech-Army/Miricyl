@@ -48,15 +48,23 @@ export default class HomePageContainer extends Component {
           console.log(error);
         });
     } else {
-      const results = [];
+      let results = "";
       this.state.tags.map((tags) => {
-        this.state.charities.map((charity) => {
-          if (charity.tags === tags) {
-            results.push(charity);
-          }
-        });
+        let apiTag = `${tags},`;
+        let resultsTemp = results.concat(apiTag);
+        results = resultsTemp;
+        console.log("results", results);
       });
-      this.setState({ charityResults: results });
+
+      nodeServer
+        .get(`http://localhost:3000/api/charities?tags=${results}`)
+        .then((res) => {
+          const charities = res.data;
+          this.setState({ charityResults: charities });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
