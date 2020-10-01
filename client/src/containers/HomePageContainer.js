@@ -53,7 +53,6 @@ export default class HomePageContainer extends Component {
         let apiTag = `${tags},`;
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
-        console.log("results", results);
       });
 
       nodeServer
