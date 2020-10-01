@@ -10,12 +10,12 @@ const INITIAL_STATE = {
     // { id: 1, title: "Addiction", tags: "addiction" },
     // { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
   ],
-  charities: [
-    { id: 1, name: "Turning Point Scotland", tags: "addiction" },
-    { id: 2, name: "Pregnancy Counselling & Care", tags: "parenting" },
-    { id: 3, name: "Mind", tags: "addiction" },
-    { id: 4, name: "Stepping Stones", tags: "parenting" },
-  ],
+  // charities: [
+  //   { id: 1, name: "Turning Point Scotland", tags: "addiction" },
+  //   { id: 2, name: "Pregnancy Counselling & Care", tags: "parenting" },
+  //   { id: 3, name: "Mind", tags: "addiction" },
+  //   { id: 4, name: "Stepping Stones", tags: "parenting" },
+  // ],
   charityResults: [],
 };
 
@@ -38,7 +38,15 @@ export default class HomePageContainer extends Component {
 
   selectResults() {
     if (this.state.tags.length === 0) {
-      this.setState({ charityResults: this.state.charities });
+      nodeServer
+        .get("http://localhost:3000/api/charities")
+        .then((res) => {
+          const charities = res.data;
+          this.setState({ charityResults: charities });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       const results = [];
       this.state.tags.map((tags) => {
