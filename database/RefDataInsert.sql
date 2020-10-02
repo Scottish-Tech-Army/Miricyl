@@ -1,11 +1,11 @@
-Insert into miricyl.country values(101,'Scotland');
-Insert into miricyl.country values(102,'England');
-Insert into miricyl.country values(103,'Wales');
-Insert into miricyl.country values(104,"Northen Ireland");
-Insert into miricyl.country values(105,"United Kingdom");
-Insert into miricyl.gender values(101,'Female');
-Insert into miricyl.gender values(102,'Male');
-Insert into miricyl.gender values(103,'Both');
+Insert into Miricyl.Country values(101,'Scotland');
+Insert into Miricyl.Country values(102,'England');
+Insert into Miricyl.Country values(103,'Wales');
+Insert into Miricyl.Country values(104,"Northen Ireland");
+Insert into Miricyl.Country values(105,"United Kingdom");
+Insert into Miricyl.Gender values(101,'Female');
+Insert into Miricyl.Gender values(102,'Male');
+Insert into Miricyl.Gender values(103,'Both');
 
 Insert into Miricyl.Needs Values(101,'Abuse','Abuse or bullying');
 Insert into Miricyl.Needs Values(102,'Addiction','Addiction');
@@ -56,14 +56,12 @@ Insert into Miricyl.Type Values(112,'Online support - Text Counselling');
 Insert into Miricyl.Type Values(113,'Online support - E-Counselling');
 Insert into Miricyl.Type Values(114,'Online support - Video Counselling');
 
-Insert into Miricyl.personalisation Values(101,'Under 16','Under 18');
-Insert into Miricyl.personalisation Values(102,'16+','');
-Insert into Miricyl.personalisation Values(103,'18+','');
-Insert into Miricyl.personalisation Values(104,'A student','A student');
-Insert into Miricyl.personalisation Values(105,'A parent','A parent');
-Insert into Miricyl.personalisation Values(106,'LGBTQ+','LGBTQ+');
-Insert into Miricyl.personalisation Values(107,'Unemployed','Unemployed');
-Insert into Miricyl.personalisation Values(108,'A carer','A carer');
-Insert into Miricyl.personalisation Values(109,'BAME','BAME');
-
-
+Insert into Miricyl.Personalisation Values(101,'Under 16','Under 18');
+Insert into Miricyl.Personalisation Values(102,'16+','');
+Insert into Miricyl.Personalisation Values(103,'18+','');
+Insert into Miricyl.Personalisation Values(104,'A student','A student');
+Insert into Miricyl.Personalisation Values(105,'A parent','A parent');
+Insert into Miricyl.Personalisation Values(106,'LGBTQ+','LGBTQ+');
+Insert into Miricyl.Personalisation Values(107,'Unemployed','Unemployed');
+Insert into Miricyl.Personalisation Values(108,'A carer','A carer');
+Insert into Miricyl.Personalisation Values(109,'BAME','BAME');
