@@ -20,7 +20,7 @@ null,
 105,
 1);
 
-INSERT INTO `miricyl`.`organisation`
+INSERT INTO `Miricyl`.`Organisation`
 (`OrgID`,
 `OrgName`,
 `LogoURl`,
