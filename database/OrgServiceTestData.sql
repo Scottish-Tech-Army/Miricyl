@@ -1,5 +1,5 @@
   
-INSERT INTO `miricyl`.`orgservice`
+INSERT INTO `Miricyl`.`OrgService`
 (`OrgServiceID`,
 `ServiceName`,
 `Description`,
@@ -31,7 +31,7 @@ VALUES
 105);
 
   
-INSERT INTO `miricyl`.`orgservice`
+INSERT INTO `Miricyl`.`OrgService`
 (`OrgServiceID`,
 `ServiceName`,
 `Description`,
@@ -62,7 +62,7 @@ null,
 null,
 105);
 
-INSERT INTO `miricyl`.`orgservice`
+INSERT INTO `Miricyl`.`OrgService`
 (`OrgServiceID`,
 `ServiceName`,
 `Description`,
@@ -94,6 +94,6 @@ null,
 105);
 
 
-insert into miricyl.serviceneeds values (2001,102,103,104);
-insert into miricyl.serviceneeds values (2002,126,102,105);
-insert into miricyl.serviceneeds values (2003,103,111,102);
+insert into Miricyl.ServiceNeeds values (2001,102,103,104);
+insert into Miricyl.ServiceNeeds values (2002,126,102,105);
+insert into Miricyl.ServiceNeeds values (2003,103,111,102);
