@@ -227,14 +227,14 @@ SELECT
     T.Description as TypeOfSupport,
     P.Description as Personalisation
 
-FROM miricyl.serviceneeds SN
-INNER JOIN miricyl.orgservice OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
-inner join miricyl.organisation O on O.OrgID = OS.Organisation_OrgID
-INNER JOIN miricyl.country C on C.CountryID = OS.Country_CountryID
-INNER JOIN miricyl.gender G on G.GenderID = OS.Gender_GenderID
-INNER JOIN miricyl.needs N on N.NeedsID = SN.Needs_NeedsID
-LEFT JOIN miricyl.type T on T.ServiceTypeID = SN.Type_ServiceTypeID
-LEFT JOIN miricyl.personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID;
+FROM Miricyl.ServiceNeeds SN
+INNER JOIN Miricyl.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
+inner join Miricyl.Organisation O on O.OrgID = OS.Organisation_OrgID
+INNER JOIN Miricyl.Country C on C.CountryID = OS.Country_CountryID
+INNER JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
+INNER JOIN Miricyl.Needs N on N.NeedsID = SN.Needs_NeedsID
+LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
+LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
