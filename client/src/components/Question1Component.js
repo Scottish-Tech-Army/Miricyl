@@ -11,7 +11,7 @@ const Question1Component = (props) => {
   };
 
   const questions = props.questions.map((question) => (
-    <option key={question.id} value={question.tags}>
+    <option key={question.NeedsID} value={question.NeedsDesc}>
       {question.NeedsDesc}
     </option>
   ));
