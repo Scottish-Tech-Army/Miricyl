@@ -4,16 +4,16 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   user: "root",
   password: "example",
-  database: "miricyl",
+  database: "Miricyl",
   host: "localhost",
   port: "3306",
 });
 
 let miricyldb = {};
 
-miricyldb.tags = () => {
+miricyldb.needs = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM tags`, (err, results) => {
+    pool.query(`SELECT * FROM Needs`, (err, results) => {
       if (err) {
         return reject(err);
       }

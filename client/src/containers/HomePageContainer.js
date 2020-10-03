@@ -68,7 +68,7 @@ export default class HomePageContainer extends Component {
   }
 
   getQuestion1() {
-    nodeServer.get("/tags").then((res) => {
+    nodeServer.get("/needs").then((res) => {
       const question1Api = res.data;
       this.setState({ question1: question1Api });
     });

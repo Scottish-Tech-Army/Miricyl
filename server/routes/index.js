@@ -4,9 +4,9 @@ const db = require("../db");
 
 const router = express.Router();
 
-router.get("/tags", async (req, res, next) => {
+router.get("/needs", async (req, res, next) => {
   try {
-    let results = await db.tags();
+    let results = await db.needs();
     res.json(results);
   } catch (e) {
     console.log(e);
