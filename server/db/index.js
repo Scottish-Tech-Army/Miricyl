@@ -25,7 +25,7 @@ miricyldb.needs = () => {
 
 miricyldb.charities = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM charities`, (err, results) => {
+    pool.query(`SELECT * FROM ServiceDetails`, (err, results) => {
       if (err) {
         return reject(err);
       }
@@ -42,11 +42,10 @@ miricyldb.charitySelect = (tags) => {
   splitTags.forEach((tag) => {
     finalTags.push(tag);
   });
-  console.log("finalTags", finalTags);
 
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT * FROM charities WHERE tags IN (?)`,
+      `SELECT * FROM ServiceDetails WHERE Needs IN (?)`,
       [finalTags],
       (err, results) => {
         if (err) {
