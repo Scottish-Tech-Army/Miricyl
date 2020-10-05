@@ -14,11 +14,9 @@ const Question1Component = (props) => {
     if (e.target.classList == "question-button") {
       tags.push(e.target.value);
       e.target.classList = "question-button-selected";
-      console.log("if fired");
     } else {
       tags.splice(tags.indexOf(e.target.value), 1);
       e.target.classList = "question-button";
-      console.log("else fired");
     }
   };
 
