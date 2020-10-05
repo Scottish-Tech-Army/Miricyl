@@ -42,6 +42,7 @@ font-style:  normal; */
   border: solid 1px #2e3192;
   margin: 5px;
   background-color: #FFFFFF;
+  width: 200px;
 }
 .question-button-selected {
   font-family: "clone-rounded-latin", sans-serif;
@@ -55,6 +56,7 @@ font-style:  normal; */
   border: none;
   margin: 5px;
   background-color: #2e3192;
+  width: 200px;
 }
 
 .results-list {
@@ -112,6 +114,8 @@ font-style:  normal; */
   border: none;
   margin: 35px 0px 10px 0px;
   float: right;
+  background-color: #FFFFFF;
+  width: 200px;
 }
 
 .active {
