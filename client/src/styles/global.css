@@ -9,16 +9,15 @@ font-family:  clone-rounded-latin,   sans-serif;
 font-weight:  400;
 font-style:  normal; */
 
-
 .question-one-container {
   margin: 0;
-  background: linear-gradient(#FCD432, #FF6E43);
+  background: linear-gradient(#fcd432, #ff6e43);
   height: 100vh;
 }
 
 .results-container {
   margin: 0;
-  background: linear-gradient(#C974FF, #9026FC);
+  background: linear-gradient(#c974ff, #9026fc);
   height: 100vh;
 }
 .question-title {
@@ -28,14 +27,40 @@ font-style:  normal; */
   font-weight: 400;
   font-size: 28px;
   line-height: 29px;
-  letter-spacing: 0.6px; 
+  letter-spacing: 0.6px;
+  color: #ffffff;
+}
+.question-button {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2e3192;
+  text-align: center;
+  letter-spacing: 0.4px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: solid 1px #2e3192;
+  margin: 5px;
+  background-color: #FFFFFF;
+}
+.question-button-selected {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
   color: #FFFFFF;
+  text-align: center;
+  letter-spacing: 0.4px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: none;
+  margin: 5px;
+  background-color: #2e3192;
 }
 
 .results-list {
-  border: solid 0.5px #BCBCBC;
+  border: solid 0.5px #bcbcbc;
   margin: 15px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 20px;
   text-align: left;
   padding: 15px 10px;
@@ -48,17 +73,15 @@ font-style:  normal; */
   font-size: 18px;
   letter-spacing: 0.1px;
   color: #2e3192;
-  
 }
 
 .select-container {
-  border: solid 0.5px #BCBCBC;
+  border: solid 0.5px #bcbcbc;
   margin: 15px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 20px;
   text-align: center;
   padding: 15px 10px;
-
 }
 
 .question-one-text {
@@ -69,13 +92,16 @@ font-style:  normal; */
   color: #2e3192;
 }
 
-.question-one-subtext{
+.question-one-subtext {
   font-family: "Nunito", sans-serif;
   font-size: 14px;
   letter-spacing: 0.1px;
-  color: #BCBCBC;
+  color: #bcbcbc;
 }
-input[type=submit] {
+
+/* css below is for the "next-submit button" */
+/* input[type="submit"]  */
+.next-button {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 16px;
   color: #2e3192;
@@ -86,4 +112,15 @@ input[type=submit] {
   border: none;
   margin: 35px 0px 10px 0px;
   float: right;
+}
+
+.active {
+  background-color: #7fff00;
+}
+.inactive {
+  background-color: #aa0707;
+}
+
+input[type="checkbox"]:checked ~ .question-button {
+  background-color: #ff6e43;
 }

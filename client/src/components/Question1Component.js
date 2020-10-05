@@ -3,17 +3,31 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
 const Question1Component = (props) => {
+  const tags = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addTag(e.target.q1.value);
     props.history.push("/results");
-    props.selectResults();
+    props.selectResults(tags);
+  };
+
+  const handleChange = (e) => {
+    if (e.target.classList == "question-button") {
+      tags.push(e.target.value);
+      e.target.classList = "question-button-selected";
+    } else {
+      tags.splice(tags.indexOf(e.target.value), 1);
+      e.target.classList = "question-button";
+    }
   };
 
   const questions = props.questions.map((question) => (
-    <option key={question.NeedsID} value={question.NeedsDesc}>
+    <button
+      onClick={handleChange}
+      className="question-button"
+      value={question.NeedsDesc}
+    >
       {question.NeedsDesc}
-    </option>
+    </button>
   ));
 
   return (
@@ -26,17 +40,17 @@ const Question1Component = (props) => {
         <p className="question-one-text">What can we help you with?</p>
         <p className="question-one-subtext">select all that apply</p>
 
-        <form onSubmit={handleSubmit}>
-          <select name="q1">
-            <option key="0" value="" defaultValue>
-              I'm looking for help with...
-            </option>
-            {questions}
-          </select>
-          <br />
+        {/* <form onSubmit={handleSubmit}> */}
+        {/* <h2>I'm looking for help with...</h2> */}
 
-          <input type="submit" value="Next" />
-        </form>
+        {questions}
+
+        <br />
+        <button className="next-button" onClick={handleSubmit}>
+          Next
+        </button>
+        {/* <input type="submit" value="Next" />
+        </form> */}
       </div>
     </div>
   );

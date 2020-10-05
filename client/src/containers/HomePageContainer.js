@@ -7,8 +7,8 @@ import nodeServer from "../api/nodeServer";
 const INITIAL_STATE = {
   tags: [],
   question1: [
-    // { id: 1, title: "Addiction", tags: "addiction" },
-    // { id: 2, title: "Pregnancy and Parenting", tags: "parenting" },
+    { NeedsID: 1, title: "Alcohol", NeedsDesc: "Alcohol" },
+    { NeedsID: 2, title: "Pregnancy and Parenting", NeedsDesc: "Parenting" },
   ],
   // charities: [
   //   { id: 1, name: "Turning Point Scotland", tags: "addiction" },
@@ -23,21 +23,12 @@ export default class HomePageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
-    this.addTag = this.addTag.bind(this);
     this.selectResults = this.selectResults.bind(this);
     this.getQuestion1 = this.getQuestion1.bind(this);
   }
 
-  addTag(tag) {
-    if (tag) {
-      const newTags = this.state.tags;
-      newTags.push(tag);
-      this.setState({ tags: newTags });
-    }
-  }
-
-  selectResults() {
-    if (this.state.tags.length === 0) {
+  selectResults(tags) {
+    if (tags === 0) {
       nodeServer
         .get("http://localhost:3000/api/charities")
         .then((res) => {
@@ -49,12 +40,12 @@ export default class HomePageContainer extends Component {
         });
     } else {
       let results = "";
-      this.state.tags.map((tags) => {
-        let apiTag = `${tags},`;
+      tags.map((tag) => {
+        let apiTag = `${tag},`;
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
-
+      console.log("results", results);
       nodeServer
         .get(`http://localhost:3000/api/charities?tags=${results}`)
         .then((res) => {
@@ -75,7 +66,7 @@ export default class HomePageContainer extends Component {
   }
 
   componentDidMount() {
-    this.getQuestion1();
+    // this.getQuestion1();
   }
 
   render() {
