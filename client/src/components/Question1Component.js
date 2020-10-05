@@ -3,17 +3,44 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
 const Question1Component = (props) => {
+  const tags = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addTag(e.target.q1.value);
     props.history.push("/results");
-    props.selectResults();
+    props.selectResults(tags);
   };
 
+  const handleChange = (e) => {
+    if (e.target.checked) {
+      tags.push(e.target.value);
+    }
+    if (!e.target.checked) {
+      tags.splice(tags.indexOf(e.target.value), 1);
+    }
+  };
+
+  // const setColor = (e) => {
+  //   const target = e.target,
+  //     status = e.target.classList.contains("active");
+  //   e.target.classList.add(status ? "inactive" : "active");
+  //   e.target.classList.remove(status ? "active" : "inactive");
+  // };
+
   const questions = props.questions.map((question) => (
-    <option key={question.NeedsID} value={question.NeedsDesc}>
-      {question.NeedsDesc}
-    </option>
+    <div className="question-button">
+      <input
+        type="checkbox"
+        // type="button"
+        key={question.NeedsID}
+        value={question.NeedsDesc}
+        id={question.NeedsDesc}
+        onChange={handleChange}
+        // onChange={setColor}
+        // style={color:"white"}
+        // <input
+      />
+      <label>{question.NeedsDesc}</label>
+    </div>
   ));
 
   return (
@@ -27,12 +54,10 @@ const Question1Component = (props) => {
         <p className="question-one-subtext">select all that apply</p>
 
         <form onSubmit={handleSubmit}>
-          <select name="q1">
-            <option key="0" value="" defaultValue>
-              I'm looking for help with...
-            </option>
-            {questions}
-          </select>
+          {/* <h2>I'm looking for help with...</h2> */}
+
+          {questions}
+
           <br />
 
           <input type="submit" value="Next" />
