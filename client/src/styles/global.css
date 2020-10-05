@@ -42,6 +42,19 @@ font-style:  normal; */
   border: solid 1px #2e3192;
   margin: 5px;
 }
+.question-button-selected {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2e3192;
+  text-align: center;
+  letter-spacing: 0.4px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: solid 1px #2e3192;
+  margin: 5px;
+  background-color: #ff6e43;
+}
 
 .results-list {
   border: solid 0.5px #bcbcbc;
@@ -86,7 +99,8 @@ font-style:  normal; */
 }
 
 /* css below is for the "next-submit button" */
-input[type="submit"] {
+/* input[type="submit"]  */
+.next-button {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 16px;
   color: #2e3192;
@@ -106,6 +120,6 @@ input[type="submit"] {
   background-color: #aa0707;
 }
 
-/* input[type="checkbox"]:checked + label ~ .question-button {
+input[type="checkbox"]:checked ~ .question-button {
   background-color: #ff6e43;
-} */
+}
