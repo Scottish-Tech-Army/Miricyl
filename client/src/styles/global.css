@@ -41,19 +41,20 @@ font-style:  normal; */
   border-radius: 20px;
   border: solid 1px #2e3192;
   margin: 5px;
+  background-color: #FFFFFF;
 }
 .question-button-selected {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 16px;
   font-weight: bold;
-  color: #2e3192;
+  color: #FFFFFF;
   text-align: center;
   letter-spacing: 0.4px;
   padding: 5px 20px;
   border-radius: 20px;
-  border: solid 1px #2e3192;
+  border: none;
   margin: 5px;
-  background-color: #ff6e43;
+  background-color: #2e3192;
 }
 
 .results-list {
