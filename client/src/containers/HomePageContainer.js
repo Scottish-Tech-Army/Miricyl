@@ -47,7 +47,7 @@ export default class HomePageContainer extends Component {
       });
       console.log("results", results);
       nodeServer
-        .get(`http://localhost:3000/api/charities?tags=${results}`)
+        .get(`/charities?tags=${results}`)
         .then((res) => {
           const charities = res.data;
           this.setState({ charityResults: charities });
