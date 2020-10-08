@@ -1,9 +1,7 @@
 import axios from "axios";
 
-let development = process.env.NODE_ENV !== "production";
+let development = process.env.NODE_ENV == "development";
 
 export default axios.create({
-  baseURL: development
-    ? "http://localhost:3000/api"
-    : "https://devmiricylserver.azurewebsites.net/api",
+  baseURL: development ? "http://localhost:3000/api" : "__serverUrl__",
 });

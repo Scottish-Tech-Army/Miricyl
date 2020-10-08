@@ -1,13 +1,28 @@
 const mysql = require("mysql");
+const express = require("express");
+const app = express();
 
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  user: "root",
-  password: "example",
-  database: "Miricyl",
-  host: "localhost",
-  port: "3306",
-});
+let development = app.settings.env == "development";
+
+if (development) {
+  var pool = mysql.createPool({
+    connectionLimit: 10,
+    user: "root",
+    password: "example",
+    database: "Miricyl",
+    host: "localhost",
+    port: "3306",
+  });
+} else {
+  var pool = mysql.createPool({
+    connectionLimit: 10,
+    user: "__user__",
+    password: "__password__",
+    database: "Miricyl",
+    host: "localhost",
+    port: "3306",
+  });
+}
 
 let miricyldb = {};
 
