@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
+import Question2Component from "../components/Question2Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -17,6 +18,7 @@ const INITIAL_STATE = {
   //   { id: 4, name: "Stepping Stones", tags: "parenting" },
   // ],
   charityResults: [],
+  types: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -25,12 +27,27 @@ export default class HomePageContainer extends Component {
     this.state = { ...INITIAL_STATE };
     this.selectResults = this.selectResults.bind(this);
     this.getQuestion1 = this.getQuestion1.bind(this);
+    this.getQuestion2 = this.getQuestion2.bind(this);
+  }
+
+  getQuestion1() {
+    nodeServer.get("/needs").then((res) => {
+      const question1Api = res.data;
+      this.setState({ question1: question1Api });
+    });
+  }
+
+  getQuestion2() {
+    nodeServer.get("/types").then((res) => {
+      const typesApi = res.data;
+      this.setState({ types: typesApi });
+    });
   }
 
   selectResults(tags) {
     if (tags === 0) {
       nodeServer
-        .get("http://localhost:3000/api/charities")
+        .get("/charities")
         .then((res) => {
           const charities = res.data;
           this.setState({ charityResults: charities });
@@ -56,13 +73,7 @@ export default class HomePageContainer extends Component {
           console.log(error);
         });
     }
-  }
-
-  getQuestion1() {
-    nodeServer.get("/needs").then((res) => {
-      const question1Api = res.data;
-      this.setState({ question1: question1Api });
-    });
+    this.getQuestion2();
   }
 
   componentDidMount() {
@@ -78,6 +89,12 @@ export default class HomePageContainer extends Component {
               questions={this.state.question1}
               addTag={this.addTag}
               selectResults={this.selectResults}
+            />
+          </Route>
+          <Route exact path="/service-types">
+            <Question2Component
+              results={this.state.charityResults}
+              questions={this.state.types}
             />
           </Route>
           <Route exact path="/results">

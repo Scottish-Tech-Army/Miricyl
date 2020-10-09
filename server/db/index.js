@@ -38,6 +38,18 @@ miricyldb.needs = () => {
   });
 };
 
+miricyldb.types = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Type`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(results);
+    });
+  });
+};
+
 miricyldb.charities = () => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM ServiceDetails`, (err, results) => {

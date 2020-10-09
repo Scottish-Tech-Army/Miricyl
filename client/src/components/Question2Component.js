@@ -2,20 +2,20 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
-const Question1Component = (props) => {
-  const tags = [];
+const Question2Component = (props) => {
+  var types = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.history.push("/service-types");
-    props.selectResults(tags);
+    props.history.push("/results");
+    // props.selectResults(tags);
   };
 
   const handleChange = (e) => {
     if (e.target.classList == "question-button") {
-      tags.push(e.target.value);
+      types.push(e.target.value);
       e.target.classList = "question-button-selected";
     } else {
-      tags.splice(tags.indexOf(e.target.value), 1);
+      types.splice(types.indexOf(e.target.value), 1);
       e.target.classList = "question-button";
     }
   };
@@ -24,20 +24,21 @@ const Question1Component = (props) => {
     <button
       onClick={handleChange}
       className="question-button"
-      value={question.NeedsDesc}
+      value={question.Description}
+      key={question.ServiceTypeID}
     >
-      {question.NeedsDesc}
+      {question.Description}
     </button>
   ));
-
   return (
-    <div className="question-one-container">
+    <>
       <h1 className="question-title">
         Search mental health resources & services that can help you feel better
       </h1>
-
       <div className="select-container">
-        <p className="question-one-text">What can we help you with?</p>
+        <p className="question-one-text">
+          What types of support are you looking for?
+        </p>
         <p className="question-one-subtext">select all that apply</p>
 
         {questions}
@@ -46,11 +47,9 @@ const Question1Component = (props) => {
         <button className="next-button" onClick={handleSubmit}>
           Next
         </button>
-        {/* <input type="submit" value="Next" />
-        </form> */}
       </div>
-    </div>
+    </>
   );
 };
 
-export default withRouter(Question1Component);
+export default withRouter(Question2Component);
