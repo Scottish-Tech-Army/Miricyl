@@ -15,9 +15,15 @@ font-style:  normal; */
   height: 100vh;
 }
 
-.results-container {
+.question-two-container {
   margin: 0;
   background: linear-gradient(#c974ff, #9026fc);
+  height: 100vh;
+}
+
+.results-container {
+  margin: 0;
+  background: linear-gradient(#fcd432, #ff6e43);
   height: 100vh;
 }
 .question-title {
@@ -41,14 +47,14 @@ font-style:  normal; */
   border-radius: 20px;
   border: solid 1px #2e3192;
   margin: 5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   width: 200px;
 }
 .question-button-selected {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 16px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   letter-spacing: 0.4px;
   padding: 5px 20px;
@@ -114,7 +120,7 @@ font-style:  normal; */
   border: none;
   margin: 35px 0px 10px 0px;
   float: right;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   width: 200px;
 }
 

@@ -7,7 +7,7 @@ const Question2Component = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.history.push("/results");
-    // props.selectResults(tags);
+    props.filterByType(types);
   };
 
   const handleChange = (e) => {
@@ -20,6 +20,8 @@ const Question2Component = (props) => {
     }
   };
 
+  //   TODO: filter results based on the types selected
+
   const questions = props.questions.map((question) => (
     <button
       onClick={handleChange}
@@ -31,7 +33,7 @@ const Question2Component = (props) => {
     </button>
   ));
   return (
-    <>
+    <div className="question-two-container">
       <h1 className="question-title">
         Search mental health resources & services that can help you feel better
       </h1>
@@ -48,7 +50,7 @@ const Question2Component = (props) => {
           Next
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

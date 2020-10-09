@@ -19,6 +19,7 @@ const INITIAL_STATE = {
   // ],
   charityResults: [],
   types: [],
+  charitiesFilteredByType: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -28,6 +29,7 @@ export default class HomePageContainer extends Component {
     this.selectResults = this.selectResults.bind(this);
     this.getQuestion1 = this.getQuestion1.bind(this);
     this.getQuestion2 = this.getQuestion2.bind(this);
+    this.filterByType = this.filterByType.bind(this);
   }
 
   getQuestion1() {
@@ -62,7 +64,6 @@ export default class HomePageContainer extends Component {
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
-      console.log("results", results);
       nodeServer
         .get(`/charities?tags=${results}`)
         .then((res) => {
@@ -74,6 +75,23 @@ export default class HomePageContainer extends Component {
         });
     }
     this.getQuestion2();
+  }
+
+  filterByType(types) {
+    if (types.length === 0) {
+      this.setState({ charitiesFilteredByType: this.state.charityResults });
+    } else {
+      let filteredCharities = [];
+      const charities = this.state.charityResults;
+      types.map((type) => {
+        charities.map((charity) => {
+          if (charity.TypeOfSupport === type) {
+            filteredCharities.push(charity);
+          }
+        });
+      });
+      this.setState({ charitiesFilteredByType: filteredCharities });
+    }
   }
 
   componentDidMount() {
@@ -95,10 +113,11 @@ export default class HomePageContainer extends Component {
             <Question2Component
               results={this.state.charityResults}
               questions={this.state.types}
+              filterByType={this.filterByType}
             />
           </Route>
           <Route exact path="/results">
-            <Results results={this.state.charityResults} />
+            <Results results={this.state.charitiesFilteredByType} />
           </Route>
         </React.Fragment>
       </Router>
