@@ -19,7 +19,7 @@ if (development) {
     user: "__user__",
     password: "__password__",
     database: "Miricyl",
-    host: "localhost",
+    host: "__host__",
     port: "3306",
   });
 }
