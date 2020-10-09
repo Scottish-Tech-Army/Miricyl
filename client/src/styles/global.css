@@ -12,13 +12,15 @@ font-style:  normal; */
 .question-one-container {
   margin: 0;
   background: linear-gradient(#fcd432, #ff6e43);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .results-container {
   margin: 0;
+  padding: 20px 5px;
+  min-height: 100vh;
   background: linear-gradient(#c974ff, #9026fc);
-  height: 100vh;
+  /* height: 100vh; */
 }
 .question-title {
   margin: 0;
@@ -59,7 +61,7 @@ font-style:  normal; */
   width: 200px;
 }
 
-.results-list {
+.results-list-container {
   border: solid 0.5px #bcbcbc;
   margin: 15px;
   background-color: #ffffff;
@@ -69,12 +71,56 @@ font-style:  normal; */
   text-decoration: none;
 }
 
-.results-list-name {
+.results-list-title {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.1px;
   color: #2e3192;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.results-list-service-description {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #BCBCBC;
+  line-height: 15px;
+  margin: 5px 0px;
+}
+
+.results-list-address-title {
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+  line-height:15px;
+  margin: 5px 0px;
+}
+.results-list-address-detail {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+  line-height:15px;
+  margin: 5px 0px;
+}
+.results-list-button {
+  background-color: #2E3192;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px 8px 5px 0px;
+}
+.results-list-logo {
+  width: 50px;
 }
 
 .select-container {
