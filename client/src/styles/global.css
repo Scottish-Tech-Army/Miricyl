@@ -73,11 +73,13 @@ font-style:  normal; */
 
 .results-list-title {
   font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.1px;
+  font-weight: bold;
+  font-size: 21px;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.09px;
+  line-height: 1.1;
   color: #2e3192;
-  text-decoration: underline;
   margin: 0;
 }
 
