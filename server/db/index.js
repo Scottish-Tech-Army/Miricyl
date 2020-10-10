@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const express = require("express");
 const app = express();
 
-let development = app.settings.env == "development";
+let development = process.env.NODE_ENV == "development";
 
 if (development) {
   var pool = mysql.createPool({
