@@ -18,8 +18,8 @@ if (development) {
     connectionLimit: 10,
     user: "__user__",
     password: "__password__",
-    database: "Miricyl",
-    host: "localhost",
+    database: "__database__",
+    host: "__host__",
     port: "3306",
   });
 }
