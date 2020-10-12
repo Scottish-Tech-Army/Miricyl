@@ -8,8 +8,8 @@ import nodeServer from "../api/nodeServer";
 const INITIAL_STATE = {
   tags: [],
   question1: [
-    { NeedsID: 1, title: "Alcohol", NeedsDesc: "Alcohol" },
-    { NeedsID: 2, title: "Pregnancy and Parenting", NeedsDesc: "Parenting" },
+    // { NeedsID: 1, title: "Alcohol", NeedsDesc: "Alcohol" },
+    // { NeedsID: 2, title: "Pregnancy and Parenting", NeedsDesc: "Parenting" },
   ],
   // charities: [
   //   { id: 1, name: "Turning Point Scotland", tags: "addiction" },
@@ -52,6 +52,7 @@ export default class HomePageContainer extends Component {
         .get("/charities")
         .then((res) => {
           const charities = res.data;
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
         .catch((error) => {
@@ -68,6 +69,7 @@ export default class HomePageContainer extends Component {
         .get(`/charities?tags=${results}`)
         .then((res) => {
           const charities = res.data;
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
         .catch((error) => {
@@ -95,7 +97,7 @@ export default class HomePageContainer extends Component {
   }
 
   componentDidMount() {
-    // this.getQuestion1();
+    this.getQuestion1();
   }
 
   render() {
