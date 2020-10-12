@@ -6,10 +6,13 @@ const Results = (props) => {
   const showResults = props.results.map((result) => (
 
     <div className="results-list-container" key={result.PlaceID}>
-        <p className="results-list-title">
+        <div className="results-title-container">
+          <p className="results-list-title">
+        <img className="results-list-logo" src={result.Logo}/>
         <a href={result.ServiceURL}>{result.OrgName}</a>
         </p>
         <p className="results-list-service-description">{result.ServiceDescription}</p>
+        </div>
           <div>
           <button className="results-list-button" type="button">Call</button>
           <button className="results-list-button" type="button">Chat</button>
@@ -21,6 +24,7 @@ const Results = (props) => {
         <p className="results-list-address-detail">{result.PhysicalAddress}</p>
         <p className="results-list-address-title">About</p>
         <p className="results-list-address-detail">{result.OrgDescription}</p>
+        
       
     </div>
   ));
