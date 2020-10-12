@@ -7,11 +7,14 @@ const Results = (props) => {
 
     <div className="results-list-container" key={result.PlaceID}>
         <div className="results-title-container">
-          <p className="results-list-title">
         <img className="results-list-logo" src={result.Logo}/>
+        <div className="results-list-title-service">
+          <p className="results-list-title"> 
         <a href={result.ServiceURL}>{result.OrgName}</a>
         </p>
-        <p className="results-list-service-description">{result.ServiceDescription}</p>
+        <p className="results-list-service-description">{result.ServiceDescription}
+        </p>
+        </div>
         </div>
           <div>
           <button className="results-list-button" type="button">Call</button>
