@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const express = require("express");
 const app = express();
 
-let development = app.settings.env == "development";
+let development = process.env.NODE_ENV == "development";
 
 if (development) {
   var pool = mysql.createPool({
@@ -29,6 +29,18 @@ let miricyldb = {};
 miricyldb.needs = () => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM Needs`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(results);
+    });
+  });
+};
+
+miricyldb.types = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Type`, (err, results) => {
       if (err) {
         return reject(err);
       }

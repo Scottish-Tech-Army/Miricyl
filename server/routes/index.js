@@ -14,6 +14,16 @@ router.get("/needs", async (req, res, next) => {
   }
 });
 
+router.get("/types", async (req, res, next) => {
+  try {
+    let results = await db.types();
+    res.json(results);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 router.get("/charities", async (req, res, next) => {
   var tags = req.query.tags;
   if (!req.query.tags) {
