@@ -20,21 +20,12 @@ const Results = (props) => {
           <div>
           <button className="results-list-button" type="button">Call</button>
           <button className="results-list-button" type="button">Chat</button>
+          
+          {result.EmailAddress ? 
           <button className="results-list-button" type="button">
-
-            {result.EmailAddress &&  <a class="mailto" href={result.EmailAddress}>Email</a>}
+            <a class="mailto" href={"mailto:" + result.EmailAddress}>Email</a>
+          </button> : null}
           
-          {/* {result.EmailAddress ? <a class="mailto" href={result.EmailAddress}>Email</a> : <button className="results-list-button" type="button">Email</button>} */}
-          
-          {/* {result.EmailAddress ? <a class="mailto" href={result.EmailAddress}>Email</a> : null} */}
-          {/* <a class="mailto" href={result.EmailAddress}>Email</a> */}
-          </button>
-          
-          
-          
-          
-          {/* <p className="results-list-email">{result.EmailAddress}</p> */}
-
           
           </div>
         <p className="results-list-address-title">Phone Support:</p>
