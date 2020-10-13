@@ -12,13 +12,21 @@ font-style:  normal; */
 .question-one-container {
   margin: 0;
   background: linear-gradient(#fcd432, #ff6e43);
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.question-two-container {
+  margin: 0;
+  padding: 20px 5px;
+  min-height: 100vh;
+  background: linear-gradient(#c974ff, #9026fc);
+  /* height: 100vh; */
 }
 
 .results-container {
   margin: 0;
-  background: linear-gradient(#c974ff, #9026fc);
-  height: 100vh;
+  background: linear-gradient(#fcd432, #ff6e43);
+  min-height: 100vh;
 }
 .question-title {
   margin: 0;
@@ -41,14 +49,14 @@ font-style:  normal; */
   border-radius: 20px;
   border: solid 1px #2e3192;
   margin: 5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   width: 200px;
 }
 .question-button-selected {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 16px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   letter-spacing: 0.4px;
   padding: 5px 20px;
@@ -59,7 +67,7 @@ font-style:  normal; */
   width: 200px;
 }
 
-.results-list {
+.results-list-container {
   border: solid 0.5px #bcbcbc;
   margin: 15px;
   background-color: #ffffff;
@@ -69,13 +77,87 @@ font-style:  normal; */
   text-decoration: none;
 }
 
-.results-list-name {
+.results-title-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  margin: 0px 10px 10px 0px;
+}
+
+.results-list-title {
   font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: bold;
+  font-size: 21px;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.09px;
+  line-height: 1.1;
+  color: #2e3192;
+  margin: 0;
+}
+
+.results-list-title-service{
+  padding-left: 10px;
+  align-items: center;
+}
+
+.results-list-service-description {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #BCBCBC;
+  line-height: 15px;
+  margin: 5px 0px;
+}
+
+.results-list-address-title {
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
+  line-height:15px;
+  margin: 5px 0px;
 }
+.results-list-address-detail {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #2e3192;
+  line-height:15px;
+  margin: 5px 0px;
+}
+.results-list-button {
+  background-color: #2E3192;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px 8px 5px 0px;
+}
+
+.results-list-button a {
+  color: white;
+  text-decoration: none;
+}
+/* .results-list-button-disable {
+  display: none;
+} */
+/* .results-list-email-link{
+  text-decoration: none;
+} */
+
+.results-list-logo {
+  width: 50px;
+}
+/* .results-list-email {
+  color: black;
+} */
 
 .select-container {
   border: solid 0.5px #bcbcbc;
@@ -114,11 +196,11 @@ font-style:  normal; */
   border: none;
   margin: 35px 0px 10px 0px;
   float: right;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   width: 200px;
 }
 
-.active {
+/* .active {
   background-color: #7fff00;
 }
 .inactive {
@@ -127,4 +209,4 @@ font-style:  normal; */
 
 input[type="checkbox"]:checked ~ .question-button {
   background-color: #ff6e43;
-}
+} */
