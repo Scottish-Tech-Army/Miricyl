@@ -112,8 +112,8 @@ resource "azurerm_mysql_server" "primary_server" {
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_database.name
 
-  administrator_login          = "__db_login__"
-  administrator_login_password = "__db_password__"
+  administrator_login          = "__dblogin__"
+  administrator_login_password = "__dbpassword__"
 
   sku_name   = "GP_Gen5_2"
   storage_mb = 5120
