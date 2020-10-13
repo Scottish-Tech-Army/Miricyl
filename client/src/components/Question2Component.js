@@ -2,12 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
-const Question2Component = (props) => {
+const Question2Component = ({ questions, history, filterByType }) => {
   var types = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.history.push("/results");
-    props.filterByType(types);
+    history.push("/results");
+    filterByType(types);
   };
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ const Question2Component = (props) => {
 
   //   TODO: filter results based on the types selected
 
-  const questions = props.questions.map((question) => (
+  const questionsList = questions.map((question) => (
     <button
       onClick={handleChange}
       className="question-button"
@@ -43,7 +43,7 @@ const Question2Component = (props) => {
         </p>
         <p className="question-one-subtext">select all that apply</p>
 
-        {questions}
+        {questionsList}
 
         <br />
         <button className="next-button" onClick={handleSubmit}>

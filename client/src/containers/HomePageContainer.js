@@ -61,7 +61,7 @@ export default class HomePageContainer extends Component {
     } else {
       let results = "";
       tags.map((tag) => {
-        let apiTag = `${tag},`;
+        let apiTag = `${tag}%`;
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
