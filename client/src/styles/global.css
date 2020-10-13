@@ -153,6 +153,38 @@ font-style:  normal; */
 .results-list-logo {
   width: 50px;
 }
+.results-list-needs-tag {
+  border-radius: 16px;
+  background-color:#fcd432;
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.05px;
+  text-align: center;
+  color: #2e3192;
+  margin: 10px auto 5px 0px;
+  width: fit-content;
+  padding: 0px 15px;
+}
+.results-list-personalisation-tag {
+  border-radius: 16px;
+  background-color: #4ecfff;
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.05px;
+  text-align: center;
+  color: #2e3192;
+  margin: 10px auto 5px 0px;
+  width: fit-content;
+  padding: 0px 15px;
+}
 
 .select-container {
   border: solid 0.5px #bcbcbc;

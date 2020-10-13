@@ -34,6 +34,9 @@ const Results = (props) => {
         <p className="results-list-address-detail">{result.PhysicalAddress}</p>
         <p className="results-list-address-title">About</p>
         <p className="results-list-address-detail">{result.OrgDescription}</p>
+
+        <p className="results-list-needs-tag">{result.Needs}</p>
+        <p className="results-list-personalisation-tag">{result.Personalisation}</p>
         
       
     </div>
