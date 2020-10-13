@@ -300,6 +300,7 @@ DROP VIEW IF EXISTS `Miricyl`.`ServiceDetails` ;
 USE `Miricyl`;
 CREATE  OR REPLACE VIEW `ServiceDetails` AS
 SELECT 
+	O.OrgID,
 	O.OrgName, 
     CASE WHEN OS.NationalService THEN 'YES' ELSE 'NO' END NationalService,
     C.Name SpecificArea,
@@ -328,7 +329,8 @@ LEFT JOIN Miricyl.Country C on C.CountryID = OS.Country_CountryID
 LEFT JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
 INNER JOIN Miricyl.Needs N on N.NeedsID = SN.Needs_NeedsID
 LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
-LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID;
+LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
+WHERE (NULLIF(`n`.`UserOption`, '') IS NOT NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
