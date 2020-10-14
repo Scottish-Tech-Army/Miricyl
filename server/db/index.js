@@ -28,13 +28,17 @@ let miricyldb = {};
 
 miricyldb.needs = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM Needs`, (err, results) => {
-      if (err) {
-        return reject(err);
-      }
+    // pool.query(`SELECT * FROM Needs`, (err, results) => {
+    pool.query(
+      `SELECT distinct UserOption as Need FROM Miricyl.Needs where nullif(UserOption,'') is not null`,
+      (err, results) => {
+        if (err) {
+          return reject(err);
+        }
 
-      return resolve(results);
-    });
+        return resolve(results);
+      }
+    );
   });
 };
 
@@ -65,14 +69,14 @@ miricyldb.charities = () => {
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];
   let finalTags = [];
-  let splitTags = tags.split(",");
+  let splitTags = tags.split("%");
   splitTags.forEach((tag) => {
     finalTags.push(tag);
   });
 
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT * FROM ServiceDetails WHERE Needs IN (?)`,
+      `SELECT * FROM ServiceDetails WHERE UserOption IN (?)`,
       [finalTags],
       (err, results) => {
         if (err) {

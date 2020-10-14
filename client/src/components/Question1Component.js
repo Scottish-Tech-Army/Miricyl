@@ -2,12 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
-const Question1Component = (props) => {
+const Question1Component = ({ questions, selectResults, history }) => {
   const tags = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.history.push("/service-types");
-    props.selectResults(tags);
+    history.push("/service-types");
+    selectResults(tags);
   };
 
   const handleChange = (e) => {
@@ -20,13 +20,14 @@ const Question1Component = (props) => {
     }
   };
 
-  const questions = props.questions.map((question) => (
+  const questionsList = questions.map((question) => (
     <button
       onClick={handleChange}
       className="question-button"
-      value={question.NeedsDesc}
+      value={question.Need}
+      key={question.Need}
     >
-      {question.NeedsDesc}
+      {question.Need}
     </button>
   ));
 
@@ -40,7 +41,7 @@ const Question1Component = (props) => {
         <p className="question-one-text">What can we help you with?</p>
         <p className="question-one-subtext">select all that apply</p>
 
-        {questions}
+        {questionsList}
 
         <br />
         <button className="next-button" onClick={handleSubmit}>
