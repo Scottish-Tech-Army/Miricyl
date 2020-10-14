@@ -21,7 +21,7 @@ const Results = (props) => {
         <div>  
           {result.PhoneNo ? 
           <button className="results-list-button" type="button">
-            Call
+            <a href={"tel:" + result.PhoneNo}>Call</a>
           </button> : null }
 
           <button className="results-list-button" type="button">Chat</button>
