@@ -30,11 +30,13 @@ export default class HomePageContainer extends Component {
     this.getQuestion1 = this.getQuestion1.bind(this);
     this.getQuestion2 = this.getQuestion2.bind(this);
     this.filterByType = this.filterByType.bind(this);
+    this.getUnique = this.getUnique.bind(this);
   }
 
   getQuestion1() {
     nodeServer.get("/needs").then((res) => {
       const question1Api = res.data;
+      question1Api.sort((a, b) => a.Need.localeCompare(b.Need));
       this.setState({ question1: question1Api });
     });
   }
@@ -46,14 +48,28 @@ export default class HomePageContainer extends Component {
     });
   }
 
+  getUnique(charities) {
+     return Array.from(
+      new Set(charities.map((charity) => charity.OrgName))
+    ).map((OrgName)=> {
+      return charities.find((charity) => charity.OrgName === OrgName)
+    })
+  }
+
+
   selectResults(tags) {
     if (tags === 0) {
       nodeServer
         .get("/charities")
         .then((res) => {
           const charities = res.data;
-          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: charities });
+ 
+          // returns unique charities
+          const uniqueCharities = this.getUnique(charities)
+         
+          // sorts charities alphabetically 
+          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: uniqueCharities });
         })
         .catch((error) => {
           console.log(error);
@@ -69,8 +85,11 @@ export default class HomePageContainer extends Component {
         .get(`/charities?tags=${results}`)
         .then((res) => {
           const charities = res.data;
-          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: charities });
+          // returns unique charities
+          const uniqueCharities = this.getUnique(charities)
+          // sorts charities alphabetically 
+          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: uniqueCharities });
         })
         .catch((error) => {
           console.log(error);

@@ -66,6 +66,7 @@ miricyldb.charities = () => {
   });
 };
 
+
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];
   let finalTags = [];
