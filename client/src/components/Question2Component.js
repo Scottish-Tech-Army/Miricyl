@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
+import { IoIosArrowDropleft } from "react-icons/io";
 
 const Question2Component = ({ questions, history, filterByType }) => {
   var types = [];
@@ -46,9 +47,12 @@ const Question2Component = ({ questions, history, filterByType }) => {
         {questionsList}
 
         <br />
-        <button className="next-button" onClick={handleSubmit}>
-          Next
-        </button>
+        <div className="bottom-navigation">
+          <IoIosArrowDropleft onClick={() => {history.goBack()}} />
+          <button className="next-button" onClick={handleSubmit}>
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

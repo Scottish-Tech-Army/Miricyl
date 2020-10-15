@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
+
 const Question1Component = ({ questions, selectResults, history }) => {
   const tags = [];
   const handleSubmit = (e) => {
@@ -44,11 +45,10 @@ const Question1Component = ({ questions, selectResults, history }) => {
         {questionsList}
 
         <br />
+
         <button className="next-button" onClick={handleSubmit}>
           Next
         </button>
-        {/* <input type="submit" value="Next" />
-        </form> */}
       </div>
     </div>
   );

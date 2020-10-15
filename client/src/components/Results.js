@@ -1,9 +1,11 @@
 import React from "react";
 import "../styles/global.css";
+import { withRouter } from "react-router-dom";
+import { IoIosArrowDropleft } from "react-icons/io";
 
-const Results = (props) => {
+const Results = ({results, history}) => {
 
-  const showResults = props.results.map((result) => (
+  const showResults = results.map((result) => (
 
     <div className="results-list-container" key={result.PlaceID}>
         <div className="results-title-container">
@@ -37,13 +39,21 @@ const Results = (props) => {
         
       
     </div>
+    
   ));
 
   return (
+    <>
+
     <div className="results-container">
       <h1 className="question-title">Search results</h1>
       {showResults}
     </div>
+    <div className="bottom-navigation">
+
+<IoIosArrowDropleft onClick={() => {history.goBack()}} />
+    </div>
+    </>
   );
 };
-export default Results;
+export default withRouter(Results);
