@@ -97,7 +97,7 @@ font-style:  normal; */
   margin: 0;
 }
 
-.results-list-title-service{
+.results-list-title-service {
   padding-left: 10px;
   align-items: center;
 }
@@ -106,7 +106,7 @@ font-style:  normal; */
   font-family: "Nunito", sans-serif;
   font-size: 12px;
   letter-spacing: 0.1px;
-  color: #BCBCBC;
+  color: #bcbcbc;
   line-height: 15px;
   margin: 5px 0px;
 }
@@ -117,7 +117,7 @@ font-style:  normal; */
   font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
-  line-height:15px;
+  line-height: 15px;
   margin: 5px 0px;
 }
 .results-list-address-detail {
@@ -125,11 +125,11 @@ font-style:  normal; */
   font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
-  line-height:15px;
+  line-height: 15px;
   margin: 5px 0px;
 }
 .results-list-button {
-  background-color: #2E3192;
+  background-color: #2e3192;
   color: #ffffff;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -198,6 +198,14 @@ font-style:  normal; */
   float: right;
   background-color: #ffffff;
   width: 200px;
+}
+
+.back-button {
+  width: 60px;
+  height: 60px;
+  color: white;
+  margin: 35px 0px 10px 0px;
+  float: left;
 }
 
 /* .active {
