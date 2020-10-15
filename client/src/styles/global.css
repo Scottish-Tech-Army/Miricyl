@@ -13,11 +13,12 @@ font-style:  normal; */
   margin: 0;
   background: linear-gradient(#fcd432, #ff6e43);
   min-height: 100vh;
+  padding: 15px 10px 75px 10px;
 }
 
 .question-two-container {
   margin: 0;
-  padding: 20px 5px;
+  padding: 15px 10px 75px 10px;
   min-height: 100vh;
   background: linear-gradient(#c974ff, #9026fc);
   /* height: 100vh; */
@@ -27,6 +28,7 @@ font-style:  normal; */
   margin: 0;
   background: linear-gradient(#fcd432, #ff6e43);
   min-height: 100vh;
+  padding: 15px 10px 75px 10px;
 }
 .question-title {
   margin: 0;
@@ -74,7 +76,6 @@ font-style:  normal; */
   border-radius: 20px;
   text-align: left;
   padding: 15px 10px;
-  text-decoration: none;
 }
 
 .results-title-container {
@@ -105,27 +106,31 @@ font-style:  normal; */
 .results-list-service-description {
   font-family: "Nunito", sans-serif;
   font-size: 12px;
-  letter-spacing: 0.1px;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.09px;
   color: #bcbcbc;
-  line-height: 15px;
-  margin: 5px 0px;
+  /* line-height: 1.1; */
+  margin: 0;
+  padding-top: 3px;
 }
 
-.results-list-address-title {
+.results-list-sub-title {
   font-family: "Nunito", sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
   line-height: 15px;
   margin: 5px 0px;
 }
-.results-list-address-detail {
+.results-list-service-detail {
   font-family: "Nunito", sans-serif;
   font-size: 12px;
-  letter-spacing: 0.1px;
+  font-weight: "bold";
+  /* letter-spacing: 0.1px; */
   color: #2e3192;
-  line-height: 15px;
+  /* line-height:15px; */
   margin: 5px 0px;
 }
 .results-list-button {
@@ -145,19 +150,42 @@ font-style:  normal; */
   color: white;
   text-decoration: none;
 }
-/* .results-list-button-disable {
-  display: none;
-} */
-/* .results-list-email-link{
-  text-decoration: none;
-} */
 
 .results-list-logo {
   width: 50px;
 }
-/* .results-list-email {
-  color: black;
-} */
+.results-list-needs-tag {
+  border-radius: 16px;
+  background-color: #fcd432;
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.05px;
+  text-align: center;
+  color: #2e3192;
+  margin: 10px auto 10px 0px;
+  width: fit-content;
+  padding: 0px 15px;
+}
+.results-list-personalisation-tag {
+  border-radius: 16px;
+  background-color: #4ecfff;
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.05px;
+  text-align: center;
+  color: #2e3192;
+  margin: 10px auto 10px 0px;
+  width: fit-content;
+  padding: 0px 15px;
+}
 
 .select-container {
   border: solid 0.5px #bcbcbc;

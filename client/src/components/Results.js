@@ -11,31 +11,48 @@ const Results = ({results, history}) => {
         <div className="results-title-container">
           <img className="results-list-logo" src={result.Logo}/>
           <div className="results-list-title-service">
-          <p className="results-list-title"> 
-        
-          {result.ServiceURL ? <a href={result.ServiceURL}>{result.OrgName}</a> : <p>{result.OrgName}</p>}
-          </p>
           
+          {result.ServiceURL ? 
+          <p className="results-list-title"> <a href={result.ServiceURL}>{result.OrgName}</a></p> : 
+          <p className="results-list-title">{result.OrgName}</p>}
+        
           <p className="results-list-service-description">{result.ServiceDescription}</p>
           </div>
         </div>
-          <div>
-          <button className="results-list-button" type="button">Call</button>
+
+        <div>  
+          {result.PhoneNo ? 
+          <button className="results-list-button" type="button">
+            <a href={"tel:" + result.PhoneNo}>Call</a>
+          </button> : null }
+
           <button className="results-list-button" type="button">Chat</button>
           
           {result.EmailAddress ? 
           <button className="results-list-button" type="button">
             <a class="mailto" href={"mailto:" + result.EmailAddress}>Email</a>
-          </button> : null}
-          
-          
-          </div>
-        <p className="results-list-address-title">Phone Support:</p>
-        <p className="results-list-address-detail">{result.OpeningTime}</p>
-        <p className="results-list-address-title">Address:</p>
-        <p className="results-list-address-detail">{result.PhysicalAddress}</p>
-        <p className="results-list-address-title">About</p>
-        <p className="results-list-address-detail">{result.OrgDescription}</p>
+          </button> : null} 
+        </div>
+
+        {result.OpeningTime ? 
+        <p className="results-list-sub-title">Phone Support:</p> : null }
+        <p className="results-list-service-detail">{result.OpeningTime}</p>
+        
+        {result.PhysicalAddress ? 
+        <p className="results-list-sub-title">Address:</p>  : null }
+        <p className="results-list-service-detail">{result.PhysicalAddress}</p>
+        
+
+        <p className="results-list-needs-tag">{result.Needs}</p>
+        <p className="results-list-personalisation-tag">{result.Personalisation}</p>
+
+        {result.TypeOfSupport ? 
+        <p className="results-list-sub-title">Types of Service:</p> : null }
+        <li className="results-list-service-detail">{result.TypeOfSupport}</li>
+        
+        {result.OrgDescription ? 
+        <p className="results-list-sub-title">About</p> : null }
+        <p className="results-list-service-detail">{result.OrgDescription}</p>
         
       
     </div>
