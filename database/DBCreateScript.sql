@@ -330,7 +330,7 @@ LEFT JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
 INNER JOIN Miricyl.Needs N on N.NeedsID = SN.Needs_NeedsID
 LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
 LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
-WHERE (NULLIF(`n`.`UserOption`, '') IS NOT NULL);
+WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
