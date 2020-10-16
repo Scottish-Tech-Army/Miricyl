@@ -56,7 +56,7 @@ resource "azurerm_app_service_plan" "primary_appservice" {
 
 # Front end web service
 resource "azurerm_app_service" "client" {
-  name                = "${local.tags.environment}-${local.tags.environment}${local.prefix}client"
+  name                = "${local.tags.environment}${local.prefix}client"
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
@@ -80,7 +80,7 @@ resource "azurerm_app_service" "client" {
 
 # Backend web service
 resource "azurerm_app_service" "server" {
-  name                = "${local.tags.environment}-${local.tags.environment}${local.prefix}server"
+  name                = "${local.tags.environment}${local.prefix}server"
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
