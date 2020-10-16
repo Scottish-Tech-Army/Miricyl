@@ -8,3 +8,12 @@ provider "azurerm" {
     features {}
 }
 
+terraform {
+    backend "azurerm" {
+        resource_group_name     = "__storageresourcegroupname__"
+        storage_account_name    = "__storageaccountname__"
+        container_name          = "terraform"
+        key                     = "terraform.tfstate"
+        access_key              =  "__storageaccesskey__"
+    }
+}
