@@ -88,6 +88,7 @@ resource "azurerm_app_service" "server" {
  app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
     "WEBSITES_PORT"                  = "3000"
+    "PORT"                           = "3000"
     "SCM_COMMAND_IDLE_TIMEOUT"       = "1800"
   }
 
