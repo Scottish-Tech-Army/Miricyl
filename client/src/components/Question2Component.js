@@ -20,7 +20,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
 // handle change
     const handleChange = (e) => {
-      if (e.target.classList === "question-button") {
+      if (e.target.classList == "question-button") {
         types.push(e.target.value);
         e.target.classList = "question-button-selected";
       } else {
@@ -37,6 +37,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
       }
     })
           if(isSelected === true){
+            types.push(question.Description)
         return (
           <button
           onClick={handleChange}

@@ -234,6 +234,16 @@ font-style:  normal; */
   color: white;
   margin: 35px 0px 10px 0px;
   float: left;
+  padding-bottom: 2rem;
+}
+
+.back-button-results {
+  width: 60px;
+  height: 60px;
+  color: white;
+  /* margin: 35px 0px 10px 0px; */
+  float: left;
+  padding-bottom: 2rem;
 }
 
 /* .active {

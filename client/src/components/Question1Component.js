@@ -33,6 +33,7 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
         isSelected = true
       }})
           if(isSelected === true){
+            tags.push(question.Need)
         return (
           <button
           onClick={handleChange}

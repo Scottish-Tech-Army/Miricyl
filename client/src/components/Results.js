@@ -65,11 +65,12 @@ const Results = ({results, history}) => {
     <div className="results-container">
       <h1 className="question-title">Search results</h1>
       {showResults}
+      <div className="bottom-navigation">
+          <IoIosArrowDropleft className="back-button-results" onClick={() => {history.goBack()}} />
+        </div>
     </div>
-    <div className="bottom-navigation">
 
-<IoIosArrowDropleft className="back-button"  onClick={() => {history.goBack()}} />
-    </div>
+
     </>
   );
 };
