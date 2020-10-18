@@ -70,10 +70,11 @@ export default class HomePageContainer extends Component {
     } else {
       let results = "";
       tags.map((tag) => {
-        let apiTag = `${tag}%`;
+        let apiTag = `${tag}£`;
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
+      console.log(results);
       nodeServer
         .get(`/charities?tags=${results}`)
         .then((res) => {
@@ -121,6 +122,7 @@ export default class HomePageContainer extends Component {
             <Question1Component
               questions={this.state.question1}
               addTag={this.addTag}
+              needs={this.state.tags}
               selectResults={this.selectResults}
             />
           </Route>
@@ -129,6 +131,7 @@ export default class HomePageContainer extends Component {
               results={this.state.charityResults}
               questions={this.state.types}
               filterByType={this.filterByType}
+              selectedTypes={this.state.selectedTypes}
             />
           </Route>
           <Route exact path="/results">

@@ -22,15 +22,15 @@ const Results = ({results, history}) => {
 
         <div>  
           {result.PhoneNo ? 
-          <button className="results-list-button" type="button">
+          <button key={result.PhoneNo} className="results-list-button" type="button">
             <a href={"tel:" + result.PhoneNo}>Call</a>
           </button> : null }
 
           <button className="results-list-button" type="button">Chat</button>
           
           {result.EmailAddress ? 
-          <button className="results-list-button" type="button">
-            <a class="mailto" href={"mailto:" + result.EmailAddress}>Email</a>
+          <button key={result.EmailAddress} className="results-list-button" type="button">
+            <a className="mailto"  href={"mailto:" + result.EmailAddress}>Email</a>
           </button> : null} 
         </div>
 
