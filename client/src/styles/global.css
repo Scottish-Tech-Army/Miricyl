@@ -9,6 +9,17 @@ font-family:  clone-rounded-latin,   sans-serif;
 font-weight:  400;
 font-style:  normal; */
 
+.results-react-button-icon {
+  vertical-align: middle;
+  padding-bottom: 3px;
+  font-size: 17px;
+}
+.results-react-icons-detail {
+  vertical-align: middle;
+  padding-bottom: 3px;
+  color: #2e3192;
+}
+
 .question-one-container {
   margin: 0;
   background: linear-gradient(#fcd432, #ff6e43);
@@ -75,7 +86,7 @@ font-style:  normal; */
   background-color: #ffffff;
   border-radius: 20px;
   text-align: left;
-  padding: 15px 10px;
+  padding: 15px 15px;
 }
 
 .results-title-container {
@@ -122,7 +133,7 @@ font-style:  normal; */
   letter-spacing: 0.1px;
   color: #2e3192;
   line-height:15px;
-  margin: 5px 0px;
+  margin: 10px 0px 3px 0px;
 }
 .results-list-service-detail {
   font-family: "Nunito", sans-serif;
@@ -131,7 +142,7 @@ font-style:  normal; */
   /* letter-spacing: 0.1px; */
   color: #2e3192;
   /* line-height:15px; */
-  margin: 5px 0px;
+  margin: 0;
 }
 .results-list-button {
   background-color: #2E3192;
@@ -142,7 +153,7 @@ font-style:  normal; */
   letter-spacing: 0.3px;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 5px 20px 5px 10px;
   margin: 5px 8px 5px 0px;
 }
 
