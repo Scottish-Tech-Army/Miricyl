@@ -132,13 +132,8 @@ font-style:  normal; */
   font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
-<<<<<<< HEAD
-  line-height:15px;
-  margin: 10px 0px 3px 0px;
-=======
   line-height: 15px;
-  margin: 5px 0px;
->>>>>>> develop
+  margin: 10px 0px 3px 0px;
 }
 .results-list-service-detail {
   font-family: "Nunito", sans-serif;

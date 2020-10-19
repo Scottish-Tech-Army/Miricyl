@@ -18,6 +18,19 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
   const QuestionsList = () => {
 
+    function getUnique(charities) {
+    return Array.from(
+     new Set(charities.map((charity) => charity.UserOption_Type))
+   ).map((UserOption_Type)=> {
+     return charities.find((charity) => charity.UserOption_Type === UserOption_Type)
+   })
+  }
+
+
+
+ let uniqueQuestions = getUnique(questions)
+ console.log(uniqueQuestions);
+
 // handle change
     const handleChange = (e) => {
       if (e.target.classList == "question-button") {
@@ -28,24 +41,25 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
         e.target.classList = "question-button";
       }
     };
+
   
-  return questions.map((question) => {
+  return uniqueQuestions.map((Question) => {
     var isSelected = false
     selectedTypes.map((type) => {
-      if(type === question.Description) {
+      if(type === Question.UserOption_Type) {
         isSelected = true
       }
     })
           if(isSelected === true){
-            types.push(question.Description)
+            types.push(Question.UserOption_Type)
         return (
           <button
           onClick={handleChange}
           className="question-button-selected"
-          value={question.Description}
-          key={question.Description}
+          value={Question.UserOption_Type}
+          key={Question.UserOption_Type}
         >
-          {question.Description}
+          {Question.UserOption_Type}
         </button>
         )
       } else {
@@ -53,10 +67,10 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
           <button
           onClick={handleChange}
           className="question-button"
-          value={question.Description}
-          key={question.Description}
+          value={Question.UserOption_Type}
+          key={Question.UserOption_Type}
         >
-          {question.Description}
+          {Question.UserOption_Type}
         </button>
         )
       }
@@ -64,16 +78,6 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
   })
   }
 
-  // const questionsList = questions.map((question) => (
-  //   <button
-  //     onClick={handleChange}
-  //     className="question-button"
-  //     value={question.Description}
-  //     key={question.ServiceTypeID}
-  //   >
-  //     {question.Description}
-  //   </button>
-  // ));
   return (
     <div className="question-two-container">
       <h1 className="question-title">
@@ -97,6 +101,9 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
       </div>
     </div>
   );
-};
+
+}
+
+
 
 export default withRouter(Question2Component);
