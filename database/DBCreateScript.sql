@@ -247,6 +247,7 @@ DROP TABLE IF EXISTS `Miricyl`.`Type` ;
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Type` (
   `ServiceTypeID` INT NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(200) NOT NULL,
+  `UserOption_Type` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`ServiceTypeID`),
   UNIQUE INDEX `ServiceTypeID_UNIQUE` (`ServiceTypeID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -320,6 +321,7 @@ SELECT
     N.NeedsDesc as Needs,
     N.UserOption,
     T.Description as TypeOfSupport,
+	T.UserOption_Type,
     P.Description as Personalisation
 
 FROM Miricyl.ServiceNeeds SN
