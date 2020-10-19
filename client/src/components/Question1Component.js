@@ -2,7 +2,10 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
-const Question1Component = ({ questions, selectResults, history }) => {
+
+
+
+const Question1Component = ({ questions, needs, selectResults, history }) => {
   const tags = [];
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,26 +13,52 @@ const Question1Component = ({ questions, selectResults, history }) => {
     selectResults(tags);
   };
 
-  const handleChange = (e) => {
-    if (e.target.classList == "question-button") {
-      tags.push(e.target.value);
-      e.target.classList = "question-button-selected";
-    } else {
-      tags.splice(tags.indexOf(e.target.value), 1);
-      e.target.classList = "question-button";
-    }
-  };
+  const QuestionsList = () => {
 
-  const questionsList = questions.map((question) => (
-    <button
-      onClick={handleChange}
-      className="question-button"
-      value={question.Need}
-      key={question.Need}
-    >
-      {question.Need}
-    </button>
-  ));
+    const handleChange = (e) => {
+      if (e.target.className === "question-button") {
+        tags.push(e.target.value);
+        e.target.className = "question-button-selected";
+      } else {
+        tags.splice(tags.indexOf(e.target.value), 1);
+        e.target.className = "question-button";
+      }
+    };
+  
+  
+  return questions.map((question) => {
+    var isSelected = false
+    needs.map((need) => {
+      if(need === question.Need) {
+        isSelected = true
+      }})
+          if(isSelected === true){
+            tags.push(question.Need)
+        return (
+          <button
+          onClick={handleChange}
+          className="question-button-selected"
+          value={question.Need}
+          key={question.Need}
+        >
+          {question.Need}
+        </button>
+        )
+      } else {
+        return (
+          <button
+          onClick={handleChange}
+          className="question-button"
+          value={question.Need}
+          key={question.Need}
+        >
+          {question.Need}
+        </button>
+        )
+      }
+    
+  })
+  }
 
   return (
     <div className="question-one-container">
@@ -41,17 +70,19 @@ const Question1Component = ({ questions, selectResults, history }) => {
         <p className="question-one-text">What can we help you with?</p>
         <p className="question-one-subtext">select all that apply</p>
 
-        {questionsList}
+        <QuestionsList />
 
         <br />
+
         <button className="next-button" onClick={handleSubmit}>
           Next
         </button>
-        {/* <input type="submit" value="Next" />
-        </form> */}
       </div>
     </div>
   );
 };
+
+
+
 
 export default withRouter(Question1Component);

@@ -8,6 +8,6 @@ app.use(cors());
 app.use("/api", apiRouter);
 app.use(cors());
 
-app.listen(process.env.PORT || "3000", () => {
+app.listen("3000", () => {
   console.log("server is running", process.env.NODE_ENV);
 });

@@ -66,13 +66,16 @@ miricyldb.charities = () => {
   });
 };
 
+
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];
   let finalTags = [];
-  let splitTags = tags.split("%");
+  let splitTags = tags.split("£");
   splitTags.forEach((tag) => {
-    finalTags.push(tag);
+    console.log('tag', tag);
+    finalTags.push(`${tag}`);
   });
+  // console.log('select', finalTags);
 
   return new Promise((resolve, reject) => {
     pool.query(
@@ -82,7 +85,7 @@ miricyldb.charitySelect = (tags) => {
         if (err) {
           return reject(err);
         }
-
+        console.log('results',  results);
         return resolve(results);
       }
     );

@@ -109,7 +109,7 @@ font-style:  normal; */
   margin: 0;
 }
 
-.results-list-title-service{
+.results-list-title-service {
   padding-left: 10px;
   align-items: center;
 }
@@ -120,7 +120,7 @@ font-style:  normal; */
   font-stretch: normal;
   font-style: normal;
   letter-spacing: 0.09px;
-  color: #BCBCBC;
+  color: #bcbcbc;
   /* line-height: 1.1; */
   margin: 0;
   padding-top: 3px;
@@ -132,20 +132,25 @@ font-style:  normal; */
   font-size: 12px;
   letter-spacing: 0.1px;
   color: #2e3192;
+<<<<<<< HEAD
   line-height:15px;
   margin: 10px 0px 3px 0px;
+=======
+  line-height: 15px;
+  margin: 5px 0px;
+>>>>>>> develop
 }
 .results-list-service-detail {
   font-family: "Nunito", sans-serif;
   font-size: 12px;
-  font-weight: 'bold';
+  font-weight: "bold";
   /* letter-spacing: 0.1px; */
   color: #2e3192;
   /* line-height:15px; */
   margin: 0;
 }
 .results-list-button {
-  background-color: #2E3192;
+  background-color: #2e3192;
   color: #ffffff;
   font-family: "Nunito", sans-serif;
   font-weight: bold;
@@ -167,7 +172,7 @@ font-style:  normal; */
 }
 .results-list-needs-tag {
   border-radius: 16px;
-  background-color:#fcd432;
+  background-color: #fcd432;
   font-family: "Nunito", sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -237,6 +242,24 @@ font-style:  normal; */
   float: right;
   background-color: #ffffff;
   width: 200px;
+}
+
+.back-button {
+  width: 60px;
+  height: 60px;
+  color: white;
+  margin: 35px 0px 10px 0px;
+  float: left;
+  padding-bottom: 2rem;
+}
+
+.back-button-results {
+  width: 60px;
+  height: 60px;
+  color: white;
+  /* margin: 35px 0px 10px 0px; */
+  float: left;
+  padding-bottom: 2rem;
 }
 
 /* .active {
