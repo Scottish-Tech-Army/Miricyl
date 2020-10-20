@@ -80,7 +80,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
   return (
     <div className="question-two-container">
-      <h1 className="question-title">
+      <h1 className="question-two-title">
         Search mental health resources & services that can help you feel better
       </h1>
       <div className="select-container">

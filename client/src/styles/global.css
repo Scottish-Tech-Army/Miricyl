@@ -34,6 +34,10 @@ font-style:  normal; */
   background: linear-gradient(#c974ff, #9026fc);
   /* height: 100vh; */
 }
+.grid-container{
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
 
 .results-container {
   margin: 0;
@@ -42,42 +46,69 @@ font-style:  normal; */
   padding: 15px 10px 75px 10px;
 }
 .question-title {
-  margin: 0;
-  padding: 50px 20px 20px 20px;
   font-family: "clone-rounded-latin", sans-serif;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 29px;
-  letter-spacing: 0.6px;
+  font-size: 57px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 1.27px;
   color: #ffffff;
+  margin: 40px 20px 10px 20px;
+}
+.question-page-detail-text {
+  margin: 40px 20px 10px 20px;
+  font-family: "Nunito", sans-serif;
+  font-size: 27px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  color: #2e3192;
 }
 .question-button {
-  font-family: "clone-rounded-latin", sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: bold;
   color: #2e3192;
   text-align: center;
-  letter-spacing: 0.4px;
+  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
-  border-radius: 20px;
+  border-radius: 40px;
   border: solid 1px #2e3192;
   margin: 5px;
   background-color: #ffffff;
-  width: 200px;
+  /* width: 200px; */
+  font-family: "Nunito", sans-serif;
+  font-size: 22.4px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  width: 480px;
+  
+  
+
 }
 .question-button-selected {
-  font-family: "clone-rounded-latin", sans-serif;
-  font-size: 16px;
+  /* font-family: "clone-rounded-latin", sans-serif; */
+  font-family: "Nunito", sans-serif;
+  /* font-size: 16px; */
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  letter-spacing: 0.4px;
+  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
-  border-radius: 20px;
+  border-radius: 40px;
   border: none;
   margin: 5px;
   background-color: #2e3192;
-  width: 200px;
+  font-size: 22.4px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  width: 480px;
 }
 
 .results-list-container {
@@ -200,43 +231,75 @@ font-style:  normal; */
 
 .select-container {
   border: solid 0.5px #bcbcbc;
-  margin: 15px;
+  margin-top: 45px;
+  margin-right: 40px;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 40px;
   text-align: center;
-  padding: 15px 10px;
+  padding: 30px 5px 10px 5px;
+  max-height: 500px;
+  overflow: auto; 
 }
 
 .question-one-text {
-  font-family: "Nunito", sans-serif;
+  /* font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-size: 18px;
-  letter-spacing: 0.1px;
+  letter-spacing: 0.1px; */
+  font-family: "Nunito", sans-serif;
+  font-size: 29px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: 0.13px;
+  text-align: center;
   color: #2e3192;
+  margin: 0;
 }
 
 .question-one-subtext {
   font-family: "Nunito", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.1px;
+  /* font-size: 14px;
+  letter-spacing: 0.1px; */
   color: #bcbcbc;
+  font-size: 21px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.52;
+  letter-spacing: 0.33px;
+  text-align: center;
+  color: #6f7e8b;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 /* css below is for the "next-submit button" */
 /* input[type="submit"]  */
 .next-button {
   font-family: "clone-rounded-latin", sans-serif;
-  font-size: 16px;
+  /* font-size: 16px; */
   color: #2e3192;
-  text-align: Center;
-  letter-spacing: 0.4px;
+  text-align: center;
+  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
-  border-radius: 20px;
+  border-radius: 40px;
   border: none;
-  margin: 35px 0px 10px 0px;
-  float: right;
+  /* margin: 35px 0px 10px 0px; */
+  /* float: right; */
   background-color: #ffffff;
   width: 200px;
+  font-size: 29px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  margin-top: 20px;
+  margin-right: 40px;
+  float: right;
+
 }
 
 .back-button {
