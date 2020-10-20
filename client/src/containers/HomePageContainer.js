@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
 import Question2Component from "../components/Question2Component";
+import Question3Component from "../components/Question3Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -8,9 +9,11 @@ import nodeServer from "../api/nodeServer";
 const INITIAL_STATE = {
   tags: [],
   selectedTypes: [],
+  selectedPersonalisation: [],
   question1: [],
   charityResults: [],
   types: [],
+  personalisation: [],
   charitiesFilteredByType: [],
 };
 
@@ -21,6 +24,7 @@ export default class HomePageContainer extends Component {
     this.selectResults = this.selectResults.bind(this);
     this.getQuestion1 = this.getQuestion1.bind(this);
     this.getQuestion2 = this.getQuestion2.bind(this);
+    this.getQuestion3 = this.getQuestion3.bind(this);
     this.filterByType = this.filterByType.bind(this);
     this.getUnique = this.getUnique.bind(this);
   }
@@ -37,6 +41,13 @@ export default class HomePageContainer extends Component {
     nodeServer.get("/types").then((res) => {
       const typesApi = res.data;
       this.setState({ types: typesApi });
+    });
+  }
+
+  getQuestion3() {
+    nodeServer.get("/personalisation").then((res) => {
+      const personalisation = res.data;
+      this.setState({ personalisation: personalisation });
     });
   }
 
@@ -95,6 +106,7 @@ export default class HomePageContainer extends Component {
   filterByType(types) {
     if (types.length === 0) {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
+      this.getQuestion3()
     } else {
       this.setState({ selectedTypes: types})
       let filteredCharities = [];
@@ -107,6 +119,7 @@ export default class HomePageContainer extends Component {
         });
       });
       this.setState({ charitiesFilteredByType: filteredCharities });
+      this.getQuestion3()
     }
   }
 
@@ -134,9 +147,13 @@ export default class HomePageContainer extends Component {
               selectedTypes={this.state.selectedTypes}
             />
           </Route>
-          <Route exact path="/results">
-            <Results results={this.state.charitiesFilteredByType} />
+          <Route exact path="/personalisation">
+            <Question3Component questions={this.state.personalisation} />
           </Route>
+          <Route exact path="/results">
+            <Results results={this.state.charitiesFilteredByType} selectedPersonalisation={this.state.selectedPersonalisation}/>
+          </Route>
+
         </React.Fragment>
       </Router>
     );

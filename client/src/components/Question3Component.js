@@ -3,18 +3,13 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
 
-const Question2Component = ({ questions, history, filterByType, selectedTypes}) => {
+const Question3Component = ({ questions, history, filterByType, selectedPersonalisation}) => {
   var types = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push("/personalisation");
+    history.push("/results");
     filterByType(types);
   };
-
- 
-
-
-  //   TODO: filter results based on the types selected
 
   const QuestionsList = () => {
 
@@ -25,8 +20,6 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
      return charities.find((charity) => charity.UserOption_Type === UserOption_Type)
    })
   }
-
-
 
  let uniqueQuestions = getUnique(questions)
  console.log(uniqueQuestions);
@@ -45,7 +38,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
   
   return uniqueQuestions.map((Question) => {
     var isSelected = false
-    selectedTypes.map((type) => {
+    selectedPersonalisation.map((type) => {
       if(type === Question.UserOption_Type) {
         isSelected = true
       }
@@ -106,4 +99,4 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
 
 
-export default withRouter(Question2Component);
+export default withRouter(Question3Component);
