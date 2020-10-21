@@ -74,8 +74,8 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
 
         <div>
           <div className="select-container">
-            <p className="question-one-text">What can we help you with?</p>
-            <p className="question-one-subtext">select all that apply</p>
+            <p className="question-text">What can we help you with?</p>
+            <p className="question-subtext">select all that apply</p>
 
             <QuestionsList />
 

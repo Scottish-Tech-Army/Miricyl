@@ -80,25 +80,38 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
   return (
     <div className="question-two-container">
-      <h1 className="question-two-title">
-        Search mental health resources & services that can help you feel better
-      </h1>
-      <div className="select-container">
-        <p className="question-one-text">
-          What types of support are you looking for?
-        </p>
-        <p className="question-one-subtext">select all that apply</p>
 
-        <QuestionsList />
-
-        <br />
-        <div className="bottom-navigation">
-          <IoIosArrowDropleft className="back-button" onClick={() => {history.goBack()}} />
-          <button className="next-button" onClick={handleSubmit}>
-            Next
-          </button>
+      <div className="grid-container">
+        
+        <div className="title-description-container">
+          <h1 className="question-title">
+            Search mental health resources & services that can help you feel better
+          </h1>
+          <h2 className="question-page-detail-text">
+            Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health.  We will guide you in finding the treatment and help you need.
+          </h2>
         </div>
-      </div>
+            
+            <div>
+              <div className="select-container">
+                <p className="question-text">
+                  What types of support are you looking for?
+                </p>
+                <p className="question-subtext">select all that apply</p>
+
+                <QuestionsList />
+
+                <br />
+              </div>
+        
+                <div className="bottom-navigation">
+                  <IoIosArrowDropleft className="back-button" onClick={() => {history.goBack()}} />
+                  <button className="next-button" onClick={handleSubmit}>
+                  Next
+                  </button>
+                </div>
+              </div>
+            </div>
     </div>
   );
 
