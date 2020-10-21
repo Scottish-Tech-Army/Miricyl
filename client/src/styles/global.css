@@ -85,7 +85,7 @@ font-style:  normal; */
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.5px;
-  width: 480px;
+  min-width: 480px;
   
   
 
@@ -306,9 +306,10 @@ font-style:  normal; */
   width: 60px;
   height: 60px;
   color: white;
-  margin: 35px 0px 10px 0px;
+  margin-top: 16px;
+  /* margin: 20px 0px 10px 0px;
   float: left;
-  padding-bottom: 2rem;
+  padding-bottom: 2rem; */
 }
 
 .back-button-results {

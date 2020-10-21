@@ -103,8 +103,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
                 <br />
               </div>
-        
-                <div className="bottom-navigation">
+              <div className="bottom-navigation">
                   <IoIosArrowDropleft className="back-button" onClick={() => {history.goBack()}} />
                   <button className="next-button" onClick={handleSubmit}>
                   Next

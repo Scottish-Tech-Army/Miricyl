@@ -81,11 +81,11 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
 
             <br />
             </div>
-            <button className="next-button" onClick={handleSubmit}>
-              Next
-            </button>
           </div>
       </div>
+      <button className="next-button" onClick={handleSubmit}>
+              Next
+      </button>
     </div>
   );
 };
