@@ -247,6 +247,7 @@ DROP TABLE IF EXISTS `Miricyl`.`Type` ;
 CREATE TABLE IF NOT EXISTS `Miricyl`.`Type` (
   `ServiceTypeID` INT NOT NULL AUTO_INCREMENT,
   `Description` VARCHAR(200) NOT NULL,
+  `UserOption_Type` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`ServiceTypeID`),
   UNIQUE INDEX `ServiceTypeID_UNIQUE` (`ServiceTypeID` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -320,6 +321,7 @@ SELECT
     N.NeedsDesc as Needs,
     N.UserOption,
     T.Description as TypeOfSupport,
+	T.UserOption_Type,
     P.Description as Personalisation
 
 FROM Miricyl.ServiceNeeds SN
@@ -330,7 +332,7 @@ LEFT JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
 INNER JOIN Miricyl.Needs N on N.NeedsID = SN.Needs_NeedsID
 LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
 LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
-WHERE (NULLIF(`n`.`UserOption`, '') IS NOT NULL);
+WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

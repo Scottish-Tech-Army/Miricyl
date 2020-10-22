@@ -3,7 +3,9 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
 
-const Question1Component = ({ questions, selectResults, history }) => {
+
+
+const Question1Component = ({ questions, needs, selectResults, history }) => {
   const tags = [];
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,47 +13,84 @@ const Question1Component = ({ questions, selectResults, history }) => {
     selectResults(tags);
   };
 
-  const handleChange = (e) => {
-    if (e.target.classList == "question-button") {
-      tags.push(e.target.value);
-      e.target.classList = "question-button-selected";
-    } else {
-      tags.splice(tags.indexOf(e.target.value), 1);
-      e.target.classList = "question-button";
-    }
-  };
+  const QuestionsList = () => {
 
-  const questionsList = questions.map((question) => (
-    <button
-      onClick={handleChange}
-      className="question-button"
-      value={question.Need}
-      key={question.Need}
-    >
-      {question.Need}
-    </button>
-  ));
+    const handleChange = (e) => {
+      if (e.target.className === "question-button") {
+        tags.push(e.target.value);
+        e.target.className = "question-button-selected";
+      } else {
+        tags.splice(tags.indexOf(e.target.value), 1);
+        e.target.className = "question-button";
+      }
+    };
+  
+  
+  return questions.map((question) => {
+    var isSelected = false
+    needs.map((need) => {
+      if(need === question.Need) {
+        isSelected = true
+      }})
+          if(isSelected === true){
+            tags.push(question.Need)
+        return (
+          <button
+          onClick={handleChange}
+          className="question-button-selected"
+          value={question.Need}
+          key={question.Need}
+        >
+          {question.Need}
+        </button>
+        )
+      } else {
+        return (
+          <button
+          onClick={handleChange}
+          className="question-button"
+          value={question.Need}
+          key={question.Need}
+        >
+          {question.Need}
+        </button>
+        )
+      }
+    
+  })
+  }
 
   return (
     <div className="question-one-container">
-      <h1 className="question-title">
-        Search mental health resources & services that can help you feel better
-      </h1>
+      <div className="grid-container">
+        <div className="title-description-container">
+        <h1 className="question-title">
+          Search mental health resources & services that can help you feel better
+        </h1>
+        <h2 className="question-page-detail-text">
+        Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health.  We will guide you in finding the treatment and help you need.
+        </h2>
+        </div>
 
-      <div className="select-container">
-        <p className="question-one-text">What can we help you with?</p>
-        <p className="question-one-subtext">select all that apply</p>
+        <div>
+          <div className="select-container">
+            <p className="question-text">What can we help you with?</p>
+            <p className="question-subtext">select all that apply</p>
 
-        {questionsList}
+            <QuestionsList />
 
-        <br />
-
-        <button className="next-button" onClick={handleSubmit}>
-          Next
-        </button>
+            <br />
+            </div>
+          </div>
       </div>
+      <button className="next-button" onClick={handleSubmit}>
+              Next
+      </button>
     </div>
   );
 };
+
+
+
 
 export default withRouter(Question1Component);

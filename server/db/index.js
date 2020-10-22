@@ -70,9 +70,9 @@ miricyldb.charities = () => {
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];
   let finalTags = [];
-  let splitTags = tags.split("%");
+  let splitTags = tags.split("£");
   splitTags.forEach((tag) => {
-    finalTags.push(tag);
+    finalTags.push(`${tag}`);
   });
 
   return new Promise((resolve, reject) => {
@@ -83,7 +83,6 @@ miricyldb.charitySelect = (tags) => {
         if (err) {
           return reject(err);
         }
-
         return resolve(results);
       }
     );

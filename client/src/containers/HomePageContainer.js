@@ -7,16 +7,8 @@ import nodeServer from "../api/nodeServer";
 
 const INITIAL_STATE = {
   tags: [],
-  question1: [
-    // { NeedsID: 1, title: "Alcohol", NeedsDesc: "Alcohol" },
-    // { NeedsID: 2, title: "Pregnancy and Parenting", NeedsDesc: "Parenting" },
-  ],
-  // charities: [
-  //   { id: 1, name: "Turning Point Scotland", tags: "addiction" },
-  //   { id: 2, name: "Pregnancy Counselling & Care", tags: "parenting" },
-  //   { id: 3, name: "Mind", tags: "addiction" },
-  //   { id: 4, name: "Stepping Stones", tags: "parenting" },
-  // ],
+  selectedTypes: [],
+  question1: [],
   charityResults: [],
   types: [],
   charitiesFilteredByType: [],
@@ -58,6 +50,7 @@ export default class HomePageContainer extends Component {
 
 
   selectResults(tags) {
+    this.setState({ tags})
     if (tags === 0) {
       nodeServer
         .get("/charities")
@@ -77,10 +70,11 @@ export default class HomePageContainer extends Component {
     } else {
       let results = "";
       tags.map((tag) => {
-        let apiTag = `${tag}%`;
+        let apiTag = `${tag}£`;
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
+      console.log(results);
       nodeServer
         .get(`/charities?tags=${results}`)
         .then((res) => {
@@ -102,6 +96,7 @@ export default class HomePageContainer extends Component {
     if (types.length === 0) {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
     } else {
+      this.setState({ selectedTypes: types})
       let filteredCharities = [];
       const charities = this.state.charityResults;
       types.map((type) => {
@@ -127,6 +122,7 @@ export default class HomePageContainer extends Component {
             <Question1Component
               questions={this.state.question1}
               addTag={this.addTag}
+              needs={this.state.tags}
               selectResults={this.selectResults}
             />
           </Route>
@@ -135,6 +131,7 @@ export default class HomePageContainer extends Component {
               results={this.state.charityResults}
               questions={this.state.types}
               filterByType={this.filterByType}
+              selectedTypes={this.state.selectedTypes}
             />
           </Route>
           <Route exact path="/results">
