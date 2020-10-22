@@ -39,17 +39,22 @@ font-style:  normal; */
   background-repeat: no-repeat;
   background-size: cover;
 }
-.grid-container{
+
+.results-page-container {
+  background-image: url(../assets/bg1.png);
+  margin: 0;
+  min-height: 100vh;
+  padding: 15px 10px 75px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.question-grid-container{
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
-.results-container {
-  margin: 0;
-  background: linear-gradient(#fcd432, #ff6e43);
-  min-height: 100vh;
-  padding: 15px 10px 75px 10px;
-}
 .question-title {
   font-family: "clone-rounded-latin", sans-serif;
   font-size: 57px;
@@ -116,6 +121,11 @@ font-style:  normal; */
   width: 480px;
 }
 
+.results-page-display {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 .results-list-container {
   border: solid 0.5px #bcbcbc;
   margin: 15px;
@@ -136,11 +146,11 @@ font-style:  normal; */
 .results-list-title {
   font-family: "Nunito", sans-serif;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 29px;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: 0.09px;
-  line-height: 1.1;
+  letter-spacing: 0.13px;
+  line-height: 29px;
   color: #2e3192;
   margin: 0;
 }
@@ -152,12 +162,12 @@ font-style:  normal; */
 
 .results-list-service-description {
   font-family: "Nunito", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: 0.09px;
-  color: #bcbcbc;
-  /* line-height: 1.1; */
+  letter-spacing: 0.25px;
+  line-height: 13px;
+  color: #6f7e8b;
   margin: 0;
   padding-top: 3px;
 }
@@ -180,17 +190,31 @@ font-style:  normal; */
   /* line-height:15px; */
   margin: 0;
 }
+
+.results-button-container {
+  margin-top: 20px;
+}
+
 .results-list-button {
   background-color: #2e3192;
   color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 0.3px;
+  font-family: "clone-rounded-latin", sans-serif;
+  width: 145px;
+  height: 38px;
+  /* font-weight: bold; */
+  /* font-size: 14px; */
+  /* letter-spacing: 0.3px; */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 5px 20px 5px 10px;
-  margin: 5px 8px 5px 0px;
+  margin: 5px 30px 5px 0px;
+  font-size: 19px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.42px;
+  text-align: center;
 }
 
 .results-list-button a {
@@ -199,7 +223,7 @@ font-style:  normal; */
 }
 
 .results-list-logo {
-  width: 50px;
+  width: 76px;
 }
 .results-list-needs-tag {
   border-radius: 16px;

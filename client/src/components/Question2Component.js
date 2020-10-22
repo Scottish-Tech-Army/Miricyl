@@ -81,7 +81,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
   return (
     <div className="question-two-container">
 
-      <div className="grid-container">
+      <div className="question-grid-container">
         
         <div className="title-description-container">
           <h1 className="question-title">

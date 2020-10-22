@@ -62,7 +62,7 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
 
   return (
     <div className="question-one-container">
-      <div className="grid-container">
+      <div className="question-grid-container">
         <div className="title-description-container">
         <h1 className="question-title">
           Search mental health resources & services that can help you feel better
