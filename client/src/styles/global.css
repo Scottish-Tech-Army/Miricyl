@@ -377,8 +377,9 @@
   padding-bottom: 2rem;
 }
 
-.nav-logo {
+.navbar-logo {
   margin-left: 35px;
+  height: 50px;
 }
 
 /* .active {
