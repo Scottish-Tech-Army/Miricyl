@@ -1,12 +1,17 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 
 const NavBar = () => {
 
     return (
-        <h1>This is the Nav Bar with Logo and help button</h1>
+        <>
+        <div className="navbar-container">
+            <h1 className="nav-logo">LOGO HERE</h1>
+            <button className="help-button">Help!</button>
+
+        </div>
+        </>
     )
 };
 
-export default withRouter(NavBar);
+export default NavBar;
