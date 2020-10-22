@@ -81,9 +81,10 @@ resource "azurerm_app_service" "client" {
   site_config {
     linux_fx_version  = "PHP|7.3"
     app_command_line  = "npm run start"
-    ip_restriction {
+  /*  ip_restriction {
   virtual_network_subnet_id = azurerm_subnet.primary_services.id
     }
+    */
   }
 }
 
@@ -103,9 +104,10 @@ resource "azurerm_app_service" "server" {
   site_config {
     linux_fx_version = "NODE|10.10"
     app_command_line = "npm run start"
-    ip_restriction {
+  /*  ip_restriction {
   virtual_network_subnet_id = azurerm_subnet.primary_services.id
     }
+    */
   }
 }
 
