@@ -12,6 +12,7 @@ import { IoIosArrowDropleft } from "react-icons/io";
 const Results = ({results, history}) => {
 
   const showResults = results.map((result) => (
+  
 
     <div className="results-list-container" key={ result.PlaceID }>
         <div className="results-title-container">
@@ -31,12 +32,6 @@ const Results = ({results, history}) => {
           <button className="results-list-button" type="button"><IconContext.Provider value={{ className: 'results-react-button-icon' }}>
             <a href={ "tel:" + result.PhoneNo }><BiPhone /> Call</a>
             </IconContext.Provider></button> : null }
-
-        <div>  
-          {result.PhoneNo ? 
-          <button key={result.PhoneNo} className="results-list-button" type="button">
-            <a href={"tel:" + result.PhoneNo}>Call</a>
-          </button> : null }
 
 
           {result.ServiceURL ? 
@@ -75,11 +70,11 @@ const Results = ({results, history}) => {
         
       
     </div>   
+  
     
   ));
 
   return (
-    <>
 
     <div className="results-container">
       <h1 className="question-title">Search results</h1>
@@ -89,9 +84,7 @@ const Results = ({results, history}) => {
         </div>
     </div>
 
-
-    </>
   );
 }
-;
+
 export default withRouter(Results);
