@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `OuterCode` VARCHAR(10) NULL DEFAULT NULL,
   `InnerCode` VARCHAR(10) NULL DEFAULT NULL,
   `PhoneNo` VARCHAR(100) NULL DEFAULT NULL,
-  `OpeningTime` VARCHAR(200) NULL DEFAULT NULL,
+  `OpeningTime` VARCHAR(500) NULL DEFAULT NULL,
   `Organisation_OrgID` INT NOT NULL,
   `Gender_GenderID` INT NULL DEFAULT NULL,
   `ServiceURL` VARCHAR(200) NULL DEFAULT NULL,
@@ -231,6 +231,8 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`Service_Import` (
   `Personal_Unemployed` VARCHAR(1) NULL DEFAULT '0',
   `Personal_A_carer` VARCHAR(1) NULL DEFAULT '0',
   `Personal_BAME` VARCHAR(1) NULL DEFAULT '0',
+  `Self_Reffered` VARCHAR(1) NULL DEFAULT '0',
+  `Referred_By_Another_Party` VARCHAR(1) NULL DEFAULT '0',
   `Needs` VARCHAR(1) NULL DEFAULT '0',
   `Type_of_Support` VARCHAR(1) NULL DEFAULT '0',
   `Personalisation` VARCHAR(1) NULL DEFAULT '0')
