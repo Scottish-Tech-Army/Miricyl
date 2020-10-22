@@ -174,20 +174,19 @@ font-style:  normal; */
 
 .results-list-sub-title {
   font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.1px;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0px;
   color: #2e3192;
-  line-height: 15px;
+  line-height: 22px;
   margin: 10px 0px 3px 0px;
 }
 .results-list-service-detail {
   font-family: "Nunito", sans-serif;
-  font-size: 12px;
-  font-weight: "bold";
-  /* letter-spacing: 0.1px; */
+  font-size: 18px;
+  letter-spacing: 0px;
   color: #2e3192;
-  /* line-height:15px; */
+  line-height: 22px;
   margin: 0;
 }
 
@@ -226,36 +225,42 @@ font-style:  normal; */
   width: 76px;
 }
 .results-list-needs-tag {
-  border-radius: 16px;
+  border-radius: 19px;
   background-color: #fcd432;
   font-family: "Nunito", sans-serif;
-  font-size: 12px;
+  /* font-size: 12px; */
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.25;
-  letter-spacing: 0.05px;
+  /* letter-spacing: 0.05px; */
   text-align: center;
   color: #2e3192;
-  margin: 10px auto 10px 0px;
+  margin: 10px 20px 10px 0px;
   width: fit-content;
   padding: 0px 15px;
+  /* height: 30px; */
+  font-size: 14.2px;
+  letter-spacing: 0.06px;
+
 }
 .results-list-personalisation-tag {
-  border-radius: 16px;
+  border-radius: 19px;
   background-color: #4ecfff;
   font-family: "Nunito", sans-serif;
-  font-size: 12px;
+  /* font-size: 12px; */
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.25;
-  letter-spacing: 0.05px;
+  /* letter-spacing: 0.05px; */
   text-align: center;
   color: #2e3192;
   margin: 10px auto 10px 0px;
   width: fit-content;
   padding: 0px 15px;
+  font-size: 14.2px;
+  letter-spacing: 0.06px;
 }
 
 .select-container {
