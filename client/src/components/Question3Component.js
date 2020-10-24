@@ -3,26 +3,26 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
 
-const Question2Component = ({ questions, history, filterByType, selectedTypes}) => {
-  var types = [];
+const Question3Component = ({ questions, history, filterByPersonalisations, selectedPersonalisations}) => {
+  var personalisations = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push("/personalise");
-    filterByType(types);
+    history.push("/results");
+    filterByPersonalisations(personalisations);
   };
 
  
 
 
-  //   TODO: filter results based on the types selected
+  //   TODO: filter results based on the personalisations selected
 
   const QuestionsList = () => {
 
   //   function getUnique(charities) {
   //   return Array.from(
-  //    new Set(charities.map((charity) => charity.UserOption_Type))
-  //  ).map((UserOption_Type)=> {
-  //    return charities.find((charity) => charity.UserOption_Type === UserOption_Type)
+  //    new Set(charities.map((charity) => charity.UserOption))
+  //  ).map((UserOption)=> {
+  //    return charities.find((charity) => charity.UserOption === UserOption)
   //  })
   // }
 
@@ -33,10 +33,10 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 // handle change
     const handleChange = (e) => {
       if (e.target.classList == "question-button") {
-        types.push(e.target.value);
+        personalisations.push(e.target.value);
         e.target.classList = "question-button-selected";
       } else {
-        types.splice(types.indexOf(e.target.value), 1);
+        personalisations.splice(personalisations.indexOf(e.target.value), 1);
         e.target.classList = "question-button";
       }
     };
@@ -44,21 +44,21 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
   
   return questions.map((Question) => {
     var isSelected = false
-    selectedTypes.map((type) => {
-      if(type === Question.UserOption_Type) {
+    selectedPersonalisations.map((type) => {
+      if(type === Question.UserOption) {
         isSelected = true
       }
     })
           if(isSelected === true){
-            types.push(Question.UserOption_Type)
+            personalisations.push(Question.UserOption)
         return (
           <button
           onClick={handleChange}
           className="question-button-selected"
-          value={Question.UserOption_Type}
-          key={Question.UserOption_Type}
+          value={Question.UserOption}
+          key={Question.UserOption}
         >
-          {Question.UserOption_Type}
+          {Question.UserOption}
         </button>
         )
       } else {
@@ -66,10 +66,10 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
           <button
           onClick={handleChange}
           className="question-button"
-          value={Question.UserOption_Type}
-          key={Question.UserOption_Type}
+          value={Question.UserOption}
+          key={Question.UserOption}
         >
-          {Question.UserOption_Type}
+          {Question.UserOption}
         </button>
         )
       }
@@ -94,7 +94,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
             <div>
               <div className="select-container">
                 <p className="question-text">
-                  What types of support are you looking for?
+                  What personalisations of support are you looking for?
                 </p>
                 <p className="question-subtext">select all that apply</p>
 
@@ -117,4 +117,4 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
 
 
 
-export default withRouter(Question2Component);
+export default withRouter(Question3Component);

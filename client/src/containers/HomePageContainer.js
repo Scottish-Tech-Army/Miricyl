@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
 import Question2Component from "../components/Question2Component";
+import Question3Component from "../components/Question3Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -8,10 +9,13 @@ import nodeServer from "../api/nodeServer";
 const INITIAL_STATE = {
   tags: [],
   selectedTypes: [],
+  selectedPersonalisations: [],
   question1: [],
   charityResults: [],
   types: [],
+  personalisations: [],
   charitiesFilteredByType: [],
+  charitiesFilteredByPersonalisations: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -21,8 +25,10 @@ export default class HomePageContainer extends Component {
     this.selectResults = this.selectResults.bind(this);
     this.getQuestion1 = this.getQuestion1.bind(this);
     this.getQuestion2 = this.getQuestion2.bind(this);
+    this.getQuestion3 = this.getQuestion3.bind(this);
     this.filterByType = this.filterByType.bind(this);
-    this.getUnique = this.getUnique.bind(this);
+    this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
+    // this.getUnique = this.getUnique.bind(this);
   }
 
   getQuestion1() {
@@ -39,14 +45,20 @@ export default class HomePageContainer extends Component {
       this.setState({ types: typesApi });
     });
   }
-
-  getUnique(charities) {
-     return Array.from(
-      new Set(charities.map((charity) => charity.OrgName))
-    ).map((OrgName)=> {
-      return charities.find((charity) => charity.OrgName === OrgName)
-    })
+  getQuestion3() {
+    nodeServer.get("/personalisations").then((res) => {
+      const personalisationApi = res.data;
+      this.setState({ personalisations: personalisationApi });
+    });
   }
+
+  // getUnique(charities) {
+  //    return Array.from(
+  //     new Set(charities.map((charity) => charity.OrgName))
+  //   ).map((OrgName)=> {
+  //     return charities.find((charity) => charity.OrgName === OrgName)
+  //   })
+  // }
 
 
   selectResults(tags) {
@@ -58,11 +70,11 @@ export default class HomePageContainer extends Component {
           const charities = res.data;
  
           // returns unique charities
-          const uniqueCharities = this.getUnique(charities)
+          // const uniqueCharities = this.getUnique(charities)
          
           // sorts charities alphabetically 
-          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: uniqueCharities });
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: charities });
         })
         .catch((error) => {
           console.log(error);
@@ -80,10 +92,10 @@ export default class HomePageContainer extends Component {
         .then((res) => {
           const charities = res.data;
           // returns unique charities
-          const uniqueCharities = this.getUnique(charities)
+          // const uniqueCharities = this.getUnique(charities)
           // sorts charities alphabetically 
-          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: uniqueCharities });
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: charities });
         })
         .catch((error) => {
           console.log(error);
@@ -95,18 +107,42 @@ export default class HomePageContainer extends Component {
   filterByType(types) {
     if (types.length === 0) {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
+      this.getQuestion3();
     } else {
       this.setState({ selectedTypes: types})
       let filteredCharities = [];
       const charities = this.state.charityResults;
       types.map((type) => {
         charities.map((charity) => {
-          if (charity.TypeOfSupport === type) {
+          if (charity.UserOption_Type === type) {
             filteredCharities.push(charity);
           }
         });
       });
       this.setState({ charitiesFilteredByType: filteredCharities });
+      this.getQuestion3();
+    }
+  }
+
+  filterByPersonalisations(selected) {
+    if (selected.length === 0) {
+      this.setState({ charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType });
+      console.log('none', this.state.filteredCharities);
+      // this.getQuestion4();
+    } else {
+      this.setState({ selectedPersonalisations: selected})
+      let filteredCharities = [];
+      const charities = this.state.charitiesFilteredByType;
+      selected.map((personalisation) => {
+        charities.map((charity) => {
+          if (charity.Personalisation === personalisation) {
+            filteredCharities.push(charity);
+          }
+        });
+      });
+      this.setState({ charitiesFilteredByType: filteredCharities });
+      console.log('some', filteredCharities);
+      // this.getQuestion4();
     }
   }
 
@@ -132,6 +168,14 @@ export default class HomePageContainer extends Component {
               questions={this.state.types}
               filterByType={this.filterByType}
               selectedTypes={this.state.selectedTypes}
+            />
+          </Route>
+          <Route exact path="/personalise">
+            <Question3Component
+              results={this.state.charityResults}
+              questions={this.state.personalisations}
+              filterByPersonalisations={this.filterByPersonalisations}
+              selectedPersonalisations={this.state.selectedPersonalisations}
             />
           </Route>
           <Route exact path="/results">
