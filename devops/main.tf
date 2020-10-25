@@ -62,8 +62,8 @@ resource "azurerm_app_service_plan" "primary_appservice" {
   kind                  = "linux"
   reserved              = true
   sku {
-    tier = "Premium"
-    size = "V2"
+    tier = "Dynamic"
+    size = "P1V2"
   }
   tags                  = local.tags
 }
