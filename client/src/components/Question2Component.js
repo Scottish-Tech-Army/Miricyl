@@ -11,24 +11,20 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
     filterByType(types);
   };
 
- 
-
-
-  //   TODO: filter results based on the types selected
 
   const QuestionsList = () => {
 
-  //   function getUnique(charities) {
-  //   return Array.from(
-  //    new Set(charities.map((charity) => charity.UserOption_Type))
-  //  ).map((UserOption_Type)=> {
-  //    return charities.find((charity) => charity.UserOption_Type === UserOption_Type)
-  //  })
-  // }
+    function getUnique(charities) {
+    return Array.from(
+     new Set(charities.map((charity) => charity.UserOption_Type))
+   ).map((UserOption_Type)=> {
+     return charities.find((charity) => charity.UserOption_Type === UserOption_Type)
+   })
+  }
 
 
 
-//  let uniqueQuestions = getUnique(questions)
+ let uniqueQuestions = getUnique(questions)
 
 // handle change
     const handleChange = (e) => {
@@ -42,7 +38,7 @@ const Question2Component = ({ questions, history, filterByType, selectedTypes}) 
     };
 
   
-  return questions.map((Question) => {
+  return uniqueQuestions.map((Question) => {
     var isSelected = false
     selectedTypes.map((type) => {
       if(type === Question.UserOption_Type) {

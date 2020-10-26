@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
 import Question2Component from "../components/Question2Component";
 import Question3Component from "../components/Question3Component";
+import Question4Component from "../components/Question4Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   personalisations: [],
   charitiesFilteredByType: [],
   charitiesFilteredByPersonalisations: [],
+  finalCharities: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -28,7 +30,8 @@ export default class HomePageContainer extends Component {
     this.getQuestion3 = this.getQuestion3.bind(this);
     this.filterByType = this.filterByType.bind(this);
     this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
-    // this.getUnique = this.getUnique.bind(this);
+    this.sortCharities = this.sortCharities.bind(this);
+    this.getUnique = this.getUnique.bind(this);
   }
 
   getQuestion1() {
@@ -52,13 +55,21 @@ export default class HomePageContainer extends Component {
     });
   }
 
-  // getUnique(charities) {
-  //    return Array.from(
-  //     new Set(charities.map((charity) => charity.OrgName))
-  //   ).map((OrgName)=> {
-  //     return charities.find((charity) => charity.OrgName === OrgName)
-  //   })
-  // }
+  getUnique(charities) {
+     return Array.from(
+      new Set(charities.map((charity) => charity.OrgName))
+    ).map((OrgName)=> {
+      return charities.find((charity) => charity.OrgName === OrgName)
+    })
+  };
+
+  sortCharities(postcode) {
+    console.log('postcode', postcode.postcode);
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
+    let uniqueCharities = this.getUnique(fullCharities)
+    this.setState({ finalCharities: uniqueCharities})
+  }
+
 
 
   selectResults(tags) {
@@ -127,8 +138,7 @@ export default class HomePageContainer extends Component {
   filterByPersonalisations(selected) {
     if (selected.length === 0) {
       this.setState({ charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType });
-      console.log('none', this.state.filteredCharities);
-      // this.getQuestion4();
+      console.log('none', this.state.filteredCharities); 
     } else {
       this.setState({ selectedPersonalisations: selected})
       let filteredCharities = [];
@@ -140,9 +150,9 @@ export default class HomePageContainer extends Component {
           }
         });
       });
-      this.setState({ charitiesFilteredByType: filteredCharities });
+      this.setState({ charitiesFilteredByPersonalisations: filteredCharities });
       console.log('some', filteredCharities);
-      // this.getQuestion4();
+      // this.sortCharities()
     }
   }
 
@@ -178,8 +188,13 @@ export default class HomePageContainer extends Component {
               selectedPersonalisations={this.state.selectedPersonalisations}
             />
           </Route>
+          <Route exact path="/postcode">
+            <Question4Component
+              sortCharities={this.sortCharities}
+            />
+          </Route>
           <Route exact path="/results">
-            <Results results={this.state.charitiesFilteredByType} />
+            <Results results={this.state.finalCharities} />
           </Route>
         </React.Fragment>
       </Router>

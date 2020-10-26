@@ -7,28 +7,13 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
   var personalisations = [];
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push("/results");
+    history.push("/postcode");
     filterByPersonalisations(personalisations);
   };
 
- 
-
-
-  //   TODO: filter results based on the personalisations selected
-
   const QuestionsList = () => {
 
-  //   function getUnique(charities) {
-  //   return Array.from(
-  //    new Set(charities.map((charity) => charity.UserOption))
-  //  ).map((UserOption)=> {
-  //    return charities.find((charity) => charity.UserOption === UserOption)
-  //  })
-  // }
 
-
-
-//  let uniqueQuestions = getUnique(questions)
 
 // handle change
     const handleChange = (e) => {
@@ -44,35 +29,37 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
   
   return questions.map((Question) => {
     var isSelected = false
-    selectedPersonalisations.map((type) => {
-      if(type === Question.UserOption) {
-        isSelected = true
-      }
-    })
-          if(isSelected === true){
-            personalisations.push(Question.UserOption)
-        return (
-          <button
-          onClick={handleChange}
-          className="question-button-selected"
-          value={Question.UserOption}
-          key={Question.UserOption}
-        >
-          {Question.UserOption}
-        </button>
-        )
-      } else {
-        return (
-          <button
-          onClick={handleChange}
-          className="question-button"
-          value={Question.UserOption}
-          key={Question.UserOption}
-        >
-          {Question.UserOption}
-        </button>
-        )
-      }
+    if(Question.UserOption !== "") {
+      selectedPersonalisations.map((type) => {
+        if(type === Question.UserOption) {
+          isSelected = true
+        }
+      })
+            if(isSelected === true){
+              personalisations.push(Question.UserOption)
+          return (
+            <button
+            onClick={handleChange}
+            className="question-button-selected"
+            value={Question.UserOption}
+            key={Question.UserOption}
+          >
+            {Question.UserOption}
+          </button>
+          )
+        } else {
+          return (
+            <button
+            onClick={handleChange}
+            className="question-button"
+            value={Question.UserOption}
+            key={Question.UserOption}
+          >
+            {Question.UserOption}
+          </button>
+          )
+        }
+    }
     
   })
   }
@@ -94,7 +81,7 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
             <div>
               <div className="select-container">
                 <p className="question-text">
-                  What personalisations of support are you looking for?
+                  What Personalise your results?
                 </p>
                 <p className="question-subtext">select all that apply</p>
 
