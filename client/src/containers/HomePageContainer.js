@@ -66,8 +66,21 @@ export default class HomePageContainer extends Component {
   sortCharities(postcode) {
     console.log('postcode', postcode.postcode);
     const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
-    let uniqueCharities = this.getUnique(fullCharities)
-    this.setState({ finalCharities: uniqueCharities})
+
+    if(postcode.postcode === "") {
+      let nationalCharities = []
+      fullCharities.map((charity) => {
+        if(charity.NationalService === "YES")
+        nationalCharities.push(charity)
+        console.log(charity);
+      })
+      let uniqueCharities = this.getUnique(nationalCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    } else {
+      let uniqueCharities = this.getUnique(fullCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    }
+
   }
 
 
