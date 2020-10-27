@@ -81,7 +81,7 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
             <div>
               <div className="select-container">
                 <p className="question-text">
-                  What Personalise your results?
+                  Personalise your results
                 </p>
                 <p className="question-subtext">select all that apply</p>
 
