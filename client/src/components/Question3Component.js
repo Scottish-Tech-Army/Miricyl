@@ -65,7 +65,7 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
   }
 
   return (
-    <div className="question-two-container">
+    <div className="question-three-container">
 
       <div className="question-grid-container">
         

@@ -19,7 +19,7 @@ const Question4Component = ({history, sortCharities}) => {
       }
 
     return (
-        <div className="question-one-container">
+        <div className="question-four-container">
             <div className="question-grid-container">
                 <div className="title-description-container">
                     <h1 className="question-title">
