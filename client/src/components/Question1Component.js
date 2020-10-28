@@ -73,13 +73,13 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
         </div>
 
         <div>
-          <div className="select-container">
-            <p className="question-text">What can we help you with?</p>
-            <p className="question-subtext">select all that apply</p>
+            <div className="select-container">
+              <p className="question-text">What can we help you with?</p>
+              <p className="question-subtext">select all that apply</p>
 
-            <QuestionsList />
+              <QuestionsList />
 
-            <br />
+              <br />
             </div>
                 <div className="bottom-navigation">
                   <button className="next-button" onClick={handleSubmit}>
