@@ -192,4 +192,7 @@ INSERT INTO `Miricyl`.`Organisation` VALUES (1001,'Projekt 42','','Wellness Cent
 (1192,' Argyll & Bute Addiction Team (Islay) ','','Community Based',NULL,NULL,'',NULL,NULL),
 (1193,' Hillcrest Futures ','','Community Based',NULL,NULL,'',NULL,NULL),
 (1194,' Relationships Scotland Orkney ','','Community Based',NULL,NULL,'',NULL,NULL),
-(1195,' Tayside Council on Alcohol - Young Person Service ','','Community Based',NULL,NULL,'',NULL,NULL);
+(1195,' Tayside Council on Alcohol - Young Person Service ','','Community Based',NULL,NULL,'',NULL,NULL),
+(1196,' Multiple Needs Charity 1','','Dummy Organisation to Test behaviour',NULL,NULL,'',NULL,NULL),
+(1197,' Charity with 2 Needs','','Dummy Org to Test App Behaviour',NULL,NULL,'',NULL,NULL),
+(1198,' Dummy Charity with 1 Need','','Dummy Org to Test App Behaviour',NULL,NULL,'',NULL,NULL);
