@@ -31,13 +31,15 @@ const Question4Component = ({history, sortCharities}) => {
                 </div>
                     <div>
                     <div className="select-container-q4">
-                    <p className="question-text">Enter the first part of your postcode to find services in your area</p>
+                    <p className="question-text">Enter the first part of your postcode to find services and support in your area</p>
 
-                    <input
+                    
+                    <input className="postcode-select"
                         type="text"
                         onChange={handleChange}
                         placeholder="Enter your postcode"
                     ></input>
+                    
 
                     <br />
                     </div>

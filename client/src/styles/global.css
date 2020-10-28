@@ -335,6 +335,7 @@
   text-align: center;
   color: #2e3192;
   margin: 0;
+  padding: 10px 40px;
 }
 
 .question-subtext {
@@ -413,6 +414,24 @@
 .navbar-logo {
   margin-left: 35px;
   height: 50px;
+}
+
+/* input[type=text] */
+.postcode-select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #4585bf;
+  border-radius: 30px;
+  box-sizing: border-box;
+  
+  font-family: "Nunito", sans-serif;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 0.47px;
+  text-align: center;
+  color: #bcbcbc;
+  margin-top: 45px;
 }
 
 /* .active {
