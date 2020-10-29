@@ -1,0 +1,2 @@
+#JS: result will go here of course not in this file but to this folder (setting up file structure)
+#Once git is sorted in my machine, this could be deleted.
