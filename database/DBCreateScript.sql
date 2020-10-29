@@ -314,7 +314,7 @@ SELECT
     O.LogoURl as Logo,
     O.ServiceDesc as OrgDescription,
     OS.Description AS ServiceDescription,
-    CONCAT(OS.Address1, ', ', OS.Address2 ) AS PhysicalAddress,
+    IF(ISNULL(OS.Address2),Address1,CONCAT(OS.Address1, ', ', OS.Address2 )) AS PhysicalAddress,
     OS.ServiceEmail as EmailAddress,
     OS.ServiceURL ,
     OS.PhoneNo,
