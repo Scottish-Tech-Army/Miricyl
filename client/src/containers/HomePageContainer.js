@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Question1Component from "../components/Question1Component";
 import Question2Component from "../components/Question2Component";
 import Question3Component from "../components/Question3Component";
+import Question4Component from "../components/Question4Component";
+
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -9,12 +11,14 @@ import nodeServer from "../api/nodeServer";
 const INITIAL_STATE = {
   tags: [],
   selectedTypes: [],
-  selectedPersonalisation: [],
+  selectedPersonalisations: [],
   question1: [],
   charityResults: [],
   types: [],
-  personalisation: [],
+  personalisations: [],
   charitiesFilteredByType: [],
+  charitiesFilteredByPersonalisations: [],
+  finalCharities: [],
 };
 
 export default class HomePageContainer extends Component {
@@ -26,6 +30,8 @@ export default class HomePageContainer extends Component {
     this.getQuestion2 = this.getQuestion2.bind(this);
     this.getQuestion3 = this.getQuestion3.bind(this);
     this.filterByType = this.filterByType.bind(this);
+    this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
+    this.sortCharities = this.sortCharities.bind(this);
     this.getUnique = this.getUnique.bind(this);
   }
 
@@ -43,6 +49,12 @@ export default class HomePageContainer extends Component {
       this.setState({ types: typesApi });
     });
   }
+  getQuestion3() {
+    nodeServer.get("/personalisations").then((res) => {
+      const personalisationApi = res.data;
+      this.setState({ personalisations: personalisationApi });
+    });
+  }
 
   getQuestion3() {
     nodeServer.get("/personalisation").then((res) => {
@@ -57,7 +69,28 @@ export default class HomePageContainer extends Component {
     ).map((OrgName)=> {
       return charities.find((charity) => charity.OrgName === OrgName)
     })
+  };
+
+  sortCharities(postcode) {
+    console.log('postcode', postcode.postcode);
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
+
+    if(postcode.postcode === "") {
+      let nationalCharities = []
+      fullCharities.map((charity) => {
+        if(charity.NationalService === "YES")
+        nationalCharities.push(charity)
+        console.log(charity);
+      })
+      let uniqueCharities = this.getUnique(nationalCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    } else {
+      let uniqueCharities = this.getUnique(fullCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    }
+
   }
+
 
 
   selectResults(tags) {
@@ -69,11 +102,11 @@ export default class HomePageContainer extends Component {
           const charities = res.data;
  
           // returns unique charities
-          const uniqueCharities = this.getUnique(charities)
+          // const uniqueCharities = this.getUnique(charities)
          
           // sorts charities alphabetically 
-          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: uniqueCharities });
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: charities });
         })
         .catch((error) => {
           console.log(error);
@@ -91,10 +124,10 @@ export default class HomePageContainer extends Component {
         .then((res) => {
           const charities = res.data;
           // returns unique charities
-          const uniqueCharities = this.getUnique(charities)
+          // const uniqueCharities = this.getUnique(charities)
           // sorts charities alphabetically 
-          uniqueCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          this.setState({ charityResults: uniqueCharities });
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          this.setState({ charityResults: charities });
         })
         .catch((error) => {
           console.log(error);
@@ -106,20 +139,41 @@ export default class HomePageContainer extends Component {
   filterByType(types) {
     if (types.length === 0) {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
-      this.getQuestion3()
+      this.getQuestion3();
     } else {
       this.setState({ selectedTypes: types})
       let filteredCharities = [];
       const charities = this.state.charityResults;
       types.map((type) => {
         charities.map((charity) => {
-          if (charity.TypeOfSupport === type) {
+          if (charity.UserOption_Type === type) {
             filteredCharities.push(charity);
           }
         });
       });
       this.setState({ charitiesFilteredByType: filteredCharities });
-      this.getQuestion3()
+      this.getQuestion3();
+    }
+  }
+
+  filterByPersonalisations(selected) {
+    if (selected.length === 0) {
+      this.setState({ charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType });
+      console.log('none', this.state.filteredCharities); 
+    } else {
+      this.setState({ selectedPersonalisations: selected})
+      let filteredCharities = [];
+      const charities = this.state.charitiesFilteredByType;
+      selected.map((personalisation) => {
+        charities.map((charity) => {
+          if (charity.Personalisation === personalisation) {
+            filteredCharities.push(charity);
+          }
+        });
+      });
+      this.setState({ charitiesFilteredByPersonalisations: filteredCharities });
+      console.log('some', filteredCharities);
+      // this.sortCharities()
     }
   }
 
@@ -147,11 +201,21 @@ export default class HomePageContainer extends Component {
               selectedTypes={this.state.selectedTypes}
             />
           </Route>
-          <Route exact path="/personalisation">
-            <Question3Component questions={this.state.personalisation} />
+          <Route exact path="/personalise">
+            <Question3Component
+              results={this.state.charityResults}
+              questions={this.state.personalisations}
+              filterByPersonalisations={this.filterByPersonalisations}
+              selectedPersonalisations={this.state.selectedPersonalisations}
+            />
+          </Route>
+          <Route exact path="/postcode">
+            <Question4Component
+              sortCharities={this.sortCharities}
+            />
           </Route>
           <Route exact path="/results">
-            <Results results={this.state.charitiesFilteredByType} selectedPersonalisation={this.state.selectedPersonalisation}/>
+            <Results results={this.state.finalCharities} />
           </Route>
 
         </React.Fragment>

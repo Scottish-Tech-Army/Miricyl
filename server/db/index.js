@@ -54,9 +54,15 @@ miricyldb.types = () => {
   });
 };
 
+<<<<<<< HEAD
 miricyldb.personalisation = () => {
   return new Promise((resolve, reject) => {
     pool.query(SELECT * FROM `Personalisation`, (err, results) => {
+=======
+miricyldb.personalisations = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+>>>>>>> develop
       if (err) {
         return reject(err);
       }

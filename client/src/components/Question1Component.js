@@ -62,22 +62,30 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
 
   return (
     <div className="question-one-container">
-      <h1 className="question-title">
-        Search mental health resources & services that can help you feel better
-      </h1>
+      <div className="question-grid-container">
+        <div className="title-description-container">
+        <h1 className="question-title">
+          Search mental health resources & services that can help you feel better
+        </h1>
+        <h2 className="question-page-detail-text">
+        Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health.  We will guide you in finding the treatment and help you need.
+        </h2>
+        </div>
 
-      <div className="select-container">
-        <p className="question-one-text">What can we help you with?</p>
-        <p className="question-one-subtext">select all that apply</p>
+        <div>
+          <div className="select-container">
+            <p className="question-text">What can we help you with?</p>
+            <p className="question-subtext">select all that apply</p>
 
-        <QuestionsList />
+            <QuestionsList />
 
-        <br />
-
-        <button className="next-button" onClick={handleSubmit}>
-          Next
-        </button>
+            <br />
+            </div>
+          </div>
       </div>
+      <button className="next-button" onClick={handleSubmit}>
+              Next
+      </button>
     </div>
   );
 };

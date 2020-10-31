@@ -24,9 +24,15 @@ router.get("/types", async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 router.get("/personalisation", async (req, res, next) => {
   try {
     let results = await db.types();
+=======
+router.get("/personalisations", async (req, res, next) => {
+  try {
+    let results = await db.personalisations();
+>>>>>>> develop
     res.json(results);
   } catch (e) {
     console.log(e);
