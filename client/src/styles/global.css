@@ -184,7 +184,6 @@
   line-height: 29px;
   color: #2e3192;
   margin: 0;
-  margin-top: 50px;
 }
 
 .results-list-title-service {
@@ -535,6 +534,56 @@
     color: #bcbcbc;
     margin-top: 25px;
   }
+  .results-page-display {
+    grid-template-columns: 1fr;
+  }
+  .results-list-container {
+    margin: 5px;
+    border-radius: 25px;
+    padding: 10px 15px;
+  }
+  .results-list-logo {
+    width: 50px;
+  }
+  .results-list-title {
+    font-size: 21px;
+    letter-spacing: 0.09px;
+    line-height: 22px;
+  }
+  .results-list-service-description {
+    font-size: 12px;
+    letter-spacing: 0.19px;
+    line-height: 13px;
+    color: #6f7e8b;
+    margin: 0;
+    padding-top: 5px;
+  }
+  .results-list-button {
+    width: auto;
+    height: 33px;
+    font-weight: bold;
+    /* font-size: 14px; */
+    /* letter-spacing: 0.3px; */
+    border: none;
+    border-radius: 8px;
+    padding: 5px 15px 5px 10px;
+    margin: 5px 10px 5px 0px;
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-align: center;
+  }
+  
+  /* .results-list-button a {
+    color: white;
+    text-decoration: none;
+  } */
+
+  
+  
+  
 
 
   
