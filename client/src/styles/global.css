@@ -319,6 +319,7 @@
   padding: 30px 5px 10px 5px;
   height: 320px;
   opacity: 0.95;
+  width: 90%;
 }
 
 .question-text {
@@ -335,7 +336,7 @@
   letter-spacing: 0.13px;
   text-align: center;
   color: #2e3192;
-  margin: 0;
+  margin: 10px;
   padding: 10px 40px;
 }
 
@@ -455,7 +456,6 @@
     height: 32px;
     justify-self: right;
   }
-
   .question-grid-container{
     grid-template-columns: 1fr;
     margin-top: 40px;
@@ -474,7 +474,12 @@
     border-radius: 25px;
     padding: 20px 5px;
     height: 400px;
-    width: 90%;
+  }
+  .select-container-q4 {
+    margin: 20px 10px 10px 10px;
+    border-radius: 25px;
+    padding: 20px 5px;
+    height: 200px;
   }
   .question-text {
     font-weight: 700;
@@ -491,7 +496,6 @@
     letter-spacing: 0.22px;
     margin-bottom: 5px;
   }
-
   .question-button {
     font-size: 14px;
     letter-spacing: 0.31px;
@@ -516,17 +520,20 @@
     height: 40px;
     color: white;
     margin-top: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     padding: none;
-
   }
-
-  .back-button {
+  .postcode-select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 22.5px;
     
-    /* margin-top: 16px; */
-    /* margin: 20px 0px 10px 0px;
-    float: left;
-    padding-bottom: 2rem; */
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #bcbcbc;
+    margin-top: 25px;
   }
 
 
