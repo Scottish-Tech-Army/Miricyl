@@ -111,6 +111,17 @@ resource "azurerm_app_service" "server" {
   }
 }
 
+#  Web service to host the automated test results
+resource "azurerm_app_service" "testing" {
+  name                = "${local.prefix}${local.prefix}testing"
+  location            = local.primary_location
+  resource_group_name = azurerm_resource_group.primary_webapp.name
+  app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
+  app_settings = {
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
+  }
+}
+
 # Resource group for database components per zone
 resource "azurerm_resource_group" "primary_database" {
   name                = "${local.zone}-${local.prefix}-az-database-rg"
