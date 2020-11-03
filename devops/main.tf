@@ -113,7 +113,7 @@ resource "azurerm_app_service" "server" {
 
 #  Web service to host the automated test results
 resource "azurerm_app_service" "testing" {
-  name                = "${local.prefix}${local.prefix}testing"
+  name                = "${local.zone}${local.prefix}testing"
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
