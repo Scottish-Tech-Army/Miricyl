@@ -18,6 +18,17 @@ locals{
               1  = "prod"
           }
     }
+    custom_domain = {
+      np = {
+        npmiricyltesting = "testing.miricyl.org"
+        devmiricylclient = "dev.miricyl.org"
+        intmiricylclient = "int.miricyl.org"
+        premiricylclient = "pre.miricyl.org"
+      }
+      p = {
+        prodmiricylclient = "help.miricyl.org"
+      }
+    }
     tags = {
         zone = local.zone
     }
@@ -119,7 +130,15 @@ resource "azurerm_app_service" "testing" {
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
+    "SCM_COMMAND_IDLE_TIMEOUT"       = "1800"
   }
+}
+
+resource "azurerm_app_service_custom_hostname_binding" "testing" {
+  for_each            = lookup(local.environments, local.custom_domain)
+  hostname            = ${each.value}
+  app_service_name    = azurerm_app_service.${each.key}.name
+  resource_group_name = azurerm_resource_group.primary_webapp.name
 }
 
 # Resource group for database components per zone
