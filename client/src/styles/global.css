@@ -556,31 +556,39 @@
     line-height: 13px;
     color: #6f7e8b;
     margin: 0;
-    padding-top: 5px;
+    padding-top: 10px;
   }
   .results-list-button {
     width: auto;
     height: 33px;
     font-weight: bold;
-    /* font-size: 14px; */
-    /* letter-spacing: 0.3px; */
-    border: none;
-    border-radius: 8px;
-    padding: 5px 15px 5px 10px;
-    margin: 5px 10px 5px 0px;
     font-size: 16px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
     letter-spacing: 0.36px;
-    text-align: center;
+    margin: 5px 10px 5px 0px;
   }
-  
-  /* .results-list-button a {
-    color: white;
-    text-decoration: none;
-  } */
-
+  .results-list-sub-title {
+    font-size: 12px;
+    line-height: 1.33;
+    margin: 10px 0px 3px 0px;
+  }
+  .results-list-service-detail {
+    font-size: 12px;
+    line-height: 1.33;
+  }
+  .results-list-needs-tag {
+    border-radius: 16px;
+    margin: 10px 15px 10px 0px;
+    font-size: 12px;
+    letter-spacing: 0.05px;
+    padding: 2px 15px;
+  }
+  .results-list-personalisation-tag {
+    border-radius: 16px;
+    font-size: 12px;
+    letter-spacing: 0.05px;
+    margin: 10px 15px 10px 0px;
+    padding: 2px 15px;
+  }
   
   
   
