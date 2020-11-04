@@ -136,8 +136,8 @@ resource "azurerm_app_service" "testing" {
 
 resource "azurerm_app_service_custom_hostname_binding" "customdomains" {
   for_each            = lookup(local.environments, local.custom_domain)
-  hostname            = ${each.value}
-  app_service_name    = azurerm_app_service.${each.key}.name
+  hostname            = "${each.value}"
+  app_service_name    = "azurerm_app_service.${each.key}.name"
   resource_group_name = azurerm_resource_group.primary_webapp.name
 }
 
