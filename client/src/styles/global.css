@@ -254,7 +254,7 @@
 }
 
 .results-list-logo {
-  width: 76px;
+  max-width: 76px;
 }
 .results-list-needs-tag {
   border-radius: 19px;
