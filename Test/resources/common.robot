@@ -3,7 +3,7 @@ Library  SeleniumLibrary
 Library  String
 
 *** Variables ***
-${browser}      chrome
+${browser}      headlesschrome
 *** Keywords ***
 Begin test
     open browser  about:blank  ${browser}
