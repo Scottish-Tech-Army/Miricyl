@@ -7,8 +7,16 @@ const NavBar = () => {
     return (
         <>
         <div className="navbar-container">
-            {/* <h1 className="nav-logo">LOGO HERE</h1> */}
-            <img className="navbar-logo" src={Logo} alt="logo"/>
+                    
+            
+            <a href='/'><img className="navbar-logo" src={Logo} alt="logo" /></a>
+
+            {/* <IoIosArrowDropleft className="back-button" onClick={() => {history.push("/")}} /> */}
+            {/* onClick={() => history.push("/")} */}
+            
+
+
+            
             <button className="help-button">Help!</button>
 
         </div>
