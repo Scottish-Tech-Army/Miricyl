@@ -160,7 +160,6 @@
 
 .results-list-container {
   border: solid 0.5px #bcbcbc;
-  margin: 15px;
   background-color: #ffffff;
   border-radius: 20px;
   text-align: left;
@@ -538,6 +537,7 @@
   }
   .results-page-display {
     grid-template-columns: 1fr;
+    margin: 10px;
   }
   .results-list-container {
     margin: 5px;
@@ -582,15 +582,24 @@
     margin: 10px 15px 10px 0px;
     font-size: 12px;
     letter-spacing: 0.05px;
-    padding: 2px 15px;
+    padding: 0px 15px;
   }
   .results-list-personalisation-tag {
     border-radius: 16px;
     font-size: 12px;
     letter-spacing: 0.05px;
     margin: 10px 15px 10px 0px;
-    padding: 2px 15px;
+    padding: 0px 15px;
   }
+  .back-button-results {
+    width: 40px;
+    height: 40px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding: none;
+  }
+
   
   
   
