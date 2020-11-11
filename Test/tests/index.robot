@@ -9,7 +9,7 @@ Test Teardown  end test
 #############################################Home Page Tests##################################################################
 ########################################################################################################################
 
-#*** Test Cases ***
+*** Test Cases ***
 Miricyl Landing Page Checks
     [Documentation]  This checks the miricyl landing page.
     [Tags]  Smoke  functional  end-2-end
