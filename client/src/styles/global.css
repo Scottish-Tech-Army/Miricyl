@@ -12,7 +12,6 @@
   padding-bottom: 3px;
   color: #2e3192;
 }
-
 .navbar-container {
   box-sizing: border-box;
   height: 110px;
@@ -25,7 +24,6 @@
   grid-template-columns: 50% 50%;
   align-items: center;
 }
-
 .question-one-container {
   background-image: url(../assets/bg1.png);
   margin: 0;
@@ -33,9 +31,8 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
 }
-
 .question-two-container {
   background-image: url(../assets/bg2.png);
   margin: 0;
@@ -43,9 +40,8 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
 }
-
 .question-three-container {
   background-image: url(../assets/bg3.png);
   margin: 0;
@@ -53,7 +49,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
 }
 
 .question-four-container {
@@ -63,7 +59,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
 }
 
 .results-page-container {
@@ -109,17 +105,14 @@
   color: #2e3192;
 }
 .question-button {
-  /* font-size: 16px; */
   font-weight: bold;
   color: #2e3192;
   text-align: center;
-  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
   margin-bottom: 15px;
   background-color: #ffffff;
-  /* width: 200px; */
   font-family: "Nunito", sans-serif;
   font-size: 22.4px;
   font-stretch: normal;
@@ -127,18 +120,12 @@
   line-height: normal;
   letter-spacing: 0.5px;
   width: 90%;
-  
-  
-
 }
 .question-button-selected {
-  /* font-family: "clone-rounded-latin", sans-serif; */
   font-family: "Nunito", sans-serif;
-  /* font-size: 16px; */
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
@@ -232,9 +219,6 @@
   font-family: "clone-rounded-latin", sans-serif;
   width: 145px;
   height: 38px;
-  /* font-weight: bold; */
-  /* font-size: 14px; */
-  /* letter-spacing: 0.3px; */
   border: none;
   border-radius: 8px;
   padding: 5px 20px 5px 10px;
@@ -323,10 +307,6 @@
 }
 
 .question-text {
-  /* font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.1px; */
   font-family: "Nunito", sans-serif;
   font-size: 29px;
   font-weight: bold;
@@ -342,8 +322,6 @@
 
 .question-subtext {
   font-family: "Nunito", sans-serif;
-  /* font-size: 14px;
-  letter-spacing: 0.1px; */
   color: #bcbcbc;
   font-size: 21px;
   font-weight: normal;
@@ -357,8 +335,6 @@
   margin-bottom: 10px;
 }
 
-/* css below is for the "next-submit button" */
-/* input[type="submit"]  */
 .next-button {
   font-family: "clone-rounded-latin", sans-serif;
   color: #2e3192;
@@ -396,16 +372,12 @@
   height: 60px;
   color: white;
   margin-top: 16px;
-  /* margin: 20px 0px 10px 0px;
-  float: left;
-  padding-bottom: 2rem; */
 }
 
 .back-button-results {
   width: 60px;
   height: 60px;
   color: white;
-  /* margin: 35px 0px 10px 0px; */
   float: left;
   padding-bottom: 2rem;
 }
@@ -605,17 +577,4 @@
     margin-left: 20px;
     padding: none;
   }
-
-  
-  
-  
-
-
-  
-
-
-
-
-
-
 }
