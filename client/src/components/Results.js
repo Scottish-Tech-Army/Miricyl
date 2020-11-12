@@ -24,6 +24,8 @@ const Results = ({results, history}) => {
           <p className="results-list-title">{ result.OrgName }</p>}
         
           <p className="results-list-service-description">{ result.ServiceDescription }</p>
+          {result.googleRating ? 
+          <p>{result.googleRating}</p> : null}
           </div>
         </div>
 
