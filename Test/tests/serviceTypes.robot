@@ -1,8 +1,8 @@
 *** Settings ***
 
-Resource        ../pageObjects/index.robot
-Resource        ../pageObjects/serviceTypes.robot
-Resource        ../resources/common.robot
+Resource        /home/vsts/work/r1/a/extracted/Test/pageObjects/index.robot
+Resource        /home/vsts/work/r1/a/extracted/Test/pageObjects/serviceTypes.robot
+Resource        /home/vsts/work/r1/a/extracted/Test/resources/common.robot
 
 Test Setup  begin test
 Test Teardown  end test
