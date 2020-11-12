@@ -30,7 +30,7 @@ miricyldb.needs = () => {
   return new Promise((resolve, reject) => {
     // pool.query(`SELECT * FROM Needs`, (err, results) => {
     pool.query(
-      `SELECT distinct UserOption as Need FROM Miricyl.Needs where nullif(UserOption,'') is not null`,
+      `SELECT distinct UserOption as Need FROM Needs where nullif(UserOption,'') is not null`,
       (err, results) => {
         if (err) {
           return reject(err);
