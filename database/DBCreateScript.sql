@@ -102,7 +102,7 @@ DROP TABLE IF EXISTS `Miricyl`.`OrgService` ;
 
 CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `OrgServiceID` INT NOT NULL AUTO_INCREMENT,
-  `ServiceName` VARCHAR(100) NULL DEFAULT NULL,
+  `ServiceName` VARCHAR(250) NULL DEFAULT NULL,
   `Description` VARCHAR(500) NULL DEFAULT NULL,
   `Address1` VARCHAR(255) NULL DEFAULT NULL,
   `Address2` VARCHAR(255) NULL DEFAULT NULL,
@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `ServiceEmail` VARCHAR(200) NULL DEFAULT NULL,
   `Country_CountryID` INT NULL DEFAULT NULL,
   `NationalService` TINYINT NULL DEFAULT '0',  
+  `FaceBookURL` VARCHAR(200) NULL DEFAULT NULL,  
   PRIMARY KEY (`OrgServiceID`),
   UNIQUE INDEX `OrgServiceID_UNIQUE` (`OrgServiceID` ASC) VISIBLE,
   INDEX `fk_OrgService_Organisation_idx` (`Organisation_OrgID` ASC) VISIBLE,
@@ -302,7 +303,7 @@ DROP TABLE IF EXISTS `Miricyl`.`ServiceDetails`;
 DROP VIEW IF EXISTS `Miricyl`.`ServiceDetails` ;
 USE `Miricyl`;
 CREATE  OR REPLACE VIEW `ServiceDetails` AS
-SELECT 
+SELECT distinct 
 	O.OrgID,
 	O.OrgName, 
     CASE WHEN OS.NationalService THEN 'YES' ELSE 'NO' END NationalService,
@@ -320,11 +321,11 @@ SELECT
     OS.PhoneNo,
     OS.OpeningTime,
     G.Gender,
-    N.NeedsDesc as Needs,
     N.UserOption,
     T.Description as TypeOfSupport,
 	T.UserOption_Type,
-    P.Description as Personalisation
+    P.Description as Personalisation,
+    OS.FaceBookURL
 
 FROM Miricyl.ServiceNeeds SN
 INNER JOIN Miricyl.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
