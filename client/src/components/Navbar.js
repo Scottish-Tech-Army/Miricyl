@@ -8,14 +8,9 @@ const NavBar = () => {
         <>
         <div className="navbar-container">
                     
-            
+            <div>
             <a href='/'><img className="navbar-logo" src={Logo} alt="logo" /></a>
-
-            {/* <IoIosArrowDropleft className="back-button" onClick={() => {history.push("/")}} /> */}
-            {/* onClick={() => history.push("/")} */}
-            
-
-
+            </div>
             
             <button className="help-button">Help!</button>
 

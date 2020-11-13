@@ -31,7 +31,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  background-size: cover;
 }
 .question-two-container {
   background-image: url(../assets/bg2.png);
@@ -40,7 +40,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  background-size: cover;
 }
 .question-three-container {
   background-image: url(../assets/bg3.png);
@@ -49,7 +49,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  background-size: cover;
 }
 
 .question-four-container {
@@ -59,7 +59,7 @@
   padding: 15px 10px 75px 10px;
   background-position: center;
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  background-size: cover;
 }
 
 .results-page-container {
@@ -120,6 +120,7 @@
   line-height: normal;
   letter-spacing: 0.5px;
   width: 90%;
+  cursor: pointer;
 }
 .question-button-selected {
   font-family: "Nunito", sans-serif;
@@ -137,6 +138,7 @@
   line-height: normal;
   letter-spacing: 0.5px;
   width: 90%;
+  cursor: pointer;
 }
 
 .results-page-display {
@@ -349,6 +351,7 @@
   margin-top: 20px;
   margin-right: 40px;
   float: right;
+  cursor: pointer;
 }
 
 .help-button {
@@ -365,6 +368,7 @@
   width: 125px;
   height: 53px;
   justify-self: right;
+  cursor: pointer;
 }
 
 .back-button {
@@ -372,6 +376,7 @@
   height: 60px;
   color: white;
   margin-top: 16px;
+  cursor: pointer;
 }
 
 .back-button-results {
@@ -380,6 +385,7 @@
   color: white;
   float: left;
   padding-bottom: 2rem;
+  cursor: pointer;
 }
 
 .navbar-logo {
@@ -427,6 +433,21 @@
     margin-right: 36px;
     height: 32px;
     justify-self: right;
+  }
+  .question-one-container {
+    background-size: none;
+  }
+  .question-two-container {
+    background-size: none;
+  }
+  .question-three-container {
+    background-size: none;
+  }
+  .question-four-container {
+    background-size: none;
+  }
+  .results-page-container {
+    background-size: none;
   }
   .question-grid-container{
     grid-template-columns: 1fr;
