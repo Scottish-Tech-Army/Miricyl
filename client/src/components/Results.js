@@ -12,15 +12,20 @@ import { IoIosArrowDropleft } from "react-icons/io";
 const Results = ({results, history}) => {
 
   const showResults = results.map((result) => (
+
+    // <a href="https://www.codexworld.com" target="_blank">Visit CodexWorld</a>
+    // window.open('https://www.codexworld.com', '_blank');
   
 
     <div className="results-list-container" key={ result.PlaceID }>
         <div className="results-title-container">
+          <a href= { result.ServiceURL } target="_blank">
           <img className="results-list-logo" src={ result.Logo }/>
+          </a>
           <div className="results-list-title-service">
           
           {result.ServiceURL ? 
-          <p className="results-list-title"> <a href={ result.ServiceURL }>{ result.OrgName }</a></p> : 
+          <p className="results-list-title"> <a href={ result.ServiceURL } target="_blank">{ result.OrgName }</a></p> : 
           <p className="results-list-title">{ result.OrgName }</p>}
         
           <p className="results-list-service-description">{ result.ServiceDescription }</p>
@@ -37,7 +42,7 @@ const Results = ({results, history}) => {
           {result.ServiceURL ? 
           <button className="results-list-button" type="button">
             <IconContext.Provider value={{ className: 'results-react-button-icon' }}>
-            <a href={ result.ServiceURL }>
+            <a href={ result.ServiceURL } target="_blank">
           <BiChat /> Chat </a>
           </IconContext.Provider></button> : null }
           
