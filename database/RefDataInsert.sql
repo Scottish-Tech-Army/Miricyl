@@ -60,10 +60,10 @@ Insert into Miricyl.Personalisation Values(101,'Under 16','Under 18');
 Insert into Miricyl.Personalisation Values(102,'16+','');
 Insert into Miricyl.Personalisation Values(103,'18+','');
 Insert into Miricyl.Personalisation Values(104,'A student','A student');
-Insert into Miricyl.Personalisation Values(105,'A parent','A parent or Carer');
+Insert into Miricyl.Personalisation Values(105,'A parent','A parent');
 Insert into Miricyl.Personalisation Values(106,'LGBTQ+','LGBTQ+');
 Insert into Miricyl.Personalisation Values(107,'Unemployed','Unemployed');
-Insert into Miricyl.Personalisation Values(108,'A carer','A parent or Carer');
+Insert into Miricyl.Personalisation Values(108,'A carer','A carer');
 Insert into Miricyl.Personalisation Values(109,'BAME','BAME');
 
 
