@@ -63,14 +63,12 @@ router.get("/googleratings/:id", async (req, res) => {
   let development = process.env.NODE_ENV == "development";
   let key = ""
   if (development) {
-    key = "AIzaSyAN_LdXvaqh_sJY8SM4NWTZQ606E88Br4c"
+    key = process.env.googleapi
   } else {
     key = __googleapitoken__
   };
-  console.log('key', key);
   try {
     let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&fields=rating&key=${key}`
-    console.log('url', url);
   let results = await axios.get(url)
      res.json(results.data.result) 
   } catch (e) {
