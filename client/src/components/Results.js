@@ -13,13 +13,9 @@ const Results = ({results, history}) => {
 
   const showResults = results.map((result) => (
 
-    // <a href="https://www.codexworld.com" target="_blank">Visit CodexWorld</a>
-    // window.open('https://www.codexworld.com', '_blank');
-  
-
     <div className="results-list-container" key={ result.PlaceID }>
         <div className="results-title-container">
-          <a href= { result.ServiceURL } target="_blank">
+          <a href= { result.ServiceURL } target="_blank" >
           <img className="results-list-logo" src={ result.Logo }/>
           </a>
           <div className="results-list-title-service">
