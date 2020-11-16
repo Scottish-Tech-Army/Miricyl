@@ -1,6 +1,6 @@
 *** Settings ***
-Resource  /home/vsts/work/r1/a/extracted/Test/pageObjects/index.robot
-Resource  /home/vsts/work/r1/a/extracted/Test/resources/common.robot
+Resource  ./index.robot
+Resource  ./common.robot
 
 Test Setup  begin test
 Test Teardown  end test
