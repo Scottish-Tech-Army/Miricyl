@@ -1,6 +1,6 @@
 *** Settings ***
-Resource  ./index.robot
-Resource  ./common.robot
+Resource  ../pageObjects/index.robot
+Resource  ../resources/common.robot
 
 Test Setup  begin test
 Test Teardown  end test
