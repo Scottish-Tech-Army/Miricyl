@@ -1,5 +1,5 @@
 *** Settings ***
-Resource  ../pageObjects/index.robot
+Resource  ../pageobjects/index.robot
 Resource  ../resources/common.robot
 
 Test Setup  begin test
