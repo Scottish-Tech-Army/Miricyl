@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 @import url("https://use.typekit.net/sfj2qxn.css");
 
-
 .results-react-button-icon {
   vertical-align: middle;
   padding-bottom: 3px;
@@ -12,7 +11,6 @@
   padding-bottom: 3px;
   color: #2e3192;
 }
-
 .navbar-container {
   box-sizing: border-box;
   height: 110px;
@@ -25,7 +23,6 @@
   grid-template-columns: 50% 50%;
   align-items: center;
 }
-
 .question-one-container {
   background-image: url(../assets/bg1.png);
   margin: 0;
@@ -35,9 +32,27 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .question-two-container {
   background-image: url(../assets/bg2.png);
+  margin: 0;
+  min-height: 100vh;
+  padding: 15px 10px 75px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.question-three-container {
+  background-image: url(../assets/bg3.png);
+  margin: 0;
+  min-height: 100vh;
+  padding: 15px 10px 75px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.question-four-container {
+  background-image: url(../assets/bg4.png);
   margin: 0;
   min-height: 100vh;
   padding: 15px 10px 75px 10px;
@@ -60,7 +75,7 @@
   margin-top: 85px;
 }
 
-.question-grid-container{
+.question-grid-container {
   display: grid;
   grid-template-columns: 50% 50%;
   margin-top: 60px;
@@ -89,36 +104,28 @@
   color: #2e3192;
 }
 .question-button {
-  /* font-size: 16px; */
   font-weight: bold;
   color: #2e3192;
   text-align: center;
-  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
   margin-bottom: 15px;
   background-color: #ffffff;
-  /* width: 200px; */
   font-family: "Nunito", sans-serif;
   font-size: 22.4px;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.5px;
-  min-width: 480px;
-  
-  
-
+  width: 90%;
+  cursor: pointer;
 }
 .question-button-selected {
-  /* font-family: "clone-rounded-latin", sans-serif; */
   font-family: "Nunito", sans-serif;
-  /* font-size: 16px; */
   font-weight: bold;
   color: #ffffff;
   text-align: center;
-  /* letter-spacing: 0.4px; */
   padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
@@ -129,21 +136,23 @@
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.5px;
-  width: 480px;
+  width: 90%;
+  cursor: pointer;
 }
 
 .results-page-display {
   display: grid;
   grid-template-columns: 50% 50%;
+  margin: 35px;
 }
 
 .results-list-container {
   border: solid 0.5px #bcbcbc;
-  margin: 15px;
   background-color: #ffffff;
   border-radius: 20px;
   text-align: left;
-  padding: 15px 15px;
+  padding: 30px 30px;
+  margin: 30px;
 }
 
 .results-title-container {
@@ -212,9 +221,6 @@
   font-family: "clone-rounded-latin", sans-serif;
   width: 145px;
   height: 38px;
-  /* font-weight: bold; */
-  /* font-size: 14px; */
-  /* letter-spacing: 0.3px; */
   border: none;
   border-radius: 8px;
   padding: 5px 20px 5px 10px;
@@ -234,7 +240,7 @@
 }
 
 .results-list-logo {
-  width: 76px;
+  max-width: 76px;
 }
 .results-list-needs-tag {
   border-radius: 19px;
@@ -254,7 +260,6 @@
   /* height: 30px; */
   font-size: 14.2px;
   letter-spacing: 0.06px;
-
 }
 .results-list-personalisation-tag {
   border-radius: 19px;
@@ -283,15 +288,26 @@
   border-radius: 40px;
   text-align: center;
   padding: 30px 5px 10px 5px;
-  max-height: 500px;
-  overflow: auto; 
+  height: 500px;
+  overflow: auto;
+  opacity: 0.95;
+  width: 90%;
+}
+
+.select-container-q4 {
+  border: solid 0.5px #bcbcbc;
+  margin-top: 45px;
+  margin-right: 40px;
+  background-color: #ffffff;
+  border-radius: 40px;
+  text-align: center;
+  padding: 10px 5px 10px 5px;
+  height: 320px;
+  opacity: 0.95;
+  width: 90%;
 }
 
 .question-text {
-  /* font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.1px; */
   font-family: "Nunito", sans-serif;
   font-size: 29px;
   font-weight: bold;
@@ -301,13 +317,12 @@
   letter-spacing: 0.13px;
   text-align: center;
   color: #2e3192;
-  margin: 0;
+  margin: 0px;
+  padding: 5px 40px;
 }
 
 .question-subtext {
   font-family: "Nunito", sans-serif;
-  /* font-size: 14px;
-  letter-spacing: 0.1px; */
   color: #bcbcbc;
   font-size: 21px;
   font-weight: normal;
@@ -321,8 +336,6 @@
   margin-bottom: 10px;
 }
 
-/* css below is for the "next-submit button" */
-/* input[type="submit"]  */
 .next-button {
   font-family: "clone-rounded-latin", sans-serif;
   color: #2e3192;
@@ -337,6 +350,7 @@
   margin-top: 20px;
   margin-right: 40px;
   float: right;
+  cursor: pointer;
 }
 
 .help-button {
@@ -345,17 +359,15 @@
   text-align: center;
   padding: 5px 20px;
   border-radius: 26.5px;
-  border: solid 2px #2e3192 ;
+  border: solid 2px #2e3192;
   background-color: transparent;
-  width: 200px;
   font-size: 24px;
   letter-spacing: 0.64px;
-  /* margin-top: 20px; */
   margin-right: 60px;
-  /* float: right; */
   width: 125px;
   height: 53px;
   justify-self: right;
+  cursor: pointer;
 }
 
 .back-button {
@@ -363,18 +375,16 @@
   height: 60px;
   color: white;
   margin-top: 16px;
-  /* margin: 20px 0px 10px 0px;
-  float: left;
-  padding-bottom: 2rem; */
+  cursor: pointer;
 }
 
 .back-button-results {
   width: 60px;
   height: 60px;
   color: white;
-  /* margin: 35px 0px 10px 0px; */
   float: left;
   padding-bottom: 2rem;
+  cursor: pointer;
 }
 
 .navbar-logo {
@@ -382,13 +392,207 @@
   height: 50px;
 }
 
-/* .active {
-  background-color: #7fff00;
-}
-.inactive {
-  background-color: #aa0707;
+/* input[type=text] */
+.postcode-select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #4585bf;
+  border-radius: 30px;
+  box-sizing: border-box;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: 0.47px;
+  text-align: center;
+  color: #bcbcbc;
+  margin-top: 45px;
 }
 
-input[type="checkbox"]:checked ~ .question-button {
-  background-color: #ff6e43;
-} */
+/* MOBILE RESPONSIVE RULES */
+
+@media screen and (max-width: 450px) {
+  .navbar-container {
+    height: 80px;
+  }
+  .navbar-logo {
+    margin-left: 25px;
+    height: 37px;
+  }
+  .help-button {
+    padding: 2px 10px;
+    border-radius: 16px;
+    border: solid 1px #2e3192;
+    background-color: transparent;
+    width: 70px;
+    font-size: 16px;
+    letter-spacing: 0.36px;
+    margin-right: 36px;
+    height: 32px;
+    justify-self: right;
+  }
+  .question-one-container {
+    background-size: none;
+  }
+  .question-two-container {
+    background-size: none;
+  }
+  .question-three-container {
+    background-size: none;
+  }
+  .question-four-container {
+    background-size: none;
+  }
+  .results-page-container {
+    background-size: none;
+  }
+  .question-grid-container {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+  .question-title {
+    font-size: 28px;
+    line-height: 1.04;
+    letter-spacing: 0.62px;
+    margin: 40px 20px 5px 20px;
+  }
+  .question-page-detail-text {
+    display: none;
+  }
+  .select-container {
+    margin: 20px 10px 10px 10px;
+    border-radius: 25px;
+    padding: 20px 5px;
+    height: 400px;
+  }
+  .select-container-q4 {
+    margin: 20px 10px 10px 10px;
+    border-radius: 25px;
+    padding: 20px 5px;
+    height: 200px;
+  }
+  .question-text {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.1px;
+    line-height: 1.28;
+    letter-spacing: 0.08px;
+    padding: 0;
+  }
+  .question-subtext {
+    font-size: 14px;
+    text-align: center;
+    line-height: 2.29;
+    letter-spacing: 0.22px;
+    margin-bottom: 5px;
+  }
+  .question-button {
+    font-size: 14px;
+    letter-spacing: 0.31px;
+    padding: 5px 20px;
+    border-radius: 25px;
+  }
+  .question-button-selected {
+    font-size: 14px;
+    letter-spacing: 0.31px;
+    padding: 5px 20px;
+    border-radius: 25px;
+  }
+  .next-button {
+    width: 110px;
+    margin-top: 10px;
+    margin-right: 20px;
+    font-size: 16px;
+    letter-spacing: 0.36px;
+  }
+  .back-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding: none;
+  }
+  .postcode-select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 22.5px;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    text-align: center;
+    color: #bcbcbc;
+    margin-top: 25px;
+  }
+  .results-page-display {
+    grid-template-columns: 1fr;
+    margin: 10px;
+  }
+  .results-list-container {
+    margin: 5px;
+    border-radius: 25px;
+    padding: 10px 12px;
+  }
+  .results-list-logo {
+    width: 50px;
+  }
+  .results-list-title {
+    font-size: 21px;
+    letter-spacing: 0.09px;
+    line-height: 22px;
+  }
+  .results-list-service-description {
+    font-size: 12px;
+    letter-spacing: 0.19px;
+    line-height: 13px;
+    color: #6f7e8b;
+    margin: 0;
+    padding-top: 10px;
+  }
+  .results-button-container {
+    display: flex;
+    justify-content: left;
+    margin-top: 12px;
+  }
+  .results-list-button {
+    width: auto;
+    height: 33px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.36px;
+    margin-right: 10px;
+  }
+  .results-list-sub-title {
+    font-size: 12px;
+    line-height: 1.33;
+    margin: 10px 0px 3px 0px;
+  }
+  .results-list-service-detail {
+    font-size: 12px;
+    line-height: 1.33;
+  }
+  .results-list-needs-tag {
+    border-radius: 16px;
+    margin: 10px 15px 10px 0px;
+    font-size: 12px;
+    letter-spacing: 0.05px;
+    padding: 0px 15px;
+  }
+  .results-list-personalisation-tag {
+    border-radius: 16px;
+    font-size: 12px;
+    letter-spacing: 0.05px;
+    margin: 10px 15px 10px 0px;
+    padding: 0px 15px;
+  }
+  .back-button-results {
+    width: 40px;
+    height: 40px;
+    color: white;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding: none;
+  }
+}

@@ -63,10 +63,10 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
   })
   }
 
-  return (
-    <div className="question-two-container">
+return (
+<div className="question-three-container">
 
-      <div className="question-grid-container">
+  <div className="question-grid-container">
         
         <div className="title-description-container">
           <h1 className="question-title">
@@ -87,16 +87,16 @@ const Question3Component = ({ questions, history, filterByPersonalisations, sele
                 <QuestionsList />
 
                 <br />
-              </div>
-              <div className="bottom-navigation">
+            </div>
+                  <div className="bottom-navigation">
                   <IoIosArrowDropleft className="back-button" onClick={() => {history.goBack()}} />
                   <button className="next-button" onClick={handleSubmit}>
                   Next
                   </button>
-                </div>
-              </div>
+                  </div>
             </div>
-    </div>
+  </div>
+</div>
   );
 
 }

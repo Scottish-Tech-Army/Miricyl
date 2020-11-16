@@ -18,6 +18,20 @@ locals{
               1  = "prod"
           }
     }
+<<<<<<< HEAD
+=======
+    custom_domain = {
+      np = {
+        npmiricyltesting = "testing.miricyl.org"
+        devmiricylclient = "dev.miricyl.org"
+        intmiricylclient = "int.miricyl.org"
+        premiricylclient = "pre.miricyl.org"
+      }
+      p = {
+        prodmiricylclient = "help.miricyl.org"
+      }
+    }
+>>>>>>> develop
     tags = {
         zone = local.zone
     }
@@ -62,8 +76,13 @@ resource "azurerm_app_service_plan" "primary_appservice" {
   kind                  = "linux"
   reserved              = true
   sku {
+<<<<<<< HEAD
     tier = "Dynamic"
     size = "P1V2"
+=======
+    tier = "PremiumV2"
+    size = "P1v2"
+>>>>>>> develop
   }
   tags                  = local.tags
 }
@@ -108,9 +127,34 @@ resource "azurerm_app_service" "server" {
   virtual_network_subnet_id = azurerm_subnet.primary_services.id
     }
     */
+<<<<<<< HEAD
   }
 }
 
+=======
+  }
+}
+
+#  Web service to host the automated test results
+resource "azurerm_app_service" "testing" {
+  name                = "${local.zone}${local.prefix}testing"
+  location            = local.primary_location
+  resource_group_name = azurerm_resource_group.primary_webapp.name
+  app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
+  app_settings = {
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
+    "SCM_COMMAND_IDLE_TIMEOUT"       = "1800"
+  }
+}
+
+resource "azurerm_app_service_custom_hostname_binding" "customdomains" {
+  for_each            = lookup(local.custom_domain, local.zone)
+  hostname            = "${each.value}"
+  app_service_name    = "azurerm_app_service.${each.key}.name"
+  resource_group_name = azurerm_resource_group.primary_webapp.name
+}
+
+>>>>>>> develop
 # Resource group for database components per zone
 resource "azurerm_resource_group" "primary_database" {
   name                = "${local.zone}-${local.prefix}-az-database-rg"

@@ -3,7 +3,6 @@ import Question1Component from "../components/Question1Component";
 import Question2Component from "../components/Question2Component";
 import Question3Component from "../components/Question3Component";
 import Question4Component from "../components/Question4Component";
-
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
@@ -113,6 +112,25 @@ export default class HomePageContainer extends Component {
 
         }
  }))
+  };
+
+  sortCharities(postcode) {
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
+
+    if(postcode.postcode === "") {
+      let nationalCharities = []
+      fullCharities.map((charity) => {
+        if(charity.NationalService === "YES")
+        nationalCharities.push(charity)
+        console.log(charity);
+      })
+      let uniqueCharities = this.getUnique(nationalCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    } else {
+      let uniqueCharities = this.getUnique(fullCharities)
+      this.setState({ finalCharities: uniqueCharities})
+    }
+
   }
   // async postcodeSearch(APICall) {
   //    await postcodeServer.get(`${APICall}`).then((res => {
@@ -134,6 +152,7 @@ export default class HomePageContainer extends Component {
       }
       }
       
+
 
 
 
@@ -256,7 +275,6 @@ export default class HomePageContainer extends Component {
             />
           </Route>
           <Route exact path="/results">
-            {/* <Results results={this.state.finalCharities} /> */}
             <Results results={this.state.finalCharities} />
           </Route>
 
