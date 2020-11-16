@@ -15,9 +15,12 @@ const Results = ({results, history}) => {
 
     <div className="results-list-container" key={ result.PlaceID }>
         <div className="results-title-container">
+
+          {result.Logo ? 
           <a href= { result.ServiceURL } target="_blank" >
           <img className="results-list-logo" src={ result.Logo }/>
-          </a>
+            </a> : <img className="results-list-logo" src={ result.Logo }/> }
+          
           <div className="results-list-title-service">
           
           {result.ServiceURL ? 
