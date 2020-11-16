@@ -62,7 +62,7 @@ const Results = ({results, history}) => {
         <p className="results-list-service-detail">{result.PhysicalAddress}</p>
         
 
-        <p className="results-list-needs-tag">{result.Needs}</p>
+        <p className="results-list-needs-tag">{result.UserOption}</p>
         <p className="results-list-personalisation-tag">{result.Personalisation}</p>
 
         {result.TypeOfSupport ? 
