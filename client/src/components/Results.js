@@ -7,6 +7,7 @@ import { BiChat } from "react-icons/bi";
 import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
+import ReactStars from "react-rating-stars-component";
 
 
 const Results = ({results, history}) => {
@@ -28,8 +29,11 @@ const Results = ({results, history}) => {
           <p className="results-list-title">{ result.OrgName }</p>}
         
           <p className="results-list-service-description">{ result.ServiceDescription }</p>
-          {result.googleRating ? 
-          <p>{result.googleRating}</p> : null}
+          {result.googleRating ? <p> <ReactStars
+            count={5}
+            value={result.googleRating}
+            isHalf={true}
+          />{result.googleRating} </p>: null}
           </div>
         </div>
 
