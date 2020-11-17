@@ -3,7 +3,7 @@ Documentation  Demo robot test scripts: Objects and actions on the personalise p
 
 Library  SeleniumLibrary
 Resource  ../resources/common.robot
-Resource  ../resources/testData.robot
+Resource  ../resources/testdata.robot
 
 
 *** Keywords ***
