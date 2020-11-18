@@ -19,8 +19,11 @@
   position: absolute;
   z-index: 1;
   top: 0;
+  
+}
+.navbar-wrapper {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: auto auto;
   align-items: center;
 }
 .question-one-container {
