@@ -137,8 +137,9 @@
   height: 550px;
   overflow: auto;
   /* overflow-y: hidden; */
-  opacity: 0.95;
+  opacity: 0.9;
   width: 570px;
+  background-image: linear-gradient(to bottom, #ffffff00 93%, #ffffff 98%);
 }
 
 .select-container-q4 {
@@ -400,19 +401,21 @@
 /* input[type=text] */
 .postcode-select {
   width: 90%;
-  padding: 12px 20px;
+  padding: 16px 20px;
   margin: 8px 0;
   border: 1px solid #4585bf;
   border-radius: 30px;
   box-sizing: border-box;
-
   font-family: "Nunito", sans-serif;
   font-size: 21px;
   font-weight: bold;
   letter-spacing: 0.47px;
   text-align: center;
-  color: #bcbcbc;
+  color: hsl(0, 0%, 56%);
   margin-top: 45px;
+}
+::placeholder {
+  color: #bcbcbc;
 }
 
 /* MOBILE RESPONSIVE RULES */
