@@ -81,12 +81,14 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
 
               <br />
             </div>
+            <div className="bottom-navigation">
+                  <button className="next-button" onClick={handleSubmit}>
+                  Next
+                  </button>
+                </div>
                 
           </div>
       </div>
-      <button className="next-button" onClick={handleSubmit}>
-              Next
-      </button>
     </div>
   );
 };

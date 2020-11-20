@@ -27,7 +27,7 @@
   align-items: center;
   margin-top: 30px;
   margin-left: 100px;
-  margin-right: 50px;
+  margin-right: 100px;
 }
 .navbar-logo {
   height: 50px;
@@ -114,10 +114,10 @@
   line-height: 1;
   letter-spacing: 1.27px;
   color: #ffffff;
-  margin: 85px 10px 0px 100px;
+  margin: 85px 80px 0px 100px;
 }
 .question-page-detail-text {
-  margin: 40px 40px 10px 100px;
+  margin: 40px 80px 0px 100px;
   font-family: "Nunito", sans-serif;
   font-size: 27px;
   font-weight: normal;
@@ -128,7 +128,6 @@
   color: #2e3192;
 }
 .select-container {
-  /* border: solid 0.5px #bcbcbc; */
   margin-top: 85px;
   margin-right: 100px;
   background-color: #ffffff;
@@ -138,56 +137,55 @@
   height: 550px;
   overflow: auto;
   opacity: 0.95;
-  width: 85%;
+  max-width: 570px;
 }
 
 .select-container-q4 {
-  /* border: solid 0.5px #bcbcbc; */
   margin-top: 45px;
   margin-right: 40px;
   background-color: #ffffff;
   border-radius: 40px;
   text-align: center;
-  padding: 10px 5px 10px 5px;
+  padding: 38px 30px 0px 38px;
   height: 320px;
   opacity: 0.95;
   width: 90%;
 }
 .question-button {
-  font-weight: bold;
   color: #2e3192;
   text-align: center;
-  padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
-  margin-bottom: 15px;
   background-color: #ffffff;
   font-family: "Nunito", sans-serif;
   font-size: 22.4px;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.5px;
-  width: 90%;
+  width: 100%;
   cursor: pointer;
+  margin: 0 0 22px;
+  padding: 16px 10px 13px 10px;
 }
 .question-button-selected {
-  font-family: "Nunito", sans-serif;
-  font-weight: bold;
   color: #ffffff;
   text-align: center;
-  padding: 5px 20px;
   border-radius: 40px;
   border: solid 1px #2e3192;
-  margin-bottom: 15px;
   background-color: #2e3192;
+  font-family: "Nunito", sans-serif;
   font-size: 22.4px;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.5px;
-  width: 90%;
+  width: 100%;
   cursor: pointer;
+  margin: 0 0 22px;
+  padding: 16px 10px 13px 10px;  
 }
 
 .results-page-display {
@@ -340,8 +338,8 @@
   letter-spacing: 0.13px;
   text-align: center;
   color: #2e3192;
-  margin: 0px;
-  padding: 5px 40px;
+  margin: 0 40px 8px 40px;
+  /* padding5px 40px; */
 }
 
 .question-subtext {
@@ -355,12 +353,16 @@
   letter-spacing: 0.33px;
   text-align: center;
   color: #6f7e8b;
-  margin: 0;
-  margin-bottom: 10px;
+  margin: 8px 0px 20px 0px;
 }
 
 .next-button {
   font-family: "clone-rounded-latin", sans-serif;
+  font-size: 29px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
   color: #2e3192;
   text-align: center;
   padding: 5px 20px;
@@ -368,12 +370,13 @@
   border: solid 1px #ffffff;
   background-color: #ffffff;
   width: 153px;
-  font-size: 29px;
   letter-spacing: 0.64px;
   margin-top: 20px;
-  margin-right: 40px;
+  margin-right: 100px;
   float: right;
   cursor: pointer;
+  margin: 30px 100px 0px 0px;
+  padding: 5px 44px 13px 45px;
 }
 
 .back-button {
