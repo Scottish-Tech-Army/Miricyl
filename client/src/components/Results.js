@@ -65,9 +65,11 @@ const Results = ({results, history}) => {
         <p className="results-list-sub-title"><IconContext.Provider value={{ className: 'results-react-icons-detail' }}> <BiMap /> Address:</IconContext.Provider></p> : null }
         <p className="results-list-service-detail">{result.PhysicalAddress}</p>
         
+        {result.UserOption ? 
+        <p className="results-list-needs-tag">{result.UserOption}</p> : null }
 
-        <p className="results-list-needs-tag">{result.UserOption}</p>
-        <p className="results-list-personalisation-tag">{result.Personalisation}</p>
+        {result.Personalisation ?
+        <p className="results-list-personalisation-tag">{result.Personalisation}</p> : null }
 
         {result.TypeOfSupport ? 
         <p className="results-list-sub-title">Types of Service:</p> : null }

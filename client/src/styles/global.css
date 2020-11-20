@@ -293,41 +293,36 @@
   max-width: 76px;
 }
 .results-list-needs-tag {
+  font-family: "Nunito", sans-serif;
+  color: #2e3192;
+  font-size: 14.2px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.06px;
+  text-align: center;
   border-radius: 19px;
   background-color: #fcd432;
-  font-family: "Nunito", sans-serif;
-  /* font-size: 12px; */
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  /* letter-spacing: 0.05px; */
-  text-align: center;
-  color: #2e3192;
-  margin: 10px 20px 10px 0px;
   width: fit-content;
-  padding: 0px 15px;
-  /* height: 30px; */
-  font-size: 14.2px;
-  letter-spacing: 0.06px;
+  margin: 30px 0px 9px 0px;
+  padding: 6px 15px 6px 15px;
 }
 .results-list-personalisation-tag {
-  border-radius: 19px;
-  background-color: #4ecfff;
   font-family: "Nunito", sans-serif;
-  /* font-size: 12px; */
+  color: #2e3192;
+  font-size: 14.2px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.25;
-  /* letter-spacing: 0.05px; */
-  text-align: center;
-  color: #2e3192;
-  margin: 10px auto 10px 0px;
-  width: fit-content;
-  padding: 0px 15px;
-  font-size: 14.2px;
   letter-spacing: 0.06px;
+  text-align: center;
+  border-radius: 19px;
+  background-color: #4ecfff;
+  width: fit-content;
+  margin: 15px 0px 30px 0px;
+  padding: 6px 15px 6px 15px;  
 }
 
 .question-text {
