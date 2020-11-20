@@ -208,7 +208,7 @@
 .results-title-container {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 100px auto;
   align-items: center;
   margin: 0px 10px 10px 0px;
 }
@@ -223,24 +223,23 @@
   line-height: 29px;
   color: #2e3192;
   margin: 0;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .results-list-title-service {
-  padding-left: 10px;
-  align-items: center;
+  padding-left: 30px;
 }
 
 .results-list-service-description {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
+  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: 0.25px;
   line-height: 13px;
   color: #6f7e8b;
-  margin: 0;
-  padding-top: 3px;
+  margin: 10px 0px 13px 0px;
 }
 
 .results-list-sub-title {
@@ -290,7 +289,11 @@
 }
 
 .results-list-logo {
-  max-width: 76px;
+  max-width: 100px;
+  max-height: 80px;
+  /* height: 100%;
+  width: 100%;
+  object-fit: contain; */
 }
 .results-list-needs-tag {
   font-family: "Nunito", sans-serif;

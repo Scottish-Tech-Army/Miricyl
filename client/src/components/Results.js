@@ -20,10 +20,10 @@ const Results = ({results, history}) => {
           {result.Logo ? 
           <a href= { result.ServiceURL } target="_blank" >
           <img className="results-list-logo" src={ result.Logo }/>
-            </a> : <img className="results-list-logo" src={ result.Logo }/> }
+            </a> : <div></div> }
           
           <div className="results-list-title-service">
-          
+
           {result.ServiceURL ? 
           <p className="results-list-title"> <a href={ result.ServiceURL } target="_blank">{ result.OrgName }</a></p> : 
           <p className="results-list-title">{ result.OrgName }</p>}
