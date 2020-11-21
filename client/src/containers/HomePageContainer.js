@@ -4,11 +4,10 @@ import Question2Component from "../components/Question2Component";
 import Question3Component from "../components/Question3Component";
 import Question4Component from "../components/Question4Component";
 import Results from "../components/Results";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 // import postcodeServer from "../api/postcodeServer"
-import GoogleServer from "../api/GoogleServer";
-import { IoLogoFacebook } from "react-icons/io";
+
 
 const INITIAL_STATE = {
   tags: [],
@@ -279,6 +278,7 @@ export default class HomePageContainer extends Component {
           </Route>
 
         </React.Fragment>
+        <Redirect to="/" />
       </Router>
     );
   }

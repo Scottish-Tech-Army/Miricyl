@@ -33,7 +33,11 @@ const Results = ({results, history}) => {
             count={5}
             value={result.googleRating}
             isHalf={true}
-          />{result.googleRating} </p>: null}
+          />{result.googleRating} </p>:  <p> <ReactStars
+          count={5}
+          value={0}
+          isHalf={true}
+        />No ratings found </p>}
           </div>
         </div>
 
