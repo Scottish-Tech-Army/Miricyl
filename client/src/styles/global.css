@@ -375,14 +375,11 @@ scrollbar-width: none;  /* Firefox */
   line-height: normal;
   color: #2e3192;
   text-align: center;
-  padding: 5px 20px;
   border-radius: 30px;
   border: solid 1px #ffffff;
   background-color: #ffffff;
   width: 153px;
   letter-spacing: 0.64px;
-  margin-top: 20px;
-  margin-right: 100px;
   float: right;
   cursor: pointer;
   margin: 30px 100px 0px 0px;
@@ -390,10 +387,10 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .back-button {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   color: white;
-  margin-top: 16px;
+  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -408,23 +405,28 @@ scrollbar-width: none;  /* Firefox */
 
 /* input[type=text] */
 .postcode-select {
-  width: 90%;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: 1px solid #4585bf;
-  border-radius: 30px;
-  box-sizing: border-box;
   font-family: "Nunito", sans-serif;
   font-size: 21px;
   font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
   letter-spacing: 0.47px;
   text-align: center;
-  color: hsl(0, 0%, 56%);
-  margin-top: 45px;
+  color: #8f8f8f;
+  width: 90%;
+  margin: 51px 0 0;
+  padding: 16px 0px;
+  border: 1px solid #4585bf;
+  border-radius: 30px;
+  box-sizing: border-box;
 }
 ::placeholder {
   color: #bcbcbc;
 }
+
+
+ 
 
 /* MOBILE RESPONSIVE RULES */
 
@@ -466,86 +468,105 @@ scrollbar-width: none;  /* Firefox */
   .results-page-container {
     background-size: none;
   }
+
   .question-grid-container {
     grid-template-columns: 1fr;
     margin-top: 40px;
   }
+
+  .title-description-container {
+    /* max-width: 350px; */
+    margin: 16px 27px 0px 26px;
+    /* padding: 20px; */
+  }
+
   .question-title {
     font-size: 28px;
     line-height: 1.04;
     letter-spacing: 0.62px;
-    margin: 40px 20px 5px 20px;
+    margin: 20px 0px 0px 0px;
+  
   }
+
   .question-page-detail-text {
     display: none;
   }
   .select-container {
-    margin: 20px 10px 10px 10px;
+    margin: 22px auto 25px auto;
     border-radius: 25px;
-    padding: 20px 5px;
-    height: 400px;
+    padding: 21px 15px 0 15px;
+    height: 420px;
+    width: 300px;
   }
   .select-container-q4 {
-    margin: 20px 10px 10px 10px;
+    margin: 22px auto 25px auto;
     border-radius: 25px;
-    padding: 20px 5px;
-    height: 200px;
+    padding: 16px 12px 38px 12px;
+    height: 175px;
+    width: 300px;
   }
 
   .question-text {
-    font-weight: 700;
     font-size: 18px;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.08px;
     line-height: 1.28;
     letter-spacing: 0.08px;
     padding: 0;
+    margin: 0 8.5px 0px 9.5px;
   }
+
   .question-subtext {
     font-size: 14px;
     text-align: center;
     line-height: 2.29;
     letter-spacing: 0.22px;
-    margin-bottom: 5px;
+    margin: 0;
+    padding: 0;
   }
+
   .question-button {
     font-size: 14px;
     letter-spacing: 0.31px;
-    padding: 5px 20px;
+    padding: 8px 20px;
     border-radius: 25px;
+    margin: 8px 0px;
   }
   .question-button-selected {
     font-size: 14px;
     letter-spacing: 0.31px;
-    padding: 5px 20px;
+    padding: 8px 20px;
     border-radius: 25px;
+    margin: 8px 0px;
   }
   .next-button {
     width: 110px;
-    margin-top: 10px;
-    margin-right: 20px;
+    height: 32px;
     font-size: 16px;
     letter-spacing: 0.36px;
+    padding: 3px 0px 6px 0px;
+    border-radius: 16px;
+    margin: 15px 30px 0px 0px;
   }
-  .back-button {
-    width: 40px;
-    height: 40px;
-    color: white;
-    margin-top: 5px;
-    margin-left: 20px;
-    padding: none;
-  }
-  .postcode-select {
-    padding: 12px 20px;
-    margin: 8px 0;
-    border-radius: 22.5px;
 
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 0.31px;
-    text-align: center;
-    color: #bcbcbc;
-    margin-top: 25px;
+  .back-button {
+    width: 45px;
+    height: 45px;
+    margin-top: 7px;
+    margin-left: 26px;
   }
+
+  .postcode-select {    
+      font-size: 14px;
+      letter-spacing: 0.31px;
+      width: 90%;
+      margin: 20px 3px 0;
+      padding: 14px 0px;
+      border-radius: 22.5px;
+    }
+    ::placeholder {
+      color: #bcbcbc;
+    }
+
   .results-page-display {
     grid-template-columns: 1fr;
     margin: 10px;
