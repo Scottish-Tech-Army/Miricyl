@@ -90,14 +90,16 @@ const Results = ({results, history}) => {
 
     <div className="results-page-container">
       <div className="results-wrapper">
-      <h1 className="question-title">Search results</h1>
-      <div className="results-page-display">
-      {showResults}
+        <div className="title-description-container">
+        <h1 className="question-title">Search results</h1>
+        </div>
+          <div className="results-page-display">
+          {showResults}
+          </div>
+            <div className="bottom-navigation">
+              <IoIosArrowDropleft className="back-button-results" onClick={() => {history.goBack()}} />
+            </div>
       </div>
-      <div className="bottom-navigation">
-          <IoIosArrowDropleft className="back-button-results" onClick={() => {history.goBack()}} />
-        </div>
-        </div>
     </div>
 
   );
