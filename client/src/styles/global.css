@@ -395,10 +395,11 @@ scrollbar-width: none;  /* Firefox */
 }
 
 .back-button-results {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   color: white;
-  float: left;
+  margin-left: 100px;
+  /* float: left; */
   padding-bottom: 2rem;
   cursor: pointer;
 }
@@ -492,18 +493,18 @@ scrollbar-width: none;  /* Firefox */
     display: none;
   }
   .select-container {
-    margin: 22px auto 25px auto;
+    margin: 32px auto 25px auto;
     border-radius: 25px;
     padding: 21px 15px 0 15px;
     height: 420px;
     width: 300px;
   }
   .select-container-q4 {
-    margin: 22px auto 25px auto;
+    margin: 32px auto 25px auto;
     border-radius: 25px;
     padding: 16px 12px 38px 12px;
     height: 175px;
-    width: 300px;
+    max-width: 300px;
   }
 
   .question-text {
