@@ -143,7 +143,7 @@ resource "azurerm_app_service_custom_hostname_binding" "customdomains" {
   app_service_name    = "azurerm_app_service.${each.key}.name"
   resource_group_name = azurerm_resource_group.primary_webapp.name
 }
-/*
+*/
 
 # Resource group for database components per zone
 resource "azurerm_resource_group" "primary_database" {
