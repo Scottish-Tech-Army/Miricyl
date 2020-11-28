@@ -9,6 +9,7 @@ const Question4Component = ({history, sortCharities}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // debugger;
         history.push("/results");
         sortCharities({postcode})
  
