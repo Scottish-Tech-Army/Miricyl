@@ -73,6 +73,7 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
         </div>
 
         <div>
+        {/* <div className="background-image"> */}
             <div className="select-container">
               <p className="question-text">What can we help you with?</p>
               <p className="question-subtext">select all that apply</p>
@@ -80,7 +81,8 @@ const Question1Component = ({ questions, needs, selectResults, history }) => {
               <QuestionsList />
 
               <br />
-            </div>
+              </div>
+            {/* </div> */}
             <div className="bottom-navigation">
                   <button className="next-button" onClick={handleSubmit}>
                   Next

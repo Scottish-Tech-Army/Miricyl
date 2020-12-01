@@ -140,6 +140,7 @@
   width: 570px;
   background-image: linear-gradient(to bottom, #ffffff00 93%, #ffffff 98%);
 }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .select-container::-webkit-scrollbar {
   display: none;
