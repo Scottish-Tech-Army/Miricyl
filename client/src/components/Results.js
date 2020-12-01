@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../styles/global.css";
 import {IconContext} from "react-icons";
 import { BiPhone } from "react-icons/bi";
@@ -8,11 +8,62 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
+import nodeServer from "../api/nodeServer";
+
 
 
 const Results = ({results, history}) => {
+  const [displayResults, setDisplayResults] = useState(results)
 
-  const showResults = results.map((result) => (
+//   async getRating(charities) {
+//     const finalCharities =[]
+//     await Promise.all(charities.map(charity => {
+//           // console.log(charity.PlaceID);
+//           if(charity.PlaceID){
+//             nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+//               const rating = res.data.rating
+//               // console.log('rating', rating);
+//               charity.googleRating = rating
+//               finalCharities.push(charity)
+//               this.setState({ finalCharities: finalCharities})
+//             })
+//           } else {
+//             // console.log('fired');
+//             this.setState({ finalCharities: finalCharities})
+//           }
+//  }))
+//   };
+
+  const getRating = async () => {
+    const finalCharities =[]
+          // console.log(charity.PlaceID);
+          await Promise.all(displayResults.map(charity => {
+            
+            if(charity.PlaceID){
+              nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+              const rating = res.data.rating
+              
+              charity.googleRating = rating
+              console.log('rating', charity);
+              finalCharities.push(charity)
+            //   this.setState({ finalCharities: finalCharities})
+            })
+          } else {
+            console.log('fired');
+            
+          }
+          // return finalCharities
+          
+        })).then((res) => {
+          console.log(res)
+        })
+          // setDisplayResults(finalCharities)
+      
+
+  };
+
+  const showResults = displayResults.map((result) => (
+
 
     <div className="results-list-container" key={ result.PlaceID }>
         <div className="results-title-container">
@@ -89,6 +140,11 @@ const Results = ({results, history}) => {
   
     
   ));
+
+  // useEffect(() => {
+  //   getRating()
+  // }, [])
+
 
   return (
 

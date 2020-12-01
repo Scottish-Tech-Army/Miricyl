@@ -156,13 +156,14 @@ export default class HomePageContainer extends Component {
     if(postcode.postcode === "") {
    let nationalCharities = this.nationalCharities(fullCharities)
    let uniqueCharities = this.getUnique(nationalCharities)
-   console.table(uniqueCharities)
-    this.getRating(uniqueCharities)
+   this.setState({ finalCharities: uniqueCharities})
+    // this.getRating(uniqueCharities)
    
     } else {
       let localCharities = localCharities(uniqueCharities, postcode.postcode.slice(0, 4))
       let uniqueCharities = this.getUnique(localCharities)
-        this.getRating(uniqueCharities)
+      this.setState({ finalCharities: uniqueCharities})
+        // this.getRating(uniqueCharities)
 
       }
       }
