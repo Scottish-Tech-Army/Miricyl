@@ -22,7 +22,6 @@ const INITIAL_STATE = {
   charitiesFilteredByPersonalisations: [],
   finalCharities: [],
   postcode: "",
-  
 };
 
 export default class HomePageContainer extends Component {
@@ -39,8 +38,8 @@ export default class HomePageContainer extends Component {
     this.getUnique = this.getUnique.bind(this);
     this.getRating = this.getRating.bind(this);
     // this.getNationalRating = this.getNationalRating.bind(this);
-    this.nationalCharities = this.nationalCharities.bind(this)
-    this.localCharities = this.localCharities.bind(this)
+    this.nationalCharities = this.nationalCharities.bind(this);
+    this.localCharities = this.localCharities.bind(this);
   }
 
   getQuestion1() {
@@ -56,7 +55,6 @@ export default class HomePageContainer extends Component {
       const typesApi = res.data;
       this.setState({ types: typesApi });
     });
-    
   }
   getQuestion3() {
     nodeServer.get("/personalisations").then((res) => {
@@ -66,58 +64,55 @@ export default class HomePageContainer extends Component {
   }
 
   getUnique(charities) {
-     return Array.from(
-      new Set(charities.map((charity) => charity.OrgName))
-    ).map((OrgName)=> {
-      return charities.find((charity) => charity.OrgName === OrgName)
-    })
+    return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
+      (OrgName) => {
+        return charities.find((charity) => charity.OrgName === OrgName);
+      }
+    );
+  }
 
-  };
+  //   async getNationalRating(sortedCharities) {
+  //     const finalCharities =[]
 
+  //     await Promise.all(sortedCharities.map(charity => {
+  //       if(charity.NationalService === 'YES')
+  //       {
+  //         if(charity.PlaceID !== ""){
+  //           nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+  //             const rating = res.data.rating
+  //             charity.googleRating = rating
+  //             finalCharities.push(charity)
+  //             this.setState({ finalCharities: finalCharities})
+  //           })
+  //         }else {
+  //           finalCharities.push(charity)
+  //             this.setState({ finalCharities: finalCharities})
+  //         }
+  //       }
 
-//   async getNationalRating(sortedCharities) {
-//     const finalCharities =[]
-
-//     await Promise.all(sortedCharities.map(charity => {
-//       if(charity.NationalService === 'YES')
-//       {
-//         if(charity.PlaceID !== ""){
-//           nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
-//             const rating = res.data.rating
-//             charity.googleRating = rating
-//             finalCharities.push(charity)
-//             this.setState({ finalCharities: finalCharities})
-//           })
-//         }else {
-//           finalCharities.push(charity)
-//             this.setState({ finalCharities: finalCharities})
-//         }
-//       } 
-   
-
-      
-//  }))
-//   }
+  //  }))
+  //   }
 
   async getRating(charities) {
-    const finalCharities =[]
-    await Promise.all(charities.map(charity => {
-          // console.log(charity.PlaceID);
-          if(charity.PlaceID){
-            nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
-              const rating = res.data.rating
-              // console.log('rating', rating);
-              charity.googleRating = rating
-              finalCharities.push(charity)
-              this.setState({ finalCharities: finalCharities})
-            })
-          } else {
-            // console.log('fired');
-            this.setState({ finalCharities: finalCharities})
-          }
- }))
-  };
-
+    const finalCharities = [];
+    await Promise.all(
+      charities.map((charity) => {
+        // console.log(charity.PlaceID);
+        if (charity.PlaceID) {
+          nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+            const rating = res.data.rating;
+            // console.log('rating', rating);
+            charity.googleRating = rating;
+            finalCharities.push(charity);
+            this.setState({ finalCharities: finalCharities });
+          });
+        } else {
+          // console.log('fired');
+          this.setState({ finalCharities: finalCharities });
+        }
+      })
+    );
+  }
 
   // }
   // async postcodeSearch(APICall) {
@@ -128,62 +123,59 @@ export default class HomePageContainer extends Component {
   //TODO
 
   nationalCharities(charities) {
-    const national =[]
-     charities.map((charity) => {
-      if(charity.NationalService === 'YES'){
-        national.push(charity)
+    const national = [];
+    charities.map((charity) => {
+      if (charity.NationalService === "YES") {
+        national.push(charity);
       }
-    })
-  
-    return national;
+    });
 
+    return national;
   }
 
   localCharities(charities, postcode) {
     return charities.map((charity) => {
-      if(charity.OuterCode.toLowerCase() === postcode.toLowerCase())
-      return charity
-    })
-
+      if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
+        return charity;
+    });
   }
 
   sortCharities(postcode) {
-    this.setState({ postcode: postcode.postcode })
-    
-    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
-   
+    this.setState({ postcode: postcode.postcode });
 
-    if(postcode.postcode === "") {
-   let nationalCharities = this.nationalCharities(fullCharities)
-   let uniqueCharities = this.getUnique(nationalCharities)
-   this.setState({ finalCharities: uniqueCharities})
-    // this.getRating(uniqueCharities)
-   
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
+      this.state.charitiesFilteredByType,
+      this.state.charityResults
+    );
+
+    if (postcode.postcode === "") {
+      let nationalCharities = this.nationalCharities(fullCharities);
+      let uniqueCharities = this.getUnique(nationalCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
     } else {
-      let localCharities = localCharities(uniqueCharities, postcode.postcode.slice(0, 4))
-      let uniqueCharities = this.getUnique(localCharities)
-      this.setState({ finalCharities: uniqueCharities})
-        // this.getRating(uniqueCharities)
-
-      }
-      }
-      
-
-
-
+      let localCharities = localCharities(
+        uniqueCharities,
+        postcode.postcode.slice(0, 4)
+      );
+      let uniqueCharities = this.getUnique(localCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
+    }
+  }
 
   selectResults(tags) {
-    this.setState({ tags})
+    this.setState({ tags });
     if (tags === 0) {
       nodeServer
         .get("/charities")
         .then((res) => {
           const charities = res.data;
- 
+
           // returns unique charities
           // const uniqueCharities = this.getUnique(charities)
-         
-          // sorts charities alphabetically 
+
+          // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
@@ -201,7 +193,7 @@ export default class HomePageContainer extends Component {
         .get(`/charities?tags=${results}`)
         .then((res) => {
           const charities = res.data;
-          // sorts charities alphabetically 
+          // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
@@ -209,9 +201,8 @@ export default class HomePageContainer extends Component {
           console.log(error);
         });
     }
-    
+
     this.getQuestion2();
-    
   }
 
   filterByType(types) {
@@ -219,7 +210,7 @@ export default class HomePageContainer extends Component {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
       this.getQuestion3();
     } else {
-      this.setState({ selectedTypes: types})
+      this.setState({ selectedTypes: types });
       let filteredCharities = [];
       const charities = this.state.charityResults;
       types.map((type) => {
@@ -237,9 +228,11 @@ export default class HomePageContainer extends Component {
 
   filterByPersonalisations(selected) {
     if (selected.length === 0) {
-      this.setState({ charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType });
+      this.setState({
+        charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType,
+      });
     } else {
-      this.setState({ selectedPersonalisations: selected})
+      this.setState({ selectedPersonalisations: selected });
       let filteredCharities = [];
       const charities = this.state.charitiesFilteredByType;
       selected.map((personalisation) => {
@@ -287,14 +280,11 @@ export default class HomePageContainer extends Component {
             />
           </Route>
           <Route exact path="/postcode">
-            <Question4Component
-              sortCharities={this.sortCharities}
-            />
+            <Question4Component sortCharities={this.sortCharities} />
           </Route>
           <Route exact path="/results">
             <Results results={this.state.finalCharities} />
           </Route>
-
         </React.Fragment>
       </Router>
     );
