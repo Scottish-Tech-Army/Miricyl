@@ -86,6 +86,7 @@ resource "azurerm_app_service" "client" {
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
+  https_only          = true
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
   }
@@ -106,6 +107,7 @@ resource "azurerm_app_service" "server" {
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
+  https_only          = true
  app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
     "WEBSITES_PORT"                  = "3000"
@@ -128,18 +130,20 @@ resource "azurerm_app_service" "testing" {
   location            = local.primary_location
   resource_group_name = azurerm_resource_group.primary_webapp.name
   app_service_plan_id = azurerm_app_service_plan.primary_appservice.id
+  https_only          = true
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.appin01.instrumentation_key}"
     "SCM_COMMAND_IDLE_TIMEOUT"       = "1800"
   }
 }
-
+/*
 resource "azurerm_app_service_custom_hostname_binding" "customdomains" {
   for_each            = lookup(local.custom_domain, local.zone)
   hostname            = "${each.value}"
   app_service_name    = "azurerm_app_service.${each.key}.name"
   resource_group_name = azurerm_resource_group.primary_webapp.name
 }
+*/
 
 # Resource group for database components per zone
 resource "azurerm_resource_group" "primary_database" {

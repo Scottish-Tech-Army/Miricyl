@@ -43,5 +43,5 @@ The Api calls are structures into the following
 To run this app locally run these services in order
 
 1. start the database either by the docker command or using the dashboard
-2. cd into the server directory anr run `npm start dev`
+2. cd into the server directory anr run `npm run dev`
 3. cd int the client directory and run `npm start` at both the frontend and server run on port 3000 you will be asked if you want to change the port, select y and the frontend will run on port 3001

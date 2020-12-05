@@ -47,8 +47,8 @@ Logo is present
 
 Help button is present
     [Documentation]  Checks if the Help button is present
-    element should be visible  css:body:nth-child(2) div:nth-child(2) div.navbar-container > button.help-button
-    element text should be  css:body:nth-child(2) div:nth-child(2) div.navbar-container > button.help-button  Help!
+    element should be visible  css:#root > div.navbar-container > div > button
+    element text should be  css:#root > div.navbar-container > div > button  Help!
 
 Headline on the homepage
     [Documentation]  Checks the headline text "Search mental health resources.."
@@ -78,40 +78,43 @@ Ensure all the 'Needs' are listed on the home page
 
     #Checks if Abuse and Bullying is visible
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)  Abuse or Bullying
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)  Addiction
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)  Addiction
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)  Anxiety, Anger or Stress
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)  Anxiety, Anger or Stress
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)  Body image or Eating disorders
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)  Body image or Eating disorders
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)  Childhood abuse or Bullying
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)  Crime
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)  Debt or Looking for Employment
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)  Debt or Unemployment
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)  Domestic abuse or Sexual violence
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)  Domestic Abuse
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)  Low, Depressed or Lonely
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)  Feeling low or Depressed
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)  Parenting
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)  LGBTQ+ or Gender identity
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)  Relationship or Bereavement
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)  Pregnancy and Parenting
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)  Sleeping problems
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)  Sleeping problems
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)  Suicide or Self-harm
 
     element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)  Suicide or Self-harm
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)  Victim or Involved in Crime
+
+    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(15)
+    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(15)  ZA-Future Need
 
 Click on the next button
     [Documentation]  Clicks on the next button on the page

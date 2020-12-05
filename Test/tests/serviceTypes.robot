@@ -1,8 +1,8 @@
 *** Settings ***
 
-Resource        ./index.robot
-Resource        ./serviceTypes.robot
-Resource        ./common.robot
+Resource        ../pageobjects/index.robot
+Resource        ../pageobjects/serviceTypes.robot
+Resource        ../resources/common.robot
 
 Test Setup  begin test
 Test Teardown  end test

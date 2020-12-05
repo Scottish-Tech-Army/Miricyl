@@ -3,20 +3,21 @@ import "../styles/global.css";
 import Logo from "../assets/BoostLogo.png";
 
 const NavBar = () => {
+  return (
+    <>
+      <div className="navbar-container">
+        <div className="navbar-wrapper">
+          <div>
+            <a href="/">
+              <img className="navbar-logo" src={Logo} alt="logo" />
+            </a>
+          </div>
 
-    return (
-        <>
-        <div className="navbar-container">
-                    
-            <div>
-            <a href='/'><img className="navbar-logo" src={Logo} alt="logo" /></a>
-            </div>
-            
-            <button className="help-button">Help!</button>
-
+          <button className="help-button">Help!</button>
         </div>
-        </>
-    )
+      </div>
+    </>
+  );
 };
 
 export default NavBar;

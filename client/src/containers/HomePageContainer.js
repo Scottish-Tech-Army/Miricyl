@@ -6,6 +6,9 @@ import Question4Component from "../components/Question4Component";
 import Results from "../components/Results";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
+// import postcodeServer from "../api/postcodeServer"
+import GoogleServer from "../api/GoogleServer";
+import { IoLogoFacebook } from "react-icons/io";
 
 const INITIAL_STATE = {
   tags: [],
@@ -18,6 +21,7 @@ const INITIAL_STATE = {
   charitiesFilteredByType: [],
   charitiesFilteredByPersonalisations: [],
   finalCharities: [],
+  postcode: "",
 };
 
 export default class HomePageContainer extends Component {
@@ -32,6 +36,10 @@ export default class HomePageContainer extends Component {
     this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
     this.sortCharities = this.sortCharities.bind(this);
     this.getUnique = this.getUnique.bind(this);
+    this.getRating = this.getRating.bind(this);
+    // this.getNationalRating = this.getNationalRating.bind(this);
+    this.nationalCharities = this.nationalCharities.bind(this);
+    this.localCharities = this.localCharities.bind(this);
   }
 
   getQuestion1() {
@@ -56,47 +64,118 @@ export default class HomePageContainer extends Component {
   }
 
   getUnique(charities) {
-     return Array.from(
-      new Set(charities.map((charity) => charity.OrgName))
-    ).map((OrgName)=> {
-      return charities.find((charity) => charity.OrgName === OrgName)
-    })
-  };
-
-  sortCharities(postcode) {
-    console.log('postcode', postcode.postcode);
-    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(this.state.charitiesFilteredByType, this.state.charityResults)
-
-    if(postcode.postcode === "") {
-      let nationalCharities = []
-      fullCharities.map((charity) => {
-        if(charity.NationalService === "YES")
-        nationalCharities.push(charity)
-        console.log(charity);
-      })
-      let uniqueCharities = this.getUnique(nationalCharities)
-      this.setState({ finalCharities: uniqueCharities})
-    } else {
-      let uniqueCharities = this.getUnique(fullCharities)
-      this.setState({ finalCharities: uniqueCharities})
-    }
-
+    return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
+      (OrgName) => {
+        return charities.find((charity) => charity.OrgName === OrgName);
+      }
+    );
   }
 
+  //   async getNationalRating(sortedCharities) {
+  //     const finalCharities =[]
 
+  //     await Promise.all(sortedCharities.map(charity => {
+  //       if(charity.NationalService === 'YES')
+  //       {
+  //         if(charity.PlaceID !== ""){
+  //           nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+  //             const rating = res.data.rating
+  //             charity.googleRating = rating
+  //             finalCharities.push(charity)
+  //             this.setState({ finalCharities: finalCharities})
+  //           })
+  //         }else {
+  //           finalCharities.push(charity)
+  //             this.setState({ finalCharities: finalCharities})
+  //         }
+  //       }
+
+  //  }))
+  //   }
+
+  async getRating(charities) {
+    const finalCharities = [];
+    await Promise.all(
+      charities.map((charity) => {
+        // console.log(charity.PlaceID);
+        if (charity.PlaceID) {
+          nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+            const rating = res.data.rating;
+            // console.log('rating', rating);
+            charity.googleRating = rating;
+            finalCharities.push(charity);
+            this.setState({ finalCharities: finalCharities });
+          });
+        } else {
+          // console.log('fired');
+          this.setState({ finalCharities: finalCharities });
+        }
+      })
+    );
+  }
+
+  // }
+  // async postcodeSearch(APICall) {
+  //    await postcodeServer.get(`${APICall}`).then((res => {
+  //     (let localPostcodes = res.data)
+  //   }))};
+
+  //TODO
+
+  nationalCharities(charities) {
+    const national = [];
+    charities.map((charity) => {
+      if (charity.NationalService === "YES") {
+        national.push(charity);
+      }
+    });
+
+    return national;
+  }
+
+  localCharities(charities, postcode) {
+    return charities.map((charity) => {
+      if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
+        return charity;
+    });
+  }
+
+  sortCharities(postcode) {
+    this.setState({ postcode: postcode.postcode });
+
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
+      this.state.charitiesFilteredByType,
+      this.state.charityResults
+    );
+
+    if (postcode.postcode === "") {
+      let nationalCharities = this.nationalCharities(fullCharities);
+      let uniqueCharities = this.getUnique(nationalCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
+    } else {
+      let localCharities = localCharities(
+        uniqueCharities,
+        postcode.postcode.slice(0, 4)
+      );
+      let uniqueCharities = this.getUnique(localCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
+    }
+  }
 
   selectResults(tags) {
-    this.setState({ tags})
+    this.setState({ tags });
     if (tags === 0) {
       nodeServer
         .get("/charities")
         .then((res) => {
           const charities = res.data;
- 
+
           // returns unique charities
           // const uniqueCharities = this.getUnique(charities)
-         
-          // sorts charities alphabetically 
+
+          // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
@@ -110,14 +189,11 @@ export default class HomePageContainer extends Component {
         let resultsTemp = results.concat(apiTag);
         results = resultsTemp;
       });
-      console.log(results);
       nodeServer
         .get(`/charities?tags=${results}`)
         .then((res) => {
           const charities = res.data;
-          // returns unique charities
-          // const uniqueCharities = this.getUnique(charities)
-          // sorts charities alphabetically 
+          // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           this.setState({ charityResults: charities });
         })
@@ -125,6 +201,7 @@ export default class HomePageContainer extends Component {
           console.log(error);
         });
     }
+
     this.getQuestion2();
   }
 
@@ -133,7 +210,7 @@ export default class HomePageContainer extends Component {
       this.setState({ charitiesFilteredByType: this.state.charityResults });
       this.getQuestion3();
     } else {
-      this.setState({ selectedTypes: types})
+      this.setState({ selectedTypes: types });
       let filteredCharities = [];
       const charities = this.state.charityResults;
       types.map((type) => {
@@ -143,6 +220,7 @@ export default class HomePageContainer extends Component {
           }
         });
       });
+      filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
       this.setState({ charitiesFilteredByType: filteredCharities });
       this.getQuestion3();
     }
@@ -150,10 +228,11 @@ export default class HomePageContainer extends Component {
 
   filterByPersonalisations(selected) {
     if (selected.length === 0) {
-      this.setState({ charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType });
-      console.log('none', this.state.filteredCharities); 
+      this.setState({
+        charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType,
+      });
     } else {
-      this.setState({ selectedPersonalisations: selected})
+      this.setState({ selectedPersonalisations: selected });
       let filteredCharities = [];
       const charities = this.state.charitiesFilteredByType;
       selected.map((personalisation) => {
@@ -163,9 +242,8 @@ export default class HomePageContainer extends Component {
           }
         });
       });
+      filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
       this.setState({ charitiesFilteredByPersonalisations: filteredCharities });
-      console.log('some', filteredCharities);
-      // this.sortCharities()
     }
   }
 
@@ -202,9 +280,7 @@ export default class HomePageContainer extends Component {
             />
           </Route>
           <Route exact path="/postcode">
-            <Question4Component
-              sortCharities={this.sortCharities}
-            />
+            <Question4Component sortCharities={this.sortCharities} />
           </Route>
           <Route exact path="/results">
             <Results results={this.state.finalCharities} />
