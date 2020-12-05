@@ -61,26 +61,36 @@ const Results = ({
     // UserOption_Type (types of support)
     // personalisation
 
-    const charityObjects = uniqueOrgIds.slice(0, 10).map((orgId) => {
+    const charityObjects = uniqueOrgIds.map((orgId) => {
       const charity = charities.find((charity) => charity.OrgID === orgId);
 
       const servicesFromCharity = charities.filter(
         (charity) => charity.OrgID == orgId
       );
 
+      // This filtering logic will need to be changed once the use filter interface is implemented
+      // as for now it deleted any unselected filters which the user may wish to enable
+
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
-      ];
+      ].filter((need) => selectedNeeds.includes(need));
+
       const typesOfSupportOffered = [
         ...new Set(
           servicesFromCharity.map((service) => service.UserOption_Type)
         ),
       ];
+      // .filter((supportType) => selectedSupportTypes.includes(supportType));
+      // removed the filter as I think we should show all services?
+
+      // there seems to be a data problem here
       const personalisationsMet = [
         ...new Set(
           servicesFromCharity.map((service) => service.Personalisation)
         ),
-      ]; // might not work
+      ].filter((personalisation) =>
+        selectedPersonalisations.includes(personalisation)
+      );
 
       delete charity.TypeOfSupport;
       delete charity.UserOption_Type;

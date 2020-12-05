@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Question1Component from "../components/Question1Component";
-import Question2Component from "../components/Question2Component";
-import Question3Component from "../components/Question3Component";
-import Question4Component from "../components/Question4Component";
-import Results from "../components/Results";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,7 +12,7 @@ import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
-import ResultsX from "../components/Results";
+import Results from "../components/Results";
 
 const HomePageContainer = () => {
   const [allNeeds, setAllNeeds] = useState([]);
@@ -161,6 +156,8 @@ const HomePageContainer = () => {
     );
   };
 
+  // OTHER
+
   //   async getNationalRating(sortedCharities) {
   //     const finalCharities =[]
 
@@ -183,26 +180,26 @@ const HomePageContainer = () => {
   //  }))
   //   }
 
-  const getRating = async (charities) => {
-    const finalCharities = [];
-    await Promise.all(
-      charities.map((charity) => {
-        // console.log(charity.PlaceID);
-        if (charity.PlaceID) {
-          nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
-            const rating = res.data.rating;
-            // console.log('rating', rating);
-            charity.googleRating = rating;
-            finalCharities.push(charity);
-            this.setState({ finalCharities: finalCharities });
-          });
-        } else {
-          // console.log('fired');
-          this.setState({ finalCharities: finalCharities });
-        }
-      })
-    );
-  };
+  // const getRating = async (charities) => {
+  //   const finalCharities = [];
+  //   await Promise.all(
+  //     charities.map((charity) => {
+  //       // console.log(charity.PlaceID);
+  //       if (charity.PlaceID) {
+  //         nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+  //           const rating = res.data.rating;
+  //           // console.log('rating', rating);
+  //           charity.googleRating = rating;
+  //           finalCharities.push(charity);
+  //           this.setState({ finalCharities: finalCharities });
+  //         });
+  //       } else {
+  //         // console.log('fired');
+  //         this.setState({ finalCharities: finalCharities });
+  //       }
+  //     })
+  //   );
+  // };
 
   // }
   // async postcodeSearch(APICall) {
@@ -212,47 +209,47 @@ const HomePageContainer = () => {
 
   //TODO
 
-  const nationalCharities = (charities) => {
-    const national = [];
-    charities.map((charity) => {
-      if (charity.NationalService === "YES") {
-        national.push(charity);
-      }
-    });
+  // const nationalCharities = (charities) => {
+  //   const national = [];
+  //   charities.map((charity) => {
+  //     if (charity.NationalService === "YES") {
+  //       national.push(charity);
+  //     }
+  //   });
 
-    return national;
-  };
+  //   return national;
+  // };
 
-  const localCharities = (charities, postcode) => {
-    return charities.map((charity) => {
-      if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
-        return charity;
-    });
-  };
+  // const localCharities = (charities, postcode) => {
+  //   return charities.map((charity) => {
+  //     if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
+  //       return charity;
+  //   });
+  // };
 
-  const sortCharities = (postcode) => {
-    this.setState({ postcode: postcode.postcode });
+  // const sortCharities = (postcode) => {
+  //   this.setState({ postcode: postcode.postcode });
 
-    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
-      this.state.charitiesFilteredByType,
-      this.state.charityResults
-    );
+  //   const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
+  //     this.state.charitiesFilteredByType,
+  //     this.state.charityResults
+  //   );
 
-    if (postcode.postcode === "") {
-      let nationalCharities = this.nationalCharities(fullCharities);
-      let uniqueCharities = this.getUnique(nationalCharities);
-      this.setState({ finalCharities: uniqueCharities });
-      // this.getRating(uniqueCharities)
-    } else {
-      let localCharities = localCharities(
-        uniqueCharities,
-        postcode.postcode.slice(0, 4)
-      );
-      let uniqueCharities = this.getUnique(localCharities);
-      this.setState({ finalCharities: uniqueCharities });
-      // this.getRating(uniqueCharities)
-    }
-  };
+  //   if (postcode.postcode === "") {
+  //     let nationalCharities = this.nationalCharities(fullCharities);
+  //     let uniqueCharities = this.getUnique(nationalCharities);
+  //     this.setState({ finalCharities: uniqueCharities });
+  //     // this.getRating(uniqueCharities)
+  //   } else {
+  //     let localCharities = localCharities(
+  //       uniqueCharities,
+  //       postcode.postcode.slice(0, 4)
+  //     );
+  //     let uniqueCharities = this.getUnique(localCharities);
+  //     this.setState({ finalCharities: uniqueCharities });
+  //     // this.getRating(uniqueCharities)
+  //   }
+  // };
 
   const filterByPersonalisations = (selected) => {
     if (selected.length === 0) {
@@ -305,10 +302,9 @@ const HomePageContainer = () => {
           onComplete={handlePostcodeSearchCompleted}
           onBackClicked={onBackClicked}
         />
-        {/* <Question4Component sortCharities={this.sortCharities} /> */}
       </Route>
       <Route exact path="/results">
-        <ResultsX
+        <Results
           onBackClicked={onBackClicked}
           selectedNeeds={selectedNeeds}
           selectedSupportTypes={selectedSupportTypes}
@@ -316,7 +312,6 @@ const HomePageContainer = () => {
           postcode={postcode}
           charities={charities}
         />
-        {/* <Results results={this.state.finalCharities} /> */}
       </Route>
     </>
   );
