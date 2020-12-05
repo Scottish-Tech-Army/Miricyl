@@ -16,6 +16,7 @@ import nodeServer from "../api/nodeServer";
 import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
+import TextBoxQuestion from "../components/TextBoxQuestion";
 
 const INITIAL_STATE = {
   tags: [],
@@ -42,6 +43,8 @@ const HomePageContainer = () => {
   const [selectedPersonalisations, setSelectedPersonalisations] = useState([]);
 
   const [charities, setCharities] = useState([]);
+
+  const [postcode, setPostcode] = useState([]);
 
   const history = useHistory();
 
@@ -171,10 +174,15 @@ const HomePageContainer = () => {
 
   const handlePersonalisationsCompleted = (selectedOptions) => {
     setSelectedPersonalisations(selectedOptions);
-    console.log(selectedOptions);
+    history.push("/postcode");
   };
 
-  //
+  // QUESTION 4 - Postcode:
+
+  const handlePostcodeSearchCompleted = (text) => {
+    console.log(text);
+    setPostcode(text);
+  };
 
   const getUnique = (charities) => {
     return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
@@ -322,17 +330,15 @@ const HomePageContainer = () => {
           questionTitle="Personalise your results"
           onBackClicked={onBackClicked}
         />
-        {/* <Question3Component
-          results={this.state.charityResults}
-          questions={this.state.personalisations}
-          filterByPersonalisations={this.filterByPersonalisations}
-          selectedPersonalisations={this.state.selectedPersonalisations}
-        /> */}
       </Route>
-      {/* <Route exact path="/postcode">
-        <Question4Component sortCharities={this.sortCharities} />
+      <Route exact path="/postcode">
+        <TextBoxQuestion
+          onComplete={handlePostcodeSearchCompleted}
+          onBackClicked={onBackClicked}
+        />
+        {/* <Question4Component sortCharities={this.sortCharities} /> */}
       </Route>
-      <Route exact path="/results">
+      {/* <Route exact path="/results">
         <Results results={this.state.finalCharities} />
       </Route> */}
     </>
