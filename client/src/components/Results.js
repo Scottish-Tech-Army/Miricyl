@@ -100,7 +100,7 @@ const Results = ({ results, history }) => {
       </div>
 
       <div className="results-button-container">
-        {result.PhoneNo ? (
+        {result.PhoneNo && (
           <button className="results-list-button" type="button">
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
@@ -110,9 +110,9 @@ const Results = ({ results, history }) => {
               </a>
             </IconContext.Provider>
           </button>
-        ) : null}
+        )}
 
-        {result.ServiceURL ? (
+        {result.ServiceURL && (
           <button className="results-list-button" type="button">
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
@@ -122,9 +122,9 @@ const Results = ({ results, history }) => {
               </a>
             </IconContext.Provider>
           </button>
-        ) : null}
+        )}
 
-        {result.EmailAddress ? (
+        {result.EmailAddress && (
           <button className="results-list-button" type="button">
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
@@ -134,10 +134,10 @@ const Results = ({ results, history }) => {
               </a>
             </IconContext.Provider>
           </button>
-        ) : null}
+        )}
       </div>
 
-      {result.OpeningTime ? (
+      {result.OpeningTime && (
         <p className="results-list-sub-title">
           <IconContext.Provider
             value={{ className: "results-react-icons-detail" }}
@@ -146,10 +146,10 @@ const Results = ({ results, history }) => {
             <BiPhone /> Phone Support:
           </IconContext.Provider>
         </p>
-      ) : null}
+      )}
       <p className="results-list-service-detail">{result.OpeningTime}</p>
 
-      {result.PhysicalAddress ? (
+      {result.PhysicalAddress && (
         <p className="results-list-sub-title">
           <IconContext.Provider
             value={{ className: "results-react-icons-detail" }}
@@ -158,29 +158,27 @@ const Results = ({ results, history }) => {
             <BiMap /> Address:
           </IconContext.Provider>
         </p>
-      ) : null}
+      )}
       <p className="results-list-service-detail">{result.PhysicalAddress}</p>
 
-      {result.UserOption ? (
+      {result.UserOption && (
         <p className="results-list-needs-tag">{result.UserOption}</p>
-      ) : null}
+      )}
 
-      {result.Personalisation ? (
+      {result.Personalisation && (
         <p className="results-list-personalisation-tag">
           {result.Personalisation}
         </p>
-      ) : null}
+      )}
 
-      {result.TypeOfSupport ? (
+      {result.TypeOfSupport && (
         <p className="results-list-sub-title">Types of Service:</p>
-      ) : null}
-      {result.TypeOfSupport ? (
+      )}
+      {result.TypeOfSupport && (
         <li className="results-list-service-detail">{result.TypeOfSupport}</li>
-      ) : null}
+      )}
 
-      {result.OrgDescription ? (
-        <p className="results-list-sub-title">About</p>
-      ) : null}
+      {result.OrgDescription && <p className="results-list-sub-title">About</p>}
       <p className="results-list-service-detail">{result.OrgDescription}</p>
     </div>
   ));

@@ -4,17 +4,23 @@ import Question2Component from "../components/Question2Component";
 import Question3Component from "../components/Question3Component";
 import Question4Component from "../components/Question4Component";
 import Results from "../components/Results";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 // import postcodeServer from "../api/postcodeServer"
 import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
+import Question from "../components/Question";
 
 const INITIAL_STATE = {
   tags: [],
+  needs: [],
   selectedTypes: [],
   selectedPersonalisations: [],
-  question1: [],
   charityResults: [],
   types: [],
   personalisations: [],
@@ -29,7 +35,7 @@ export default class HomePageContainer extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
     this.selectResults = this.selectResults.bind(this);
-    this.getQuestion1 = this.getQuestion1.bind(this);
+    this.getNeeds = this.getNeeds.bind(this);
     this.getQuestion2 = this.getQuestion2.bind(this);
     this.getQuestion3 = this.getQuestion3.bind(this);
     this.filterByType = this.filterByType.bind(this);
@@ -42,13 +48,23 @@ export default class HomePageContainer extends Component {
     this.localCharities = this.localCharities.bind(this);
   }
 
-  getQuestion1() {
+  // QUESTION - 1: Needs
+
+  getNeeds() {
     nodeServer.get("/needs").then((res) => {
-      const question1Api = res.data;
-      question1Api.sort((a, b) => a.Need.localeCompare(b.Need));
-      this.setState({ question1: question1Api });
+      const needsResponse = res.data;
+      needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
+      const needs = needsResponse.map((need) => need.Need);
+      this.setState({ needs: needs });
     });
   }
+
+  handleNeedsCompleted = (selectedOptions) => {
+    // history.push("/service-types");
+    console.log(selectedOptions);
+  };
+
+  // QUESTION - 2:
 
   getQuestion2() {
     nodeServer.get("/types").then((res) => {
@@ -248,7 +264,7 @@ export default class HomePageContainer extends Component {
   }
 
   componentDidMount() {
-    this.getQuestion1();
+    this.getNeeds();
   }
 
   render() {
@@ -256,12 +272,15 @@ export default class HomePageContainer extends Component {
       <Router>
         <React.Fragment>
           <Route exact path="/">
-            <Question1Component
-              questions={this.state.question1}
-              addTag={this.addTag}
-              needs={this.state.tags}
-              selectResults={this.selectResults}
+            <Question
+              optionsList={this.state.needs}
+              onComplete={this.handleNeedsCompleted}
+              questionTitle="What can we help you with?"
             />
+            {/* <Question1Component
+              questions={this.state.needs}
+              selectResults={this.selectResults}
+            /> */}
           </Route>
           <Route exact path="/service-types">
             <Question2Component
