@@ -35,7 +35,9 @@ const HomePageContainer = () => {
   const [allNeeds, setAllNeeds] = useState([]);
   const [selectedNeeds, setSelectedNeeds] = useState([]);
 
-  const [supportTypes, setSupportTypes] = useState([]);
+  const [allSupportTypes, setAllSupportTypes] = useState([]);
+  const [selectedSupportTypes, setSelectedSupportTypes] = useState([]);
+
   const [charities, setCharities] = useState([]);
 
   const history = useHistory();
@@ -43,23 +45,6 @@ const HomePageContainer = () => {
   useEffect(() => {
     getNeeds();
   }, []);
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { ...INITIAL_STATE };
-  //   this.selectResults = this.selectResults.bind(this);
-  //   this.getNeeds = this.getNeeds.bind(this);
-  //   this.getSupportTypes = this.getSupportTypes.bind(this);
-  //   this.getQuestion3 = this.getQuestion3.bind(this);
-  //   this.filterByType = this.filterByType.bind(this);
-  //   this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
-  //   this.sortCharities = this.sortCharities.bind(this);
-  //   this.getUnique = this.getUnique.bind(this);
-  //   this.getRating = this.getRating.bind(this);
-  //   // this.getNationalRating = this.getNationalRating.bind(this);
-  //   this.nationalCharities = this.nationalCharities.bind(this);
-  //   this.localCharities = this.localCharities.bind(this);
-  // }
 
   const onBackClicked = () => {
     console.log("back clicked");
@@ -130,17 +115,22 @@ const HomePageContainer = () => {
   const getSupportTypes = () => {
     nodeServer.get("/types").then((res) => {
       const supportTypesResponse = res.data;
-      setSupportTypes(supportTypesResponse);
+
+      const uniqueSupportTypes = [
+        ...new Set(
+          supportTypesResponse.map((supportType) => supportType.UserOption_Type)
+        ),
+      ];
+
+      setAllSupportTypes(uniqueSupportTypes);
     });
   };
 
   const handleSupportTypesCompleted = (selectedOptions) => {
-    // comments are from needs completed
-    // setSelectedNeeds(selectedOptions);
-    // getSupportTypes();
-    // getCharitiesSuitableForNeeds();
+    setSelectedSupportTypes(selectedOptions);
+    getPersonalisations();
+    // filter by type would be called here but I think we should do all that at the end
     // history.push("/service-types");
-    // fetchCharitiesSuitableForNeeds();
   };
 
   const filterByType = (types) => {
@@ -164,7 +154,7 @@ const HomePageContainer = () => {
     // }
   };
 
-  //
+  // QUESTION 3 - Personalisations:
 
   const getQuestion3 = () => {
     nodeServer.get("/personalisations").then((res) => {
@@ -303,21 +293,13 @@ const HomePageContainer = () => {
           onComplete={handleNeedsCompleted}
           questionTitle="What can we help you with?"
         />
-        {/* <Question1Component
-              questions={this.state.needs}
-              selectResults={this.selectResults}
-            /> */}
       </Route>
       <Route exact path="/service-types">
-        {/* <Question
-          optionsList={supportTypes}
+        <Question
+          optionsList={allSupportTypes}
           onComplete={handleSupportTypesCompleted}
           questionTitle="What types of support are you looking for?"
-        /> */}
-        <Question2Component
-          results={charities}
-          questions={supportTypes}
-          filterByType={filterByType}
+          onBackClicked={onBackClicked}
         />
       </Route>
       {/* <Route exact path="/personalise">
