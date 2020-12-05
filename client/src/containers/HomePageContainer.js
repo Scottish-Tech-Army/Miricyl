@@ -17,7 +17,7 @@ import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
-import ResultsX from "../components/ResultsX";
+import ResultsX from "../components/Results";
 
 const HomePageContainer = () => {
   const [allNeeds, setAllNeeds] = useState([]);
