@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
 
-const Question = ({
+const MultiChoiceQuestion = ({
   optionsList,
   onComplete,
   questionTitle,
@@ -103,4 +103,4 @@ const Question = ({
   );
 };
 
-export default Question;
+export default MultiChoiceQuestion;

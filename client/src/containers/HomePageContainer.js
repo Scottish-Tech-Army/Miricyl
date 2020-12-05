@@ -15,7 +15,7 @@ import nodeServer from "../api/nodeServer";
 // import postcodeServer from "../api/postcodeServer"
 import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
-import Question from "../components/Question";
+import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 
 const INITIAL_STATE = {
   tags: [],
@@ -38,6 +38,9 @@ const HomePageContainer = () => {
   const [allSupportTypes, setAllSupportTypes] = useState([]);
   const [selectedSupportTypes, setSelectedSupportTypes] = useState([]);
 
+  const [allPersonalisations, setAllPersonalisations] = useState([]);
+  const [selectedPersonalisations, setSelectedPersonalisations] = useState([]);
+
   const [charities, setCharities] = useState([]);
 
   const history = useHistory();
@@ -47,8 +50,7 @@ const HomePageContainer = () => {
   }, []);
 
   const onBackClicked = () => {
-    console.log("back clicked");
-    // history.goBack();
+    history.goBack();
   };
 
   // QUESTION - 1: Needs
@@ -129,6 +131,8 @@ const HomePageContainer = () => {
   const handleSupportTypesCompleted = (selectedOptions) => {
     setSelectedSupportTypes(selectedOptions);
     getPersonalisations();
+    history.push("/personalise");
+
     // filter by type would be called here but I think we should do all that at the end
     // history.push("/service-types");
   };
@@ -156,12 +160,21 @@ const HomePageContainer = () => {
 
   // QUESTION 3 - Personalisations:
 
-  const getQuestion3 = () => {
+  const getPersonalisations = () => {
     nodeServer.get("/personalisations").then((res) => {
-      const personalisationApi = res.data;
-      this.setState({ personalisations: personalisationApi });
+      const personalisationsResponse = res.data
+        .map((personalisation) => personalisation.UserOption)
+        .filter((personalisation) => personalisation != "");
+      setAllPersonalisations(personalisationsResponse);
     });
   };
+
+  const handlePersonalisationsCompleted = (selectedOptions) => {
+    setSelectedPersonalisations(selectedOptions);
+    console.log(selectedOptions);
+  };
+
+  //
 
   const getUnique = (charities) => {
     return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
@@ -288,34 +301,40 @@ const HomePageContainer = () => {
   return (
     <>
       <Route exact path="/">
-        <Question
+        <MultiChoiceQuestion
           optionsList={allNeeds}
           onComplete={handleNeedsCompleted}
           questionTitle="What can we help you with?"
         />
       </Route>
       <Route exact path="/service-types">
-        <Question
+        <MultiChoiceQuestion
           optionsList={allSupportTypes}
           onComplete={handleSupportTypesCompleted}
           questionTitle="What types of support are you looking for?"
           onBackClicked={onBackClicked}
         />
       </Route>
-      {/* <Route exact path="/personalise">
-          <Question3Component
-            results={this.state.charityResults}
-            questions={this.state.personalisations}
-            filterByPersonalisations={this.filterByPersonalisations}
-            selectedPersonalisations={this.state.selectedPersonalisations}
-          />
-        </Route>
-        <Route exact path="/postcode">
-          <Question4Component sortCharities={this.sortCharities} />
-        </Route>
-        <Route exact path="/results">
-          <Results results={this.state.finalCharities} />
-        </Route> */}
+      <Route exact path="/personalise">
+        <MultiChoiceQuestion
+          optionsList={allPersonalisations}
+          onComplete={handlePersonalisationsCompleted}
+          questionTitle="Personalise your results"
+          onBackClicked={onBackClicked}
+        />
+        {/* <Question3Component
+          results={this.state.charityResults}
+          questions={this.state.personalisations}
+          filterByPersonalisations={this.filterByPersonalisations}
+          selectedPersonalisations={this.state.selectedPersonalisations}
+        /> */}
+      </Route>
+      {/* <Route exact path="/postcode">
+        <Question4Component sortCharities={this.sortCharities} />
+      </Route>
+      <Route exact path="/results">
+        <Results results={this.state.finalCharities} />
+      </Route> */}
     </>
   );
 };
