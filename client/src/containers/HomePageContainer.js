@@ -17,20 +17,7 @@ import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
-
-const INITIAL_STATE = {
-  tags: [],
-  needs: [],
-  selectedTypes: [],
-  selectedPersonalisations: [],
-  charityResults: [],
-  types: [],
-  personalisations: [],
-  charitiesFilteredByType: [],
-  charitiesFilteredByPersonalisations: [],
-  finalCharities: [],
-  postcode: "",
-};
+import ResultsX from "../components/ResultsX";
 
 const HomePageContainer = () => {
   const [allNeeds, setAllNeeds] = useState([]);
@@ -89,6 +76,7 @@ const HomePageContainer = () => {
 
           // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          console.log(charities);
           setCharities(charities);
         })
         .catch((error) => {
@@ -105,6 +93,8 @@ const HomePageContainer = () => {
         .get(`/charities?tags=${queryParams}`)
         .then((res) => {
           const charities = res.data;
+          console.log(charities);
+
           // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           setCharities(charities);
@@ -140,27 +130,6 @@ const HomePageContainer = () => {
     // history.push("/service-types");
   };
 
-  const filterByType = (types) => {
-    // if (types.length === 0) {
-    //   this.setState({ charitiesFilteredByType: this.state.charityResults });
-    //   this.getQuestion3();
-    // } else {
-    //   this.setState({ selectedTypes: types });
-    //   let filteredCharities = [];
-    //   const charities = this.state.charityResults;
-    //   types.map((type) => {
-    //     charities.map((charity) => {
-    //       if (charity.UserOption_Type === type) {
-    //         filteredCharities.push(charity);
-    //       }
-    //     });
-    //   });
-    //   filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-    //   this.setState({ charitiesFilteredByType: filteredCharities });
-    //   this.getQuestion3();
-    // }
-  };
-
   // QUESTION 3 - Personalisations:
 
   const getPersonalisations = () => {
@@ -180,8 +149,8 @@ const HomePageContainer = () => {
   // QUESTION 4 - Postcode:
 
   const handlePostcodeSearchCompleted = (text) => {
-    console.log(text);
     setPostcode(text);
+    history.push("/results");
   };
 
   const getUnique = (charities) => {
@@ -338,9 +307,17 @@ const HomePageContainer = () => {
         />
         {/* <Question4Component sortCharities={this.sortCharities} /> */}
       </Route>
-      {/* <Route exact path="/results">
-        <Results results={this.state.finalCharities} />
-      </Route> */}
+      <Route exact path="/results">
+        <ResultsX
+          onBackClicked={onBackClicked}
+          selectedNeeds={selectedNeeds}
+          selectedSupportTypes={selectedSupportTypes}
+          selectedPersonalisations={selectedPersonalisations}
+          postcode={postcode}
+          charities={charities}
+        />
+        {/* <Results results={this.state.finalCharities} /> */}
+      </Route>
     </>
   );
 };

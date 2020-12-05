@@ -27,7 +27,6 @@ const MultiChoiceQuestion = ({
   };
 
   useEffect(() => {
-    console.log(optionsList);
     const optionsListForDisplay = optionsList.map((option) => {
       return { value: option, isSelected: false };
     });
