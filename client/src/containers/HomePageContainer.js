@@ -9,6 +9,7 @@ import {
   Route,
   Link,
   useHistory,
+  withRouter,
 } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 // import postcodeServer from "../api/postcodeServer"
@@ -31,20 +32,24 @@ const INITIAL_STATE = {
 };
 
 const HomePageContainer = () => {
-  const [needs, setNeeds] = useState([]);
+  const [allNeeds, setAllNeeds] = useState([]);
+  const [selectedNeeds, setSelectedNeeds] = useState([]);
+
+  const [supportTypes, setSupportTypes] = useState([]);
+  const [charities, setCharities] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     getNeeds();
   }, []);
-
-  const history = useHistory();
 
   // constructor(props) {
   //   super(props);
   //   this.state = { ...INITIAL_STATE };
   //   this.selectResults = this.selectResults.bind(this);
   //   this.getNeeds = this.getNeeds.bind(this);
-  //   this.getQuestion2 = this.getQuestion2.bind(this);
+  //   this.getSupportTypes = this.getSupportTypes.bind(this);
   //   this.getQuestion3 = this.getQuestion3.bind(this);
   //   this.filterByType = this.filterByType.bind(this);
   //   this.filterByPersonalisations = this.filterByPersonalisations.bind(this);
@@ -56,6 +61,11 @@ const HomePageContainer = () => {
   //   this.localCharities = this.localCharities.bind(this);
   // }
 
+  const onBackClicked = () => {
+    console.log("back clicked");
+    // history.goBack();
+  };
+
   // QUESTION - 1: Needs
 
   const getNeeds = () => {
@@ -63,38 +73,113 @@ const HomePageContainer = () => {
       const needsResponse = res.data;
       needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
       const needs = needsResponse.map((need) => need.Need);
-      setNeeds(needs);
+      setAllNeeds(needs);
     });
   };
 
   const handleNeedsCompleted = (selectedOptions) => {
-    // history.push("/service-types");
-    console.log(selectedOptions);
+    setSelectedNeeds(selectedOptions);
+    getSupportTypes();
+    getCharitiesSuitableForNeeds();
+    history.push("/service-types");
+    // fetchCharitiesSuitableForNeeds();
   };
 
-  // QUESTION - 2:
+  const getCharitiesSuitableForNeeds = () => {
+    // this method could do with a good refactor
 
-  // const getQuestion2 = () => {
-  //   nodeServer.get("/types").then((res) => {
-  //     const typesApi = res.data;
-  //     this.setState({ types: typesApi });
-  //   });
-  // };
+    if (allNeeds.length === 0) {
+      nodeServer
+        .get("/charities")
+        .then((res) => {
+          const charities = res.data;
 
-  // const getQuestion3 = () => {
-  //   nodeServer.get("/personalisations").then((res) => {
-  //     const personalisationApi = res.data;
-  //     this.setState({ personalisations: personalisationApi });
-  //   });
-  // };
+          // returns unique charities
+          // const uniqueCharities = this.getUnique(charities)
 
-  // const getUnique = (charities) => {
-  //   return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
-  //     (OrgName) => {
-  //       return charities.find((charity) => charity.OrgName === OrgName);
-  //     }
-  //   );
-  // };
+          // sorts charities alphabetically
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          setCharities(charities);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      let queryParams = "";
+      allNeeds.map((need) => {
+        let queryParam = `${need}£`;
+        queryParams = queryParams.concat(queryParam);
+      });
+
+      nodeServer
+        .get(`/charities?tags=${queryParams}`)
+        .then((res) => {
+          const charities = res.data;
+          // sorts charities alphabetically
+          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+          setCharities(charities);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  // QUESTION 2 - Support Types:
+
+  const getSupportTypes = () => {
+    nodeServer.get("/types").then((res) => {
+      const supportTypesResponse = res.data;
+      setSupportTypes(supportTypesResponse);
+    });
+  };
+
+  const handleSupportTypesCompleted = (selectedOptions) => {
+    // comments are from needs completed
+    // setSelectedNeeds(selectedOptions);
+    // getSupportTypes();
+    // getCharitiesSuitableForNeeds();
+    // history.push("/service-types");
+    // fetchCharitiesSuitableForNeeds();
+  };
+
+  const filterByType = (types) => {
+    // if (types.length === 0) {
+    //   this.setState({ charitiesFilteredByType: this.state.charityResults });
+    //   this.getQuestion3();
+    // } else {
+    //   this.setState({ selectedTypes: types });
+    //   let filteredCharities = [];
+    //   const charities = this.state.charityResults;
+    //   types.map((type) => {
+    //     charities.map((charity) => {
+    //       if (charity.UserOption_Type === type) {
+    //         filteredCharities.push(charity);
+    //       }
+    //     });
+    //   });
+    //   filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+    //   this.setState({ charitiesFilteredByType: filteredCharities });
+    //   this.getQuestion3();
+    // }
+  };
+
+  //
+
+  const getQuestion3 = () => {
+    nodeServer.get("/personalisations").then((res) => {
+      const personalisationApi = res.data;
+      this.setState({ personalisations: personalisationApi });
+    });
+  };
+
+  const getUnique = (charities) => {
+    return Array.from(new Set(charities.map((charity) => charity.OrgName))).map(
+      (OrgName) => {
+        return charities.find((charity) => charity.OrgName === OrgName);
+      }
+    );
+  };
 
   //   async getNationalRating(sortedCharities) {
   //     const finalCharities =[]
@@ -118,26 +203,26 @@ const HomePageContainer = () => {
   //  }))
   //   }
 
-  // const getRating = async (charities) => {
-  //   const finalCharities = [];
-  //   await Promise.all(
-  //     charities.map((charity) => {
-  //       // console.log(charity.PlaceID);
-  //       if (charity.PlaceID) {
-  //         nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
-  //           const rating = res.data.rating;
-  //           // console.log('rating', rating);
-  //           charity.googleRating = rating;
-  //           finalCharities.push(charity);
-  //           this.setState({ finalCharities: finalCharities });
-  //         });
-  //       } else {
-  //         // console.log('fired');
-  //         this.setState({ finalCharities: finalCharities });
-  //       }
-  //     })
-  //   );
-  // };
+  const getRating = async (charities) => {
+    const finalCharities = [];
+    await Promise.all(
+      charities.map((charity) => {
+        // console.log(charity.PlaceID);
+        if (charity.PlaceID) {
+          nodeServer.get(`/googleratings/${charity.PlaceID}`).then((res) => {
+            const rating = res.data.rating;
+            // console.log('rating', rating);
+            charity.googleRating = rating;
+            finalCharities.push(charity);
+            this.setState({ finalCharities: finalCharities });
+          });
+        } else {
+          // console.log('fired');
+          this.setState({ finalCharities: finalCharities });
+        }
+      })
+    );
+  };
 
   // }
   // async postcodeSearch(APICall) {
@@ -147,154 +232,95 @@ const HomePageContainer = () => {
 
   //TODO
 
-  // const nationalCharities = (charities) => {
-  //   const national = [];
-  //   charities.map((charity) => {
-  //     if (charity.NationalService === "YES") {
-  //       national.push(charity);
-  //     }
-  //   });
+  const nationalCharities = (charities) => {
+    const national = [];
+    charities.map((charity) => {
+      if (charity.NationalService === "YES") {
+        national.push(charity);
+      }
+    });
 
-  //   return national;
-  // };
+    return national;
+  };
 
-  // const localCharities = (charities, postcode) => {
-  //   return charities.map((charity) => {
-  //     if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
-  //       return charity;
-  //   });
-  // };
+  const localCharities = (charities, postcode) => {
+    return charities.map((charity) => {
+      if (charity.OuterCode.toLowerCase() === postcode.toLowerCase())
+        return charity;
+    });
+  };
 
-  // const sortCharities = (postcode) => {
-  //   this.setState({ postcode: postcode.postcode });
+  const sortCharities = (postcode) => {
+    this.setState({ postcode: postcode.postcode });
 
-  //   const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
-  //     this.state.charitiesFilteredByType,
-  //     this.state.charityResults
-  //   );
+    const fullCharities = this.state.charitiesFilteredByPersonalisations.concat(
+      this.state.charitiesFilteredByType,
+      this.state.charityResults
+    );
 
-  //   if (postcode.postcode === "") {
-  //     let nationalCharities = this.nationalCharities(fullCharities);
-  //     let uniqueCharities = this.getUnique(nationalCharities);
-  //     this.setState({ finalCharities: uniqueCharities });
-  //     // this.getRating(uniqueCharities)
-  //   } else {
-  //     let localCharities = localCharities(
-  //       uniqueCharities,
-  //       postcode.postcode.slice(0, 4)
-  //     );
-  //     let uniqueCharities = this.getUnique(localCharities);
-  //     this.setState({ finalCharities: uniqueCharities });
-  //     // this.getRating(uniqueCharities)
-  //   }
-  // };
+    if (postcode.postcode === "") {
+      let nationalCharities = this.nationalCharities(fullCharities);
+      let uniqueCharities = this.getUnique(nationalCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
+    } else {
+      let localCharities = localCharities(
+        uniqueCharities,
+        postcode.postcode.slice(0, 4)
+      );
+      let uniqueCharities = this.getUnique(localCharities);
+      this.setState({ finalCharities: uniqueCharities });
+      // this.getRating(uniqueCharities)
+    }
+  };
 
-  // const selectResults = (tags) => {
-  //   this.setState({ tags });
-  //   if (tags === 0) {
-  //     nodeServer
-  //       .get("/charities")
-  //       .then((res) => {
-  //         const charities = res.data;
-
-  //         // returns unique charities
-  //         // const uniqueCharities = this.getUnique(charities)
-
-  //         // sorts charities alphabetically
-  //         charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-  //         this.setState({ charityResults: charities });
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } else {
-  //     let results = "";
-  //     tags.map((tag) => {
-  //       let apiTag = `${tag}£`;
-  //       let resultsTemp = results.concat(apiTag);
-  //       results = resultsTemp;
-  //     });
-  //     nodeServer
-  //       .get(`/charities?tags=${results}`)
-  //       .then((res) => {
-  //         const charities = res.data;
-  //         // sorts charities alphabetically
-  //         charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-  //         this.setState({ charityResults: charities });
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-
-  //   this.getQuestion2();
-  // };
-
-  // const filterByType = (types) => {
-  //   if (types.length === 0) {
-  //     this.setState({ charitiesFilteredByType: this.state.charityResults });
-  //     this.getQuestion3();
-  //   } else {
-  //     this.setState({ selectedTypes: types });
-  //     let filteredCharities = [];
-  //     const charities = this.state.charityResults;
-  //     types.map((type) => {
-  //       charities.map((charity) => {
-  //         if (charity.UserOption_Type === type) {
-  //           filteredCharities.push(charity);
-  //         }
-  //       });
-  //     });
-  //     filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-  //     this.setState({ charitiesFilteredByType: filteredCharities });
-  //     this.getQuestion3();
-  //   }
-  // };
-
-  // const filterByPersonalisations = (selected) => {
-  //   if (selected.length === 0) {
-  //     this.setState({
-  //       charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType,
-  //     });
-  //   } else {
-  //     this.setState({ selectedPersonalisations: selected });
-  //     let filteredCharities = [];
-  //     const charities = this.state.charitiesFilteredByType;
-  //     selected.map((personalisation) => {
-  //       charities.map((charity) => {
-  //         if (charity.Personalisation === personalisation) {
-  //           filteredCharities.push(charity);
-  //         }
-  //       });
-  //     });
-  //     filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-  //     this.setState({ charitiesFilteredByPersonalisations: filteredCharities });
-  //   }
-  // };
+  const filterByPersonalisations = (selected) => {
+    if (selected.length === 0) {
+      this.setState({
+        charitiesFilteredByPersonalisations: this.state.charitiesFilteredByType,
+      });
+    } else {
+      this.setState({ selectedPersonalisations: selected });
+      let filteredCharities = [];
+      const charities = this.state.charitiesFilteredByType;
+      selected.map((personalisation) => {
+        charities.map((charity) => {
+          if (charity.Personalisation === personalisation) {
+            filteredCharities.push(charity);
+          }
+        });
+      });
+      filteredCharities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+      this.setState({ charitiesFilteredByPersonalisations: filteredCharities });
+    }
+  };
 
   return (
-    <Router>
-      <React.Fragment>
-        <Route exact path="/">
-          <Question
-            optionsList={needs}
-            onComplete={handleNeedsCompleted}
-            questionTitle="What can we help you with?"
-          />
-          {/* <Question1Component
+    <>
+      <Route exact path="/">
+        <Question
+          optionsList={allNeeds}
+          onComplete={handleNeedsCompleted}
+          questionTitle="What can we help you with?"
+        />
+        {/* <Question1Component
               questions={this.state.needs}
               selectResults={this.selectResults}
             /> */}
-        </Route>
-        {/* <Route exact path="/service-types">
-          <Question2Component
-            results={this.state.charityResults}
-            questions={this.state.types}
-            filterByType={this.filterByType}
-            selectedTypes={this.state.selectedTypes}
-          />
-        </Route>
-        <Route exact path="/personalise">
+      </Route>
+      <Route exact path="/service-types">
+        {/* <Question
+          optionsList={supportTypes}
+          onComplete={handleSupportTypesCompleted}
+          questionTitle="What types of support are you looking for?"
+        /> */}
+        <Question2Component
+          results={charities}
+          questions={supportTypes}
+          filterByType={filterByType}
+        />
+      </Route>
+      {/* <Route exact path="/personalise">
           <Question3Component
             results={this.state.charityResults}
             questions={this.state.personalisations}
@@ -308,9 +334,8 @@ const HomePageContainer = () => {
         <Route exact path="/results">
           <Results results={this.state.finalCharities} />
         </Route> */}
-      </React.Fragment>
-    </Router>
+    </>
   );
 };
 
-export default HomePageContainer;
+export default withRouter(HomePageContainer);

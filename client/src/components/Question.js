@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../styles/global.css";
+import { IoIosArrowDropleft } from "react-icons/io";
 
-const Question = ({ optionsList, onComplete, questionTitle }) => {
+const Question = ({
+  optionsList,
+  onComplete,
+  questionTitle,
+  onBackClicked,
+}) => {
   const [options, setOptions] = useState([]);
 
   const handleOptionClicked = (selectedOption) => {
@@ -72,6 +78,12 @@ const Question = ({ optionsList, onComplete, questionTitle }) => {
             <br />
           </div>
           <div className="bottom-navigation">
+            {onBackClicked && (
+              <IoIosArrowDropleft
+                className="back-button"
+                onClick={onBackClicked}
+              />
+            )}
             <button
               className="next-button"
               onClick={() =>
