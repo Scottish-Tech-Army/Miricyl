@@ -3,3 +3,6 @@ devops/terraform.tfstate.backup
 devops/.terraform/modules/modules.json
 devops/.terraform/plugins/selections.json
 devops/.terraform/plugins/registry.terraform.io/hashicorp/azurerm/2.28.0/darwin_amd64/terraform-provider-azurerm_v2.28.0_x5
+
+debug.log
+launch.json

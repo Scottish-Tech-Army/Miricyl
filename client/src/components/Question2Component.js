@@ -3,12 +3,7 @@ import { withRouter } from "react-router-dom";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
 
-const Question2Component = ({
-  questions,
-  history,
-  filterByType,
-  selectedTypes,
-}) => {
+const Question2Component = ({ questions, history, filterByType }) => {
   var types = [];
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,11 +37,6 @@ const Question2Component = ({
 
     return uniqueQuestions.map((Question) => {
       var isSelected = false;
-      selectedTypes.map((type) => {
-        if (type === Question.UserOption_Type) {
-          isSelected = true;
-        }
-      });
       if (isSelected === true) {
         types.push(Question.UserOption_Type);
         return (
