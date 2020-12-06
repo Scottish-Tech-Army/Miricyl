@@ -52,15 +52,15 @@ const HomePageContainer = () => {
   const handleNeedsCompleted = (selectedOptions) => {
     setSelectedNeeds(selectedOptions);
     getSupportTypes();
-    getCharitiesSuitableForNeeds();
+    getCharitiesSuitableForNeeds(selectedOptions);
     history.push("/service-types");
     // fetchCharitiesSuitableForNeeds();
   };
 
-  const getCharitiesSuitableForNeeds = () => {
+  const getCharitiesSuitableForNeeds = (selectedOptions) => {
     // this method could do with a good refactor
 
-    if (allNeeds.length === 0) {
+    if (selectedOptions.length === 0) {
       nodeServer
         .get("/charities")
         .then((res) => {
@@ -79,7 +79,7 @@ const HomePageContainer = () => {
         });
     } else {
       let queryParams = "";
-      allNeeds.map((need) => {
+      selectedOptions.map((need) => {
         let queryParam = `${need}£`;
         queryParams = queryParams.concat(queryParam);
       });
@@ -287,6 +287,7 @@ const HomePageContainer = () => {
           onComplete={handleSupportTypesCompleted}
           questionTitle="What types of support are you looking for?"
           onBackClicked={onBackClicked}
+          backgroundToUse="two"
         />
       </Route>
       <Route exact path="/personalise">
@@ -295,12 +296,14 @@ const HomePageContainer = () => {
           onComplete={handlePersonalisationsCompleted}
           questionTitle="Personalise your results"
           onBackClicked={onBackClicked}
+          backgroundToUse="three"
         />
       </Route>
       <Route exact path="/postcode">
         <TextBoxQuestion
           onComplete={handlePostcodeSearchCompleted}
           onBackClicked={onBackClicked}
+          backgroundToUse="four"
         />
       </Route>
       <Route exact path="/results">

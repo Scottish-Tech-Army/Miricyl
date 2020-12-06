@@ -3,7 +3,11 @@ import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import "../styles/global.css";
 
-const TextBoxQuestion = ({ onComplete, onBackClicked }) => {
+const TextBoxQuestion = ({
+  onComplete,
+  onBackClicked,
+  backgroundToUse = "one",
+}) => {
   const [text, setText] = useState("");
 
   const handleChange = (e) => {
@@ -11,7 +15,7 @@ const TextBoxQuestion = ({ onComplete, onBackClicked }) => {
   };
 
   return (
-    <div className="question-four-container">
+    <div className={`question-${backgroundToUse}-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
           <h1 className="question-title">

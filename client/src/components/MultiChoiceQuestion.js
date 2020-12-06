@@ -7,6 +7,7 @@ const MultiChoiceQuestion = ({
   onComplete,
   questionTitle,
   onBackClicked,
+  backgroundToUse = "one",
 }) => {
   const [options, setOptions] = useState([]);
 
@@ -52,7 +53,7 @@ const MultiChoiceQuestion = ({
   };
 
   return (
-    <div className="question-one-container">
+    <div className={`question-${backgroundToUse}-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
           <h1 className="question-title">

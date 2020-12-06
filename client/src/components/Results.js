@@ -15,7 +15,7 @@ const Results = ({
   selectedNeeds,
   selectedSupportTypes,
   selectedPersonalisations,
-  postcode,
+  postcode = "",
   charities,
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
@@ -35,9 +35,39 @@ const Results = ({
     // then by personalisations
     // then by postcode
 
-    const prioritisedCharities = allCharities.sort(
-      (a, b) => needsMet(a, b) || supportTypes(a, b) || personalisations(a, b)
-    );
+    let filteredCharities = allCharities;
+
+    if (selectedSupportTypes.length > 0) {
+      filteredCharities = filteredCharities.filter(
+        (charity) =>
+          charity.typesOfSupportOffered.filter((supportType) =>
+            selectedSupportTypes.includes(supportType)
+          ).length > 0
+      );
+    }
+
+    if (selectedNeeds.length > 0) {
+      filteredCharities = filteredCharities.filter((charity) => {
+        return selectedNeeds.every((need) => charity.needsMet.includes(need));
+      });
+    }
+
+    if (postcode != "") {
+      filteredCharities = filteredCharities.filter(
+        (charity) => charity.OuterCode.toLowerCase() == postcode.toLowerCase()
+      );
+    }
+
+    const prioritisedCharities = filteredCharities
+      .filter((charity) => charity.NationalService === "YES" || postcode != "")
+      .sort((a, b) => a.OrgName.localeCompare(b.OrgName))
+      .sort(
+        (a, b) =>
+          needsMet(a, b) ||
+          supportTypes(a, b) ||
+          ((a, b) => a.OrgName.localeCompare(b.OrgName)) ||
+          personalisations(a, b)
+      );
 
     setprioritisedResults(prioritisedCharities);
   };
@@ -52,8 +82,27 @@ const Results = ({
 
   const constructCharityObjects = () => {
     // get unique org ids
+    // because of the structure of the data we should sort it so that NationalServices of yes is first
+    // this way the set will contain the correct value for this
+
+    let locationSortedCharities;
+
+    if (postcode == "") {
+      locationSortedCharities = charities.sort((a, b) => {
+        return a.NationalService === "YES"
+          ? -1
+          : b.NationalService === "YES"
+          ? 1
+          : 0;
+      });
+    } else {
+      locationSortedCharities = charities.sort((a, b) => {
+        return a.OuterCode === postcode ? -1 : b.OuterCode === postcode ? 1 : 0;
+      });
+    }
+
     const uniqueOrgIds = [
-      ...new Set(charities.map((charity) => charity.OrgID)),
+      ...new Set(locationSortedCharities.map((charity) => charity.OrgID)),
     ];
 
     // for each org generate list of
@@ -63,8 +112,7 @@ const Results = ({
 
     const charityObjects = uniqueOrgIds.map((orgId) => {
       const charity = charities.find((charity) => charity.OrgID === orgId);
-
-      const servicesFromCharity = charities.filter(
+      let servicesFromCharity = charities.filter(
         (charity) => charity.OrgID == orgId
       );
 
@@ -82,15 +130,13 @@ const Results = ({
       ];
       // .filter((supportType) => selectedSupportTypes.includes(supportType));
       // removed the filter as I think we should show all services?
+      // this is a business question
 
-      // there seems to be a data problem here
       const personalisationsMet = [
         ...new Set(
           servicesFromCharity.map((service) => service.Personalisation)
         ),
-      ].filter((personalisation) =>
-        selectedPersonalisations.includes(personalisation)
-      );
+      ];
 
       delete charity.TypeOfSupport;
       delete charity.UserOption_Type;
