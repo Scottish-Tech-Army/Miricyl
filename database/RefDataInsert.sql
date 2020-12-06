@@ -85,31 +85,31 @@ Values(133, 'Victim of crime', 'Victim or Involved in Crime');
 Insert into Miricyl.Type
 Values(101, 'Information', 'Information');
 Insert into Miricyl.Type
-Values(102, 'Directory of local services', 'Directory of local services');
+Values(102, 'Directory of local services', 'Information');
 Insert into Miricyl.Type
-Values(103, 'Face to Face Counselling', 'Face to face');
+Values(103, 'Face to Face Counselling', 'Talk to someone');
 Insert into Miricyl.Type
 Values(104, 'Free services', 'Free services');
 Insert into Miricyl.Type
-Values(105, 'Drop in', 'Face to face');
+Values(105, 'Drop in', 'Talk to someone');
 Insert into Miricyl.Type
-Values(106, 'In a Group', 'In a Group');
+Values(106, 'In a Group', 'Support groups');
 Insert into Miricyl.Type
-Values(107, 'One to One', 'Face to face');
+Values(107, 'One to One', 'Talk to someone');
 Insert into Miricyl.Type
-Values(108, 'Self Help', 'Information');
+Values(108, 'Self Help', 'Community care');
 Insert into Miricyl.Type
-Values(109, 'Online support - Message Boards/Forums', 'Email or Forum');
+Values(109, 'Online support - Message Boards/Forums', 'Online support');
 Insert into Miricyl.Type
-Values(110, 'Online support by Telephone', 'Telephone or Zoom');
+Values(110, 'Online support by Telephone', 'Online support');
 Insert into Miricyl.Type
-Values(111, 'Online support by Chat', 'Chat or Text');
+Values(111, 'Online support by Chat', 'Online support');
 Insert into Miricyl.Type
-Values(112, 'Online support by Text', 'Chat or Text');
+Values(112, 'Online support by Text', 'Online support');
 Insert into Miricyl.Type
-Values(113, 'Online support by Email', 'Email or Forum');
+Values(113, 'Online support by Email', 'Online support');
 Insert into Miricyl.Type
-Values(114, 'Online support by Video', 'Telephone or Zoom');
+Values(114, 'Online support by Video', 'Online support');
 
 Insert into Miricyl.Personalisation
 Values(101, 'Under 16', 'Under 18');
