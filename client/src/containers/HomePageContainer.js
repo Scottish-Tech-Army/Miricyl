@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   useHistory,
   withRouter,
 } from "react-router-dom";
