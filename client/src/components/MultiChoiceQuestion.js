@@ -7,6 +7,7 @@ const MultiChoiceQuestion = ({
   onComplete,
   questionTitle,
   onBackClicked,
+  selected,
   backgroundToUse = "one",
 }) => {
   const [options, setOptions] = useState([]);
@@ -29,7 +30,16 @@ const MultiChoiceQuestion = ({
 
   useEffect(() => {
     const optionsListForDisplay = optionsList.map((option) => {
-      return { value: option, isSelected: false };
+
+      // check if selected
+      var isSelected = false;
+      selected.map((value) => {
+
+        if (value === option) {
+          isSelected = true;
+        }
+      });
+      return { value: option, isSelected: isSelected };
     });
     setOptions(optionsListForDisplay);
   }, [optionsList]);

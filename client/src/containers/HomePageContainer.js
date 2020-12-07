@@ -25,7 +25,7 @@ const HomePageContainer = () => {
 
   const [charities, setCharities] = useState([]);
 
-  const [postcode, setPostcode] = useState([]);
+  const [postcode, setPostcode] = useState("");
 
   const history = useHistory();
 
@@ -278,6 +278,7 @@ const HomePageContainer = () => {
           optionsList={allNeeds}
           onComplete={handleNeedsCompleted}
           questionTitle="What can we help you with?"
+          selected={selectedNeeds}
         />
       </Route>
       <Route exact path="/service-types">
@@ -287,6 +288,7 @@ const HomePageContainer = () => {
           questionTitle="What types of support are you looking for?"
           onBackClicked={onBackClicked}
           backgroundToUse="two"
+          selected={selectedSupportTypes}
         />
       </Route>
       <Route exact path="/personalise">
@@ -296,6 +298,7 @@ const HomePageContainer = () => {
           questionTitle="Personalise your results"
           onBackClicked={onBackClicked}
           backgroundToUse="three"
+          selected={selectedPersonalisations}
         />
       </Route>
       <Route exact path="/postcode">
@@ -303,6 +306,7 @@ const HomePageContainer = () => {
           onComplete={handlePostcodeSearchCompleted}
           onBackClicked={onBackClicked}
           backgroundToUse="four"
+          postcode={postcode}
         />
       </Route>
       <Route exact path="/results">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import "../styles/global.css";
@@ -7,9 +7,19 @@ const TextBoxQuestion = ({
   onComplete,
   onBackClicked,
   backgroundToUse = "one",
+  postcode,
 }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState("Enter your postcode");
+  const checkPostcode = () => {
+    if (postcode) {
+      setText(`${postcode}`)
+    }
+  }
 
+
+  useEffect(() => {
+    checkPostcode();
+  }, []);
   const handleChange = (e) => {
     setText(e.target.value);
   };
@@ -41,7 +51,7 @@ const TextBoxQuestion = ({
               type="text"
               value={text}
               onChange={handleChange}
-              placeholder="Enter your postcode"
+              placeholder={text}
             ></input>
 
             <br />
