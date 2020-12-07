@@ -143,6 +143,9 @@ const HomePageContainer = () => {
   // QUESTION 4 - Postcode:
 
   const handlePostcodeSearchCompleted = (text) => {
+    if (text === "Enter your postcode") {
+      text = ""
+    }
     setPostcode(text);
     history.push("/results");
   };
