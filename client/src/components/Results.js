@@ -60,14 +60,14 @@ const Results = ({
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
-      .sort((a, b) => a.OrgName.localeCompare(b.OrgName))
-      .sort(
-        (a, b) =>
-          needsMet(a, b) ||
-          supportTypes(a, b) ||
-          ((a, b) => a.OrgName.localeCompare(b.OrgName)) ||
-          personalisations(a, b)
-      );
+      .sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+    // .sort(
+    //   (a, b) =>
+    //     needsMet(a, b) ||
+    //     supportTypes(a, b) ||
+    //     ((a, b) => a.OrgName.localeCompare(b.OrgName)) ||
+    //     personalisations(a, b)
+    // );
 
     setprioritisedResults(prioritisedCharities);
   };
@@ -112,12 +112,21 @@ const Results = ({
 
     const charityObjects = uniqueOrgIds.map((orgId) => {
       const charity = charities.find((charity) => charity.OrgID === orgId);
-      let servicesFromCharity = charities.filter(
-        (charity) => charity.OrgID == orgId
-      );
+      let servicesFromCharity = charities.filter((charity) => {
+        return (
+          charity.OrgID == orgId &&
+          (postcode === ""
+            ? charity.NationalService === "YES"
+            : charity.OuterCode === postcode)
+        );
+      });
 
       // This filtering logic will need to be changed once the use filter interface is implemented
       // as for now it deleted any unselected filters which the user may wish to enable
+
+      // the problem in UC 8 occurs because the org offers CA&B and DoLfE but only offeres Talk to Somone for one of these, not both.
+      // this means that we must filter out services (types of support offered) which dont meet needs
+      // the problem is that we need to validate that the SAME service is available for BOTH NEEDS
 
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),

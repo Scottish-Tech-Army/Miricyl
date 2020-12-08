@@ -70,7 +70,6 @@ const HomePageContainer = () => {
 
           // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          console.log(charities);
           setCharities(charities);
         })
         .catch((error) => {
@@ -144,7 +143,7 @@ const HomePageContainer = () => {
 
   const handlePostcodeSearchCompleted = (text) => {
     if (text === "Enter your postcode") {
-      text = ""
+      text = "";
     }
     setPostcode(text);
     history.push("/results");
