@@ -42,19 +42,19 @@ Insert into __dbname__.Needs Values(132,'Suicide','Suicide or Self-harm');
 Insert into __dbname__.Needs Values(133,'Victim of crime','Victim or Involved in Crime');
 
 Insert into __dbname__.Type Values(101, 'Information', 'Information');
-Insert into __dbname__.Type Values(102, 'Directory of local services', 'Information');
-Insert into __dbname__.Type Values(103, 'Face to Face Counselling', 'Talk to someone');
+Insert into __dbname__.Type Values(102, 'Directory of local services', 'Directory of local services');
+Insert into __dbname__.Type Values(103, 'Face to Face Counselling', 'Face to face');
 Insert into __dbname__.Type Values(104, 'Free services', 'Free services');
-Insert into __dbname__.Type Values(105, 'Drop in', 'Talk to someone');
-Insert into __dbname__.Type Values(106, 'In a Group', 'Support groups');
-Insert into __dbname__.Type Values(107, 'One to One', 'Talk to someone');
-Insert into __dbname__.Type Values(108, 'Self Help', 'Community care');
-Insert into __dbname__.Type Values(109, 'Online support - Message Boards/Forums', 'Online support');
-Insert into __dbname__.Type Values(110, 'Online support by Telephone', 'Online support');
-Insert into __dbname__.Type Values(111, 'Online support by Chat', 'Online support');
-Insert into __dbname__.Type Values(112, 'Online support by Text', 'Online support');
-Insert into __dbname__.Type Values(113, 'Online support by Email', 'Online support');
-Insert into __dbname__.Type Values(114, 'Online support by Video', 'Online support');
+Insert into __dbname__.Type Values(105, 'Drop in', 'Face to face');
+Insert into __dbname__.Type Values(106, 'In a Group', 'In a group');
+Insert into __dbname__.Type Values(107, 'One to One', 'Face to face');
+Insert into __dbname__.Type Values(108, 'Self Help', 'Information');
+Insert into __dbname__.Type Values(109, 'Online support - Message Boards/Forums', 'Email or forum');
+Insert into __dbname__.Type Values(110, 'Online support by Telephone', 'Telephone or zoom');
+Insert into __dbname__.Type Values(111, 'Online support by Chat', 'Chat or text');
+Insert into __dbname__.Type Values(112, 'Online support by Text', 'Chat ot text');
+Insert into __dbname__.Type Values(113, 'Online support by Email', 'Email or forum');
+Insert into __dbname__.Type Values(114, 'Online support by Video', 'Telephone or zoom');
 
 Insert into __dbname__.Personalisation Values(101,'Under 16','Under 18');
 Insert into __dbname__.Personalisation Values(102,'16+','');
@@ -65,5 +65,3 @@ Insert into __dbname__.Personalisation Values(106,'LGBTQ+','LGBTQ+');
 Insert into __dbname__.Personalisation Values(107,'Unemployed','Unemployed');
 Insert into __dbname__.Personalisation Values(108,'A carer','A carer');
 Insert into __dbname__.Personalisation Values(109,'BAME','BAME');
-
-
