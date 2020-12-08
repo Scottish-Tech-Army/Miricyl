@@ -54,7 +54,7 @@ const Results = ({
 
     if (postcode != "") {
       filteredCharities = filteredCharities.filter(
-        (charity) => charity.OuterCode.toLowerCase() == postcode.toLowerCase()
+        (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
       );
     }
 
@@ -97,7 +97,11 @@ const Results = ({
       });
     } else {
       locationSortedCharities = charities.sort((a, b) => {
-        return a.OuterCode === postcode ? -1 : b.OuterCode === postcode ? 1 : 0;
+        return a.OuterCode.toUpperCase() === postcode.toUpperCase()
+          ? -1
+          : b.OuterCode.toUpperCase() === postcode.toUpperCase()
+          ? 1
+          : 0;
       });
     }
 
@@ -117,7 +121,7 @@ const Results = ({
           charity.OrgID == orgId &&
           (postcode === ""
             ? charity.NationalService === "YES"
-            : charity.OuterCode === postcode)
+            : charity.OuterCode.toUpperCase() === postcode.toUpperCase())
         );
       });
 
