@@ -52,7 +52,7 @@ Insert into __dbname__.Type Values(108, 'Self Help', 'Information');
 Insert into __dbname__.Type Values(109, 'Online support - Message Boards/Forums', 'Email or forum');
 Insert into __dbname__.Type Values(110, 'Online support by Telephone', 'Telephone or zoom');
 Insert into __dbname__.Type Values(111, 'Online support by Chat', 'Chat or text');
-Insert into __dbname__.Type Values(112, 'Online support by Text', 'Chat ot text');
+Insert into __dbname__.Type Values(112, 'Online support by Text', 'Chat or text');
 Insert into __dbname__.Type Values(113, 'Online support by Email', 'Email or forum');
 Insert into __dbname__.Type Values(114, 'Online support by Video', 'Telephone or zoom');
 

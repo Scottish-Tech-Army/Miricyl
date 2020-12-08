@@ -105,7 +105,7 @@ Values(110, 'Online support by Telephone', 'Telephone or zoom');
 Insert into Miricyl.Type
 Values(111, 'Online support by Chat', 'Chat or text');
 Insert into Miricyl.Type
-Values(112, 'Online support by Text', 'Chat ot text');
+Values(112, 'Online support by Text', 'Chat or text');
 Insert into Miricyl.Type
 Values(113, 'Online support by Email', 'Email or forum');
 Insert into Miricyl.Type
