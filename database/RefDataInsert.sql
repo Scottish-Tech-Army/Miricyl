@@ -93,23 +93,23 @@ Values(104, 'Free services', 'Free services');
 Insert into Miricyl.Type
 Values(105, 'Drop in', 'Face to face');
 Insert into Miricyl.Type
-Values(106, 'In a Group', 'In a Group');
+Values(106, 'In a Group', 'In a group');
 Insert into Miricyl.Type
 Values(107, 'One to One', 'Face to face');
 Insert into Miricyl.Type
 Values(108, 'Self Help', 'Information');
 Insert into Miricyl.Type
-Values(109, 'Online support - Message Boards/Forums', 'Email or Forum');
+Values(109, 'Online support - Message Boards/Forums', 'Email or forum');
 Insert into Miricyl.Type
-Values(110, 'Online support by Telephone', 'Telephone or Zoom');
+Values(110, 'Online support by Telephone', 'Telephone or zoom');
 Insert into Miricyl.Type
-Values(111, 'Online support by Chat', 'Chat or Text');
+Values(111, 'Online support by Chat', 'Chat or text');
 Insert into Miricyl.Type
-Values(112, 'Online support by Text', 'Chat or Text');
+Values(112, 'Online support by Text', 'Chat or text');
 Insert into Miricyl.Type
-Values(113, 'Online support by Email', 'Email or Forum');
+Values(113, 'Online support by Email', 'Email or forum');
 Insert into Miricyl.Type
-Values(114, 'Online support by Video', 'Telephone or Zoom');
+Values(114, 'Online support by Video', 'Telephone or zoom');
 
 Insert into Miricyl.Personalisation
 Values(101, 'Under 16', 'Under 18');
@@ -120,13 +120,13 @@ Values(103, '18+', '');
 Insert into Miricyl.Personalisation
 Values(104, 'A student', 'A student');
 Insert into Miricyl.Personalisation
-Values(105, 'A parent', 'A parent');
+Values(105, 'A parent', 'A parent or carer');
 Insert into Miricyl.Personalisation
 Values(106, 'LGBTQ+', 'LGBTQ+');
 Insert into Miricyl.Personalisation
 Values(107, 'Unemployed', 'Unemployed');
 Insert into Miricyl.Personalisation
-Values(108, 'A carer', 'A carer');
+Values(108, 'A carer', 'A parent or carer');
 Insert into Miricyl.Personalisation
 Values(109, 'BAME', 'BAME');
 
