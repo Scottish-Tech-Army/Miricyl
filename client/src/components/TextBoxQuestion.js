@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import "../styles/global.css";
 
-const Question4Component = ({ history, sortCharities }) => {
-  const [postcode, setPostcode] = useState("");
+const TextBoxQuestion = ({
+  onComplete,
+  onBackClicked,
+  backgroundToUse = "one",
+  postcode,
+}) => {
+  const [text, setText] = useState("Enter your postcode");
+  const checkPostcode = () => {
+    if (postcode) {
+      setText(`${postcode}`)
+    }
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // debugger;
-    history.push("/results");
-    sortCharities({ postcode });
-  };
 
+  useEffect(() => {
+    checkPostcode();
+  }, []);
   const handleChange = (e) => {
-    setPostcode(e.target.value);
+    setText(e.target.value);
   };
 
   return (
-    <div className="question-four-container">
+    <div className={`question-${backgroundToUse}-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
           <h1 className="question-title">
@@ -42,21 +49,22 @@ const Question4Component = ({ history, sortCharities }) => {
             <input
               className="postcode-select"
               type="text"
+              value={text}
               onChange={handleChange}
-              placeholder="Enter your postcode"
+              placeholder={text}
             ></input>
 
             <br />
           </div>
 
           <div className="bottom-navigation">
-            <IoIosArrowDropleft
-              className="back-button"
-              onClick={() => {
-                history.goBack();
-              }}
-            />
-            <button className="next-button" onClick={handleSubmit}>
+            {onBackClicked && (
+              <IoIosArrowDropleft
+                className="back-button"
+                onClick={onBackClicked}
+              />
+            )}
+            <button className="next-button" onClick={() => onComplete(text)}>
               Next
             </button>
           </div>
@@ -66,4 +74,4 @@ const Question4Component = ({ history, sortCharities }) => {
   );
 };
 
-export default withRouter(Question4Component);
+export default withRouter(TextBoxQuestion);

@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `Country_CountryID` INT NULL DEFAULT NULL,
   `NationalService` TINYINT NULL DEFAULT '0',  
   `FaceBookURL` VARCHAR(200) NULL DEFAULT NULL,  
+  `ChatURL` VARCHAR(200) NULL DEFAULT NULL,    
   PRIMARY KEY (`OrgServiceID`),
   UNIQUE INDEX `OrgServiceID_UNIQUE` (`OrgServiceID` ASC) VISIBLE,
   INDEX `fk_OrgService_Organisation_idx` (`Organisation_OrgID` ASC) VISIBLE,
@@ -325,7 +326,8 @@ SELECT distinct
     T.Description as TypeOfSupport,
 	T.UserOption_Type,
     P.Description as Personalisation,
-    OS.FaceBookURL
+    OS.FaceBookURL,
+	OS.ChatURL
 
 FROM Miricyl.ServiceNeeds SN
 INNER JOIN Miricyl.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
