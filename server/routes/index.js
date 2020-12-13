@@ -19,6 +19,7 @@ router.get("/needs", async (req, res, next) => {
 });
 
 router.get("/types", async (req, res, next) => {
+  console.log('fired2');
   try {
     let results = await db.types();
     res.json(results);
@@ -69,8 +70,8 @@ router.get("/googleratings/:id", async (req, res) => {
   };
   try {
     let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&fields=rating&key=${key}`
-  let results = await axios.get(url)
-     res.json(results.data.result) 
+    let results = await axios.get(url)
+    res.json(results.data.result)
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
