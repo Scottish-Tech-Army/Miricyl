@@ -8,7 +8,6 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
-import nodeServer from "../api/nodeServer";
 
 const Results = ({
   onBackClicked,
@@ -29,15 +28,7 @@ const Results = ({
     sortCharities();
   }, [allCharities]);
 
-  // the issue right now is that we are matching the support types offered on every need. Not just the selected needs...
-  // sp we need to also create an array which is just the support types met for the selected needs
-
   const sortCharities = () => {
-    // Sort by number of needs met
-    // then by support types
-    // then by personalisations
-    // then by postcode
-
     let filteredCharities = allCharities;
 
     // if (selectedSupportTypes.length > 0) {
@@ -63,8 +54,7 @@ const Results = ({
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
-      .sort((a, b) => noOfMatchedSupportTypes(a, b));
-    // .sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+      .sort((a, b) => noOfMatchedSupportTypes(a, b) || alphabetical(a, b));
     // .sort(
     //   (a, b) =>
     //     needsMet(a, b) ||
@@ -73,18 +63,21 @@ const Results = ({
     //     personalisations(a, b)
     // );
 
+    console.log(prioritisedCharities.length);
     console.log(prioritisedCharities);
     setprioritisedResults(prioritisedCharities);
   };
-
-  const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
 
   const noOfMatchedSupportTypes = (a, b) =>
     b.matchedTypesOfSupportOffered.length -
     a.matchedTypesOfSupportOffered.length;
 
-  const personalisations = (a, b) =>
-    b.personalisationsMet.length - a.personalisationsMet.length;
+  const alphabetical = (a, b) => a.OrgName.localeCompare(b.OrgName);
+
+  // const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
+
+  // const personalisations = (a, b) =>
+  //   b.personalisationsMet.length - a.personalisationsMet.length;
 
   const constructCharityObjects = () => {
     // get unique org ids
