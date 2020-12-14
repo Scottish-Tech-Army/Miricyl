@@ -344,15 +344,6 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Create A ReadOnly Role for app user
--- -----------------------------------------------------
-CREATE ROLE iF NOT EXISTS AppReader ;
-
--- -----------------------------------------------------
--- Grant Select to AppReader Role
--- -----------------------------------------------------
-GRANT SELECT on `Miricyl`.* to AppReader;
--- -----------------------------------------------------
 -- Create A User for App
 -- -----------------------------------------------------
 CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE NEVER;
@@ -360,8 +351,7 @@ CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE 
 -- -----------------------------------------------------
 -- Grant appuser to AppReader role
 -- -----------------------------------------------------
-Grant AppReader to appuser;
+GRANT SELECT on `Miricyl`.* to appuser;
 
 -- -----------------------------------------------------
--- Create A User for App
--- -----------------------------------------------------
+FLUSH PRIVILEGES;
