@@ -55,6 +55,7 @@ const MultiChoiceQuestion = ({
           }
           value={option.value}
           key={option.value}
+          id={option.value}
         >
           {option.value}
         </button>
