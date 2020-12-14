@@ -31,7 +31,7 @@ Title is React App
 
 Go to the MIRICYL home page
     [Documentation]  User is taken to the landing page
-    go to  ${DEVURL}
+    go to  ${DEVSITE}
 
 
 Header of the home page is as expected
@@ -129,23 +129,23 @@ Click on the back button
 
 Select All 'Needs'
     [Documentation]  This will select all the needs available on the homepage
-    Select 'Abuse or Bullying'
+    Select 'Childhood abuse or Bullying'
     Select 'addiction'
     Select 'Anxiety, Anger or Stress'
     Select 'Body image or eating disorders'
     Select 'Crime'
-    Select 'Debt or Unemployment'
+    Select 'Debt or Looking for Employment'
     Select 'Domestic Abuse'
-    Select 'Feeling low or Depressed'
+    Select 'Low, Depressed or Lonely'
     Select 'LGBTQ+ or gender identity'
     Select 'Pregnancy and Parenting'
     Select 'Sleeping problems'
     Select 'Suicide or Self-harm'
 
 
-Select 'Abuse or Bullying'
-    [Documentation]  Clicks on the 'Abuse or bullying' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)
+Select 'Childhood abuse or Bullying'
+    [Documentation]  Clicks on the 'Childhood abuse or Bullying' need
+    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
     sleep  1s
 
 Select 'Addiction'
@@ -168,9 +168,9 @@ Select 'Crime'
     click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
     sleep  1s
 
-Select 'Debt or Unemployment'
+Select 'Debt or Looking for Employment'
     [Documentation]  Clicks on the 'Debt or Unemployment' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)
+    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
     sleep  1s
 
 Select 'Domestic Abuse'
@@ -178,9 +178,9 @@ Select 'Domestic Abuse'
     click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
     sleep  1s
 
-Select 'Feeling low or Depressed'
-    [Documentation]  Clicks on the 'Feeling low or Depressed' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)
+Select 'Low, Depressed or Lonely'
+    [Documentation]  Clicks on the 'Low, Depressed or Lonely' need
+    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
     sleep  1s
 
 Select 'LGBTQ+ or gender identity'
