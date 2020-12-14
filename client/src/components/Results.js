@@ -29,6 +29,9 @@ const Results = ({
     sortCharities();
   }, [allCharities]);
 
+  // the issue right now is that we are matching the support types offered on every need. Not just the selected needs...
+  // sp we need to also create an array which is just the support types met for the selected needs
+
   const sortCharities = () => {
     // Sort by number of needs met
     // then by support types
@@ -37,14 +40,14 @@ const Results = ({
 
     let filteredCharities = allCharities;
 
-    if (selectedSupportTypes.length > 0) {
-      filteredCharities = filteredCharities.filter(
-        (charity) =>
-          charity.typesOfSupportOffered.filter((supportType) =>
-            selectedSupportTypes.includes(supportType)
-          ).length > 0
-      );
-    }
+    // if (selectedSupportTypes.length > 0) {
+    //   filteredCharities = filteredCharities.filter(
+    //     (charity) =>
+    //       charity.typesOfSupportOffered.filter((supportType) =>
+    //         selectedSupportTypes.includes(supportType)
+    //       ).length > 0
+    //   );
+    // }
 
     if (selectedNeeds.length > 0) {
       filteredCharities = filteredCharities.filter((charity) => {
@@ -60,7 +63,8 @@ const Results = ({
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
-      .sort((a, b) => a.OrgName.localeCompare(b.OrgName));
+      .sort((a, b) => noOfMatchedSupportTypes(a, b));
+    // .sort((a, b) => a.OrgName.localeCompare(b.OrgName));
     // .sort(
     //   (a, b) =>
     //     needsMet(a, b) ||
@@ -69,13 +73,15 @@ const Results = ({
     //     personalisations(a, b)
     // );
 
+    console.log(prioritisedCharities);
     setprioritisedResults(prioritisedCharities);
   };
 
   const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
 
-  const supportTypes = (a, b) =>
-    b.typesOfSupportOffered.length - a.typesOfSupportOffered.length;
+  const noOfMatchedSupportTypes = (a, b) =>
+    b.matchedTypesOfSupportOffered.length -
+    a.matchedTypesOfSupportOffered.length;
 
   const personalisations = (a, b) =>
     b.personalisationsMet.length - a.personalisationsMet.length;
@@ -128,10 +134,6 @@ const Results = ({
       // This filtering logic will need to be changed once the use filter interface is implemented
       // as for now it deleted any unselected filters which the user may wish to enable
 
-      // the problem in UC 8 occurs because the org offers CA&B and DoLfE but only offeres Talk to Somone for one of these, not both.
-      // this means that we must filter out services (types of support offered) which dont meet needs
-      // the problem is that we need to validate that the SAME service is available for BOTH NEEDS
-
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
       ].filter((need) => selectedNeeds.includes(need));
@@ -141,9 +143,18 @@ const Results = ({
           servicesFromCharity.map((service) => service.UserOption_Type)
         ),
       ];
-      // .filter((supportType) => selectedSupportTypes.includes(supportType));
-      // removed the filter as I think we should show all services?
-      // this is a business question
+
+      const matchedTypesOfSupportOffered = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                selectedNeeds.includes(service.UserOption) &&
+                selectedSupportTypes.includes(service.UserOption_Type)
+            )
+            .map((matchedService) => matchedService.UserOption_Type)
+        ),
+      ];
 
       const personalisationsMet = [
         ...new Set(
@@ -151,15 +162,17 @@ const Results = ({
         ),
       ];
 
-      delete charity.TypeOfSupport;
-      delete charity.UserOption_Type;
-      delete charity.UserOption;
-      delete charity.Personalisation;
+      // This stuff is causing pass by reference issues currently
+      // delete charity.TypeOfSupport;
+      // delete charity.UserOption_Type;
+      // delete charity.UserOption;
+      // delete charity.Personalisation;
 
       return {
         ...charity,
         needsMet,
         typesOfSupportOffered,
+        matchedTypesOfSupportOffered,
         personalisationsMet,
       };
     });

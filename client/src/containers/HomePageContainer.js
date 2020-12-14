@@ -29,7 +29,6 @@ const HomePageContainer = () => {
 
   const history = useHistory();
 
-
   useEffect(() => {
     getNeeds();
   }, []);
@@ -87,8 +86,6 @@ const HomePageContainer = () => {
         .get(`/charities?tags=${queryParams}`)
         .then((res) => {
           const charities = res.data;
-          console.log(charities);
-
           // sorts charities alphabetically
           charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
           setCharities(charities);
