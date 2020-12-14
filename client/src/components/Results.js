@@ -55,16 +55,7 @@ const Results = ({
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
       .sort((a, b) => noOfMatchedSupportTypes(a, b) || alphabetical(a, b));
-    // .sort(
-    //   (a, b) =>
-    //     needsMet(a, b) ||
-    //     supportTypes(a, b) ||
-    //     ((a, b) => a.OrgName.localeCompare(b.OrgName)) ||
-    //     personalisations(a, b)
-    // );
 
-    console.log(prioritisedCharities.length);
-    console.log(prioritisedCharities);
     setprioritisedResults(prioritisedCharities);
   };
 
@@ -80,10 +71,6 @@ const Results = ({
   //   b.personalisationsMet.length - a.personalisationsMet.length;
 
   const constructCharityObjects = () => {
-    // get unique org ids
-    // because of the structure of the data we should sort it so that NationalServices of yes is first
-    // this way the set will contain the correct value for this
-
     let locationSortedCharities;
 
     if (postcode == "") {
@@ -107,11 +94,6 @@ const Results = ({
     const uniqueOrgIds = [
       ...new Set(locationSortedCharities.map((charity) => charity.OrgID)),
     ];
-
-    // for each org generate list of
-    // userOption (needs)
-    // UserOption_Type (types of support)
-    // personalisation
 
     const charityObjects = uniqueOrgIds.map((orgId) => {
       const charity = charities.find((charity) => charity.OrgID === orgId);
