@@ -1,5 +1,5 @@
 *** Settings ***
-Resource  ../pageobjects/index.robot
+Resource  ../pageObjects/index.robot
 Resource  ../resources/common.robot
 
 Test Setup  begin test
@@ -65,6 +65,9 @@ User can proceed to 'Service types' without selecting a 'Need'
 #User can select one or more 'Need' and proceed to 'Service types'
 
 
+
+
+*** Keywords ***
 
 
 
