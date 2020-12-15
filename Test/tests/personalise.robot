@@ -1,7 +1,7 @@
 *** Settings ***
-Resource  ../pageObjects/index.robot
-Resource  ../pageObjects/serviceTypes.robot
-Resource  ../pageObjects/personalise.robot
+Resource  ../pageobjects/index.robot
+Resource  ../pageobjects/servicetypes.robot
+Resource  ../pageobjects/personalise.robot
 
 Resource  ../resources/common.robot
 
