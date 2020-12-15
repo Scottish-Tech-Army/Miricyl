@@ -4,7 +4,7 @@ Documentation  Demo robot test scripts: Objects and actions on the serviceTypes 
 Library  SeleniumLibrary
 Resource  ../resources/common.robot
 Resource  ../resources/testdata.robot
-Resource  ../pageObjects/index.robot
+Resource  ../pageobjects/index.robot
 
 
 
