@@ -1,11 +1,11 @@
 *** Settings ***
-Resource  ../pageobjects/index.robot
-Resource  ../pageobjects/servicetypes.robot
-Resource  ../pageobjects/personalise.robot
-Resource  ../pageobjects/postcode.robot
-Resource  ../pageobjects/results.robot
-Resource  ../resources/common.robot
-Resource  ../resources/common.robot
+resource  ../pageobjects/index.robot
+resource  ../pageobjects/servicetypes.robot
+resource  ../pageobjects/personalise.robot
+resource  ../pageobjects/postcode.robot
+resource  ../pageobjects/results.robot
+resource  ../resources/common.robot
+resource  ../resources/common.robot
 
 Test Setup  begin test
 Test Teardown  end test
