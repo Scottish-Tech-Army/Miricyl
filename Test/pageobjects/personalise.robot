@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation  Demo robot test scripts: Objects and actions on the personalise page
 
-Library  SeleniumLibrary
-Resource  ../resources/common.robot
-Resource  ../resources/testData.robot
+library  SeleniumLibrary
+resource  ../resources/common.robot
+resource  ../resources/testData.robot
 
 
 *** Keywords ***
