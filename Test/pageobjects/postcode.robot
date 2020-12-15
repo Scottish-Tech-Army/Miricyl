@@ -3,7 +3,7 @@ Documentation  Demo robot test scripts: Objects and actions on the postacode pag
 
 Library  SeleniumLibrary
 Resource  ../resources/common.robot
-Resource  ../resources/testData.robot
+Resource  ../resources/testdata.robot
 
 ########################################################################################################################
 #############################################Location Page##################################################################
