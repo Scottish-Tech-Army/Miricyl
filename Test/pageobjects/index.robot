@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation  Demo robot test scripts: Objects and actions on the homepage/Needs
 
-library  SeleniumLibrary
-resource  ../resources/common.robot
-resource  ../resources/testData.robot
+Library  SeleniumLibrary
+Resource  ../resources/common.robot
+Resource  ../resources/testdata.robot
 
 
 
