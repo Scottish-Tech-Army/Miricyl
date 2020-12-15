@@ -41,28 +41,25 @@ Service Types are listed on the page
     element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)  Information
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)  Talk to someone
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)  Directory of local services
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)  Free services
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)  Face to face
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)  Financial help
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)  Free services
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)  Support groups
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)  In a group
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)  Self Help
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)  Email or forum
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)  Community care
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)  Telephone or zoom
 
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)
-    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)  Online support
-
-#    element should be visible
-#    element text should be
+    element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)  Chat or text
 
 Select 'No' service type
 
@@ -71,7 +68,7 @@ Select 'all' service types
     [Documentation]  Selects all service types
     Select service type: Information
     Select service type: Talk to someone
-    Select service type: Free services
+    Select service type: Face-2-face
     Select service type: Financial help
     Select service type: Support groups
     Select service type: Self Help
@@ -88,8 +85,8 @@ Select service type: Talk to someone
     click element  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)
     sleep  1s
 
-Select service type: Free services
-    [Documentation]  selects Free services
+Select service type: Face-2-face
+    [Documentation]  selects Face-2-face service
     click element  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)
     sleep  1s
 
@@ -130,3 +127,4 @@ Click on the Next button
     element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.bottom-navigation > button
     element text should be  css:#root > div.question-two-container > div > div:nth-child(2) > div.bottom-navigation > button  Next
     click element  css:#root > div.question-two-container > div > div:nth-child(2) > div.bottom-navigation > button
+    sleep  1s

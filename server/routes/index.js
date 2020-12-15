@@ -19,7 +19,6 @@ router.get("/needs", async (req, res, next) => {
 });
 
 router.get("/types", async (req, res, next) => {
-  console.log('fired2');
   try {
     let results = await db.types();
     res.json(results);
