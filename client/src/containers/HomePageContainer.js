@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
   useHistory,
   withRouter,
 } from "react-router-dom";
@@ -12,8 +13,11 @@ import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results";
+import { SeverityLevel } from '@microsoft/applicationinsights-web';
+import { getAppInsights } from '../telemetry/TelemetryService'
+import TelemetryProvider from '../telemetry/telemetry-provider'
 
-const HomePageContainer = () => {
+const HomePageContainer = (props) => {
   const [allNeeds, setAllNeeds] = useState([]);
   const [selectedNeeds, setSelectedNeeds] = useState([]);
 
@@ -29,6 +33,8 @@ const HomePageContainer = () => {
 
   const history = useHistory();
 
+  let appInsights = getAppInsights()
+
 
   useEffect(() => {
     getNeeds();
@@ -37,6 +43,14 @@ const HomePageContainer = () => {
   const onBackClicked = () => {
     history.goBack();
   };
+
+  const trackEvent = (type, selected) => {
+    appInsights.trackEvent({
+      page: type,
+      selected: selected
+    })
+
+  }
 
   // QUESTION - 1: Needs
 
@@ -53,7 +67,8 @@ const HomePageContainer = () => {
     setSelectedNeeds(selectedOptions);
     getSupportTypes();
     getCharitiesSuitableForNeeds(selectedOptions);
-    history.push("/service-types");
+    // trackEvent("needs", selectedOptions)
+    props.history.push("/service-types");
     // fetchCharitiesSuitableForNeeds();
   };
 
@@ -275,54 +290,59 @@ const HomePageContainer = () => {
   };
 
   return (
-    <>
-      <Route exact path="/">
-        <MultiChoiceQuestion
-          optionsList={allNeeds}
-          onComplete={handleNeedsCompleted}
-          questionTitle="What can we help you with?"
-          selected={selectedNeeds}
-        />
-      </Route>
-      <Route exact path="/service-types">
-        <MultiChoiceQuestion
-          optionsList={allSupportTypes}
-          onComplete={handleSupportTypesCompleted}
-          questionTitle="What types of support are you looking for?"
-          onBackClicked={onBackClicked}
-          backgroundToUse="two"
-          selected={selectedSupportTypes}
-        />
-      </Route>
-      <Route exact path="/personalise">
-        <MultiChoiceQuestion
-          optionsList={allPersonalisations}
-          onComplete={handlePersonalisationsCompleted}
-          questionTitle="Personalise your results"
-          onBackClicked={onBackClicked}
-          backgroundToUse="three"
-          selected={selectedPersonalisations}
-        />
-      </Route>
-      <Route exact path="/postcode">
-        <TextBoxQuestion
-          onComplete={handlePostcodeSearchCompleted}
-          onBackClicked={onBackClicked}
-          backgroundToUse="four"
-          postcode={postcode}
-        />
-      </Route>
-      <Route exact path="/results">
-        <Results
-          onBackClicked={onBackClicked}
-          selectedNeeds={selectedNeeds}
-          selectedSupportTypes={selectedSupportTypes}
-          selectedPersonalisations={selectedPersonalisations}
-          postcode={postcode}
-          charities={charities}
-        />
-      </Route>
-    </>
+    <Router>
+      <TelemetryProvider instrumentationKey="__instrumentationKey__" after={() => { appInsights = getAppInsights() }}>
+        <Switch>
+          <Route exact path="/">
+            <MultiChoiceQuestion
+              optionsList={allNeeds}
+              onComplete={handleNeedsCompleted}
+              questionTitle="What can we help you with?"
+              selected={selectedNeeds}
+            />
+          </Route>
+          <Route exact path="/service-types">
+            <MultiChoiceQuestion
+              optionsList={allSupportTypes}
+              onComplete={handleSupportTypesCompleted}
+              questionTitle="What types of support are you looking for?"
+              onBackClicked={onBackClicked}
+              backgroundToUse="two"
+              selected={selectedSupportTypes}
+            />
+          </Route>
+          <Route exact path="/personalise">
+            <MultiChoiceQuestion
+              optionsList={allPersonalisations}
+              onComplete={handlePersonalisationsCompleted}
+              questionTitle="Personalise your results"
+              onBackClicked={onBackClicked}
+              backgroundToUse="three"
+              selected={selectedPersonalisations}
+            />
+          </Route>
+          <Route exact path="/postcode">
+            <TextBoxQuestion
+              onComplete={handlePostcodeSearchCompleted}
+              onBackClicked={onBackClicked}
+              backgroundToUse="four"
+              postcode={postcode}
+            />
+          </Route>
+          <Route exact path="/results">
+            <Results
+              onBackClicked={onBackClicked}
+              selectedNeeds={selectedNeeds}
+              selectedSupportTypes={selectedSupportTypes}
+              selectedPersonalisations={selectedPersonalisations}
+              postcode={postcode}
+              charities={charities}
+            />
+
+          </Route>
+        </Switch>
+      </TelemetryProvider>
+    </Router>
   );
 };
 
