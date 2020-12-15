@@ -31,7 +31,7 @@ Title is React App
 
 Go to the MIRICYL home page
     [Documentation]  User is taken to the landing page
-    go to  ${DEVSITE}
+    go to  ${DEVURL}
 
 
 Header of the home page is as expected
