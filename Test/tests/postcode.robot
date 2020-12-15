@@ -1,8 +1,8 @@
 *** Settings ***
-Resource  ../pageObjects/index.robot
-Resource  ../pageObjects/serviceTypes.robot
-Resource  ../pageObjects/personalise.robot
-Resource  ../pageObjects/postcode.robot
+Resource  ../pageobjects/index.robot
+Resource  ../pageobjects/servicetypes.robot
+Resource  ../pageobjects/personalise.robot
+Resource  ../pageobjects/postcode.robot
 Resource  ../resources/common.robot
 Resource  ../resources/common.robot
 
