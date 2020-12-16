@@ -201,6 +201,7 @@ scrollbar-width: none;  /* Firefox */
 .results-page-display {
   display: grid;
   grid-template-columns: 50% 50%;
+  align-items: center;
   grid-gap: 50px;
   margin: 35px 100px;
 }
@@ -570,14 +571,27 @@ scrollbar-width: none;  /* Firefox */
   .results-page-display {
     grid-template-columns: 1fr;
     margin: 10px;
-    grid-gap: 15px;
+    grid-gap: 10px;
+    justify-items: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
+  /* .results-page-display {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    grid-gap: 50px;
+    margin: 35px 100px;
+  } */
+
   .results-list-container {
-    margin: 5px;
+    margin: 0px;
     border-radius: 25px;
-    padding: 10px 12px;
+    padding: 10px 10px;
+    width: 85%;
   }
+
   .results-title-container {
     grid-template-columns: 75px auto;
     align-items: center;
