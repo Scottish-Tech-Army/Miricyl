@@ -201,7 +201,6 @@ scrollbar-width: none;  /* Firefox */
 .results-page-display {
   display: grid;
   grid-template-columns: 50% 50%;
-  align-items: center;
   grid-gap: 50px;
   margin: 35px 100px;
 }
@@ -576,14 +575,6 @@ scrollbar-width: none;  /* Firefox */
     margin-left: auto;
     margin-right: auto;
   }
-
-  /* .results-page-display {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-    grid-gap: 50px;
-    margin: 35px 100px;
-  } */
 
   .results-list-container {
     margin: 0px;
