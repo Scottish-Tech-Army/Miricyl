@@ -178,9 +178,9 @@ const Results = ({
             <p className="results-list-title">{charity.OrgName}</p>
           )}
 
-          <p className="results-list-service-description">
+          {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
-          </p>
+          </p> */}
           {charity.googleRating ? (
             <p>
               {" "}
