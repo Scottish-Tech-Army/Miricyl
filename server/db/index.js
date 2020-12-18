@@ -14,7 +14,7 @@ if (development) {
     database: "Miricyl",
     host: "localhost",
     port: "3306",
-    ssl_ca: "/var/www/html/BaltimoreCyberTrustRoot.crt.pem",
+    ssl_ca: "/home/site/wwwroot/BaltimoreCyberTrustRoot.crt.pem",
   });
 } else {
   var pool = mysql.createPool({
