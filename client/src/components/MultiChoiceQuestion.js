@@ -10,6 +10,7 @@ const MultiChoiceQuestion = ({
   selected,
   backgroundToUse = "one",
 }) => {
+
   const [options, setOptions] = useState([]);
 
   const handleOptionClicked = (selectedOption) => {
@@ -45,6 +46,7 @@ const MultiChoiceQuestion = ({
   }, [optionsList]);
 
   const OptionsList = () => {
+    console.log(options);
     return options.map((option) => {
       var isSelected = option.isSelected;
       return (

@@ -17,7 +17,7 @@ import { SeverityLevel } from '@microsoft/applicationinsights-web';
 import { getAppInsights } from '../telemetry/TelemetryService'
 import TelemetryProvider from '../telemetry/telemetry-provider'
 
-const HomePageContainer = (props) => {
+const HomePageContainer = () => {
   const [allNeeds, setAllNeeds] = useState([]);
   const [selectedNeeds, setSelectedNeeds] = useState([]);
 
@@ -68,7 +68,7 @@ const HomePageContainer = (props) => {
     getSupportTypes();
     getCharitiesSuitableForNeeds(selectedOptions);
     // trackEvent("needs", selectedOptions)
-    props.history.push("/service-types");
+    history.push("/service-types");
     // fetchCharitiesSuitableForNeeds();
   };
 
