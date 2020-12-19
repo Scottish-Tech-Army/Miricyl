@@ -54,21 +54,31 @@ const Results = ({
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
-      .sort((a, b) => noOfMatchedSupportTypes(a, b) || alphabetical(a, b));
+      .sort(
+        (a, b) =>
+          noOfMatchedSupportTypesAndPersonalisations(a, b) ||
+          noOfMatchedPersonalisations(a, b) ||
+          noOfMatchedSupportTypes(a, b) ||
+          alphabetical(a, b)
+      );
 
     setprioritisedResults(prioritisedCharities);
   };
+
+  const noOfMatchedSupportTypesAndPersonalisations = (a, b) =>
+    b.servicesWithMatchedPersonalisationsAndSupportTypes.length -
+    a.servicesWithMatchedPersonalisationsAndSupportTypes.length;
 
   const noOfMatchedSupportTypes = (a, b) =>
     b.matchedTypesOfSupportOffered.length -
     a.matchedTypesOfSupportOffered.length;
 
+  const noOfMatchedPersonalisations = (a, b) =>
+    b.matchedPersonalisations.length - a.matchedPersonalisations.length;
+
   const alphabetical = (a, b) => a.OrgName.localeCompare(b.OrgName);
 
   // const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
-
-  // const personalisations = (a, b) =>
-  //   b.personalisationsMet.length - a.personalisationsMet.length;
 
   const constructCharityObjects = () => {
     let locationSortedCharities;
@@ -107,7 +117,7 @@ const Results = ({
       });
 
       // This filtering logic will need to be changed once the use filter interface is implemented
-      // as for now it deleted any unselected filters which the user may wish to enable
+      // as for now it deletes any unselected filters which the user may wish to enable
 
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
@@ -124,7 +134,8 @@ const Results = ({
           servicesFromCharity
             .filter(
               (service) =>
-                selectedNeeds.includes(service.UserOption) &&
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
                 selectedSupportTypes.includes(service.UserOption_Type)
             )
             .map((matchedService) => matchedService.UserOption_Type)
@@ -134,6 +145,33 @@ const Results = ({
       const personalisationsMet = [
         ...new Set(
           servicesFromCharity.map((service) => service.Personalisation)
+        ),
+      ];
+
+      const matchedPersonalisations = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
+                selectedPersonalisations.includes(service.Personalisation)
+            )
+            .map((matchedService) => matchedService.Personalisation)
+        ),
+      ];
+
+      const servicesWithMatchedPersonalisationsAndSupportTypes = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
+                selectedPersonalisations.includes(service.Personalisation) &&
+                selectedSupportTypes.includes(service.UserOption_Type)
+            )
+            .map((matchedService) => matchedService.Personalisation)
         ),
       ];
 
@@ -149,6 +187,8 @@ const Results = ({
         typesOfSupportOffered,
         matchedTypesOfSupportOffered,
         personalisationsMet,
+        matchedPersonalisations,
+        servicesWithMatchedPersonalisationsAndSupportTypes,
       };
     });
 
