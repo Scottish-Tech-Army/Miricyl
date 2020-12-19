@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
+import { withRouter } from "react-router-dom";
 
 const MultiChoiceQuestion = ({
   optionsList,
@@ -46,7 +47,6 @@ const MultiChoiceQuestion = ({
   }, [optionsList]);
 
   const OptionsList = () => {
-    console.log(options);
     return options.map((option) => {
       var isSelected = option.isSelected;
       return (
@@ -115,4 +115,4 @@ const MultiChoiceQuestion = ({
   );
 };
 
-export default MultiChoiceQuestion;
+export default withRouter(MultiChoiceQuestion);

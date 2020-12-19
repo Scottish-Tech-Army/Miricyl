@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
   withRouter,
 } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 // import postcodeServer from "../api/postcodeServer"
-import GoogleServer from "../api/GoogleServer";
 import { IoLogoFacebook } from "react-icons/io";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results";
-import { SeverityLevel } from '@microsoft/applicationinsights-web';
 import { getAppInsights } from '../telemetry/TelemetryService'
 import TelemetryProvider from '../telemetry/telemetry-provider'
 
-const HomePageContainer = () => {
+const HomePageContainer = ({ history }) => {
   const [allNeeds, setAllNeeds] = useState([]);
   const [selectedNeeds, setSelectedNeeds] = useState([]);
 
@@ -31,7 +27,6 @@ const HomePageContainer = () => {
 
   const [postcode, setPostcode] = useState("");
 
-  const history = useHistory();
 
   let appInsights = getAppInsights()
 
@@ -67,7 +62,7 @@ const HomePageContainer = () => {
     setSelectedNeeds(selectedOptions);
     getSupportTypes();
     getCharitiesSuitableForNeeds(selectedOptions);
-    // trackEvent("needs", selectedOptions)
+    trackEvent("needs", selectedOptions)
     history.push("/service-types");
     // fetchCharitiesSuitableForNeeds();
   };
@@ -132,6 +127,7 @@ const HomePageContainer = () => {
 
   const handleSupportTypesCompleted = (selectedOptions) => {
     setSelectedSupportTypes(selectedOptions);
+    trackEvent("Support Types", selectedOptions)
     getPersonalisations();
     history.push("/personalise");
 
@@ -152,6 +148,7 @@ const HomePageContainer = () => {
 
   const handlePersonalisationsCompleted = (selectedOptions) => {
     setSelectedPersonalisations(selectedOptions);
+    trackEvent("Personalisations", selectedOptions)
     history.push("/postcode");
   };
 
@@ -290,7 +287,7 @@ const HomePageContainer = () => {
   };
 
   return (
-    <Router>
+    <>
       <TelemetryProvider instrumentationKey="__instrumentationKey__" after={() => { appInsights = getAppInsights() }}>
         <Switch>
           <Route exact path="/">
@@ -342,7 +339,7 @@ const HomePageContainer = () => {
           </Route>
         </Switch>
       </TelemetryProvider>
-    </Router>
+    </>
   );
 };
 
