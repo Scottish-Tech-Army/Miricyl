@@ -14,7 +14,6 @@ if (development) {
     database: "Miricyl",
     host: "localhost",
     port: "3306",
-    ssl: true
   });
 } else {
   var pool = mysql.createPool({
@@ -24,6 +23,7 @@ if (development) {
     database: "__database__",
     host: "__host__",
     port: "3306",
+    ssl: true
   });
 }
 
