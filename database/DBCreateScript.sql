@@ -342,3 +342,16 @@ WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Create A User for App
+-- -----------------------------------------------------
+CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE NEVER;
+
+-- -----------------------------------------------------
+-- Grant appuser to AppReader role
+-- -----------------------------------------------------
+GRANT SELECT on `Miricyl`.* to appuser;
+
+-- -----------------------------------------------------
+FLUSH PRIVILEGES;
