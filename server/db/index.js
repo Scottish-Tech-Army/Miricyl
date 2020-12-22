@@ -15,6 +15,7 @@ if (development) {
     host: "localhost",
     port: "3306",
     ssl: true,
+    ssl_ca: "/home/site/wwwroot/BaltimoreCyberTrustRoot.crt.pem",
   });
 } else {
   var pool = mysql.createPool({
