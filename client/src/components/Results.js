@@ -68,33 +68,27 @@ const Results = ({
             "limit": 100
           }]
         }
-        postcodeServer.post('/', {
-          "geolocations": [{
-            "latitude": latitude,
-            "longitude": longitude,
-            "radius": 10,
-            "limit": 100
-          }]
-        }).then((returnedPostcodesResults) => {
+        postcodeServer.post('/', payload).then((returnedPostcodesResults) => {
           console.log('returned postcodes', returnedPostcodesResults.data.result[0].result);
           const returnedPostcodes = returnedPostcodesResults.data.result[0].result
-          filteredCharities = filteredCharities.filter((charity) => {
-            return returnedPostcodes.map((postcode) => {
+          let matchingCharities = []
+          filteredCharities.map((charity) => {
+            return returnedPostcodes.filter((postcode) => {
               console.log('pp', postcode.postcode);
-              return charity.PostCode.toUpperCase() === postcode.postcode
+              if (charity.PostCode.toUpperCase() === postcode.postcode) {
+                matchingCharities.push(charity)
+                return null
+              }
             })
           })
-          console.log('Charity', filteredCharities);
-          // filteredCharities = filteredCharities.filter(
-          //   return returnedPostcodes.map (postcode) => {
-          //     return charity.PostCode.toUpperCase() === postcode.data.result
-          //   }
-          //   (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
-          // );
+          console.log('Charity', matchingCharities);
+          filteredCharities = matchingCharities
+
+
         })
       })
     }
-
+    console.log('filtered', filteredCharities);
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
       .sort(
