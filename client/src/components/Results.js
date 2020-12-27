@@ -8,6 +8,7 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
+import postcodeServer from "../api/postcodeServer"
 
 const Results = ({
   onBackClicked,
@@ -46,10 +47,52 @@ const Results = ({
       });
     }
 
-    if (postcode != "") {
+    // sort for outer postcode
+    if (postcode.length < 5) {
       filteredCharities = filteredCharities.filter(
         (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
       );
+    }
+
+    // sort for full postcode with distance
+    if (postcode.length > 5) {
+      postcodeServer.get(`/${postcode}`).then((postcodeDetails) => {
+        console.log('postcode details', postcodeDetails.data.result);
+        const latitude = postcodeDetails.data.result.latitude
+        const longitude = postcodeDetails.data.result.longitude
+        const payload = {
+          "geolocations": [{
+            "latitude": latitude,
+            "longitude": longitude,
+            "radius": 2000,
+            "limit": 100
+          }]
+        }
+        postcodeServer.post('/', {
+          "geolocations": [{
+            "latitude": latitude,
+            "longitude": longitude,
+            "radius": 10,
+            "limit": 100
+          }]
+        }).then((returnedPostcodesResults) => {
+          console.log('returned postcodes', returnedPostcodesResults.data.result[0].result);
+          const returnedPostcodes = returnedPostcodesResults.data.result[0].result
+          filteredCharities = filteredCharities.filter((charity) => {
+            return returnedPostcodes.map((postcode) => {
+              console.log('pp', postcode.postcode);
+              return charity.PostCode.toUpperCase() === postcode.postcode
+            })
+          })
+          console.log('Charity', filteredCharities);
+          // filteredCharities = filteredCharities.filter(
+          //   return returnedPostcodes.map (postcode) => {
+          //     return charity.PostCode.toUpperCase() === postcode.data.result
+          //   }
+          //   (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
+          // );
+        })
+      })
     }
 
     const prioritisedCharities = filteredCharities
@@ -88,16 +131,16 @@ const Results = ({
         return a.NationalService === "YES"
           ? -1
           : b.NationalService === "YES"
-          ? 1
-          : 0;
+            ? 1
+            : 0;
       });
     } else {
       locationSortedCharities = charities.sort((a, b) => {
         return a.OuterCode.toUpperCase() === postcode.toUpperCase()
           ? -1
           : b.OuterCode.toUpperCase() === postcode.toUpperCase()
-          ? 1
-          : 0;
+            ? 1
+            : 0;
       });
     }
 
@@ -203,8 +246,8 @@ const Results = ({
             <img className="results-list-logo" src={charity.Logo} />
           </a>
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
 
         <div className="results-list-title-service">
           {charity.ServiceURL ? (
@@ -215,8 +258,8 @@ const Results = ({
               </a>
             </p>
           ) : (
-            <p className="results-list-title">{charity.OrgName}</p>
-          )}
+              <p className="results-list-title">{charity.OrgName}</p>
+            )}
 
           {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
@@ -232,12 +275,12 @@ const Results = ({
               {charity.googleRating}{" "}
             </p>
           ) : (
-            <p>
-              {" "}
-              <ReactStars count={5} value={0} isHalf={true} />
+              <p>
+                {" "}
+                <ReactStars count={5} value={0} isHalf={true} />
               No ratings found{" "}
-            </p>
-          )}
+              </p>
+            )}
         </div>
       </div>
 
