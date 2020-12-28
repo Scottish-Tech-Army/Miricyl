@@ -8,12 +8,9 @@ import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
 
 const HomePageContainer = ({ history }) => {
-  const [allNeeds, setAllNeeds] = useState([]);
-  const [selectedNeeds, setSelectedNeeds] = useState([]);
   const [needs, setNeeds] = useState([]);
 
-  const [allSupportTypes, setAllSupportTypes] = useState([]);
-  const [selectedSupportTypes, setSelectedSupportTypes] = useState([]);
+  const [supportTypes, setSupportTypes] = useState([]);
 
   const [allPersonalisations, setAllPersonalisations] = useState([]);
   const [selectedPersonalisations, setSelectedPersonalisations] = useState([]);
@@ -68,9 +65,11 @@ const HomePageContainer = ({ history }) => {
         ...new Set(
           supportTypesResponse.map((supportType) => supportType.UserOption_Type)
         ),
-      ];
+      ].map((supportType) => {
+        return { value: supportType, isSelected: false };
+      });
 
-      setAllSupportTypes(uniqueSupportTypes);
+      setSupportTypes(uniqueSupportTypes);
     });
 
     nodeServer.get("/personalisations").then((res) => {
@@ -100,9 +99,29 @@ const HomePageContainer = ({ history }) => {
 
   //QUESTION 2 - Support Types:
 
-  const handleSupportTypesCompleted = (selectedOptions) => {
-    setSelectedSupportTypes(selectedOptions);
-    trackEvent("Support Types", selectedOptions);
+  const onToggleSupportTypeSelected = (selectedSupportType) => {
+    const indexOfSupportType = supportTypes.findIndex(
+      (supportType) => supportType === selectedSupportType
+    );
+    const startOfArray = supportTypes.slice(0, indexOfSupportType);
+    const endOfArray = supportTypes.slice(
+      indexOfSupportType + 1,
+      supportTypes.length
+    );
+    setSupportTypes([
+      ...startOfArray,
+      { ...selectedSupportType, isSelected: !selectedSupportType.isSelected },
+      ...endOfArray,
+    ]);
+  };
+
+  const handleSupportTypesCompleted = () => {
+    trackEvent(
+      "Support Types",
+      supportTypes
+        .filter((supportType) => supportType.isSelected)
+        .map((supportType) => supportType.value)
+    );
     history.push("/personalise");
   };
 
@@ -142,12 +161,12 @@ const HomePageContainer = ({ history }) => {
           </Route>
           <Route exact path="/service-types">
             <MultiChoiceQuestion
-              optionsList={allSupportTypes}
+              optionsList={supportTypes}
+              onToggleItemSelected={onToggleSupportTypeSelected}
               onComplete={handleSupportTypesCompleted}
               questionTitle="What types of support are you looking for?"
               onBackClicked={onBackClicked}
               backgroundToUse="two"
-              selected={selectedSupportTypes}
             />
           </Route>
           <Route exact path="/personalise">
@@ -171,8 +190,8 @@ const HomePageContainer = ({ history }) => {
           <Route exact path="/results">
             <Results
               onBackClicked={onBackClicked}
-              selectedNeeds={selectedNeeds}
-              selectedSupportTypes={selectedSupportTypes}
+              // selectedNeeds={selectedNeeds}
+              // selectedSupportTypes={selectedSupportTypes}
               selectedPersonalisations={selectedPersonalisations}
               postcode={postcode}
               charities={charities}
