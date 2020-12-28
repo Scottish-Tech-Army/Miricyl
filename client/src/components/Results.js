@@ -20,6 +20,7 @@ const Results = ({
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
+  const [localPostcodes, setLocalPostcodes] = useState([])
 
   useEffect(() => {
     constructCharityObjects();
@@ -41,22 +42,31 @@ const Results = ({
     //   );
     // }
 
-    if (selectedNeeds.length > 0) {
-      filteredCharities = filteredCharities.filter((charity) => {
-        return selectedNeeds.every((need) => charity.needsMet.includes(need));
-      });
+
+
+    // gets a list of all postcodes withing range of latitude and longitude 
+    const getListOfPostcodes = async (payload) => {
+      let matchingCharities = []
+      await postcodeServer.post('/', payload).then((returnedPostcodesResults) => {
+        let returnedPostcodes = returnedPostcodesResults.data.result[0].result
+        filteredCharities.map((charity) => {
+          return returnedPostcodes.filter((postcode) => {
+            if (charity.PostCode.toUpperCase() === postcode.postcode) {
+              matchingCharities.push(charity)
+              return null
+            }
+          })
+        })
+        console.log('Charity', matchingCharities);
+        return matchingCharities
+
+
+      })
     }
 
-    // sort for outer postcode
-    if (postcode.length < 5) {
-      filteredCharities = filteredCharities.filter(
-        (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
-      );
-    }
-
-    // sort for full postcode with distance
-    if (postcode.length > 5) {
-      postcodeServer.get(`/${postcode}`).then((postcodeDetails) => {
+    // gets latitude and longitude from postcode
+    const getPostcodeDetails = async () => {
+      await postcodeServer.get(`/${postcode}`).then((postcodeDetails) => {
         console.log('postcode details', postcodeDetails.data.result);
         const latitude = postcodeDetails.data.result.latitude
         const longitude = postcodeDetails.data.result.longitude
@@ -68,26 +78,27 @@ const Results = ({
             "limit": 100
           }]
         }
-        postcodeServer.post('/', payload).then((returnedPostcodesResults) => {
-          console.log('returned postcodes', returnedPostcodesResults.data.result[0].result);
-          const returnedPostcodes = returnedPostcodesResults.data.result[0].result
-          let matchingCharities = []
-          filteredCharities.map((charity) => {
-            return returnedPostcodes.filter((postcode) => {
-              console.log('pp', postcode.postcode);
-              if (charity.PostCode.toUpperCase() === postcode.postcode) {
-                matchingCharities.push(charity)
-                return null
-              }
-            })
-          })
-          console.log('Charity', matchingCharities);
-          filteredCharities = matchingCharities
-
-
-        })
+        const matchingCharities = getListOfPostcodes(payload)
+        return matchingCharities
       })
     }
+
+    if (selectedNeeds.length > 0) {
+      filteredCharities = filteredCharities.filter((charity) => {
+        return selectedNeeds.every((need) => charity.needsMet.includes(need));
+      });
+    } else if (postcode.length < 5) {
+      // sort for outer postcode
+      filteredCharities = filteredCharities.filter(
+        (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
+      );
+    } else {
+      // sort for full postcode with distance
+      let matchingCharities = getPostcodeDetails()
+      filteredCharities = matchingCharities
+      console.log('matiching', matchingCharities);
+    }
+
     console.log('filtered', filteredCharities);
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
