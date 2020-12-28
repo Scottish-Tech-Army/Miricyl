@@ -4,12 +4,13 @@ import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results";
-import { getAppInsights } from '../telemetry/TelemetryService'
-import TelemetryProvider from '../telemetry/telemetry-provider'
+import { getAppInsights } from "../telemetry/TelemetryService";
+import TelemetryProvider from "../telemetry/telemetry-provider";
 
 const HomePageContainer = ({ history }) => {
   const [allNeeds, setAllNeeds] = useState([]);
   const [selectedNeeds, setSelectedNeeds] = useState([]);
+  const [needs, setNeeds] = useState([]);
 
   const [allSupportTypes, setAllSupportTypes] = useState([]);
   const [selectedSupportTypes, setSelectedSupportTypes] = useState([]);
@@ -21,12 +22,7 @@ const HomePageContainer = ({ history }) => {
 
   const [postcode, setPostcode] = useState("");
 
-
-  let appInsights = getAppInsights()
-
-  useEffect(() => {
-    getNeeds();
-  }, []);
+  let appInsights = getAppInsights();
 
   const onBackClicked = () => {
     history.goBack();
@@ -35,68 +31,36 @@ const HomePageContainer = ({ history }) => {
   const trackEvent = (type, selected) => {
     appInsights.trackEvent({
       page: type,
-      selected: selected
-    })
-
-  }
-
-  // QUESTION - 1: Needs
-
-  const getNeeds = () => {
-    nodeServer.get("/needs").then((res) => {
-      const needsResponse = res.data;
-      needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
-      const needs = needsResponse.map((need) => need.Need);
-      setAllNeeds(needs);
+      selected: selected,
     });
   };
 
-  const handleNeedsCompleted = (selectedOptions) => {
-    setSelectedNeeds(selectedOptions);
-    getSupportTypes();
-    getCharitiesSuitableForNeeds(selectedOptions);
-    trackEvent("needs", selectedOptions)
-    history.push("/service-types");
-    // fetchCharitiesSuitableForNeeds();
-  };
+  useEffect(() => {
+    getAllOptionsFromServer();
+  }, []);
 
-  const getCharitiesSuitableForNeeds = (selectedOptions) => {
-    // this method could do with a good refactor
+  // QUESTION - 1: Needs
 
-    if (selectedOptions.length === 0) {
-      nodeServer
-        .get("/charities")
-        .then((res) => {
-          const charities = res.data;
-          setCharities(charities);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      let queryParams = "";
-      selectedOptions.map((need) => {
-        let queryParam = `${need}£`;
-        queryParams = queryParams.concat(queryParam);
+  const getAllOptionsFromServer = () => {
+    nodeServer.get("/needs").then((res) => {
+      const needsResponse = res.data;
+      needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
+      const needs = needsResponse.map((need) => {
+        return { value: need.Need, isSelected: false };
+      });
+      setNeeds(needs);
+    });
+
+    nodeServer
+      .get("/charities")
+      .then((res) => {
+        const charities = res.data;
+        setCharities(charities);
+      })
+      .catch((error) => {
+        console.log(error);
       });
 
-      nodeServer
-        .get(`/charities?tags=${queryParams}`)
-        .then((res) => {
-          const charities = res.data;
-          // sorts charities alphabetically
-          charities.sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-          setCharities(charities);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  // QUESTION 2 - Support Types:
-
-  const getSupportTypes = () => {
     nodeServer.get("/types").then((res) => {
       const supportTypesResponse = res.data;
 
@@ -108,18 +72,7 @@ const HomePageContainer = ({ history }) => {
 
       setAllSupportTypes(uniqueSupportTypes);
     });
-  };
 
-  const handleSupportTypesCompleted = (selectedOptions) => {
-    setSelectedSupportTypes(selectedOptions);
-    trackEvent("Support Types", selectedOptions)
-    getPersonalisations();
-    history.push("/personalise");
-  };
-
-  // QUESTION 3 - Personalisations:
-
-  const getPersonalisations = () => {
     nodeServer.get("/personalisations").then((res) => {
       const personalisationsResponse = res.data
         .map((personalisation) => personalisation.UserOption)
@@ -128,9 +81,35 @@ const HomePageContainer = ({ history }) => {
     });
   };
 
+  const onToggleNeedSelected = (selectedNeed) => {
+    setNeeds(
+      [
+        ...needs.filter((need) => need != selectedNeed),
+        { ...selectedNeed, isSelected: !selectedNeed.isSelected },
+      ].sort((a, b) => a.value.localeCompare(b.value))
+    );
+  };
+
+  const handleNeedsCompleted = () => {
+    trackEvent(
+      "needs",
+      needs.filter((need) => need.isSelected).map((need) => need.value)
+    );
+    history.push("/service-types");
+  };
+
+  //QUESTION 2 - Support Types:
+
+  const handleSupportTypesCompleted = (selectedOptions) => {
+    setSelectedSupportTypes(selectedOptions);
+    trackEvent("Support Types", selectedOptions);
+    history.push("/personalise");
+  };
+
+  // QUESTION 3 - Personalisations:
   const handlePersonalisationsCompleted = (selectedOptions) => {
     setSelectedPersonalisations(selectedOptions);
-    trackEvent("Personalisations", selectedOptions)
+    trackEvent("Personalisations", selectedOptions);
     history.push("/postcode");
   };
 
@@ -146,14 +125,19 @@ const HomePageContainer = ({ history }) => {
 
   return (
     <>
-      <TelemetryProvider instrumentationKey="__instrumentationKey__" after={() => { appInsights = getAppInsights() }}>
+      <TelemetryProvider
+        instrumentationKey="__instrumentationKey__"
+        after={() => {
+          appInsights = getAppInsights();
+        }}
+      >
         <Switch>
           <Route exact path="/">
             <MultiChoiceQuestion
-              optionsList={allNeeds}
+              optionsList={needs}
+              onToggleItemSelected={onToggleNeedSelected}
               onComplete={handleNeedsCompleted}
               questionTitle="What can we help you with?"
-              selected={selectedNeeds}
             />
           </Route>
           <Route exact path="/service-types">
@@ -193,7 +177,6 @@ const HomePageContainer = ({ history }) => {
               postcode={postcode}
               charities={charities}
             />
-
           </Route>
         </Switch>
       </TelemetryProvider>

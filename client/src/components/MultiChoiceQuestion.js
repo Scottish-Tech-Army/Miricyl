@@ -5,55 +5,19 @@ import { withRouter } from "react-router-dom";
 
 const MultiChoiceQuestion = ({
   optionsList,
+  onToggleItemSelected,
   onComplete,
   questionTitle,
   onBackClicked,
-  selected,
   backgroundToUse = "one",
 }) => {
-
-  const [options, setOptions] = useState([]);
-
-  const handleOptionClicked = (selectedOption) => {
-    const indexOfSelectedOption = options.findIndex(
-      (option) => option == selectedOption
-    );
-
-    const toggledOption = {
-      ...selectedOption,
-      isSelected: !selectedOption.isSelected,
-    };
-
-    const startOfArray = options.slice(0, indexOfSelectedOption);
-    const endOfArray = options.slice(indexOfSelectedOption + 1);
-
-    setOptions([...startOfArray, toggledOption, ...endOfArray]);
-  };
-
-  useEffect(() => {
-    const optionsListForDisplay = optionsList.map((option) => {
-
-      // check if selected
-      var isSelected = false;
-      selected.map((value) => {
-
-        if (value === option) {
-          isSelected = true;
-        }
-      });
-      return { value: option, isSelected: isSelected };
-    });
-    setOptions(optionsListForDisplay);
-  }, [optionsList]);
-
   const OptionsList = () => {
-    return options.map((option) => {
-      var isSelected = option.isSelected;
+    return optionsList.map((option) => {
       return (
         <button
-          onClick={() => handleOptionClicked(option)}
+          onClick={() => onToggleItemSelected(option)}
           className={
-            isSelected ? "question-button-selected" : "question-button"
+            option.isSelected ? "question-button-selected" : "question-button"
           }
           value={option.value}
           key={option.value}
@@ -97,16 +61,7 @@ const MultiChoiceQuestion = ({
                 onClick={onBackClicked}
               />
             )}
-            <button
-              className="next-button"
-              onClick={() =>
-                onComplete(
-                  options
-                    .filter((option) => option.isSelected)
-                    .map((option) => option.value)
-                )
-              }
-            >
+            <button className="next-button" onClick={onComplete}>
               Next
             </button>
           </div>
