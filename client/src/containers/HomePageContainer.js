@@ -12,8 +12,7 @@ const HomePageContainer = ({ history }) => {
 
   const [supportTypes, setSupportTypes] = useState([]);
 
-  const [allPersonalisations, setAllPersonalisations] = useState([]);
-  const [selectedPersonalisations, setSelectedPersonalisations] = useState([]);
+  const [personalisations, setPersonalisations] = useState([]);
 
   const [charities, setCharities] = useState([]);
 
@@ -76,7 +75,12 @@ const HomePageContainer = ({ history }) => {
       const personalisationsResponse = res.data
         .map((personalisation) => personalisation.UserOption)
         .filter((personalisation) => personalisation != "");
-      setAllPersonalisations(personalisationsResponse);
+      const personalisations = personalisationsResponse.map(
+        (personalisation) => {
+          return { value: personalisation, isSelected: false };
+        }
+      );
+      setPersonalisations(personalisations);
     });
   };
 
@@ -126,9 +130,33 @@ const HomePageContainer = ({ history }) => {
   };
 
   // QUESTION 3 - Personalisations:
-  const handlePersonalisationsCompleted = (selectedOptions) => {
-    setSelectedPersonalisations(selectedOptions);
-    trackEvent("Personalisations", selectedOptions);
+
+  const onTogglePersonalisationSelected = (selectedPersonalisation) => {
+    const indexOfPersonalisation = personalisations.findIndex(
+      (personalisation) => personalisation === selectedPersonalisation
+    );
+    const startOfArray = personalisations.slice(0, indexOfPersonalisation);
+    const endOfArray = personalisations.slice(
+      indexOfPersonalisation + 1,
+      personalisations.length
+    );
+    setPersonalisations([
+      ...startOfArray,
+      {
+        ...selectedPersonalisation,
+        isSelected: !selectedPersonalisation.isSelected,
+      },
+      ...endOfArray,
+    ]);
+  };
+
+  const handlePersonalisationsCompleted = () => {
+    trackEvent(
+      "Personalisations",
+      personalisations
+        .filter((personalisation) => personalisation.isSelected)
+        .map((personalisation) => personalisation.value)
+    );
     history.push("/postcode");
   };
 
@@ -171,12 +199,12 @@ const HomePageContainer = ({ history }) => {
           </Route>
           <Route exact path="/personalise">
             <MultiChoiceQuestion
-              optionsList={allPersonalisations}
+              optionsList={personalisations}
+              onToggleItemSelected={onTogglePersonalisationSelected}
               onComplete={handlePersonalisationsCompleted}
               questionTitle="Personalise your results"
               onBackClicked={onBackClicked}
               backgroundToUse="three"
-              selected={selectedPersonalisations}
             />
           </Route>
           <Route exact path="/postcode">
@@ -192,7 +220,7 @@ const HomePageContainer = ({ history }) => {
               onBackClicked={onBackClicked}
               // selectedNeeds={selectedNeeds}
               // selectedSupportTypes={selectedSupportTypes}
-              selectedPersonalisations={selectedPersonalisations}
+              // selectedPersonalisations={selectedPersonalisations}
               postcode={postcode}
               charities={charities}
             />
