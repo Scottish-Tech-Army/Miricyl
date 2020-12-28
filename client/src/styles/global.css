@@ -426,7 +426,13 @@ scrollbar-width: none;  /* Firefox */
   color: #bcbcbc;
 }
 
-.filter-needs-container {
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item-container {
   display: flex;
 }
  

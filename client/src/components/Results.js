@@ -218,7 +218,11 @@ const Results = ({
   };
 
   const PrioritisedListOfCharities = prioritisedResults.map((charity) => (
-    <div className="results-list-container" key={charity.PlaceID}>
+    <div
+      className="results-list-container"
+      key={charity.PlaceID}
+      test-id={`card-${charity.OrgID}`}
+    >
       <div className="results-title-container">
         {charity.Logo ? (
           <a href={charity.ServiceURL} target="_blank">
@@ -360,12 +364,16 @@ const Results = ({
       <div className="results-wrapper">
         <Filter
           needs={needs}
+          supportTypes={supportTypes}
+          personalisations={personalisations}
           onToggleNeedSelected={onToggleNeedSelected}
           onToggleSupportTypeSelected={onToggleSupportTypeSelected}
           onTogglePersonalisationSelected={onTogglePersonalisationSelected}
         />
         <div className="title-description-container">
-          <h1 className="question-title">Search results</h1>
+          <h1 className="question-title" test-id="results-title">
+            Search results
+          </h1>
         </div>
         <div className="results-page-display">{PrioritisedListOfCharities}</div>
         <div className="bottom-navigation">
