@@ -221,6 +221,9 @@ const HomePageContainer = ({ history }) => {
               personalisations={personalisations}
               postcode={postcode}
               charities={charities}
+              onToggleNeedSelected={onToggleNeedSelected}
+              onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+              onTogglePersonalisationSelected={onTogglePersonalisationSelected}
             />
           </Route>
         </Switch>

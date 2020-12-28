@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/global.css";
+import Filter from "./Filter";
 import { IconContext } from "react-icons";
 import { BiPhone } from "react-icons/bi";
 import { BiEnvelope } from "react-icons/bi";
@@ -16,6 +17,9 @@ const Results = ({
   personalisations,
   postcode = "",
   charities,
+  onToggleNeedSelected,
+  onToggleSupportTypeSelected,
+  onTogglePersonalisationSelected,
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
@@ -33,12 +37,18 @@ const Results = ({
     .map((selectedPersonalisation) => selectedPersonalisation.value);
 
   useEffect(() => {
+    clearStates();
     constructCharityObjects();
-  }, []);
+  }, [needs, supportTypes, personalisations]);
 
   useEffect(() => {
     sortCharities();
   }, [allCharities]);
+
+  const clearStates = () => {
+    setAllCharities([]);
+    setprioritisedResults([]);
+  };
 
   const sortCharities = () => {
     let filteredCharities = allCharities;
@@ -348,6 +358,12 @@ const Results = ({
   return (
     <div className="results-page-container">
       <div className="results-wrapper">
+        <Filter
+          needs={needs}
+          onToggleNeedSelected={onToggleNeedSelected}
+          onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+          onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+        />
         <div className="title-description-container">
           <h1 className="question-title">Search results</h1>
         </div>
