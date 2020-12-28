@@ -1,63 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../styles/global.css";
-import { IoIosArrowDropleft } from "react-icons/io";
 import { withRouter } from "react-router-dom";
+import Header from "./Header";
+import SubHeader from "./SubHeader";
+import BackButton from "./BackButton";
 
 const MultiChoiceQuestion = ({
   optionsList,
+  onToggleItemSelected,
   onComplete,
   questionTitle,
   onBackClicked,
-  selected,
   backgroundToUse = "one",
 }) => {
-
-  const [options, setOptions] = useState([]);
-
-  const handleOptionClicked = (selectedOption) => {
-    const indexOfSelectedOption = options.findIndex(
-      (option) => option == selectedOption
-    );
-
-    const toggledOption = {
-      ...selectedOption,
-      isSelected: !selectedOption.isSelected,
-    };
-
-    const startOfArray = options.slice(0, indexOfSelectedOption);
-    const endOfArray = options.slice(indexOfSelectedOption + 1);
-
-    setOptions([...startOfArray, toggledOption, ...endOfArray]);
-  };
-
-  useEffect(() => {
-    const optionsListForDisplay = optionsList.map((option) => {
-
-      // check if selected
-      var isSelected = false;
-      selected.map((value) => {
-
-        if (value === option) {
-          isSelected = true;
-        }
-      });
-      return { value: option, isSelected: isSelected };
-    });
-    setOptions(optionsListForDisplay);
-  }, [optionsList]);
-
   const OptionsList = () => {
-    return options.map((option) => {
-      var isSelected = option.isSelected;
+    return optionsList.map((option) => {
       return (
         <button
-          onClick={() => handleOptionClicked(option)}
+          onClick={() => onToggleItemSelected(option)}
           className={
-            isSelected ? "question-button-selected" : "question-button"
+            option.isSelected ? "question-button-selected" : "question-button"
           }
           value={option.value}
           key={option.value}
           id={option.value}
+          test-id={option.value.replace(/\s/g, "-")}
         >
           {option.value}
         </button>
@@ -69,43 +36,29 @@ const MultiChoiceQuestion = ({
     <div className={`question-${backgroundToUse}-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
-          <h1 className="question-title">
-            Search mental health resources & services that can help you feel
-            better
-          </h1>
-          <h2 className="question-page-detail-text">
-            Boost is here for you if you need trusted guidance on accessing
-            resources and services that can positively impact your mental
-            health. We will guide you in finding the treatment and help you
-            need.
-          </h2>
+          <Header />
+          <SubHeader />
         </div>
 
         <div>
           <div className="select-container">
-            <p className="question-text">{questionTitle}</p>
-            <p className="question-subtext">select all that apply</p>
+            <p className="question-text" test-id="question-title">
+              {questionTitle}
+            </p>
+            <p className="question-subtext" test-id="question-subtitle">
+              select all that apply
+            </p>
 
             <OptionsList />
 
             <br />
           </div>
           <div className="bottom-navigation">
-            {onBackClicked && (
-              <IoIosArrowDropleft
-                className="back-button"
-                onClick={onBackClicked}
-              />
-            )}
+            {onBackClicked && <BackButton onBackClicked={onBackClicked} />}
             <button
               className="next-button"
-              onClick={() =>
-                onComplete(
-                  options
-                    .filter((option) => option.isSelected)
-                    .map((option) => option.value)
-                )
-              }
+              onClick={onComplete}
+              test-id="next-button"
             >
               Next
             </button>
