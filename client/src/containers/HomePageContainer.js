@@ -9,9 +9,7 @@ import TelemetryProvider from "../telemetry/telemetry-provider";
 
 const HomePageContainer = ({ history }) => {
   const [needs, setNeeds] = useState([]);
-
   const [supportTypes, setSupportTypes] = useState([]);
-
   const [personalisations, setPersonalisations] = useState([]);
 
   const [charities, setCharities] = useState([]);
@@ -218,9 +216,9 @@ const HomePageContainer = ({ history }) => {
           <Route exact path="/results">
             <Results
               onBackClicked={onBackClicked}
-              // selectedNeeds={selectedNeeds}
-              // selectedSupportTypes={selectedSupportTypes}
-              // selectedPersonalisations={selectedPersonalisations}
+              needs={needs}
+              supportTypes={supportTypes}
+              personalisations={personalisations}
               postcode={postcode}
               charities={charities}
             />

@@ -11,14 +11,26 @@ import ReactStars from "react-rating-stars-component";
 
 const Results = ({
   onBackClicked,
-  selectedNeeds,
-  selectedSupportTypes,
-  selectedPersonalisations,
+  needs,
+  supportTypes,
+  personalisations,
   postcode = "",
   charities,
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
+
+  const selectedNeeds = needs
+    .filter((need) => need.isSelected)
+    .map((selectedNeed) => selectedNeed.value);
+
+  const selectedSupportTypes = supportTypes
+    .filter((supportType) => supportType.isSelected)
+    .map((selectedSupportType) => selectedSupportType.value);
+
+  const selectedPersonalisations = personalisations
+    .filter((personalisation) => personalisation.isSelected)
+    .map((selectedPersonalisation) => selectedPersonalisation.value);
 
   useEffect(() => {
     constructCharityObjects();
