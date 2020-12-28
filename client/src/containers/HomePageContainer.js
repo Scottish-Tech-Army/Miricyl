@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { useFlags } from "../hooks/useFlags";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
@@ -18,6 +19,7 @@ const HomePageContainer = ({ history }) => {
 
   let appInsights = getAppInsights();
 
+  const { filter } = useFlags();
   const onBackClicked = () => {
     history.goBack();
   };

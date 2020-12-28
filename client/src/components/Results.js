@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useFlags } from "../hooks/useFlags";
 import "../styles/global.css";
 import Filter from "./Filter";
 import { IconContext } from "react-icons";
@@ -23,6 +24,8 @@ const Results = ({
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
+
+  const { filter } = useFlags();
 
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
@@ -362,14 +365,16 @@ const Results = ({
   return (
     <div className="results-page-container">
       <div className="results-wrapper">
-        <Filter
-          needs={needs}
-          supportTypes={supportTypes}
-          personalisations={personalisations}
-          onToggleNeedSelected={onToggleNeedSelected}
-          onToggleSupportTypeSelected={onToggleSupportTypeSelected}
-          onTogglePersonalisationSelected={onTogglePersonalisationSelected}
-        />
+        {filter === 1 && (
+          <Filter
+            needs={needs}
+            supportTypes={supportTypes}
+            personalisations={personalisations}
+            onToggleNeedSelected={onToggleNeedSelected}
+            onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+            onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+          />
+        )}
         <div className="title-description-container">
           <h1 className="question-title" test-id="results-title">
             Search results
