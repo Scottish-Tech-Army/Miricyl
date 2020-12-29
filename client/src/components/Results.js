@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useFlags } from "../hooks/useFlags";
 import "../styles/global.css";
+import Filter from "./Filter";
 import { IconContext } from "react-icons";
 import { BiPhone } from "react-icons/bi";
 import { BiEnvelope } from "react-icons/bi";
@@ -12,23 +14,46 @@ import postcodeServer from "../api/postcodeServer"
 
 const Results = ({
   onBackClicked,
-  selectedNeeds,
-  selectedSupportTypes,
-  selectedPersonalisations,
+  needs,
+  supportTypes,
+  personalisations,
   postcode = "",
   charities,
+  onToggleNeedSelected,
+  onToggleSupportTypeSelected,
+  onTogglePersonalisationSelected,
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
   const [postcodeCharities, setPostcodeCharities] = useState([])
 
+  const { filter } = useFlags();
+
+  const selectedNeeds = needs
+    .filter((need) => need.isSelected)
+    .map((selectedNeed) => selectedNeed.value);
+
+  const selectedSupportTypes = supportTypes
+    .filter((supportType) => supportType.isSelected)
+    .map((selectedSupportType) => selectedSupportType.value);
+
+  const selectedPersonalisations = personalisations
+    .filter((personalisation) => personalisation.isSelected)
+    .map((selectedPersonalisation) => selectedPersonalisation.value);
+
   useEffect(() => {
+    clearStates();
     constructCharityObjects();
-  }, []);
+  }, [needs, supportTypes, personalisations]);
 
   useEffect(() => {
     sortCharities();
   }, [allCharities]);
+
+  const clearStates = () => {
+    setAllCharities([]);
+    setprioritisedResults([]);
+  };
 
   const sortCharities = async () => {
     let filteredCharities = allCharities;
@@ -98,7 +123,8 @@ const Results = ({
 
 
       }).then((charities) => {
-        setPostcodeCharities(charities)
+        //setPostcodeCharities(charities)
+        console.log('charities', charities);
         filteredCharities = charities
       })
     }
@@ -247,7 +273,11 @@ const Results = ({
   };
 
   const PrioritisedListOfCharities = prioritisedResults.map((charity) => (
-    <div className="results-list-container" key={charity.PlaceID}>
+    <div
+      className="results-list-container"
+      key={charity.PlaceID}
+      test-id={`card-${charity.OrgID}`}
+    >
       <div className="results-title-container">
         {charity.Logo ? (
           <a href={charity.ServiceURL} target="_blank">
@@ -387,8 +417,20 @@ const Results = ({
   return (
     <div className="results-page-container">
       <div className="results-wrapper">
+        {filter === 1 && (
+          <Filter
+            needs={needs}
+            supportTypes={supportTypes}
+            personalisations={personalisations}
+            onToggleNeedSelected={onToggleNeedSelected}
+            onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+            onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+          />
+        )}
         <div className="title-description-container">
-          <h1 className="question-title">Search results</h1>
+          <h1 className="question-title" test-id="results-title">
+            Search results
+          </h1>
         </div>
         <div className="results-page-display">{PrioritisedListOfCharities}</div>
         <div className="bottom-navigation">

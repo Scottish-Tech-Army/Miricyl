@@ -427,6 +427,14 @@ scrollbar-width: none;  /* Firefox */
 }
 
 
+.filter-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item-container {
+  display: flex;
+}
  
 
 /* MOBILE RESPONSIVE RULES */
