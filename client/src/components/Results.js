@@ -29,6 +29,21 @@ const Results = ({
 
   const { filter } = useFlags();
 
+  const getListOfPostcodes = async (payload) => {
+    const res = await postcodeServer.post('/', payload)
+    return res
+  }
+
+  // gets latitude and longitude from postcode
+  const getPostcodeDetails = async () => {
+    try {
+      const res = await postcodeServer.get(`/${postcode}`)
+      return res
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
     .map((selectedNeed) => selectedNeed.value);
@@ -58,6 +73,9 @@ const Results = ({
   const sortCharities = async () => {
     let filteredCharities = allCharities;
 
+    console.log('filter2', filteredCharities);
+
+
     // if (selectedSupportTypes.length > 0) {
     //   filteredCharities = filteredCharities.filter(
     //     (charity) =>
@@ -75,7 +93,7 @@ const Results = ({
       return res
     }
 
-    // gets latitude and longitude from postcode
+    // // gets latitude and longitude from postcode
     const getPostcodeDetails = async () => {
       try {
         const res = await postcodeServer.get(`/${postcode}`)
@@ -89,12 +107,17 @@ const Results = ({
       filteredCharities = filteredCharities.filter((charity) => {
         return selectedNeeds.every((need) => charity.needsMet.includes(need));
       });
-    } else if (postcode.length < 5) {
+    }
+
+    if (postcode.length < 5 && postcode !== "") {
+      console.log('pc', postcode);
+      console.log('fired');
       // sort for outer postcode
       filteredCharities = filteredCharities.filter(
         (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
       );
-    } else {
+    }
+    if (postcode.length > 4) {
       // sort for full postcode with distance
       let postcodeDetails = await getPostcodeDetails().then((postcodeDetails) => {
         const latitude = postcodeDetails.data.result.latitude
@@ -127,6 +150,7 @@ const Results = ({
         filteredCharities = charities
       })
     }
+    console.log('filter', filteredCharities);
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
