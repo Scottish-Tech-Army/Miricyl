@@ -52,8 +52,6 @@ Users are able to select all personalisation
     Index.Go to the MIRICYL home page
     Index.Click on the next button
     ServiceTypes.Click on the Next button
-    Personalise.Click on the back button
-    ServiceTypes.Click on the next button
     Personalise.Select all personalisation options
     Personalise.Click on the next button
 
