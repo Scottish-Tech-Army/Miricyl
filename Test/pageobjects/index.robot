@@ -23,21 +23,18 @@ Title is React App
 
 
 
-
 ########################################################################################################################
-#############################################Service Types Page##################################################################
+#############################################Index/Needs Page##################################################################
 ########################################################################################################################
 
 
 Go to the MIRICYL home page
     [Documentation]  User is taken to the landing page
-    go to  ${DEVURL}
+    go to  ${DEVSITE}
 
 
 Header of the home page is as expected
     [Documentation]  Checks if the header is "Search mental health resources & services that can help you feel better"
-#    element should be visible  css:#root > div > h1
-#    element text should be  css:#root > div > h1  Search mental health resources & services that can help you feel better
     Logo is present
     Help button is present
 
@@ -50,76 +47,102 @@ Help button is present
     element should be visible  css:#root > div.navbar-container > div > button
     element text should be  css:#root > div.navbar-container > div > button  Help!
 
-Headline on the homepage
+Headline on the page
     [Documentation]  Checks the headline text "Search mental health resources.."
-    element should be visible  css:#root > div.question-one-container > div > div.title-description-container > h1
-    element text should be  css:#root > div.question-one-container > div > div.title-description-container > h1  Search mental health resources & services that can help you feel better
-    #root > div.question-two-container > div > div.title-description-container > h1
+    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[1]/h1
+    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[1]/h1  Search mental health resources & services that can help you feel better
 
-Purpose text on the homepage
+
+Purpose text on the page
     [Documentation]  Checks the text "Boost is here for you if you need trusted guidance on accessing.."
-    element should be visible  css:#root > div.question-one-container > div > div.title-description-container > h2
-    element text should be   css:#root > div.question-one-container > div > div.title-description-container > h2  Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health. We will guide you in finding the treatment and help you need.
+    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[1]/h2
+    element text should be   xpath://*[@id="root"]/div[2]/div/div/div[1]/h2  Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health. We will guide you in finding the treatment and help you need.
 
 
 Home Page has the question and the prompt
     [Documentation]  Checks if the home has the question 'What can we help you with?' and the prompt 'select all that apply'
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > p.question-text
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > p.question-text  What can we help you with?
+    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]
+    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]  What can we help you with?
     Prompt for the question is present
 
 Prompt for the question is present
     [Documentation]  Checks the prompt under the needs question
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > p.question-subtext
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > p.question-subtext  select all that apply
+    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[2]
+    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[2]  select all that apply
 
 Ensure all the 'Needs' are listed on the home page
     [Documentation]  Checks if all the available 'Needs' are listed on the homepage
+    Addiction
+    Anxiety, Anger or Stress
+    Body image or Eating disorders
+    Childhood abuse or Bullying
+    Debt or Looking for Employment
+    Domestic abuse or Sexual violence
+    Low, Depressed or Lonely
+    Parenting
+    Relationship or Bereavement
+    Sleeping problems
+    Suicide or Self-harm
+    Victim or Involved in Crime
+    ZA-Future Need
 
-    #Checks if Abuse and Bullying is visible
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(3)  Addiction
+Addiction
+    element should be visible  id:Addiction
+    element text should be  id:Addiction  Addiction
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)  Anxiety, Anger or Stress
+Anxiety, Anger or Stress
+    element should be visible  id:Anxiety, Anger or Stress
+    element text should be  id:Anxiety, Anger or Stress  Anxiety, Anger or Stress
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)  Body image or Eating disorders
+Body image or Eating disorders
+    element should be visible  id:Body image or Eating disorders
+    element text should be  id:Body image or Eating disorders  Body image or Eating disorders
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)  Childhood abuse or Bullying
+Childhood abuse or Bullying
+    element should be visible  id:Childhood abuse or Bullying
+    element text should be  id:Childhood abuse or Bullying  Childhood abuse or Bullying
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)  Debt or Looking for Employment
+Debt or Looking for Employment
+    element should be visible  id:Debt or Looking for Employment
+    element text should be  id:Debt or Looking for Employment  Debt or Looking for Employment
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(8)  Domestic abuse or Sexual violence
+Domestic abuse or Sexual violence
+    element should be visible  id:Domestic abuse or Sexual violence
+    element text should be  id:Domestic abuse or Sexual violence  Domestic abuse or Sexual violence
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)  Low, Depressed or Lonely
+Low, Depressed or Lonely
+    element should be visible  id:Low, Depressed or Lonely
+    element text should be  id:Low, Depressed or Lonely  Low, Depressed or Lonely
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(10)  Parenting
+Parenting
+    element should be visible  id:Parenting
+    element text should be  id:Parenting  Parenting
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)  Relationship or Bereavement
+Relationship or Bereavement
+    element should be visible  id:Relationship or Bereavement
+    element text should be  id:Relationship or Bereavement  Relationship or Bereavement
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)  Sleeping problems
+Sleeping problems
+    element should be visible  id:Sleeping problems
+    element text should be  id:Sleeping problems  Sleeping problems
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)  Suicide or Self-harm
+Suicide or Self-harm
+    element should be visible  id:Suicide or Self-harm
+    element text should be  id:Suicide or Self-harm  Suicide or Self-harm
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)  Victim or Involved in Crime
+Victim or Involved in Crime
+    element should be visible  id:Victim or Involved in Crime
+    element text should be  id:Victim or Involved in Crime  Victim or Involved in Crime
 
-    element should be visible  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(15)
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(15)  ZA-Future Need
+ZA-Future Need
+    element should be visible  id:ZA-Future Need
+    element text should be  id:ZA-Future Need  ZA-Future Need
+
 
 Click on the next button
     [Documentation]  Clicks on the next button on the page
-    element text should be  css:#root > div.question-one-container > div > div:nth-child(2) > div.bottom-navigation > button  Next
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.bottom-navigation > button
+    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[2]/button  Next
+    click element  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[2]/button
     sleep  3s
 
 Click on the back button
@@ -129,76 +152,70 @@ Click on the back button
 
 Select All 'Needs'
     [Documentation]  This will select all the needs available on the homepage
-    Select 'Childhood abuse or Bullying'
-    Select 'addiction'
+    Select 'Addiction'
     Select 'Anxiety, Anger or Stress'
-    Select 'Body image or eating disorders'
-    Select 'Crime'
+    Select 'Body image or Eating disorders'
+    Select 'Childhood abuse or Bullying'
     Select 'Debt or Looking for Employment'
-    Select 'Domestic Abuse'
+    Select 'Domestic abuse or Sexual violence'
     Select 'Low, Depressed or Lonely'
-    Select 'LGBTQ+ or gender identity'
-    Select 'Pregnancy and Parenting'
+    Select 'Parenting'
+    Select 'Relationship or Bereavement'
     Select 'Sleeping problems'
     Select 'Suicide or Self-harm'
+    Select 'Victim or Involved in Crime'
+    Select 'ZA-Future Need'
 
-
-Select 'Childhood abuse or Bullying'
-    [Documentation]  Clicks on the 'Childhood abuse or Bullying' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
-    sleep  1s
 
 Select 'Addiction'
-    [Documentation]  Clicks on the 'Addiction' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(4)
+    [Documentation]  Selects 'Addiction'
+    click element  id:Addiction
     sleep  1s
 
 Select 'Anxiety, Anger or Stress'
-    [Documentation]  Clicks on the 'Anxiety, Anger or Stress' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(5)
-    sleep  1s
+    [Documentation]  Selects 'Anxiety, Anger or Stress'
+    click element  id:Anxiety, Anger or Stress
 
-Select 'Body image or eating disorders'
-    [Documentation]  Clicks on the 'Body image or eating disorders' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(6)
-    sleep  1s
+Select 'Body image or Eating disorders'
+    [Documentation]  Selects 'Body image or Eating disorders'
+    click element  id:Body image or Eating disorders
 
-Select 'Crime'
-    [Documentation]  Clicks on the 'Crime' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
-    sleep  1s
+Select 'Childhood abuse or Bullying'
+    [Documentation]  Selects 'Childhood abuse or Bullying'
+    click element  id:Childhood abuse or Bullying
 
 Select 'Debt or Looking for Employment'
-    [Documentation]  Clicks on the 'Debt or Unemployment' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(7)
-    sleep  1s
+    [Documentation]  Selects 'Debt or Looking for Employment'
+    click element  id:Debt or Looking for Employment
 
-Select 'Domestic Abuse'
-    [Documentation]  Clicks on the 'Debt or 'Domestic Abuse' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
-    sleep  1s
+Select 'Domestic abuse or Sexual violence'
+    [Documentation]  Selects 'Domestic abuse or Sexual violence'
+    click element  id:Domestic abuse or Sexual violence
 
 Select 'Low, Depressed or Lonely'
-    [Documentation]  Clicks on the 'Low, Depressed or Lonely' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(9)
-    sleep  1s
+    [Documentation]  Selects 'Low, Depressed or Lonely'
+    click element  id:Low, Depressed or Lonely
 
-Select 'LGBTQ+ or gender identity'
-    [Documentation]  Clicks on the 'LGBTQ+ or gender identity' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(11)
-    sleep  1s
+Select 'Parenting'
+    [Documentation]  Selects 'Parenting'
+    click element  id:Parenting
 
-Select 'Pregnancy and Parenting'
-    [Documentation]  Clicks on the 'Pregnancy and Parenting' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(12)
-    sleep  1s
+Select 'Relationship or Bereavement'
+    [Documentation]  Selects 'Relationship or Bereavement'
+    click element  id:Relationship or Bereavement
+
 Select 'Sleeping problems'
-    [Documentation]  Clicks on the 'Sleeping problems' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(13)
-    sleep  1s
+    [Documentation]  Selects 'Sleeping problems'
+    click element  id:Sleeping problems
 
 Select 'Suicide or Self-harm'
-    [Documentation]  Clicks on the 'Suicide or Self-harm' need
-    click element  css:#root > div.question-one-container > div > div:nth-child(2) > div.select-container > button:nth-child(14)
-    sleep  1s
+    [Documentation]  Selects 'Suicide or Self-harm'
+    click element  id:Suicide or Self-harm
 
+Select 'Victim or Involved in Crime'
+    [Documentation]  Selects 'Victim or Involved in Crime'
+    click element  id:Victim or Involved in Crime
+
+Select 'ZA-Future Need'
+    [Documentation]  Selects 'ZA-Future Need'
+    click element  id:ZA-Future Need
