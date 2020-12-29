@@ -124,7 +124,6 @@ const Results = ({
 
       }).then((charities) => {
         //setPostcodeCharities(charities)
-        console.log('charities', charities);
         filteredCharities = charities
       })
     }
