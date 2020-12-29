@@ -29,7 +29,8 @@ Service Types question and the prompt is present
 Prompt for the question in service types page
     [Documentation]  Checks the prompt under the needs question
     Prompt for the question is present
-#    element should be visible  css:#root > div.question-two-container > div > div:nth-child(2) > div.select-container > p.question-subtext
+    
+Service Types are listed on the page
     element should be visible  id:Information
     element text should be  id:Information  Information
 
