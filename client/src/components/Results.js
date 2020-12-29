@@ -47,8 +47,6 @@ const Results = ({
     // gets a list of all postcodes withing range of latitude and longitude 
     const getListOfPostcodes = async (payload) => {
       const res = await postcodeServer.post('/', payload)
-      console.log('data', res);
-
       return res
     }
 
@@ -74,7 +72,6 @@ const Results = ({
     } else {
       // sort for full postcode with distance
       let postcodeDetails = await getPostcodeDetails().then((postcodeDetails) => {
-        console.log('postcode details', postcodeDetails.data.result);
         const latitude = postcodeDetails.data.result.latitude
         const longitude = postcodeDetails.data.result.longitude
         const payload = {
@@ -87,7 +84,6 @@ const Results = ({
         }
         return payload
       })
-      console.log('payload', postcodeDetails);
       const matchingCharities = await getListOfPostcodes(postcodeDetails).then((returnedPostcodesResults) => {
         const charities = []
         let returnedPostcodes = returnedPostcodesResults.data.result[0].result
@@ -98,21 +94,15 @@ const Results = ({
             }
           })
         })
-        console.log('Charity', charities);
-        // setPostcodeCharities(charities)
         return charities
 
 
       }).then((charities) => {
         setPostcodeCharities(charities)
-        console.log('postcodeCharities', postcodeCharities);
         filteredCharities = charities
       })
-
-      console.log('matiching', matchingCharities);
     }
 
-    console.log('filtered', filteredCharities);
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
       .sort(
