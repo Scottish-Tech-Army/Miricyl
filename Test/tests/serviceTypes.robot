@@ -23,8 +23,8 @@ Service Types page has the headline text and 'purpose' text
     [Tags]  Smoke  functional  end-2-end
     Index.Go to the MIRICYL home page
     Index.Click on the next button
-    ServiceTypes.Headline on the service type page
-    ServiceTypes.Purpose text on the service type page
+    Index.Headline on the page
+    Index.Purpose text on the page
 
 
 Service Types page has the question and the help text
