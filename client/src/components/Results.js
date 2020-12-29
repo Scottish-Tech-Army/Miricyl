@@ -20,7 +20,7 @@ const Results = ({
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
-  const [localPostcodes, setLocalPostcodes] = useState([])
+  const [postcodeCharities, setPostcodeCharities] = useState([])
 
   useEffect(() => {
     constructCharityObjects();
@@ -30,7 +30,7 @@ const Results = ({
     sortCharities();
   }, [allCharities]);
 
-  const sortCharities = () => {
+  const sortCharities = async () => {
     let filteredCharities = allCharities;
 
     // if (selectedSupportTypes.length > 0) {
@@ -46,41 +46,20 @@ const Results = ({
 
     // gets a list of all postcodes withing range of latitude and longitude 
     const getListOfPostcodes = async (payload) => {
-      let matchingCharities = []
-      await postcodeServer.post('/', payload).then((returnedPostcodesResults) => {
-        let returnedPostcodes = returnedPostcodesResults.data.result[0].result
-        filteredCharities.map((charity) => {
-          return returnedPostcodes.filter((postcode) => {
-            if (charity.PostCode.toUpperCase() === postcode.postcode) {
-              matchingCharities.push(charity)
-              return null
-            }
-          })
-        })
-        console.log('Charity', matchingCharities);
-        return matchingCharities
+      const res = await postcodeServer.post('/', payload)
+      console.log('data', res);
 
-
-      })
+      return res
     }
 
     // gets latitude and longitude from postcode
     const getPostcodeDetails = async () => {
-      await postcodeServer.get(`/${postcode}`).then((postcodeDetails) => {
-        console.log('postcode details', postcodeDetails.data.result);
-        const latitude = postcodeDetails.data.result.latitude
-        const longitude = postcodeDetails.data.result.longitude
-        const payload = {
-          "geolocations": [{
-            "latitude": latitude,
-            "longitude": longitude,
-            "radius": 2000,
-            "limit": 100
-          }]
-        }
-        const matchingCharities = getListOfPostcodes(payload)
-        return matchingCharities
-      })
+      try {
+        const res = await postcodeServer.get(`/${postcode}`)
+        return res
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (selectedNeeds.length > 0) {
@@ -94,8 +73,42 @@ const Results = ({
       );
     } else {
       // sort for full postcode with distance
-      let matchingCharities = getPostcodeDetails()
-      filteredCharities = matchingCharities
+      let postcodeDetails = await getPostcodeDetails().then((postcodeDetails) => {
+        console.log('postcode details', postcodeDetails.data.result);
+        const latitude = postcodeDetails.data.result.latitude
+        const longitude = postcodeDetails.data.result.longitude
+        const payload = {
+          "geolocations": [{
+            "latitude": latitude,
+            "longitude": longitude,
+            "radius": 2000,
+            "limit": 100
+          }]
+        }
+        return payload
+      })
+      console.log('payload', postcodeDetails);
+      const matchingCharities = await getListOfPostcodes(postcodeDetails).then((returnedPostcodesResults) => {
+        const charities = []
+        let returnedPostcodes = returnedPostcodesResults.data.result[0].result
+        filteredCharities.map((charity) => {
+          returnedPostcodes.filter((postcode) => {
+            if (charity.PostCode.toUpperCase() === postcode.postcode) {
+              charities.push(charity)
+            }
+          })
+        })
+        console.log('Charity', charities);
+        // setPostcodeCharities(charities)
+        return charities
+
+
+      }).then((charities) => {
+        setPostcodeCharities(charities)
+        console.log('postcodeCharities', postcodeCharities);
+        filteredCharities = charities
+      })
+
       console.log('matiching', matchingCharities);
     }
 
