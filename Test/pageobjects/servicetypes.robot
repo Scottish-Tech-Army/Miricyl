@@ -10,6 +10,9 @@ Resource  ../pageobjects/index.robot
 
 *** Keywords ***
 
+
+*** Keywords ***
+
 Headline on the service type page
     [Documentation]  Checks the headline text "Search mental health resources.." on the service type page
     element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[1]/h1
@@ -29,7 +32,8 @@ Service Types question and the prompt is present
 Prompt for the question in service types page
     [Documentation]  Checks the prompt under the needs question
     Prompt for the question is present
-    
+
+
 Service Types are listed on the page
     element should be visible  id:Information
     element text should be  id:Information  Information
@@ -111,8 +115,6 @@ Select service type: Chat or text
     [Documentation]  selects Chat or text
     click element  id:Chat or text
     sleep  1s
-
-
 
 Click on the back button
     [Documentation]  Clicks on the back button
