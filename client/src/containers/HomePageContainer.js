@@ -19,7 +19,7 @@ const HomePageContainer = ({ history }) => {
 
   let appInsights = getAppInsights();
 
-  const { filter } = useFlags();
+  // const { filter } = useFlags();
   const onBackClicked = () => {
     history.goBack();
   };
@@ -41,17 +41,17 @@ const HomePageContainer = ({ history }) => {
     nodeServer.get("/needs").then((res) => {
       const needsResponse = res.data;
       needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
-      const needs = needsResponse.map((need) => {
+      const userNeeds = needsResponse.map((need) => {
         return { value: need.Need, isSelected: false };
       });
-      setNeeds(needs);
+      setNeeds(userNeeds);
     });
 
     nodeServer
       .get("/charities")
       .then((res) => {
-        const charities = res.data;
-        setCharities(charities);
+        const foundCharities = res.data;
+        setCharities(foundCharities);
       })
       .catch((error) => {
         console.log(error);
@@ -75,12 +75,12 @@ const HomePageContainer = ({ history }) => {
       const personalisationsResponse = res.data
         .map((personalisation) => personalisation.UserOption)
         .filter((personalisation) => personalisation != "");
-      const personalisations = personalisationsResponse.map(
+      const UserPersonalisations = personalisationsResponse.map(
         (personalisation) => {
           return { value: personalisation, isSelected: false };
         }
       );
-      setPersonalisations(personalisations);
+      setPersonalisations(UserPersonalisations);
     });
   };
 

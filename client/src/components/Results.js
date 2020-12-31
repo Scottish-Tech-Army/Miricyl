@@ -25,24 +25,8 @@ const Results = ({
 }) => {
   const [prioritisedResults, setprioritisedResults] = useState([]);
   const [allCharities, setAllCharities] = useState([]);
-  const [postcodeCharities, setPostcodeCharities] = useState([])
 
   const { filter } = useFlags();
-
-  const getListOfPostcodes = async (payload) => {
-    const res = await postcodeServer.post('/', payload)
-    return res
-  }
-
-  // gets latitude and longitude from postcode
-  const getPostcodeDetails = async () => {
-    try {
-      const res = await postcodeServer.get(`/${postcode}`)
-      return res
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
@@ -93,7 +77,7 @@ const Results = ({
       return res
     }
 
-    // // gets latitude and longitude from postcode
+    // gets latitude and longitude from postcode
     const getPostcodeDetails = async () => {
       try {
         const res = await postcodeServer.get(`/${postcode}`)
@@ -133,16 +117,16 @@ const Results = ({
         return payload
       })
       const matchingCharities = await getListOfPostcodes(postcodeDetails).then((returnedPostcodesResults) => {
-        const charities = []
+        const foundCharities = []
         let returnedPostcodes = returnedPostcodesResults.data.result[0].result
         filteredCharities.map((charity) => {
-          returnedPostcodes.filter((postcode) => {
-            if (charity.PostCode.toUpperCase() === postcode.postcode) {
-              charities.push(charity)
+          returnedPostcodes.filter((address) => {
+            if (charity.PostCode.toUpperCase() === address.postcode) {
+              foundCharities.push(charity)
             }
           })
         })
-        return charities
+        return foundCharities
 
 
       }).then((charities) => {
