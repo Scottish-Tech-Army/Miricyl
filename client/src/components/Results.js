@@ -10,7 +10,7 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
-import postcodeServer from "../api/postcodeServer"
+import postcodeServer from "../api/postcodeServer";
 
 const Results = ({
   onBackClicked,
@@ -23,26 +23,28 @@ const Results = ({
   onToggleSupportTypeSelected,
   onTogglePersonalisationSelected,
 }) => {
+  console.log("rendered");
   const [prioritisedResults, setprioritisedResults] = useState([]);
+
   const [allCharities, setAllCharities] = useState([]);
-  const [postcodeCharities, setPostcodeCharities] = useState([])
+  const [postcodeCharities, setPostcodeCharities] = useState([]);
 
   const { filter } = useFlags();
 
   const getListOfPostcodes = async (payload) => {
-    const res = await postcodeServer.post('/', payload)
-    return res
-  }
+    const res = await postcodeServer.post("/", payload);
+    return res;
+  };
 
   // gets latitude and longitude from postcode
   const getPostcodeDetails = async () => {
     try {
-      const res = await postcodeServer.get(`/${postcode}`)
-      return res
+      const res = await postcodeServer.get(`/${postcode}`);
+      return res;
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
@@ -73,8 +75,7 @@ const Results = ({
   const sortCharities = async () => {
     let filteredCharities = allCharities;
 
-    console.log('filter2', filteredCharities);
-
+    console.log("filter2", filteredCharities);
 
     // if (selectedSupportTypes.length > 0) {
     //   filteredCharities = filteredCharities.filter(
@@ -85,23 +86,21 @@ const Results = ({
     //   );
     // }
 
-
-
-    // gets a list of all postcodes withing range of latitude and longitude 
+    // gets a list of all postcodes withing range of latitude and longitude
     const getListOfPostcodes = async (payload) => {
-      const res = await postcodeServer.post('/', payload)
-      return res
-    }
+      const res = await postcodeServer.post("/", payload);
+      return res;
+    };
 
     // // gets latitude and longitude from postcode
     const getPostcodeDetails = async () => {
       try {
-        const res = await postcodeServer.get(`/${postcode}`)
-        return res
+        const res = await postcodeServer.get(`/${postcode}`);
+        return res;
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     if (selectedNeeds.length > 0) {
       filteredCharities = filteredCharities.filter((charity) => {
@@ -110,8 +109,8 @@ const Results = ({
     }
 
     if (postcode.length < 5 && postcode !== "") {
-      console.log('pc', postcode);
-      console.log('fired');
+      console.log("pc", postcode);
+      console.log("fired");
       // sort for outer postcode
       filteredCharities = filteredCharities.filter(
         (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
@@ -119,38 +118,43 @@ const Results = ({
     }
     if (postcode.length > 4) {
       // sort for full postcode with distance
-      let postcodeDetails = await getPostcodeDetails().then((postcodeDetails) => {
-        const latitude = postcodeDetails.data.result.latitude
-        const longitude = postcodeDetails.data.result.longitude
-        const payload = {
-          "geolocations": [{
-            "latitude": latitude,
-            "longitude": longitude,
-            "radius": 2000,
-            "limit": 100
-          }]
+      let postcodeDetails = await getPostcodeDetails().then(
+        (postcodeDetails) => {
+          const latitude = postcodeDetails.data.result.latitude;
+          const longitude = postcodeDetails.data.result.longitude;
+          const payload = {
+            geolocations: [
+              {
+                latitude: latitude,
+                longitude: longitude,
+                radius: 2000,
+                limit: 100,
+              },
+            ],
+          };
+          return payload;
         }
-        return payload
-      })
-      const matchingCharities = await getListOfPostcodes(postcodeDetails).then((returnedPostcodesResults) => {
-        const charities = []
-        let returnedPostcodes = returnedPostcodesResults.data.result[0].result
-        filteredCharities.map((charity) => {
-          returnedPostcodes.filter((postcode) => {
-            if (charity.PostCode.toUpperCase() === postcode.postcode) {
-              charities.push(charity)
-            }
-          })
+      );
+      const matchingCharities = await getListOfPostcodes(postcodeDetails)
+        .then((returnedPostcodesResults) => {
+          const charities = [];
+          let returnedPostcodes =
+            returnedPostcodesResults.data.result[0].result;
+          filteredCharities.map((charity) => {
+            returnedPostcodes.filter((postcode) => {
+              if (charity.PostCode.toUpperCase() === postcode.postcode) {
+                charities.push(charity);
+              }
+            });
+          });
+          return charities;
         })
-        return charities
-
-
-      }).then((charities) => {
-        //setPostcodeCharities(charities)
-        filteredCharities = charities
-      })
+        .then((charities) => {
+          //setPostcodeCharities(charities)
+          filteredCharities = charities;
+        });
     }
-    console.log('filter', filteredCharities);
+    console.log("filter", filteredCharities);
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
@@ -183,21 +187,21 @@ const Results = ({
   const constructCharityObjects = () => {
     let locationSortedCharities;
 
-    if (postcode == "") {
+    if (postcode === "") {
       locationSortedCharities = charities.sort((a, b) => {
         return a.NationalService === "YES"
           ? -1
           : b.NationalService === "YES"
-            ? 1
-            : 0;
+          ? 1
+          : 0;
       });
     } else {
       locationSortedCharities = charities.sort((a, b) => {
         return a.OuterCode.toUpperCase() === postcode.toUpperCase()
           ? -1
           : b.OuterCode.toUpperCase() === postcode.toUpperCase()
-            ? 1
-            : 0;
+          ? 1
+          : 0;
       });
     }
 
@@ -209,15 +213,12 @@ const Results = ({
       const charity = charities.find((charity) => charity.OrgID === orgId);
       let servicesFromCharity = charities.filter((charity) => {
         return (
-          charity.OrgID == orgId &&
+          charity.OrgID === orgId &&
           (postcode === ""
             ? charity.NationalService === "YES"
             : charity.OuterCode.toUpperCase() === postcode.toUpperCase())
         );
       });
-
-      // This filtering logic will need to be changed once the use filter interface is implemented
-      // as for now it deletes any unselected filters which the user may wish to enable
 
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
@@ -307,8 +308,8 @@ const Results = ({
             <img className="results-list-logo" src={charity.Logo} />
           </a>
         ) : (
-            <div></div>
-          )}
+          <div></div>
+        )}
 
         <div className="results-list-title-service">
           {charity.ServiceURL ? (
@@ -319,8 +320,8 @@ const Results = ({
               </a>
             </p>
           ) : (
-              <p className="results-list-title">{charity.OrgName}</p>
-            )}
+            <p className="results-list-title">{charity.OrgName}</p>
+          )}
 
           {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
@@ -336,12 +337,12 @@ const Results = ({
               {charity.googleRating}{" "}
             </p>
           ) : (
-              <p>
-                {" "}
-                <ReactStars count={5} value={0} isHalf={true} />
+            <p>
+              {" "}
+              <ReactStars count={5} value={0} isHalf={true} />
               No ratings found{" "}
-              </p>
-            )}
+            </p>
+          )}
         </div>
       </div>
 
