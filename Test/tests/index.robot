@@ -26,8 +26,8 @@ Home page has the headline text and 'purpose' text
     [Documentation]  Checks the headline text on the page
     [Tags]  Smoke  functional  end-2-end
     Index.Go to the MIRICYL home page
-    Index.Headline on the homepage
-    Index.Purpose text on the homepage
+    Index.Headline on the page
+    Index.Purpose text on the page
 
 
 Home page has the question and the help text
