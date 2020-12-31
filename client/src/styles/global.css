@@ -426,8 +426,32 @@ scrollbar-width: none;  /* Firefox */
   color: #bcbcbc;
 }
 
+.filter-panel {
+  border: 2px solid #2e3192;
+  border-radius: 21px;
+  background-color: white;
+}
 
-.filter-container {
+.filter-header {
+  font-size: 29px;
+  min-height: 42px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-section-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-section-subtitle{
+  font-size: 24px;
+  color: #2e3192;
+}
+
+.filters-container {
   display: flex;
   flex-direction: column;
 }
