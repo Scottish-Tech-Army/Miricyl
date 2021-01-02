@@ -73,7 +73,7 @@ const HomePageContainer = ({ history }) => {
 
     nodeServer.get("/personalisations").then((res) => {
       const personalisationsResponse = res.data
-        .map((personalisation) => personalisation.UserOption)
+        .map((personalisation) => personalisation.Description)
         .filter((personalisation) => personalisation != "");
       const UserPersonalisations = personalisationsResponse.map(
         (personalisation) => {

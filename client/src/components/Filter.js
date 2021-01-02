@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import FilterSubsection from "./FilterSubSection";
 
 const Filter = ({
   needs,
@@ -8,67 +9,39 @@ const Filter = ({
   onToggleSupportTypeSelected,
   onTogglePersonalisationSelected,
 }) => {
+  const [expandFilterPanel, setExpandFilterPanel] = useState(false);
+
   return (
-    <div>
-      <div className="filters-container">
-        <div className="filter-item-container">
-          {needs.map((need) => {
-            return (
-              <button
-                onClick={() => onToggleNeedSelected(need)}
-                className={
-                  need.isSelected
-                    ? "question-button-selected"
-                    : "question-button"
-                }
-                value={need.value}
-                key={need.value}
-                id={need.value}
-              >
-                {need.value}
-              </button>
-            );
-          })}
-        </div>
-        <div className="filter-item-container">
-          {supportTypes.map((supportType) => {
-            return (
-              <button
-                onClick={() => onToggleSupportTypeSelected(supportType)}
-                className={
-                  supportType.isSelected
-                    ? "question-button-selected"
-                    : "question-button"
-                }
-                value={supportType.value}
-                key={supportType.value}
-                id={supportType.value}
-              >
-                {supportType.value}
-              </button>
-            );
-          })}
-        </div>
-        <div className="filter-item-container">
-          {personalisations.map((personalisation) => {
-            return (
-              <button
-                onClick={() => onTogglePersonalisationSelected(personalisation)}
-                className={
-                  personalisation.isSelected
-                    ? "question-button-selected"
-                    : "question-button"
-                }
-                value={personalisation.value}
-                key={personalisation.value}
-                id={personalisation.value}
-              >
-                {personalisation.value}
-              </button>
-            );
-          })}
-        </div>
+    <div className="filter-panel">
+      <div className="filter-header">
+        <span>Search Results</span>
+        <button
+          onClick={() => {
+            setExpandFilterPanel(!expandFilterPanel);
+          }}
+        >
+          Icon
+        </button>
       </div>
+      {expandFilterPanel && (
+        <div className="filters-container">
+          <FilterSubsection
+            filterOptions={needs}
+            heading="What can we help you with?"
+            onToggleOption={(option) => onToggleNeedSelected(option)}
+          />
+          <FilterSubsection
+            filterOptions={supportTypes}
+            heading="Types of service"
+            onToggleOption={(option) => onToggleSupportTypeSelected(option)}
+          />
+          <FilterSubsection
+            filterOptions={personalisations}
+            heading="Personalisation"
+            onToggleOption={(option) => onTogglePersonalisationSelected(option)}
+          />
+        </div>
+      )}
     </div>
   );
 };
