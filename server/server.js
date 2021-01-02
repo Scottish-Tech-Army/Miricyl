@@ -5,9 +5,6 @@ const app = express();
 
 app.use(express.json());
 app.disable("x-powered-by");
-<<<<<<< HEAD
-app.use(cors());
-=======
 
 var allowedDomains = ['*.miricyl.org', 'http://localhost:3001'];
 app.use(cors({
@@ -24,7 +21,6 @@ app.use(cors({
 }));
 
 // app.use(cors());
->>>>>>> sonarcloudFixes
 app.use("/api", apiRouter);
 
 
