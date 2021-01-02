@@ -2,9 +2,26 @@ const express = require("express");
 const apiRouter = require("./routes");
 const cors = require("cors");
 const app = express();
-
 app.use(express.json());
 app.disable("x-powered-by");
+
+let development = process.env.NODE_ENV == "development";
+
+var corsOptions = {}
+
+if (development) {
+  corsOptions = {
+    origin: 'http://localhost:3001/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
+} else {
+  corsOptions = {
+    origin: 'https://dev.miricyl.org/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+}
+
 
 // var allowedDomains = ['np-miricyl.azure-api.net', 'https://dev.miricyl.org/', 'http://localhost:3001', 'https://dem.miricyl.org/', 'https://np-miricyl.azure-api.net/dev/needs', 'https://np-miricyl.azure-api.net/dev/charities', 'https://np-miricyl.azure-api.net/dev/types', 'https://np-miricyl.azure-api.net/dev/personalisations'];
 // app.use(cors({
