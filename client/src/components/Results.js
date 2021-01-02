@@ -27,31 +27,9 @@ const Results = ({
   const [prioritisedResults, setprioritisedResults] = useState([]);
 
   const [allCharities, setAllCharities] = useState([]);
-<<<<<<< HEAD
 
   const { filter } = useFlags();
 
-=======
-  const [postcodeCharities, setPostcodeCharities] = useState([]);
-
-  const { filter } = useFlags();
-
-  const getListOfPostcodes = async (payload) => {
-    const res = await postcodeServer.post("/", payload);
-    return res;
-  };
-
-  // gets latitude and longitude from postcode
-  const getPostcodeDetails = async () => {
-    try {
-      const res = await postcodeServer.get(`/${postcode}`);
-      return res;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
->>>>>>> 7774af4deb67fd8b9a556b5051c58b20b461c41a
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
     .map((selectedNeed) => selectedNeed.value);
@@ -140,27 +118,6 @@ const Results = ({
           };
           return payload;
         }
-<<<<<<< HEAD
-        return payload
-      })
-      const matchingCharities = await getListOfPostcodes(postcodeDetails).then((returnedPostcodesResults) => {
-        const foundCharities = []
-        let returnedPostcodes = returnedPostcodesResults.data.result[0].result
-        filteredCharities.map((charity) => {
-          returnedPostcodes.filter((address) => {
-            if (charity.PostCode.toUpperCase() === address.postcode) {
-              foundCharities.push(charity)
-            }
-          })
-        })
-        return foundCharities
-
-
-      }).then((charities) => {
-        //setPostcodeCharities(charities)
-        filteredCharities = charities
-      })
-=======
       );
       const matchingCharities = await getListOfPostcodes(postcodeDetails)
         .then((returnedPostcodesResults) => {
@@ -180,7 +137,6 @@ const Results = ({
           //setPostcodeCharities(charities)
           filteredCharities = charities;
         });
->>>>>>> 7774af4deb67fd8b9a556b5051c58b20b461c41a
     }
     console.log("filter", filteredCharities);
 
@@ -220,16 +176,16 @@ const Results = ({
         return a.NationalService === "YES"
           ? -1
           : b.NationalService === "YES"
-          ? 1
-          : 0;
+            ? 1
+            : 0;
       });
     } else {
       locationSortedCharities = charities.sort((a, b) => {
         return a.OuterCode.toUpperCase() === postcode.toUpperCase()
           ? -1
           : b.OuterCode.toUpperCase() === postcode.toUpperCase()
-          ? 1
-          : 0;
+            ? 1
+            : 0;
       });
     }
 
@@ -336,8 +292,8 @@ const Results = ({
             <img className="results-list-logo" src={charity.Logo} />
           </a>
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
 
         <div className="results-list-title-service">
           {charity.ServiceURL ? (
@@ -348,8 +304,8 @@ const Results = ({
               </a>
             </p>
           ) : (
-            <p className="results-list-title">{charity.OrgName}</p>
-          )}
+              <p className="results-list-title">{charity.OrgName}</p>
+            )}
 
           {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
@@ -365,12 +321,12 @@ const Results = ({
               {charity.googleRating}{" "}
             </p>
           ) : (
-            <p>
-              {" "}
-              <ReactStars count={5} value={0} isHalf={true} />
+              <p>
+                {" "}
+                <ReactStars count={5} value={0} isHalf={true} />
               No ratings found{" "}
-            </p>
-          )}
+              </p>
+            )}
         </div>
       </div>
 
