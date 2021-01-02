@@ -9,4 +9,5 @@ app.use("/api", apiRouter);
 app.use(cors());
 
 app.listen("3000", () => {
+  console.log("server is running", process.env.NODE_ENV);
 });
