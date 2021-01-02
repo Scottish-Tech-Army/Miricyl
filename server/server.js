@@ -11,13 +11,13 @@ var corsOptions = {}
 
 if (development) {
   corsOptions = {
-    origin: 'http://localhost:3001/',
+    origin: 'http://localhost:3001',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
 } else {
   corsOptions = {
-    origin: 'https://dev.miricyl.org/',
+    origin: 'https://dev.miricyl.org',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 }
@@ -36,8 +36,8 @@ if (development) {
 //     return callback(null, true);
 //   }
 // }));
-
-app.use(cors());
+console.log(corsOptions);
+app.use(cors(corsOptions));
 app.use("/api", apiRouter);
 
 
