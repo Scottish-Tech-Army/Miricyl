@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.disable("x-powered-by");
 
-var allowedDomains = ['https://dev.miricyl.org/', 'http://localhost:3001', 'https://dem.miricyl.org/'];
+var allowedDomains = ['https://dev.miricyl.org/', 'http://localhost:3001', 'https://dem.miricyl.org/', 'https://np-miricyl.azure-api.net'];
 app.use(cors({
   origin: function (origin, callback) {
     // bypass the requests with no origin (like curl requests, mobile apps, etc )
