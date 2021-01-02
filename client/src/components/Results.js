@@ -287,7 +287,7 @@ const Results = ({
       test-id={`card-${charity.OrgID}`}
     >
       <div className="results-title-container">
-        {charity.Logo ? (
+        {charity.Logo || `/images/$web/${charity.OrgID}.png` ? (
           <a href={charity.ServiceURL} target="_blank">
             <img className="results-list-logo" src={`/images/$web/${charity.OrgID}.png`} alt={`${charity.OrgName} logo`} onError={charity.Logo} />
           </a>
