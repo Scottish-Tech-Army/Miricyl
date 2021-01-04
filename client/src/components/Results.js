@@ -70,6 +70,29 @@ const Results = ({
     //   );
     // }
 
+    const getDistance = () => {
+      const lat1 = 55.745183
+      const lon1 = -3.980991
+      const lat2 = 55.745634
+      const lon2 = -3.98146
+
+
+      const R = 6371e3; // metres
+      const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
+      const φ2 = lat2 * Math.PI / 180;
+      const Δφ = (lat2 - lat1) * Math.PI / 180;
+      const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+      const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      const d = R * c; // in metres
+
+      return d
+    }
+
     // gets a list of all postcodes withing range of latitude and longitude
     const getListOfPostcodes = async (payload) => {
       const res = await postcodeServer.post("/", payload);
@@ -93,8 +116,6 @@ const Results = ({
     }
 
     if (postcode.length < 5 && postcode !== "") {
-      console.log("pc", postcode);
-      console.log("fired");
       // sort for outer postcode
       filteredCharities = filteredCharities.filter(
         (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
@@ -116,7 +137,9 @@ const Results = ({
               },
             ],
           };
+          console.log(getDistance());
           return payload;
+
         }
       );
       const matchingCharities = await getListOfPostcodes(postcodeDetails)
@@ -127,6 +150,7 @@ const Results = ({
           filteredCharities.map((charity) => {
             returnedPostcodes.filter((postcode) => {
               if (charity.PostCode.toUpperCase() === postcode.postcode) {
+                charity.distance = 5.13
                 charities.push(charity);
               }
             });
@@ -138,7 +162,6 @@ const Results = ({
           filteredCharities = charities;
         });
     }
-    console.log("filter", filteredCharities);
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
@@ -286,10 +309,15 @@ const Results = ({
       key={charity.PlaceID}
       test-id={`card-${charity.OrgID}`}
     >
+      <div className="results-distance-container">
+        <p className="results-distance">
+          {charity.distance} mi
+        </p>
+      </div>
       <div className="results-title-container">
         {charity.Logo || `/images/$web/${charity.OrgID}.png` ? (
           <a href={charity.ServiceURL} target="_blank">
-            <img className="results-list-logo" src={`/images/$web/${charity.OrgID}.png`} alt={`${charity.OrgName} logo`} onError={charity.Logo} />
+            <img className="results-list-logo" src={`/images/$web/${charity.OrgID}.png`} alt={`${charity.OrgName} logo`} onError={(e) => { e.target.src = 'no image found' }} />
           </a>
         ) : (
             <div></div>

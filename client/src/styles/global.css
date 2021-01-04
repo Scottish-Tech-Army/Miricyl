@@ -203,6 +203,25 @@ scrollbar-width: none;  /* Firefox */
   grid-gap: 50px;
   margin: 35px 100px;
 }
+.results-distance-container {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+.results-distance {
+  text-align: center;
+  background-color: #ff6e43;
+  color: white;
+  width: 69px;
+  height: 24px;
+  line-height: 24px;
+  margin: 0 0 10px 27px;
+  padding: 6px 12px 5px 13px;
+  border-radius: 4px;
+  position: absolute;
+  top: 21px;
+  right: 31px;
+}
 
 .results-list-container {
   border: solid 0.5px #bcbcbc;
@@ -219,7 +238,7 @@ scrollbar-width: none;  /* Firefox */
   display: grid;
   grid-template-columns: 100px auto;
   align-items: center;
-  margin: 0px 10px 10px 0px;
+  margin: 55px 10px 10px 0px;
 }
 
 .results-list-title {
@@ -612,6 +631,8 @@ scrollbar-width: none;  /* Firefox */
     width: 85%;
   }
 
+
+
   .results-title-container {
     grid-template-columns: 75px auto;
     align-items: center;
@@ -677,6 +698,16 @@ scrollbar-width: none;  /* Firefox */
     letter-spacing: 0.05px;
     margin: 10px 6px 3px 0;
     padding: 5px 12px 5px 12px;
+  }
+
+  .results-distance {
+    text-align: right;
+    background-color: #ff6e43;
+    width: 69px;
+    height: 24px;
+    margin: 0 0 10px 27px;
+    padding: 6px 12px 5px 13px;
+    border-radius: 4px;
   }
   .back-button-results {
     width: 45px;
