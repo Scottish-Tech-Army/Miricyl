@@ -315,6 +315,7 @@ SELECT distinct
     O.PlaceID,
     O.LogoURl as Logo,
     O.ServiceDesc as OrgDescription,
+	OS.ServiceName as ServiceName,
     OS.Description AS ServiceDescription,
     IF(ISNULL(OS.Address2),Address1,CONCAT(OS.Address1, ', ', OS.Address2 )) AS PhysicalAddress,
     OS.ServiceEmail as EmailAddress,
