@@ -26,7 +26,7 @@ const createServiceObjects = (orgAndServicesObjects) => {
   });
 };
 
-createOrgObjects = (orgAndServicesObjects) => {
+const createOrgObjects = (orgAndServicesObjects) => {
   return orgAndServicesObjects.map((object) => {
     return {
       OrgID: object.OrgID,
@@ -45,11 +45,48 @@ const addServicesToOrgs = (services, orgs) => {
     const servicesForOrg = services.filter(
       (service) => service.OrgID === orgID
     );
+
     return {
       ...org,
-      services: servicesForOrg,
+      services: cleanServices(servicesForOrg),
     };
   });
+};
+
+const cleanServices = (servicesForOrg) => {
+  const uniqueServicesForOrg = [
+    ...new Set(servicesForOrg.map((service) => service.ServiceName)),
+  ];
+
+  return (cleanedServices = uniqueServicesForOrg.map((serviceName) => {
+    const matchedServices = servicesForOrg.filter(
+      (service) => service.ServiceName === serviceName
+    );
+
+    const needsMet = [
+      ...new Set(matchedServices.map((service) => service.Need)),
+    ];
+
+    const supportTypesMet = [
+      ...new Set(matchedServices.map((service) => service.SupportType)),
+    ];
+
+    const personalisationsMet = [
+      ...new Set(matchedServices.map((service) => service.Personalisation)),
+    ];
+
+    const baseService = matchedServices[0];
+
+    return {
+      ServiceName: serviceName,
+      NationalService: baseService.NationalService,
+      PhoneNo: baseService.PhoneNo,
+      PhysicalAddress: baseService.PhysicalAddress,
+      Needs: needsMet,
+      SupportTypes: supportTypesMet,
+      Personalisations: personalisationsMet,
+    };
+  }));
 };
 
 const isNationalService = (isNationalString) => isNationalString === "YES";

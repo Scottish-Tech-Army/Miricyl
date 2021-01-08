@@ -60,7 +60,7 @@ router.get("/charities", async (req, res, next) => {
   }
 });
 
-router.get("/charities2", async (req, res, next) => {
+router.get("/v2/charities", async (req, res, next) => {
   try {
     let results = await db.charities();
     let organisations = await db.organisations();
