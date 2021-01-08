@@ -6,3 +6,4 @@ devops/.terraform/plugins/registry.terraform.io/hashicorp/azurerm/2.28.0/darwin_
 
 debug.log
 launch.json
+client/.eslintcache

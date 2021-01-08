@@ -4,7 +4,8 @@ import { useFlags } from "../hooks/useFlags";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
-import Results from "../components/Results";
+// import Results from "../components/Results";
+import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
 
@@ -19,7 +20,6 @@ const HomePageContainer = ({ history }) => {
 
   let appInsights = getAppInsights();
 
-  // const { filter } = useFlags();
   const onBackClicked = () => {
     history.goBack();
   };
@@ -48,7 +48,7 @@ const HomePageContainer = ({ history }) => {
     });
 
     nodeServer
-      .get("/charities")
+      .get("/v2/charities")
       .then((res) => {
         const foundCharities = res.data;
         setCharities(foundCharities);

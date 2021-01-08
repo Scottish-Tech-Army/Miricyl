@@ -14,6 +14,7 @@ const createServiceObjects = (orgAndServicesObjects) => {
       OrgID: object.OrgID,
       NationalService: isNationalService(object.NationalService),
       ServiceName: object.ServiceName,
+      OuterCode: object.OuterCode,
       PhoneNo: object.PhoneNo,
       OpeningTimes: object.OpeningTimes,
       PhysicalAddress: object.PhysicalAddress,
@@ -48,7 +49,7 @@ const addServicesToOrgs = (services, orgs) => {
 
     return {
       ...org,
-      services: cleanServices(servicesForOrg),
+      Services: cleanServices(servicesForOrg),
     };
   });
 };
@@ -80,6 +81,7 @@ const cleanServices = (servicesForOrg) => {
     return {
       ServiceName: serviceName,
       NationalService: baseService.NationalService,
+      OuterCode: baseService.OuterCode,
       PhoneNo: baseService.PhoneNo,
       PhysicalAddress: baseService.PhysicalAddress,
       Needs: needsMet,
