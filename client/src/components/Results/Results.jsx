@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Filter from "../Filter/Filter";
 import OrgCard from "../OrgCard/OrgCard";
@@ -6,7 +6,6 @@ import OrgCard from "../OrgCard/OrgCard";
 import * as styles from "./results.module.scss";
 
 const Results = ({
-  onBackClicked,
   needs,
   supportTypes,
   personalisations,
@@ -17,8 +16,6 @@ const Results = ({
   onTogglePersonalisationSelected,
   onClearAllUserSelections,
 }) => {
-  console.log("rerender");
-
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
     .map((selectedNeed) => selectedNeed.value);
@@ -139,8 +136,6 @@ const Results = ({
   );
 
   sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
-
-  console.log(sortedObjects);
 
   return (
     <div className={styles.container}>
