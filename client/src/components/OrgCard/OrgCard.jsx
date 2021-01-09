@@ -57,7 +57,7 @@ const OrgOverview = ({ charity }) => {
         <a href={charity.OrgURL} target="_blank">
           <img
             className={styles.orgLogo}
-            src={`https://dev.miricyl.org/images/$web/${charity.OrgID}.png`}
+            src={`/images/$web/${charity.OrgID}.png`}
             alt={`${charity.OrgName} logo`}
           />
         </a>
