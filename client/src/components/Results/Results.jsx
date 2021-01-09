@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Filter from "../Filter";
+import OrgCard from "../OrgCard/OrgCard";
 
 import * as styles from "./results.module.scss";
 
@@ -87,10 +88,17 @@ const Results = ({
           ),
         ];
 
+        const matchedNeeds = [
+          ...new Set(
+            service.Needs.filter((need) => selectedNeeds.includes(need))
+          ),
+        ];
+
         return {
           ...service,
           matchedTypesOfSupport,
           matchedPersonalisations,
+          matchedNeeds,
         };
       });
 
@@ -144,10 +152,9 @@ const Results = ({
         onToggleSupportTypeSelected={onToggleSupportTypeSelected}
         onTogglePersonalisationSelected={onTogglePersonalisationSelected}
       />
-      <div> cards list</div>
-      <div>
-        {sortedObjects.map((object) => {
-          return <span>{object.OrgName}</span>;
+      <div className={styles.cardList}>
+        {sortedObjects.map((org) => {
+          return <OrgCard charity={org} />;
         })}
       </div>
     </div>

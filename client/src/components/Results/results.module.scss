@@ -7,4 +7,13 @@
   display: flex;
   flex-direction: column;
   padding-top: 150px;
+
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+  // do some last child stuff to make last card align left
 }
