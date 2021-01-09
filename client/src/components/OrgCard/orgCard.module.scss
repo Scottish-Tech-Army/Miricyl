@@ -19,6 +19,7 @@
 
 .overviewContainer {
   display: flex;
+  margin-bottom: 32px;
 }
 
 .logoContainer {
@@ -78,7 +79,6 @@
 .optionsMetContainer {
   display: flex;
   flex-wrap: wrap;
-  margin: 32px 0px;
 }
 
 .optionBox {
@@ -115,6 +115,7 @@
 
 .servicesContainer {
   display: flex;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
@@ -141,5 +142,69 @@
   font-family: Nunito;
   font-size: 18px;
   font-weight: normal;
+  flex: 1;
   line-height: 1.22;
+}
+
+.serviceButton {
+  border-radius: 8px;
+  background-color: #2e3192;
+}
+
+.serviceContactBoxes {
+  justify-self: flex-end;
+}
+
+// ORG DETAILS
+
+.orgDetailsContainer {
+  display: flex;
+  background-color: #2e3192;
+  color: white;
+  padding: 16px;
+  margin-top: auto;
+}
+
+.contactDetailsContainer{ 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-family: Nunito;
+  font-size: 18px;
+}
+
+.orgDetailsTitle{
+  font-family: Nunito;
+  font-size: 21px;
+  font-weight: bold;
+  max-width: 200px;
+  padding-left: 16px;
+}
+
+// Expand button
+
+.expandButtonContainer {
+  font-size: 44px;
+  display: flex;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+	color: inherit;
+	border: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+  outline: inherit;
+  
+}
+
+.expandIcon{
+  background-color: #fcd432;
+  color: #2e3192;
+  border-radius: 500px;
+
+  &.disabled {
+    background-color: lightgrey;
+  }
 }
