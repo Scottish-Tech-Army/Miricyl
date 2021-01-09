@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Filter from "../Filter";
+import Filter from "../Filter/Filter";
 import OrgCard from "../OrgCard/OrgCard";
 
 import * as styles from "./results.module.scss";
@@ -151,6 +151,7 @@ const Results = ({
         onToggleNeedSelected={onToggleNeedSelected}
         onToggleSupportTypeSelected={onToggleSupportTypeSelected}
         onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+        onClearAllClicked={onClearAllUserSelections}
       />
       <div className={styles.cardList}>
         {sortedObjects.map((org) => {
