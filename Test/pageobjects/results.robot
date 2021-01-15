@@ -846,20 +846,20 @@ Use case 10 returns 10 local services
     #Edinburgh Rehab Centre
     #Edinburgh Rehab Centre card is present
     element should be visible       xpath://*[@test-id='card-1043']
-    #Networking Key Services (NKS) Ltd. Logo is prompt for question is present
+    #NEdinburgh Rehab Centre Logo is prompt for question is present
     log  Logo is not present
-    #Networking Key Services (NKS) Ltd. name is present
+    #Edinburgh Rehab Centre. name is present
     element should be visible       xpath://*[@test-id='card-1043']//a[contains(text(), 'Edinburgh Rehab Centre')]
     element text should be          xpath://*[@test-id='card-1043']//a[contains(text(), 'Edinburgh Rehab Centre')]  Edinburgh Rehab Centre
 
     #TO-DO
-    #Org Details title for Networking Key Services (NKS) Ltd. is present within Card
-    #Networking Key Services (NKS) Ltd. Org Phone label is present
-    #Networking Key Services (NKS) Ltd. Org Phone Data is correct
-    #Networking Key Services (NKS) Ltd. Org Email label is present
-    #Networking Key Services (NKS) Ltd. Org Email Data is correct
-    #Networking Key Services (NKS) Ltd. Org Address label is presnet
-    #Networking Key Services (NKS) Ltd. Org Address Data is correct
+    #Org Details title for Edinburgh Rehab Centre is present within Card
+    #Edinburgh Rehab Centre Org Phone label is present
+    #Edinburgh Rehab Centre Org Phone Data is correct
+    #Edinburgh Rehab Centre Org Email label is present
+    #Edinburgh Rehab Centre Org Email Data is correct
+    #Edinburgh Rehab Centre Org Address label is presnet
+    #Edinburgh Rehab Centre Org Address Data is correct
 
     #Networking Key Services (NKS) Ltd.
     #Networking Key Services (NKS) Ltd. card is present
@@ -1656,135 +1656,563 @@ HIV Scotland
     #HIV Scotland Org Address Data is correct
 
 In Care Survivor Service Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(30) > div.results-title-container > div.results-list-title-service > p.results-list-title
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(30) > div.results-title-container > div.results-list-title-service > p.results-list-title  In Care Survivor Service Scotland
+    element should be visible       xpath://*[@test-id='card-1059']
+    #In Care Survivor Service Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #In Care Survivor Service Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1059']//a[contains(text(), 'In Care Survivor Service Scotland')]
+    element text should be          xpath://*[@test-id='card-1059']//a[contains(text(), 'In Care Survivor Service Scotland')]  In Care Survivor Service Scotland
+
+    #TO-DO
+    #Org Details title for In Care Survivor Service Scotland is present within Card
+    #In Care Survivor Service Scotland Org Phone label is present
+    #In Care Survivor Service Scotland Org Phone Data is correct
+    #In Care Survivor Service Scotland Email label is present
+    #In Care Survivor Service Scotland Email Data is correct
+    #In Care Survivor Service Scotland Org Address label is presnet
+    #In Care Survivor Service Scotland Org Address Data is correct
 
 IWORK4ME
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(31) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(31) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  IWORK4ME
+    element should be visible       xpath://*[@test-id='card-1060']
+    #IWORK4ME Logo is prompt for question is present
+    log  Logo is not present
+    #IWORK4ME name is present
+    element should be visible       xpath://*[@test-id='card-1060']//a[contains(text(), 'IWORK4ME')]
+    element text should be          xpath://*[@test-id='card-1060']//a[contains(text(), 'IWORK4ME')]  IWORK4ME
+
+    #TO-DO
+    #Org Details title for IWORK4ME is present within Card
+    #IWORK4ME Org Phone label is present
+    #IWORK4ME Org Phone Data is correct
+    #IWORK4ME Email label is present
+    #IWORK4ME Email Data is correct
+    #IWORK4ME Org Address label is presnet
+    #IWORK4ME Org Address Data is correct
+   
 
 Juno Perinatal Mental Health Support
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(32) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(32) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Juno Perinatal Mental Health Support
+    element should be visible       xpath://*[@test-id='card-1061']
+    #Juno Perinatal Mental Health Support Logo is prompt for question is present
+    log  Logo is not present
+    #Juno Perinatal Mental Health Support name is present
+    element should be visible       xpath://*[@test-id='card-1061']//a[contains(text(), 'Juno Perinatal Mental Health Support')]
+    element text should be          xpath://*[@test-id='card-1061']//a[contains(text(), 'Juno Perinatal Mental Health Support')]  Juno Perinatal Mental Health Support
+
+    #TO-DO
+    #Org Details title for Juno Perinatal Mental Health Support is present within Card
+    #Juno Perinatal Mental Health Support Org Phone label is present
+    #Juno Perinatal Mental Health Support Org Phone Data is correct
+    #Juno Perinatal Mental Health Support Email label is present
+    #Juno Perinatal Mental Health Support Email Data is correct
+    #Juno Perinatal Mental Health Support Org Address label is presnet
+    #Juno Perinatal Mental Health Support Org Address Data is correct
 
 LGBT Youth Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(33) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(33) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  LGBT Youth Scotland
+    element should be visible       xpath://*[@test-id='card-1061']
+    #LGBT Youth Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #LGBT Youth Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1061']//a[contains(text(), 'LGBT Youth Scotland')]
+    element text should be          xpath://*[@test-id='card-1061']//a[contains(text(), 'LGBT Youth Scotland')]  LGBT Youth Scotland
+
+    #TO-DO
+    #Org Details title for LGBT Youth Scotland is present within Card
+    #LGBT Youth Scotland Org Phone label is present
+    #LGBT Youth Scotland Org Phone Data is correct
+    #LGBT Youth Scotland Email label is present
+    #LGBT Youth Scotland Email Data is correct
+    #LGBT Youth Scotland Org Address label is presnet
+    #LGBT Youth Scotland Org Address Data is correct
 
 Networking Key Services (NKS) Ltd.
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(34) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(34) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Networking Key Services (NKS) Ltd.
+    #Networking Key Services (NKS) Ltd.
+    #Networking Key Services (NKS) Ltd. card is present
+    element should be visible       xpath://*[@test-id='card-1066']
+    #Networking Key Services (NKS) Ltd. Logo is prompt for question is present
+    log  Logo is not present
+    #Networking Key Services (NKS) Ltd. name is present
+    element should be visible       xpath://*[@test-id='card-1066']//a[contains(text(), 'Networking Key Services (NKS) Ltd.')]
+    element text should be          xpath://*[@test-id='card-1066']//a[contains(text(), 'Networking Key Services (NKS) Ltd.')]  Networking Key Services (NKS) Ltd.
+
+    #TO-DO
+    #Org Details title for Networking Key Services (NKS) Ltd. is present within Card
+    #Networking Key Services (NKS) Ltd. Org Phone label is present
+    #Networking Key Services (NKS) Ltd. Org Phone Data is correct
+    #Networking Key Services (NKS) Ltd. Org Email label is present
+    #Networking Key Services (NKS) Ltd. Org Email Data is correct
+    #Networking Key Services (NKS) Ltd. Org Address label is presnet
+    #Networking Key Services (NKS) Ltd. Org Address Data is correct
 
 People Know How
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(35) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(35) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  People Know How
+    #People Know How card is present
+    element should be visible       xpath://*[@test-id='card-1071']
+    #People Know How Logo is prompt for question is present
+    log  Logo is not present
+    #People Know How name is present
+    element should be visible       xpath://*[@test-id='card-1071']//a[contains(text(), 'People Know How')]
+    element text should be          xpath://*[@test-id='card-1071']//a[contains(text(), 'People Know How')]  People Know How
+
+    #TO-DO
+    #Org Details title for People Know How is present within Card
+    #People Know How Org Phone label is present
+    #People Know How Org Phone Data is correct
+    #People Know How Org Email label is present
+    #People Know How Org Email Data is correct
+    #People Know How Org Address label is presnet
+    #People Know How Org Address Data is correct
 
 Pregnancy Counselling & Care (Scotland)
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(36) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(36) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Pregnancy Counselling & Care (Scotland)
+    #Pregnancy Counselling & Care (Scotland) card is present
+    element should be visible       xpath://*[@test-id='card-1075']
+    #Pregnancy Counselling & Care (Scotland) Logo is prompt for question is present
+    log  Logo is not present
+    #Pregnancy Counselling & Care (Scotland) name is present
+    element should be visible       xpath://*[@test-id='card-1075']//a[contains(text(), 'Pregnancy Counselling & Care (Scotland)')]
+    element text should be          xpath://*[@test-id='card-1075']//a[contains(text(), 'Pregnancy Counselling & Care (Scotland)')]  Pregnancy Counselling & Care (Scotland)
+
+    #TO-DO
+    #Org Details title for Pregnancy Counselling & Care (Scotland) is present within Card
+    #Pregnancy Counselling & Care (Scotland) Org Phone label is present
+    #Pregnancy Counselling & Care (Scotland) Org Phone Data is correct
+    #Pregnancy Counselling & Care (Scotland) Email label is present
+    #Pregnancy Counselling & Care (Scotland) Email Data is correct
+    #Pregnancy Counselling & Care (Scotland) Address label is presnet
+    #Pregnancy Counselling & Care (Scotland) Address Data is correct
 
 Samaritans
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(37) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(37) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Samaritans
+    #Samaritans card is present
+    element should be visible       xpath://*[@test-id='card-1079']
+    #Samaritans Logo is prompt for question is present
+    log  Logo is not present
+    #Samaritans name is present
+    element should be visible       xpath://*[@test-id='card-1079']//a[contains(text(), 'Samaritans')]
+    element text should be          xpath://*[@test-id='card-1079']//a[contains(text(), 'Samaritans')]  Samaritans
+
+    #TO-DO
+    #Org Details title for Samaritans is present within Card
+    #Samaritans Org Phone label is present
+    #Samaritans Org Phone Data is correct
+    #Samaritans Email label is present
+    #Samaritans Email Data is correct
+    #Samaritans Address label is presnet
+    #Samaritans Address Data is correct
 
 Scottish Cot Death Trust
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(38) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(38) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Scottish Cot Death Trust
+    #Scottish Cot Death Trust card is present
+    element should be visible       xpath://*[@test-id='card-1081']
+    #Scottish Cot Death Trust Logo is prompt for question is present
+    log  Logo is not present
+    #Scottish Cot Death Trust name is present
+    element should be visible       xpath://*[@test-id='card-1081']//a[contains(text(), 'Scottish Cot Death Trust')]
+    element text should be          xpath://*[@test-id='card-1081']//a[contains(text(), 'Scottish Cot Death Trust')]  Scottish Cot Death Trust
+
+    #TO-DO
+    #Org Details title for Scottish Cot Death Trust is present within Card
+    #Scottish Cot Death Trust Org Phone label is present
+    #Scottish Cot Death Trust Org Phone Data is correct
+    #Scottish Cot Death Trust Email label is present
+    #Scottish Cot Death Trust Email Data is correct
+    #Scottish Cot Death Trust Address label is presnet
+    #Scottish Cot Death Trust Address Data is correct
 
 Scottish Recovery Network
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(39) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(39) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Scottish Recovery Network
+    #Scottish Recovery Network card is present
+    element should be visible       xpath://*[@test-id='card-1082']
+    #Scottish Recovery Network Logo is prompt for question is present
+    log  Logo is not present
+    #Scottish Recovery Network name is present
+    element should be visible       xpath://*[@test-id='card-1082']//a[contains(text(), 'Scottish Recovery Network')]
+    element text should be          xpath://*[@test-id='card-1082']//a[contains(text(), 'Scottish Recovery Network')]  Scottish Recovery Network
+
+    #TO-DO
+    #Org Details title for Scottish Recovery Network is present within Card
+    #Scottish Recovery Network Org Phone label is present
+    #Scottish Recovery Network Org Phone Data is correct
+    #Scottish Recovery Network Email label is present
+    #Scottish Recovery Network Email Data is correct
+    #Scottish Recovery Network Address label is presnet
+    #Scottish Recovery Network Address Data is correct
 
 Shared Care Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(40) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(40) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Shared Care Scotland
+    #Shared Care Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1083']
+    #Shared Care Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Shared Care Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1083']//a[contains(text(), 'Shared Care Scotland')]
+    element text should be          xpath://*[@test-id='card-1083']//a[contains(text(), 'Shared Care Scotland')]  Shared Care Scotland
+
+    #TO-DO
+    #Org Details title for Shared Care Scotland is present within Card
+    #Shared Care Scotland Org Phone label is present
+    #Shared Care Scotland Org Phone Data is correct
+    #Shared Care Scotland Email label is present
+    #Shared Care Scotland Email Data is correct
+    #Shared Care Scotland Address label is presnet
+    #Shared Care Scotland Address Data is correct
 
 Street Soccer Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(41) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(41) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Street Soccer Scotland
+    #Street Soccer Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1086']
+    #Street Soccer Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Street Soccer Scotland is present
+    element should be visible       xpath://*[@test-id='card-1086']//a[contains(text(), 'Street Soccer Scotland')]
+    element text should be          xpath://*[@test-id='card-1086']//a[contains(text(), 'Street Soccer Scotland')]  Street Soccer Scotland
+
+    #TO-DO
+    #Org Details title for Street Soccer Scotland is present within Card
+    #Street Soccer Scotland Org Phone label is present
+    #Street Soccer Scotland Org Phone Data is correct
+    #Street Soccer Scotland Email label is present
+    #Street Soccer Scotland Email Data is correct
+    #Street Soccer Scotland Address label is presnet
+    #Street Soccer Scotland Address Data is correct
 
 TalkTime Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(42) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(42) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  TalkTime Scotland
+    #TalkTime Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1090']
+    #TalkTime Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #TalkTime Scotland is present
+    element should be visible       xpath://*[@test-id='card-1090']//a[contains(text(), 'TalkTime Scotland')]
+    element text should be          xpath://*[@test-id='card-1090']//a[contains(text(), 'TalkTime Scotland')]  TalkTime Scotland
+
+    #TO-DO
+    #Org Details title for TalkTime Scotland is present within Card
+    #TalkTime Scotland Org Phone label is present
+    #TalkTime Scotland Org Phone Data is correct
+    #TalkTime Scotland Email label is present
+    #TalkTime Scotland Email Data is correct
+    #TalkTime Scotland Address label is presnet
+    #TalkTime Scotland Address Data is correct
 
 The Prince’s Trust
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(43) > div.results-title-container > div > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(43) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  The Prince’s Trust
+    #The Prince’s Trust card is present
+    element should be visible       xpath://*[@test-id='card-1093']
+    #The Prince’s Trust Logo is prompt for question is present
+    log  Logo is not present
+    #The Prince’s Trust name is present
+    element should be visible       xpath://*[@test-id='card-1093']//a[contains(text(), 'The Prince’s Trust')]
+    element text should be          xpath://*[@test-id='card-1093']//a[contains(text(), 'The Prince’s Trust')]  The Prince’s Trust
 
-
+    #TO-DO
+    #Org Details title for The Prince’s Trust is present within Card
+    #The Prince’s Trust Org Phone label is present
+    #The Prince’s Trust Org Phone Data is correct
+    #The Prince’s Trust Email label is present
+    #The Prince’s Trust Email Data is correct
+    #The Prince’s Trust Org Address label is presnet
+    #The Prince’s Trust Org Address Data is correct
 
 Venture Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(44) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(44) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Venture Scotland
+    #Venture Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1099']
+    #Venture Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Venture Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1099']//a[contains(text(), 'Venture Scotland')]
+    element text should be          xpath://*[@test-id='card-1099']//a[contains(text(), 'Venture Scotland')]  Venture Scotland
+
+    #TO-DO
+    #Org Details title for Venture Scotland is present within Card
+    #Venture Scotland Org Phone label is present
+    #Venture Scotland Org Phone Data is correct
+    #Venture Scotland Email label is present
+    #Venture Scotland Email Data is correct
+    #Venture Scotland Org Address label is presnet
+    #Venture Scotland Org Address Data is correct
 
 Victim Support Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(45) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(45) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Victim Support Scotland
+    #Victim Support Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1100']
+    #Victim Support Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Victim Support Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1100']//a[contains(text(), 'Victim Support Scotland')]
+    element text should be          xpath://*[@test-id='card-1100']//a[contains(text(), 'Victim Support Scotland')]  Victim Support Scotland
+
+    #TO-DO
+    #Org Details title for Victim Support Scotland is present within Card
+    #Victim Support Scotland Org Phone label is present
+    #Victim Support Scotland Org Phone Data is correct
+    #Victim Support Scotland Email label is present
+    #Victim Support Scotland Email Data is correct
+    #Victim Support Scotland Org Address label is presnet
+    #Victim Support Scotland Org Address Data is correct
 
 Waverley Care
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(46) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(46) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Waverley Care
+    #Waverley Care
+    #Waverley Care card is present
+    element should be visible       xpath://*[@test-id='card-1105']
+    #Waverley Care Logo is prompt for question is present
+    log  Logo is not present
+    #Waverley Care name is present
+    element should be visible       xpath://*[@test-id='card-1105']//a[contains(text(), 'Waverley Care')]
+    element text should be          xpath://*[@test-id='card-1105']//a[contains(text(), 'Waverley Care')]  Waverley Care
+
+    #TO-DO
+    #Org Details title for Waverley Care. is present within Card
+    #Waverley Care Org Phone label is present
+    #Waverley Care Org Phone Data is correct
+    #Waverley Care Org Email label is present
+    #Waverley Care Org Email Data is correct
+    #Waverley Care Org Address label is presnet
+    #Waverley Care Org Address Data is correct
 
 Wellbeing Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(47) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(47) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Wellbeing Scotland
+    #Wellbeing Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1106']
+    #Wellbeing Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Wellbeing Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1106']//a[contains(text(), 'Wellbeing Scotland')]
+    element text should be          xpath://*[@test-id='card-1106']//a[contains(text(), 'Wellbeing Scotland')]  Wellbeing Scotland
+
+    #TO-DO
+    #Org Details title for Wellbeing Scotland is present within Card
+    #Wellbeing Scotland Org Phone label is present
+    #Wellbeing Scotland Org Phone Data is correct
+    #Wellbeing Scotland Email label is present
+    #Wellbeing Scotland Email Data is correct
+    #Wellbeing Scotland Org Address label is presnet
+    #Wellbeing Scotland Org Address Data is correct
 
 Who Cares? Scotland
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(48) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(48) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Who Cares? Scotland
+    #Who Cares? Scotland card is present
+    element should be visible       xpath://*[@test-id='card-1108']
+    #Who Cares? Scotland Logo is prompt for question is present
+    log  Logo is not present
+    #Who Cares? Scotland name is present
+    element should be visible       xpath://*[@test-id='card-1108']//a[contains(text(), 'Who Cares? Scotland')]
+    element text should be          xpath://*[@test-id='card-1108']//a[contains(text(), 'Who Cares? Scotland')]  Who Cares? Scotland
+
+    #TO-DO
+    #Org Details title for Who Cares? Scotland is present within Card
+    #Who Cares? Scotland Org Phone label is present
+    #Who Cares? Scotland Org Phone Data is correct
+    #Who Cares? Scotland Email label is present
+    #Who Cares? Scotland Email Data is correct
+    #Who Cares? Scotland Org Address label is presnet
+    #Who Cares? Scotland Org Address Data is correct
 
 Partners in Advocacy
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(2) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(2) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Partners in Advocacy
+    #Partners in Advocacy card is present
+    element should be visible       xpath://*[@test-id='card-1069']
+    #Partners in Advocacy Logo is prompt for question is present
+    log  Logo is not present
+    #Partners in Advocacy name is present
+    element should be visible       xpath://*[@test-id='card-1069']//a[contains(text(), 'Partners in Advocacy')]
+    element text should be          xpath://*[@test-id='card-1069']//a[contains(text(), 'Partners in Advocacy')]  Partners in Advocacy
+
+    #TO-DO
+    #Org Details title for Partners in Advocacy is present within Card
+    #Partners in Advocacy Org Phone label is present
+    #Partners in Advocacy Org Phone Data is correct
+    #Partners in Advocacy Email label is present
+    #Partners in Advocacy Email Data is correct
+    #Partners in Advocacy Org Address label is presnet
+    #Partners in Advocacy Org Address Data is correct
 
 Volunteer Edinburgh
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(4) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(4) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Volunteer Edinburgh
+    #Volunteer Edinburgh card is present
+    element should be visible       xpath://*[@test-id='card-1104']
+    #Volunteer Edinburgh Logo is prompt for question is present
+    log  Logo is not present
+    #Volunteer Edinburgh name is present
+    element should be visible       xpath://*[@test-id='card-1104']//a[contains(text(), 'Volunteer Edinburgh')]
+    element text should be          xpath://*[@test-id='card-1104']//a[contains(text(), 'Volunteer Edinburgh')]  Volunteer Edinburgh
+
+    #TO-DO
+    #Org Details title for Volunteer Edinburgh is present within Card
+    #Volunteer Edinburgh Org Phone label is present
+    #Volunteer Edinburgh Org Phone Data is correct
+    #Volunteer Edinburgh Email label is present
+    #Volunteer Edinburgh Email Data is correct
+    #Volunteer Edinburgh Org Address label is presnet
+    #Volunteer Edinburgh Org Address Data is correct
 
 Befriending Network
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(3) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(3) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Befriending Network
+    #Befriending Network card is present
+    element should be visible       xpath://*[@test-id='card-1019']
+    #Befriending Network Logo is prompt for question is present
+    log  Logo is not present
+    #Befriending Network name is present
+    element should be visible       xpath://*[@test-id='card-1019']//a[contains(text(), 'Befriending Network')]
+    element text should be          xpath://*[@test-id='card-1019']//a[contains(text(), 'Befriending Network')]  Befriending Network
+
+    #TO-DO
+    #Org Details title for Befriending Network is present within Card
+    #Befriending Network Org Phone label is present
+    #Befriending Network Org Phone Data is correct
+    #Befriending Network Email label is present
+    #Befriending Network Email Data is correct
+    #Befriending Network Org Address label is presnet
+    #Befriending Network Org Address Data is correct
 
 
 Crossreach C-3
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(5) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(5) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Crossreach
+    #Crossreach Org 1032 card is present
+    element should be visible       xpath://*[@test-id='card-1032']
+    #Crossreach Org 1032 Logo is prompt for question is present
+    log  Logo is not present
+    #Crossreach Org 1032 name is present
+    element should be visible       xpath://*[@test-id='card-1032']//a[contains(text(), 'Crossreach')]
+    element text should be          xpath://*[@test-id='card-1032']//a[contains(text(), 'Crossreach')]  Crossreach
+
+    #TO-DO
+    #Org Details title for Crossreach Org 1031 is present within Card
+    #Crossreach Org 1032 Org Phone label is present
+    #Crossreach Org 1032 Org Phone Data is correct
+    #Crossreach Org 1032 Email label is present
+    #Crossreach Org 1032 Email Data is correct
+    #Crossreach Org 1032 Org Address label is presnet
+    #Crossreach Org 1032 Org Address Data is correct
 
 Crossreach C-1
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(6) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(6) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  CrossReach
+    #Crossreach Org 1031 card is present
+    element should be visible       xpath://*[@test-id='card-1031']
+    #Crossreach Org 1031 Logo is prompt for question is present
+    log  Logo is not present
+    #Crossreach Org 1031 name is present
+    element should be visible       xpath://*[@test-id='card-1031']//a[contains(text(), 'Crossreach')]
+    element text should be          xpath://*[@test-id='card-1031']//a[contains(text(), 'Crossreach')]  Crossreach
+
+    #TO-DO
+    #Org Details title for Crossreach Org 1031 is present within Card
+    #Crossreach Org 1031 Org Phone label is present
+    #Crossreach Org 1031 Org Phone Data is correct
+    #Crossreach Org 1031 Email label is present
+    #Crossreach Org 1031 Email Data is correct
+    #Crossreach Org 1031 Org Address label is presnet
+    #Crossreach Org 1031 Org Address Data is correct
 
 Edinburgh and Lothian Council on Alcohol
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(7) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(7) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Edinburgh and Lothian Council on Alcohol
+    #Edinburgh and Lothian Council on Alcohol card is present
+    element should be visible       xpath://*[@test-id='card-1037']
+    #Edinburgh and Lothian Council on Alcohol Logo is prompt for question is present
+    log  Logo is not present
+    #Edinburgh and Lothian Council on Alcohol name is present
+    element should be visible       xpath://*[@test-id='card-1037']//a[contains(text(), 'Edinburgh and Lothian Council on Alcohol')]
+    element text should be          xpath://*[@test-id='card-1037']//a[contains(text(), 'Edinburgh and Lothian Council on Alcohol')]  Edinburgh and Lothian Council on Alcohol
+
+    #TO-DO
+    #Org Details title for Edinburgh and Lothian Council on Alcohol is present within Card
+    #Edinburgh and Lothian Council on Alcohol Org Phone label is present
+    #Edinburgh and Lothian Council on Alcohol Org Phone Data is correct
+    #Edinburgh and Lothian Council on Alcohol Email label is present
+    #Edinburgh and Lothian Council on Alcohol Email Data is correct
+    #Edinburgh and Lothian Council on Alcohol Org Address label is presnet
+    #Edinburgh and Lothian Council on Alcohol Org Address Data is correct
 
 Positive Help
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(9) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(9) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Positive Help
+    #Positive Help card is present
+    element should be visible       xpath://*[@test-id='card-1074']
+    #Positive Help is prompt for question is present
+    log  Logo is not present
+    #Positive Help name is present
+    element should be visible       xpath://*[@test-id='card-1074']//a[contains(text(), 'Positive Help')]
+    element text should be          xpath://*[@test-id='card-1074']//a[contains(text(), 'Positive Help')]  Positive Help
+
+    #TO-DO
+    #Org Details title for Positive Help is present within Card
+    #Positive Help Org Phone label is present
+    #Positive Help Org Phone Data is correct
+    #Positive Help Email label is present
+    #Positive Help Email Data is correct
+    #Positive Help Org Address label is presnet
+    #Positive Help Org Address Data is correct
 
 The Sorted Project
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(10) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(10) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  The Sorted Project
+    #The Sorted Project card is present
+    element should be visible       xpath://*[@test-id='card-1095']
+    #The Sorted Project is prompt for question is present
+    log  Logo is not present
+    #The Sorted Project name is present
+    element should be visible       xpath://*[@test-id='card-1095']//a[contains(text(), 'The Sorted Project')]
+    element text should be          xpath://*[@test-id='card-1095']//a[contains(text(), 'The Sorted Project')]  The Sorted Project
+
+    #TO-DO
+    #Org Details title for The Sorted Project is present within Card
+    #The Sorted Project Org Phone label is present
+    #The Sorted Project Org Phone Data is correct
+    #The Sorted Project Email label is present
+    #The Sorted Project Email Data is correct
+    #The Sorted Project Org Address label is presnet
+    #The Sorted Project Org Address Data is correct
+
 
 Department of Work and Pensions (DWP)
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(2) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(2) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Department of Work and Pensions (DWP)
+    #Department of Work and Pensions (DWP) card is present
+    element should be visible       xpath://*[@test-id='card-1035']
+    #Department of Work and Pensions Logo is prompt for question is present
+    log  Logo is not present
+    #Department of Work and Pensions (DWP) name is present
+    element should be visible       xpath://*[@test-id='card-1035']//a[contains(text(), 'Department of Work and Pensions (DWP)')]
+    element text should be          xpath://*[@test-id='card-1035']//a[contains(text(), 'Department of Work and Pensions (DWP)')]  Department of Work and Pensions (DWP)
+
+    #TO-DO
+    #Org Details title for DWP is present within Card
+    #DWP Org Phone label is present
+    #DWP Org Phone Data is correct
+    #DWP Org Email label is present
+    #DWP Org Email Data is correct
+    #DWP Org Address label is presnet
+    #DWP Org Address Data is correct
 
 Edinburgh Rehab Centre
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(3) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(3) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Edinburgh Rehab Centre
+    #Edinburgh Rehab Centre
+    #Edinburgh Rehab Centre card is present
+    element should be visible       xpath://*[@test-id='card-1043']
+    #NEdinburgh Rehab Centre Logo is prompt for question is present
+    log  Logo is not present
+    #Edinburgh Rehab Centre. name is present
+    element should be visible       xpath://*[@test-id='card-1043']//a[contains(text(), 'Edinburgh Rehab Centre')]
+    element text should be          xpath://*[@test-id='card-1043']//a[contains(text(), 'Edinburgh Rehab Centre')]  Edinburgh Rehab Centre
+
+    #TO-DO
+    #Org Details title for Edinburgh Rehab Centre is present within Card
+    #Edinburgh Rehab Centre Org Phone label is present
+    #Edinburgh Rehab Centre Org Phone Data is correct
+    #Edinburgh Rehab Centre Org Email label is present
+    #Edinburgh Rehab Centre Org Email Data is correct
+    #Edinburgh Rehab Centre Org Address label is presnet
+    #Edinburgh Rehab Centre Org Address Data is correct
 
 NHS Lothian
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(5) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(5) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  NHS Lothian
+    #NHS Lothian
+    #NHS Lothian card is present
+    element should be visible       xpath://*[@test-id='card-1067']
+    #NHS Lothian Logo is prompt for question is present
+    log  Logo is not present
+    #NHS Lothian name is present
+    element should be visible       xpath://*[@test-id='card-1067']//a[contains(text(), 'NHS Lothian')]
+    element text should be          xpath://*[@test-id='card-1067']//a[contains(text(), 'NHS Lothian')]  NHS Lothian
 
-#Waverley Care
-#    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(6) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-#    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(6) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Waverley Care
+    #TO-DO
+    #Org Details title for NHS Lothian. is present within Card
+    #NHS Lothian Org Phone label is present
+    #NHS Lothian Org Phone Data is correct
+    #NHS Lothian Org Email label is present
+    #NHS Lothian Org Email Data is correct
+    #NHS Lothian Org Address label is presnet
+    #NHS Lothian Org Address Data is correct
 
 Wheatley Care
-    element should be visible  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(7) > div.results-title-container > div.results-list-title-service > p.results-list-title > a
-    element text should be  css:#root > div.results-page-container > div > div.results-page-display > div:nth-child(7) > div.results-title-container > div.results-list-title-service > p.results-list-title > a  Wheatley Care
+    #Wheatley Care
+    #Wheatley Care card is present
+    element should be visible       xpath://*[@test-id='card-1107']
+    #Wheatley Care Logo is prompt for question is present
+    log  Logo is not present
+    #Wheatley Care name is present
+    element should be visible       xpath://*[@test-id='card-1107']//a[contains(text(), 'Wheatley Care')]
+    element text should be          xpath://*[@test-id='card-1107']//a[contains(text(), 'Wheatley Care')]  Wheatley Care
 
-#    element should be visible
-#    element text should be
+    #TO-DO
+    #Org Details title for Wheatley Care. is present within Card
+    #Wheatley Care Org Phone label is present
+    #Wheatley Care Org Phone Data is correct
+    #Wheatley Care Org Email label is present
+    #Wheatley Care Org Email Data is correct
+    #Wheatley Care Org Address label is presnet
+    #Wheatley Care Org Address Data is correct
