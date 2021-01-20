@@ -8,6 +8,8 @@ Insert into Miricyl.Country
 values(104, 'Northen Ireland');
 Insert into Miricyl.Country
 values(105, 'United Kingdom');
+Insert into Miricyl.Country
+values(106, 'England & Wales');
 Insert into Miricyl.Gender
 values(101, 'Female');
 Insert into Miricyl.Gender

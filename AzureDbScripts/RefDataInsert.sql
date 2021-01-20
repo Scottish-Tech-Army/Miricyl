@@ -3,6 +3,7 @@ Insert into __dbname__.Country values(102,'England');
 Insert into __dbname__.Country values(103,'Wales');
 Insert into __dbname__.Country values(104,'Northen Ireland');
 Insert into __dbname__.Country values(105,'United Kingdom');
+Insert into __dbname__.Country values(106, 'England & Wales');
 Insert into __dbname__.Gender values(101,'Female');
 Insert into __dbname__.Gender values(102,'Male');
 Insert into __dbname__.Gender values(103,'Both');
