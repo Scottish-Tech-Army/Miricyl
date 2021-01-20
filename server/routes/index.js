@@ -1,9 +1,10 @@
-
 const { query } = require("express");
 const express = require("express");
-const axios = require("axios")
+const axios = require("axios");
 const db = require("../db");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
+
+const createCharityObjects = require("../charityHelper");
 dotenv.config();
 
 const router = express.Router();
@@ -59,23 +60,34 @@ router.get("/charities", async (req, res, next) => {
   }
 });
 
-router.get("/googleratings/:id", async (req, res) => {
-  let development = process.env.NODE_ENV == "development";
-  let key = ""
-  if (development) {
-    key = process.env.googleapi
-  } else {
-    key = __googleapitoken__
-  };
+router.get("/v2/charities", async (req, res, next) => {
   try {
-    let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&fields=rating&key=${key}`
-    let results = await axios.get(url)
-    res.json(results.data.result)
+    let results = await db.charities();
+    let organisations = await db.organisations();
+    const objectsToReturn = createCharityObjects(results, organisations);
+    res.json(objectsToReturn);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
   }
+});
 
-})
+router.get("/googleratings/:id", async (req, res) => {
+  let development = process.env.NODE_ENV == "development";
+  let key = "";
+  if (development) {
+    key = process.env.googleapi;
+  } else {
+    key = __googleapitoken__;
+  }
+  try {
+    let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&fields=rating&key=${key}`;
+    let results = await axios.get(url);
+    res.json(results.data.result);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
 
 module.exports = router;

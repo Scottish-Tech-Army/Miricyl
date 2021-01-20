@@ -12,6 +12,11 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
 import postcodeServer from "../api/postcodeServer";
 
+/*
+  PLEASE USE OTHER FILTER COMPONENT NOW. THIS IS JUST HERE FOR REFERENCE OF EXISTING WORK THAT HAS NOT YET BEEN CARRIED OVER.
+  THIS WILL NO LONGER WORK
+*/
+
 const Results = ({
   onBackClicked,
   needs,
@@ -199,16 +204,16 @@ const Results = ({
         return a.NationalService === "YES"
           ? -1
           : b.NationalService === "YES"
-            ? 1
-            : 0;
+          ? 1
+          : 0;
       });
     } else {
       locationSortedCharities = charities.sort((a, b) => {
         return a.OuterCode.toUpperCase() === postcode.toUpperCase()
           ? -1
           : b.OuterCode.toUpperCase() === postcode.toUpperCase()
-            ? 1
-            : 0;
+          ? 1
+          : 0;
       });
     }
 
@@ -317,11 +322,20 @@ const Results = ({
       <div className="results-title-container">
         {charity.Logo || `/images/$web/${charity.OrgID}.png` ? (
           <a href={charity.ServiceURL} target="_blank">
+<<<<<<< HEAD
             <img className="results-list-logo" src={`/images/$web/${charity.OrgID}.png`} alt={`${charity.OrgName} logo`} onError={(e) => { e.target.src = 'no image found' }} />
+=======
+            <img
+              className="results-list-logo"
+              src={`/images/$web/${charity.OrgID}.png`}
+              alt={`${charity.OrgName} logo`}
+              onError={charity.Logo}
+            />
+>>>>>>> uat
           </a>
         ) : (
-            <div></div>
-          )}
+          <div></div>
+        )}
 
         <div className="results-list-title-service">
           {charity.ServiceURL ? (
@@ -332,8 +346,8 @@ const Results = ({
               </a>
             </p>
           ) : (
-              <p className="results-list-title">{charity.OrgName}</p>
-            )}
+            <p className="results-list-title">{charity.OrgName}</p>
+          )}
 
           {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
@@ -349,12 +363,12 @@ const Results = ({
               {charity.googleRating}{" "}
             </p>
           ) : (
-              <p>
-                {" "}
-                <ReactStars count={5} value={0} isHalf={true} />
+            <p>
+              {" "}
+              <ReactStars count={5} value={0} isHalf={true} />
               No ratings found{" "}
-              </p>
-            )}
+            </p>
+          )}
         </div>
       </div>
 

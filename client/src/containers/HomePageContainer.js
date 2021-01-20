@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-import { useFlags } from "../hooks/useFlags";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
 import TextBoxQuestion from "../components/TextBoxQuestion";
-import Results from "../components/Results";
+import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
 
@@ -19,7 +18,6 @@ const HomePageContainer = ({ history }) => {
 
   let appInsights = getAppInsights();
 
-  // const { filter } = useFlags();
   const onBackClicked = () => {
     history.goBack();
   };
@@ -48,7 +46,7 @@ const HomePageContainer = ({ history }) => {
     });
 
     nodeServer
-      .get("/charities")
+      .get("/v2/charities")
       .then((res) => {
         const foundCharities = res.data;
         setCharities(foundCharities);
@@ -74,7 +72,7 @@ const HomePageContainer = ({ history }) => {
     nodeServer.get("/personalisations").then((res) => {
       const personalisationsResponse = res.data
         .map((personalisation) => personalisation.Description)
-        .filter((personalisation) => personalisation != "");
+        .filter((personalisation) => personalisation !== "");
       const UserPersonalisations = personalisationsResponse.map(
         (personalisation) => {
           return { value: personalisation, isSelected: false };
@@ -87,7 +85,7 @@ const HomePageContainer = ({ history }) => {
   const onToggleNeedSelected = (selectedNeed) => {
     setNeeds(
       [
-        ...needs.filter((need) => need != selectedNeed),
+        ...needs.filter((need) => need !== selectedNeed),
         { ...selectedNeed, isSelected: !selectedNeed.isSelected },
       ].sort((a, b) => a.value.localeCompare(b.value))
     );
@@ -170,6 +168,24 @@ const HomePageContainer = ({ history }) => {
     history.push("/results");
   };
 
+  const clearAllUserSelections = () => {
+    setNeeds(
+      needs.map((need) => {
+        return { ...need, isSelected: false };
+      })
+    );
+    setSupportTypes(
+      supportTypes.map((supportType) => {
+        return { ...supportType, isSelected: false };
+      })
+    );
+    setPersonalisations(
+      personalisations.map((personalisation) => {
+        return { ...personalisation, isSelected: false };
+      })
+    );
+  };
+
   return (
     <>
       <TelemetryProvider
@@ -226,6 +242,7 @@ const HomePageContainer = ({ history }) => {
               onToggleNeedSelected={onToggleNeedSelected}
               onToggleSupportTypeSelected={onToggleSupportTypeSelected}
               onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+              onClearAllUserSelections={clearAllUserSelections}
             />
           </Route>
         </Switch>

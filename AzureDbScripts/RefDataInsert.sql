@@ -3,6 +3,7 @@ Insert into __dbname__.Country values(102,'England');
 Insert into __dbname__.Country values(103,'Wales');
 Insert into __dbname__.Country values(104,'Northen Ireland');
 Insert into __dbname__.Country values(105,'United Kingdom');
+Insert into __dbname__.Country values(106, 'England & Wales');
 Insert into __dbname__.Gender values(101,'Female');
 Insert into __dbname__.Gender values(102,'Male');
 Insert into __dbname__.Gender values(103,'Both');
@@ -57,8 +58,8 @@ Insert into __dbname__.Type Values(113, 'Online support by Email', 'Email or for
 Insert into __dbname__.Type Values(114, 'Online support by Video', 'Telephone or zoom');
 
 Insert into __dbname__.Personalisation Values(101,'Under 16','Under 18');
-Insert into __dbname__.Personalisation Values(102,'16+','');
-Insert into __dbname__.Personalisation Values(103,'18+','');
+Insert into __dbname__.Personalisation Values(102,'16+','Under 18');
+Insert into __dbname__.Personalisation Values(103,'18+','18+');
 Insert into __dbname__.Personalisation Values(104,'A student','A student');
 Insert into __dbname__.Personalisation Values(105,'A parent','A parent');
 Insert into __dbname__.Personalisation Values(106,'LGBTQ+','LGBTQ+');
