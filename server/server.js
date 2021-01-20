@@ -8,19 +8,62 @@ app.disable("x-powered-by");
 let development = process.env.NODE_ENV == "development";
 
 var corsOptions = {}
-
-if (development) {
-  corsOptions = {
-    origin: 'http://localhost:3001',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+app.use(cors({
+  origin: function (origin, callback) {
+    switch (origin) {
+      case "http://localhost:3001":
+        callback(null, true);
+        break;
+      case "https://dev.miricyl.org":
+        callback(null, true);
+        break;
+      case "https://uat.miricyl.org":
+        callback(null, true);
+        break;
+      case "https://dem.miricyl.org":
+        callback(null, true);
+        break;
+      case "https://int.miricyl.org":
+        callback(null, true);
+        break;
+      case "https://pre.miricyl.org":
+        callback(null, true);
+        break;
+      default:
+        callback(new Error('Now allowed')); // block others
+    }
   }
+}));
 
-} else {
-  corsOptions = {
-    origin: 'https://dev.miricyl.org',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
-}
+
+// switch (origin) {
+//   case "https://example.com":
+//     corsOptions = {
+//       origin: 'http://localhost:3001',
+//       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//     }
+
+//   case "https://dev.miricyl.org":
+//     corsOptions = {
+//       origin: '"https://dev.miricyl.org"',
+//       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//     }
+//   default:
+//     callback(new Error('Now allowed')); // block others
+// }
+
+// if (development) {
+//   corsOptions = {
+//     origin: 'http://localhost:3001',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
+
+// } else {
+//   corsOptions = {
+//     origin: `https://dev.miricyl.org`,
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
+// }
 
 
 // var allowedDomains = ['np-miricyl.azure-api.net', 'https://dev.miricyl.org/', 'http://localhost:3001', 'https://dem.miricyl.org/', 'https://np-miricyl.azure-api.net/dev/needs', 'https://np-miricyl.azure-api.net/dev/charities', 'https://np-miricyl.azure-api.net/dev/types', 'https://np-miricyl.azure-api.net/dev/personalisations'];
@@ -36,8 +79,8 @@ if (development) {
 //     return callback(null, true);
 //   }
 // }));
-console.log(corsOptions);
-app.use(cors(corsOptions));
+// console.log(corsOptions);
+// app.use(cors(corsOptions));
 app.use("/api", apiRouter);
 
 
