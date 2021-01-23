@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Header from "./Header";
 import SubHeader from "./SubHeader";
 import BackButton from "./BackButton";
+import Footer from "./Footer";
 
 const MultiChoiceQuestion = ({
   optionsList,
@@ -65,6 +66,7 @@ const MultiChoiceQuestion = ({
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
