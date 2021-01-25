@@ -2,6 +2,7 @@ import React from "react";
 
 import Filter from "../Filter/Filter";
 import OrgCard from "../OrgCard/OrgCard";
+import Footer from "../Footer";
 
 import * as styles from "./results.module.scss";
 
@@ -153,6 +154,7 @@ const Results = ({
           return <OrgCard charity={org} />;
         })}
       </div>
+      <Footer />
     </div>
   );
 };
