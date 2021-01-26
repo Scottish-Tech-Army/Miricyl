@@ -7,8 +7,6 @@ import { BiEnvelope } from "react-icons/bi";
 import { BiChat } from "react-icons/bi";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
-import ReactStars from "react-rating-stars-component";
-
 const OrgCard = ({ charity }) => {
   const [isExapnded, setIsExpanded] = useState(false);
 
@@ -37,9 +35,9 @@ const OrgCard = ({ charity }) => {
         disabled={charity.Services.length <= 2}
       >
         {isExapnded ? (
-          <MdKeyboardArrowDown className={`${styles.expandIcon}`} />
+          <MdKeyboardArrowUp className={`${styles.expandIcon}`} />
         ) : (
-          <MdKeyboardArrowUp
+          <MdKeyboardArrowDown
             className={`${styles.expandIcon} ${
               charity.Services.length <= 2 && styles.disabled
             }`}
@@ -65,9 +63,7 @@ const OrgOverview = ({ charity }) => {
       <div className={styles.overviewInformationContainer}>
         <span className={styles.orgName}>{charity.OrgName}</span>
         <span className={styles.orgDescription}>{charity.OrgDescription}</span>
-        <span>Ratings placeholder</span>
       </div>
-      <div className={styles.distanceBox}>tbi</div>
     </div>
   );
 };
