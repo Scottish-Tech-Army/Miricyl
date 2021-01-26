@@ -56,7 +56,7 @@ const Results = ({
       allCharities = allCharities.filter((charity) => {
         return (
           charity.Services.filter((service) =>
-            selectedNeeds.every((selectedNeed) =>
+            selectedNeeds.some((selectedNeed) =>
               service.Needs.includes(selectedNeed)
             )
           ).length > 0
