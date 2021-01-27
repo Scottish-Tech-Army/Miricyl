@@ -22,11 +22,15 @@ const OrgCard = ({ charity }) => {
           <Service service={service} />
         ))}
       </div>
-      <OrgDetails
-        email={charity.Email}
-        phone={charity.PhoneNo}
-        address={charity.Address}
-      />
+      {charity.Email || charity.PhoneNo || charity.Address ? (
+        <OrgDetails
+          email={charity.Email}
+          phone={charity.PhoneNo}
+          address={charity.Address}
+        />
+      ) : (
+        <div className={styles.expander} />
+      )}
       <button
         className={styles.expandButtonContainer}
         onClick={() => {
@@ -154,15 +158,21 @@ const OrgDetails = ({ phone, email, address }) => {
         Organisation contact details:
       </span>
       <div className={styles.contactDetailsContainer}>
-        <span>
-          <b>Phone:</b> {email ?? "placeholder"}
-        </span>
-        <span>
-          <b>Email:</b> {phone ?? "placeholder"}
-        </span>
-        <span>
-          <b>Address:</b> {address ?? "placeholder"}
-        </span>
+        {email && (
+          <span>
+            <b>Email:</b> {email}
+          </span>
+        )}
+        {phone && (
+          <span>
+            <b>Phone:</b> {phone}
+          </span>
+        )}
+        {address && (
+          <span>
+            <b>Address:</b> {address}
+          </span>
+        )}
       </div>
     </div>
   );
