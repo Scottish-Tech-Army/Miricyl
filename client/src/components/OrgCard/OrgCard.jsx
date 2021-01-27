@@ -29,8 +29,8 @@ const OrgCard = ({ charity }) => {
           address={charity.Address}
         />
       ) : (
-        <div className={styles.expander} />
-      )}
+          <div className={styles.expander} />
+        )}
       <button
         className={styles.expandButtonContainer}
         onClick={() => {
@@ -41,12 +41,11 @@ const OrgCard = ({ charity }) => {
         {isExapnded ? (
           <MdKeyboardArrowUp className={`${styles.expandIcon}`} />
         ) : (
-          <MdKeyboardArrowDown
-            className={`${styles.expandIcon} ${
-              charity.Services.length <= 2 && styles.disabled
-            }`}
-          />
-        )}
+            <MdKeyboardArrowDown
+              className={`${styles.expandIcon} ${charity.Services.length <= 2 && styles.disabled
+                }`}
+            />
+          )}
       </button>
     </div>
   );
@@ -65,7 +64,7 @@ const OrgOverview = ({ charity }) => {
         </a>
       </div>
       <div className={styles.overviewInformationContainer}>
-        <span className={styles.orgName}>{charity.OrgName}</span>
+        <span className={styles.orgName}><a href={charity.OrgURL} target="_blank">{charity.OrgName}</a></span>
         <span className={styles.orgDescription}>{charity.OrgDescription}</span>
       </div>
     </div>
@@ -129,7 +128,7 @@ const Service = ({ service }) => {
               value={{ className: "results-react-button-icon" }}
             >
               <a href={service.ServiceUrl} target="_blank">
-                <BiChat /> Chat{" "}
+                <BiChat /> Web{" "}
               </a>
             </IconContext.Provider>
           </button>

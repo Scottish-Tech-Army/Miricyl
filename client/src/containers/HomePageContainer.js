@@ -33,6 +33,10 @@ const HomePageContainer = ({ history }) => {
     getAllOptionsFromServer();
   }, []);
 
+  useEffect(() => {
+    document.title = "Miricyl";
+  }, []);
+
   // QUESTION - 1: Needs
 
   const getAllOptionsFromServer = () => {
