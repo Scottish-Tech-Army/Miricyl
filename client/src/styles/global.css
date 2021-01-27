@@ -461,9 +461,10 @@ scrollbar-width: none;  /* Firefox */
   /* Footer css */
 
   .footer-wrapper {
+    font-family: "clone-rounded-latin", sans-serif;
     color: white;
     font-size: small;
-    margin-top: 10em;
+    margin-top: 15em;
     margin-left: 1em;
   }
  

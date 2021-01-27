@@ -39,18 +39,18 @@ const OrgCard = ({ charity }) => {
         {isExapnded ? (
           <MdKeyboardArrowDown className={`${styles.expandIcon}`} />
         ) : (
-          <MdKeyboardArrowUp
-            className={`${styles.expandIcon} ${
-              charity.Services.length <= 2 && styles.disabled
-            }`}
-          />
-        )}
+            <MdKeyboardArrowUp
+              className={`${styles.expandIcon} ${charity.Services.length <= 2 && styles.disabled
+                }`}
+            />
+          )}
       </button>
     </div>
   );
 };
 
 const OrgOverview = ({ charity }) => {
+  console.log(charity);
   return (
     <div className={styles.overviewContainer}>
       <div className={styles.logoContainer}>
@@ -63,7 +63,7 @@ const OrgOverview = ({ charity }) => {
         </a>
       </div>
       <div className={styles.overviewInformationContainer}>
-        <span className={styles.orgName}>{charity.OrgName}</span>
+        <span className={styles.orgName}><a href={charity.OrgURL} target="_blank">{charity.OrgName}</a></span>
         <span className={styles.orgDescription}>{charity.OrgDescription}</span>
         <span>Ratings placeholder</span>
       </div>
@@ -129,7 +129,7 @@ const Service = ({ service }) => {
               value={{ className: "results-react-button-icon" }}
             >
               <a href={service.ServiceUrl} target="_blank">
-                <BiChat /> Chat{" "}
+                <BiChat /> Web{" "}
               </a>
             </IconContext.Provider>
           </button>
