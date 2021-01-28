@@ -42,6 +42,7 @@ const HomePageContainer = ({ history }) => {
   const getAllOptionsFromServer = () => {
     nodeServer.get("/needs").then((res) => {
       const needsResponse = res.data;
+      console.log('needs responce', needsResponse);
       needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
       const userNeeds = needsResponse.map((need) => {
         return { value: need.Need, isSelected: false };
