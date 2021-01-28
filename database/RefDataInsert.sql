@@ -8,8 +8,6 @@ Insert into Miricyl.Country
 values(104, 'Northen Ireland');
 Insert into Miricyl.Country
 values(105, 'United Kingdom');
-Insert into Miricyl.Country
-values(106, 'England & Wales');
 Insert into Miricyl.Gender
 values(101, 'Female');
 Insert into Miricyl.Gender
@@ -34,13 +32,13 @@ Values(107, 'Body image', 'Body image or Eating disorders');
 Insert into Miricyl.Needs
 Values(108, 'Bullying', 'Childhood abuse or Bullying');
 Insert into Miricyl.Needs
-Values(109, 'I am caring for someone else', '');
+Values(109, 'I am caring for someone else', 'ZA-Future Need');
 Insert into Miricyl.Needs
 Values(110, 'Debt', 'Debt or Looking for Employment');
 Insert into Miricyl.Needs
 Values(111, 'Depression', 'Low, Depressed or Lonely');
 Insert into Miricyl.Needs
-Values(112, 'Discrimination', '');
+Values(112, 'Discrimination', 'ZA-Future Need');
 Insert into Miricyl.Needs
 Values(113, 'Domestic Abuse', 'Domestic abuse or Sexual violence');
 Insert into Miricyl.Needs
@@ -50,15 +48,15 @@ Values(115, 'Eating disorders', 'Body image or Eating disorders');
 Insert into Miricyl.Needs
 Values(116, 'Feeling low', 'Low, Depressed or Lonely');
 Insert into Miricyl.Needs
-Values(117, 'Gender identity', '');
+Values(117, 'Gender identity', 'ZA-Future Need');
 Insert into Miricyl.Needs
-Values(118, 'General Mental Health', '');
+Values(118, 'General Mental Health', 'ZA-Future Need');
 Insert into Miricyl.Needs
 Values(119, 'Into work /unemployment', 'Debt or Looking for Employment');
 Insert into Miricyl.Needs
 Values(120, 'Involved in crime', 'Victim or Involved in Crime');
 Insert into Miricyl.Needs
-Values(121, 'I was in care(foster/home)', '');
+Values(121, 'I was in care(foster/home)', 'ZA-Future Need');
 Insert into Miricyl.Needs
 Values(122, 'Loneliness', 'Low, Depressed or Lonely');
 Insert into Miricyl.Needs
