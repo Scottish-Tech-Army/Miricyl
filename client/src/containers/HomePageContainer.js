@@ -33,6 +33,10 @@ const HomePageContainer = ({ history }) => {
     getAllOptionsFromServer();
   }, []);
 
+  useEffect(() => {
+    document.title = "Miricyl";
+  }, []);
+
   // QUESTION - 1: Needs
 
   const getAllOptionsFromServer = () => {
@@ -155,7 +159,8 @@ const HomePageContainer = ({ history }) => {
         .filter((personalisation) => personalisation.isSelected)
         .map((personalisation) => personalisation.value)
     );
-    history.push("/postcode");
+    // history.push("/postcode");
+    history.push("/results");
   };
 
   // QUESTION 4 - Postcode:
@@ -223,14 +228,14 @@ const HomePageContainer = ({ history }) => {
               backgroundToUse="three"
             />
           </Route>
-          <Route exact path="/postcode">
+          {/* <Route exact path="/postcode">
             <TextBoxQuestion
               onComplete={handlePostcodeSearchCompleted}
               onBackClicked={onBackClicked}
               backgroundToUse="four"
               postcode={postcode}
             />
-          </Route>
+          </Route> */}
           <Route exact path="/results">
             <Results
               onBackClicked={onBackClicked}

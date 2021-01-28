@@ -2,6 +2,7 @@ import React from "react";
 
 import Filter from "../Filter/Filter";
 import OrgCard from "../OrgCard/OrgCard";
+import Footer from "../Footer";
 
 import * as styles from "./results.module.scss";
 
@@ -55,7 +56,7 @@ const Results = ({
       allCharities = allCharities.filter((charity) => {
         return (
           charity.Services.filter((service) =>
-            selectedNeeds.every((selectedNeed) =>
+            selectedNeeds.some((selectedNeed) =>
               service.Needs.includes(selectedNeed)
             )
           ).length > 0
@@ -153,6 +154,7 @@ const Results = ({
           return <OrgCard charity={org} />;
         })}
       </div>
+      <Footer />
     </div>
   );
 };

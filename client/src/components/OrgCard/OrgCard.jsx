@@ -7,8 +7,6 @@ import { BiEnvelope } from "react-icons/bi";
 import { BiChat } from "react-icons/bi";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
-import ReactStars from "react-rating-stars-component";
-
 const OrgCard = ({ charity }) => {
   const [isExapnded, setIsExpanded] = useState(false);
 
@@ -24,11 +22,15 @@ const OrgCard = ({ charity }) => {
           <Service service={service} />
         ))}
       </div>
-      <OrgDetails
-        email={charity.Email}
-        phone={charity.PhoneNo}
-        address={charity.Address}
-      />
+      {charity.Email || charity.PhoneNo || charity.Address ? (
+        <OrgDetails
+          email={charity.Email}
+          phone={charity.PhoneNo}
+          address={charity.Address}
+        />
+      ) : (
+          <div className={styles.expander} />
+        )}
       <button
         className={styles.expandButtonContainer}
         onClick={() => {
@@ -37,14 +39,13 @@ const OrgCard = ({ charity }) => {
         disabled={charity.Services.length <= 2}
       >
         {isExapnded ? (
-          <MdKeyboardArrowDown className={`${styles.expandIcon}`} />
+          <MdKeyboardArrowUp className={`${styles.expandIcon}`} />
         ) : (
-          <MdKeyboardArrowUp
-            className={`${styles.expandIcon} ${
-              charity.Services.length <= 2 && styles.disabled
-            }`}
-          />
-        )}
+            <MdKeyboardArrowDown
+              className={`${styles.expandIcon} ${charity.Services.length <= 2 && styles.disabled
+                }`}
+            />
+          )}
       </button>
     </div>
   );
@@ -63,11 +64,9 @@ const OrgOverview = ({ charity }) => {
         </a>
       </div>
       <div className={styles.overviewInformationContainer}>
-        <span className={styles.orgName}>{charity.OrgName}</span>
+        <span className={styles.orgName}><a href={charity.OrgURL} target="_blank">{charity.OrgName}</a></span>
         <span className={styles.orgDescription}>{charity.OrgDescription}</span>
-        <span>Ratings placeholder</span>
       </div>
-      <div className={styles.distanceBox}>tbi</div>
     </div>
   );
 };
@@ -129,7 +128,7 @@ const Service = ({ service }) => {
               value={{ className: "results-react-button-icon" }}
             >
               <a href={service.ServiceUrl} target="_blank">
-                <BiChat /> Chat{" "}
+                <BiChat /> Web{" "}
               </a>
             </IconContext.Provider>
           </button>
@@ -158,15 +157,21 @@ const OrgDetails = ({ phone, email, address }) => {
         Organisation contact details:
       </span>
       <div className={styles.contactDetailsContainer}>
-        <span>
-          <b>Phone:</b> {email ?? "placeholder"}
-        </span>
-        <span>
-          <b>Email:</b> {phone ?? "placeholder"}
-        </span>
-        <span>
-          <b>Address:</b> {address ?? "placeholder"}
-        </span>
+        {email && (
+          <span>
+            <b>Email:</b> {email}
+          </span>
+        )}
+        {phone && (
+          <span>
+            <b>Phone:</b> {phone}
+          </span>
+        )}
+        {address && (
+          <span>
+            <b>Address:</b> {address}
+          </span>
+        )}
       </div>
     </div>
   );

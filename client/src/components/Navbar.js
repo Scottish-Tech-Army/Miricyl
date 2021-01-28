@@ -19,7 +19,7 @@ const NavBar = () => {
           </div>
 
           <button className="help-button" test-id="help-button">
-            Help!
+            Help Now!
           </button>
         </div>
       </div>

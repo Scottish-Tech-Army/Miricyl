@@ -11,7 +11,7 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    database: "__dbname__",
+    database: "Miricyl",
     host: "localhost",
     port: "3306",
   });

@@ -87,6 +87,10 @@ CREATE TABLE IF NOT EXISTS `__dbname__`.`Organisation` (
   `OrgAddress` VARCHAR(500) NULL DEFAULT NULL,  
   `GoogleRating` DECIMAL(5,2) NULL DEFAULT NULL,
   `FaceBookRating` DECIMAL(5,2) NULL DEFAULT NULL,  
+  `OrgPhoneNumber` VARCHAR(500) NULL DEFAULT NULL,  
+  `OrgOpeningTime` VARCHAR(500) NULL DEFAULT NULL,  
+  `OrgCharityNumber` VARCHAR(500) NULL DEFAULT NULL,  
+  
   PRIMARY KEY (`OrgID`),
   UNIQUE INDEX `OrgID_UNIQUE` (`OrgID` ASC) VISIBLE,
   INDEX `fk_Organisation_Country1_idx` (`Country_CountryID` ASC) VISIBLE,

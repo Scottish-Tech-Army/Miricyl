@@ -457,6 +457,16 @@ scrollbar-width: none;  /* Firefox */
 .filter-item-container {
   display: flex;
 }
+
+  /* Footer css */
+
+  .footer-wrapper {
+    font-family: "clone-rounded-latin", sans-serif;
+    color: white;
+    font-size: small;
+    margin-top: 15em;
+    margin-left: 1em;
+  }
  
 
 /* MOBILE RESPONSIVE RULES */

@@ -32,10 +32,12 @@ const createOrgObjects = (orgAndServicesObjects) => {
     return {
       OrgID: object.OrgID,
       OrgName: object.OrgName,
-      OrgDescription: object.ServiceDesc,
+      OrgDescription: object.OrgDesc,
       OrgURL: object.OrgURL,
       PlaceID: object.PlaceID,
-      // Rating: object.Rating to be implemented
+      Email: object.Email,
+      PhoneNo: object.OrgPhoneNumber,
+      Address: object.OrgAddress,
     };
   });
 };
