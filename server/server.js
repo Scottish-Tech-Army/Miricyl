@@ -17,7 +17,7 @@ if (development) {
 
 } else {
   corsOptions = {
-    origin: 'https://__env__.miricyl.org',
+    origin: "__env__",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 }
