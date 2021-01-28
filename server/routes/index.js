@@ -11,7 +11,9 @@ const router = express.Router();
 // import GoogleServer from "../api/GoogleServer"
 router.get("/needs", async (req, res, next) => {
   try {
-    let results = await db.needs();
+    // let results = await db.needs();
+    let results = [{ Need: 'One' }, { Need: 'Two' }, { Need: 'Three' }];
+    console.log(results);
     res.json(results);
   } catch (e) {
     console.log(e);
