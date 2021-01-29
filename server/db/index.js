@@ -23,7 +23,7 @@ if (development) {
     database: "__database__",
     host: "__host__",
     port: "3306",
-    // ssl: true,
+    ssl: true,
   });
 }
 
@@ -38,8 +38,8 @@ miricyldb.needs = () => {
         if (err) {
           return reject(err);
         }
-
-        return resolve(results);
+        test = [{ Needs: 'one' }, { Needs: 'two' }, { Needs: 'three' }]
+        return resolve(test);
       }
     );
   });
