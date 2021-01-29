@@ -23,7 +23,7 @@ if (development) {
     database: "__database__",
     host: "__host__",
     port: "3306",
-    ssl: true,
+    // ssl: true,
   });
 }
 
