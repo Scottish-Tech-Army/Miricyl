@@ -32,18 +32,20 @@ let miricyldb = {};
 miricyldb.needs = () => {
   return new Promise((resolve, reject) => {
     // pool.query(`SELECT * FROM Needs`, (err, results) => {
-    pool.query(
-      `SELECT distinct UserOption as Need FROM Needs where nullif(UserOption,'') is not null`,
-      (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-        test = [{ Needs: 'one' }, { Needs: 'two' }, { Needs: 'three' }]
-        return resolve(test);
-      }
-    );
-  });
-};
+    // pool.query(
+    //   `SELECT distinct UserOption as Need FROM Needs where nullif(UserOption,'') is not null`,
+    //   (err, results) => {
+    //     if (err) {
+    //       return reject(err);
+    //     }
+    test = [{ Needs: 'one' }, { Needs: 'two' }, { Needs: 'three' }]
+    // return resolve(results);
+    return test
+  }
+  );
+}
+// });
+// };
 
 miricyldb.types = () => {
   return new Promise((resolve, reject) => {
