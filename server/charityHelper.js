@@ -21,7 +21,8 @@ const createServiceObjects = (orgAndServicesObjects) => {
       ServiceURL: object.ServiceURL,
       Need: object.UserOption,
       SupportType: object.UserOption_Type,
-      Personalisation: object.Personalisation,
+      // Personalisation: object.Personalisation,
+      Personalisation: object.UserOption_Personal,
       ServicePriority: object.ServicePriority,
     };
   });
