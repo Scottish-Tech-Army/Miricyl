@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
-import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
@@ -42,7 +41,6 @@ const HomePageContainer = ({ history }) => {
   const getAllOptionsFromServer = () => {
     nodeServer.get("/needs").then((res) => {
       const needsResponse = res.data;
-      console.log('needs responce', needsResponse);
       needsResponse.sort((a, b) => a.Need.localeCompare(b.Need));
       const userNeeds = needsResponse.map((need) => {
         return { value: need.Need, isSelected: false };
