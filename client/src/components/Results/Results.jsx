@@ -130,6 +130,9 @@ const Results = ({
   const noOfMatchedSupportTypes = (a, b) =>
     b.matchedTypesOfSupport.length - a.matchedTypesOfSupport.length;
 
+  const noOfMatchedNeeds = (a, b) =>
+    b.matchedNeeds.length - a.matchedNeeds.length;
+
   const sortByServicePiority = (a, b) => b.ServicePriority - a.ServicePriority;
 
   const sortByOrgPiority = (a, b) => b.OrgPriority - a.OrgPriority;
@@ -139,10 +142,50 @@ const Results = ({
 
   const alphabeticalOrg = (a, b) => a.OrgName.localeCompare(b.OrgName);
 
+  const flattenUserOptionsForSorting = (charities) => {
+    return charities.map((charity) => {
+      const allMatchedNeeds = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedNeeds;
+          })
+        ),
+      ];
+
+      const allMatchedPersonalisations = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedPersonalisations;
+          })
+        ),
+      ];
+
+      const allMatchedSupportTypes = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedTypesOfSupport;
+          })
+        ),
+      ];
+
+      return {
+        ...charity,
+        matchedNeeds: allMatchedNeeds,
+        matchedPersonalisations: allMatchedPersonalisations,
+        matchedTypesOfSupport: allMatchedSupportTypes,
+      };
+    });
+  };
+
   const prioritiseCharities = (charities) => {
-    console.log(charities);
+    // we're going to flatten all the services like before in order to sort
     return charities.sort(
-      (a, b) => sortByOrgPiority(a, b) || alphabeticalOrg(a, b)
+      (a, b) =>
+        noOfMatchedNeeds(a, b) ||
+        noOfMatchedPersonalisations(a, b) ||
+        noOfMatchedSupportTypes(a, b) ||
+        sortByOrgPiority(a, b) ||
+        alphabeticalOrg(a, b)
     );
   };
 
@@ -152,6 +195,7 @@ const Results = ({
   );
 
   sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
+  sortedObjects = flattenUserOptionsForSorting(sortedObjects);
   sortedObjects = prioritiseCharities(sortedObjects);
 
   return (
