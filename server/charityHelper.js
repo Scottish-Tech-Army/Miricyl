@@ -4,7 +4,6 @@ const createCharityObjects = (serviceDetailsJson, organisations) => {
 
   const orgObjects = addServicesToOrgs(allServices, allOrgs);
 
-  // might make more changes to this method as requirements develop
   return orgObjects;
 };
 
@@ -23,6 +22,7 @@ const createServiceObjects = (orgAndServicesObjects) => {
       Need: object.UserOption,
       SupportType: object.UserOption_Type,
       Personalisation: object.Personalisation,
+      ServicePriority: object.ServicePriority,
     };
   });
 };
@@ -38,6 +38,7 @@ const createOrgObjects = (orgAndServicesObjects) => {
       Email: object.Email,
       PhoneNo: object.OrgPhoneNumber,
       Address: object.OrgAddress,
+      OrgPriority: object.OrgPriority,
     };
   });
 };
@@ -89,6 +90,7 @@ const cleanServices = (servicesForOrg) => {
       PhysicalAddress: baseService.PhysicalAddress,
       EmailAddress: baseService.EmailAddress,
       ServiceUrl: baseService.ServiceURL,
+      ServicePriority: baseService.ServicePriority,
       Needs: needsMet,
       SupportTypes: supportTypesMet,
       Personalisations: personalisationsMet,

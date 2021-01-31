@@ -353,24 +353,12 @@ LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
 LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
 WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Create A User for App
+-- Table `Miricyl`.`Serv_Import`
 -- -----------------------------------------------------
-CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE NEVER;
-
--- -----------------------------------------------------
--- Grant appuser to AppReader role
--- -----------------------------------------------------
-GRANT SELECT on `Miricyl`.* to appuser;
-
--- -----------------------------------------------------
-FLUSH PRIVILEGES;
-
-CREATE TABLE `serv_import` (
+DROP TABLE IF EXISTS `Miricyl`.`Serv_Import` ;
+CREATE TABLE `Miricyl`.`Serv_Import` (
   `Miricyl_DB_Id` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `OrgName` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `ServiceNationwide` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -447,8 +435,11 @@ CREATE TABLE `serv_import` (
   `Personalisation` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
-CREATE TABLE `org_import` (
+-- -----------------------------------------------------
+-- Table `Miricyl`.`Serv_Import`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`Org_Import` ;
+CREATE TABLE `Miricyl`.`Org_Import` (
   `MiricylDBId` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `OrgName` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `OrgDescription` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -471,7 +462,7 @@ CREATE TABLE `org_import` (
 
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Miricyl`.`TransformOrgData`()
+CREATE PROCEDURE `Miricyl`.`TransformOrgData`()
 BEGIN
 INSERT INTO `Miricyl`.`Organisation`
 	(`OrgName`, 
@@ -512,7 +503,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Miricyl`.`TransformServiceData`()
+CREATE PROCEDURE `Miricyl`.`TransformServiceData`()
 BEGIN
 INSERT INTO `Miricyl`.`Orgservice`
 ( 
@@ -562,7 +553,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Miricyl`.`TransformServiceNeedsData`()
+CREATE PROCEDURE `Miricyl`.`TransformServiceNeedsData`()
 BEGIN
 
 INSERT INTO `Miricyl`.`ServiceNeeds`
@@ -647,3 +638,22 @@ LEFT JOIN Miricyl.personalisation P1
     
 END$$
 DELIMITER ;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+-- -----------------------------------------------------
+-- Create A User for App
+-- -----------------------------------------------------
+CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE NEVER;
+
+-- -----------------------------------------------------
+-- Grant appuser to AppReader role
+-- -----------------------------------------------------
+GRANT SELECT on `__dbname__`.* to appuser;
+
+-- -----------------------------------------------------
+FLUSH PRIVILEGES;

@@ -19,7 +19,7 @@ const NavBar = () => {
             <h1 className="navbar-logo">Miricyl</h1>
           </div>
 
-          <button className="help-button" test-id="help-button">
+          <button className="help-button" id="help-button">
             Help Now!
           </button>
         </div>
