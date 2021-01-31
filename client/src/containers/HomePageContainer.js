@@ -74,7 +74,8 @@ const HomePageContainer = ({ history }) => {
 
     nodeServer.get("/personalisations").then((res) => {
       const personalisationsResponse = res.data
-        .map((personalisation) => personalisation.Description)
+        // .map((personalisation) => personalisation.Description)
+        .map((personalisation) => personalisation.UserOption)
         .filter((personalisation) => personalisation !== "");
       const UserPersonalisations = personalisationsResponse.map(
         (personalisation) => {
@@ -82,6 +83,7 @@ const HomePageContainer = ({ history }) => {
         }
       );
       setPersonalisations(UserPersonalisations);
+      console.log(personalisationsResponse);
     });
   };
 

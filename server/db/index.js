@@ -59,7 +59,9 @@ miricyldb.types = () => {
 
 miricyldb.personalisations = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+    // pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+    pool.query(`SELECT distinct UserOption  FROM Personalisation`, (err, results) => {
+
       if (err) {
         return reject(err);
       }
