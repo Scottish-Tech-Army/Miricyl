@@ -113,7 +113,8 @@ const Results = ({
         (a, b) =>
           noOfMatchedPersonalisations(a, b) ||
           noOfMatchedSupportTypes(a, b) ||
-          alphabetical(a, b)
+          sortByServicePiority(a, b) ||
+          alphabeticalService(a, b)
       );
 
       return {
@@ -129,7 +130,21 @@ const Results = ({
   const noOfMatchedSupportTypes = (a, b) =>
     b.matchedTypesOfSupport.length - a.matchedTypesOfSupport.length;
 
-  const alphabetical = (a, b) => a.ServiceName.localeCompare(b.ServiceName);
+  const sortByServicePiority = (a, b) => b.ServicePriority - a.ServicePriority;
+
+  const sortByOrgPiority = (a, b) => b.OrgPriority - a.OrgPriority;
+
+  const alphabeticalService = (a, b) =>
+    a.ServiceName.localeCompare(b.ServiceName);
+
+  const alphabeticalOrg = (a, b) => a.OrgName.localeCompare(b.OrgName);
+
+  const prioritiseCharities = (charities) => {
+    console.log(charities);
+    return charities.sort(
+      (a, b) => sortByOrgPiority(a, b) || alphabeticalOrg(a, b)
+    );
+  };
 
   let sortedObjects = filteredCharitiesByNeedsMet(charities);
   sortedObjects = enhanceServicesWithSupportTypesAndPersonalisationsMet(
@@ -137,6 +152,7 @@ const Results = ({
   );
 
   sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
+  sortedObjects = prioritiseCharities(sortedObjects);
 
   return (
     <div className={styles.container}>
