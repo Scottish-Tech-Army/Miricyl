@@ -34,7 +34,7 @@ const TextBoxQuestion = ({
         </div>
         <div>
           <div className="select-container-q4">
-            <p className="question-text" test-id="question-title">
+            <p className="question-text" id="question-title">
               Enter the first part of your postcode to find services and support
               in your area
             </p>
@@ -45,7 +45,7 @@ const TextBoxQuestion = ({
               value={text}
               onChange={handleChange}
               placeholder="Enter your postcode"
-              test-id="text-input-field"
+              id="text-input-field"
             ></input>
 
             <br />
@@ -56,7 +56,7 @@ const TextBoxQuestion = ({
             <button
               className="next-button"
               onClick={() => onComplete(text)}
-              test-id="next-button"
+              id="next-button"
             >
               Next
             </button>

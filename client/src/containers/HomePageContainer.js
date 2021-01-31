@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
-import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
