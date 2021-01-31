@@ -11,11 +11,8 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    // database: "Miricyl",
-    // host: "localhost",
-    database: "devmiricyldb",
-    host: "np-miricyl-uksouth-mysqlserver.mysql.database.azure.com",
-
+    database: "Miricyl",
+    host: "localhost",
     port: "3306",
     ssl: true,
   });
