@@ -31,7 +31,10 @@
 }
 .navbar-logo {
   height: 50px;
+  font-family: "clone-rounded-latin", sans-serif;
+  color: white;
 }
+
 .help-button {
   font-family: "clone-rounded-latin", sans-serif;
   color: #2e3192;
@@ -482,6 +485,8 @@ scrollbar-width: none;  /* Firefox */
   }
   .navbar-logo {
     height: 37px;
+    font-family: "clone-rounded-latin", sans-serif;
+    color: white;
   }
   .help-button {
     padding: 3px 7px 6px 8px;
