@@ -338,6 +338,7 @@ SELECT distinct
     T.Description as TypeOfSupport,
 	T.UserOption_Type,
     P.Description as Personalisation,
+	P.UserOption as UserOption_Personal,
     OS.FaceBookURL,
 	OS.ChatURL,
     O.OrgPriority,

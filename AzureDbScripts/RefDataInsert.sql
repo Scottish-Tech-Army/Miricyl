@@ -57,8 +57,8 @@ Insert into __dbname__.Type Values(112, 'Online support by Text', 'Chat or text'
 Insert into __dbname__.Type Values(113, 'Online support by Email', 'Email or forum');
 Insert into __dbname__.Type Values(114, 'Online support by Video', 'Telephone or zoom');
 
-Insert into __dbname__.Personalisation Values(101,'Under 16','Under 18');
-Insert into __dbname__.Personalisation Values(102,'16+','Under 18');
+Insert into __dbname__.Personalisation Values(101,'Under 16','Child(Under 18)');
+Insert into __dbname__.Personalisation Values(102,'16+','Child(Under 18)');
 Insert into __dbname__.Personalisation Values(103,'18+','18+');
 Insert into __dbname__.Personalisation Values(104,'A student','A student');
 Insert into __dbname__.Personalisation Values(105,'A parent','A parent');
