@@ -11,9 +11,13 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    database: "Miricyl",
-    host: "localhost",
+    // database: "Miricyl",
+    // host: "localhost",
+    database: "devmiricyldb",
+    host: "np-miricyl-uksouth-mysqlserver.mysql.database.azure.com",
+
     port: "3306",
+    ssl: true,
   });
 } else {
   var pool = mysql.createPool({
@@ -41,77 +45,77 @@ miricyldb.needs = () => {
         return resolve(results);
       }
     );
-  }
-// });
-// };
+
+  });
+};
 
 miricyldb.types = () => {
-      return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM Type`, (err, results) => {
-          if (err) {
-            return reject(err);
-          }
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Type`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
 
-          return resolve(results);
-        });
-      });
-    };
+      return resolve(results);
+    });
+  });
+};
 
-  miricyldb.personalisations = () => {
-    return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+miricyldb.personalisations = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(results);
+    });
+  });
+};
+
+miricyldb.charities = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM ServiceDetails`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(results);
+    });
+  });
+};
+
+miricyldb.organisations = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Organisation`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+};
+
+miricyldb.charitySelect = (tags) => {
+  let finalResults = [];
+  let finalTags = [];
+  let splitTags = tags.split("£");
+  splitTags.forEach((tag) => {
+    finalTags.push(`${tag}`);
+  });
+
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT * FROM ServiceDetails WHERE UserOption IN (?)`,
+      [finalTags],
+      (err, results) => {
         if (err) {
           return reject(err);
         }
-
         return resolve(results);
-      });
-    });
-  };
+      }
+    );
+  });
+};
 
-  miricyldb.charities = () => {
-    return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM ServiceDetails`, (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-
-        return resolve(results);
-      });
-    });
-  };
-
-  miricyldb.organisations = () => {
-    return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM Organisation`, (err, results) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(results);
-      });
-    });
-  };
-
-  miricyldb.charitySelect = (tags) => {
-    let finalResults = [];
-    let finalTags = [];
-    let splitTags = tags.split("£");
-    splitTags.forEach((tag) => {
-      finalTags.push(`${tag}`);
-    });
-
-    return new Promise((resolve, reject) => {
-      pool.query(
-        `SELECT * FROM ServiceDetails WHERE UserOption IN (?)`,
-        [finalTags],
-        (err, results) => {
-          if (err) {
-            return reject(err);
-          }
-          return resolve(results);
-        }
-      );
-    });
-  };
-
-  module.exports = miricyldb;
+module.exports = miricyldb;
