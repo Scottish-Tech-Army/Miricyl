@@ -8,15 +8,16 @@ const NavBar = () => {
       <div className="navbar-container">
         <div className="navbar-wrapper">
           <div>
-            {/* <a href="/">
-              <img
+            <a href="/" className="navbar-link">
+              {/* <img
                 className="navbar-logo"
                 src={Logo}
                 alt="logo"
                 test-id="logo"
-              />
-            </a> */}
-            <h1 className="navbar-logo">Miricyl</h1>
+              /> */}
+              <h1 className="navbar-logo">Miricyl</h1>
+            </a>
+
           </div>
 
           <button className="help-button" id="help-button">

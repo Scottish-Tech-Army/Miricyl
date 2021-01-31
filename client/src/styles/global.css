@@ -33,6 +33,10 @@
   height: 50px;
   font-family: "clone-rounded-latin", sans-serif;
   color: white;
+  text-decoration: none;
+}
+.navbar-link {
+  text-decoration: none;
 }
 
 .help-button {
@@ -487,6 +491,7 @@ scrollbar-width: none;  /* Firefox */
     height: 37px;
     font-family: "clone-rounded-latin", sans-serif;
     color: white;
+    text-decoration: none;
   }
   .help-button {
     padding: 3px 7px 6px 8px;
