@@ -13,8 +13,7 @@ if (development) {
     password: process.env.dbpassword,
     database: "Miricyl",
     host: "localhost",
-    port: "3306",
-    ssl: true,
+    port: "3306"
   });
 } else {
   var pool = mysql.createPool({
