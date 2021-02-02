@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useFlags } from "../hooks/useFlags";
 import "../styles/global.css";
+import Filter from "./Filter";
 import { IconContext } from "react-icons";
 import { BiPhone } from "react-icons/bi";
 import { BiEnvelope } from "react-icons/bi";
@@ -8,28 +10,61 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
+import postcodeServer from "../api/postcodeServer";
+
+/*
+  PLEASE USE OTHER FILTER COMPONENT NOW. THIS IS JUST HERE FOR REFERENCE OF EXISTING WORK THAT HAS NOT YET BEEN CARRIED OVER.
+  THIS WILL NO LONGER WORK
+*/
 
 const Results = ({
   onBackClicked,
-  selectedNeeds,
-  selectedSupportTypes,
-  selectedPersonalisations,
+  needs,
+  supportTypes,
+  personalisations,
   postcode = "",
   charities,
+  onToggleNeedSelected,
+  onToggleSupportTypeSelected,
+  onTogglePersonalisationSelected,
 }) => {
+  console.log("rendered");
   const [prioritisedResults, setprioritisedResults] = useState([]);
+
   const [allCharities, setAllCharities] = useState([]);
 
+  const { filter } = useFlags();
+
+  const selectedNeeds = needs
+    .filter((need) => need.isSelected)
+    .map((selectedNeed) => selectedNeed.value);
+
+  const selectedSupportTypes = supportTypes
+    .filter((supportType) => supportType.isSelected)
+    .map((selectedSupportType) => selectedSupportType.value);
+
+  const selectedPersonalisations = personalisations
+    .filter((personalisation) => personalisation.isSelected)
+    .map((selectedPersonalisation) => selectedPersonalisation.value);
+
   useEffect(() => {
+    clearStates();
     constructCharityObjects();
-  }, []);
+  }, [needs, supportTypes, personalisations]);
 
   useEffect(() => {
     sortCharities();
   }, [allCharities]);
 
-  const sortCharities = () => {
+  const clearStates = () => {
+    setAllCharities([]);
+    setprioritisedResults([]);
+  };
+
+  const sortCharities = async () => {
     let filteredCharities = allCharities;
+
+    console.log("filter2", filteredCharities);
 
     // if (selectedSupportTypes.length > 0) {
     //   filteredCharities = filteredCharities.filter(
@@ -40,17 +75,75 @@ const Results = ({
     //   );
     // }
 
+    // gets a list of all postcodes withing range of latitude and longitude
+    const getListOfPostcodes = async (payload) => {
+      const res = await postcodeServer.post("/", payload);
+      return res;
+    };
+
+    // gets latitude and longitude from postcode
+    const getPostcodeDetails = async () => {
+      try {
+        const res = await postcodeServer.get(`/${postcode}`);
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (selectedNeeds.length > 0) {
       filteredCharities = filteredCharities.filter((charity) => {
         return selectedNeeds.every((need) => charity.needsMet.includes(need));
       });
     }
 
-    if (postcode != "") {
+    if (postcode.length < 5 && postcode !== "") {
+      console.log("pc", postcode);
+      console.log("fired");
+      // sort for outer postcode
       filteredCharities = filteredCharities.filter(
         (charity) => charity.OuterCode.toUpperCase() == postcode.toUpperCase()
       );
     }
+    if (postcode.length > 4) {
+      // sort for full postcode with distance
+      let postcodeDetails = await getPostcodeDetails().then(
+        (postcodeDetails) => {
+          const latitude = postcodeDetails.data.result.latitude;
+          const longitude = postcodeDetails.data.result.longitude;
+          const payload = {
+            geolocations: [
+              {
+                latitude: latitude,
+                longitude: longitude,
+                radius: 2000,
+                limit: 100,
+              },
+            ],
+          };
+          return payload;
+        }
+      );
+      const matchingCharities = await getListOfPostcodes(postcodeDetails)
+        .then((returnedPostcodesResults) => {
+          const charities = [];
+          let returnedPostcodes =
+            returnedPostcodesResults.data.result[0].result;
+          filteredCharities.map((charity) => {
+            returnedPostcodes.filter((postcode) => {
+              if (charity.PostCode.toUpperCase() === postcode.postcode) {
+                charities.push(charity);
+              }
+            });
+          });
+          return charities;
+        })
+        .then((charities) => {
+          //setPostcodeCharities(charities)
+          filteredCharities = charities;
+        });
+    }
+    console.log("filter", filteredCharities);
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
@@ -83,7 +176,7 @@ const Results = ({
   const constructCharityObjects = () => {
     let locationSortedCharities;
 
-    if (postcode == "") {
+    if (postcode === "") {
       locationSortedCharities = charities.sort((a, b) => {
         return a.NationalService === "YES"
           ? -1
@@ -109,15 +202,12 @@ const Results = ({
       const charity = charities.find((charity) => charity.OrgID === orgId);
       let servicesFromCharity = charities.filter((charity) => {
         return (
-          charity.OrgID == orgId &&
+          charity.OrgID === orgId &&
           (postcode === ""
             ? charity.NationalService === "YES"
             : charity.OuterCode.toUpperCase() === postcode.toUpperCase())
         );
       });
-
-      // This filtering logic will need to be changed once the use filter interface is implemented
-      // as for now it deletes any unselected filters which the user may wish to enable
 
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
@@ -196,11 +286,20 @@ const Results = ({
   };
 
   const PrioritisedListOfCharities = prioritisedResults.map((charity) => (
-    <div className="results-list-container" key={charity.PlaceID}>
+    <div
+      className="results-list-container"
+      key={charity.PlaceID}
+      test-id={`card-${charity.OrgID}`}
+    >
       <div className="results-title-container">
-        {charity.Logo ? (
+        {charity.Logo || `/images/$web/${charity.OrgID}.png` ? (
           <a href={charity.ServiceURL} target="_blank">
-            <img className="results-list-logo" src={charity.Logo} />
+            <img
+              className="results-list-logo"
+              src={`/images/$web/${charity.OrgID}.png`}
+              alt={`${charity.OrgName} logo`}
+              onError={charity.Logo}
+            />
           </a>
         ) : (
           <div></div>
@@ -336,8 +435,20 @@ const Results = ({
   return (
     <div className="results-page-container">
       <div className="results-wrapper">
+        {filter === 1 && (
+          <Filter
+            needs={needs}
+            supportTypes={supportTypes}
+            personalisations={personalisations}
+            onToggleNeedSelected={onToggleNeedSelected}
+            onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+            onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+          />
+        )}
         <div className="title-description-container">
-          <h1 className="question-title">Search results</h1>
+          <h1 className="question-title" test-id="results-title">
+            Search results
+          </h1>
         </div>
         <div className="results-page-display">{PrioritisedListOfCharities}</div>
         <div className="bottom-navigation">

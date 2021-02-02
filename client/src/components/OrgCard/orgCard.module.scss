@@ -1,0 +1,214 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background-color: #fff;
+  border-radius: 16px;
+  margin: 16px;
+  overflow: hidden;
+  padding: 24px;
+  opacity: 0.95;
+  border: solid 0.5px #bcbcbc;
+
+  @media(max-width: 900px){
+    width: 100%;
+  }
+}
+
+// OVERVIEW
+
+.overviewContainer {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+}
+
+.orgLogo {
+  max-width: 100px;
+}
+
+.orgName {
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 29px;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.13px;
+  line-height: 29px;
+  color: #2e3192;
+  margin-bottom: 12px;
+}
+
+.orgDescription {
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.25px;
+  line-height: 13px;
+  color: #6f7e8b;
+  margin-bottom: 8px;
+
+}
+
+.overviewInformationContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.distanceBox {
+  background-color: #FF6E43;
+  color: white;
+  height: 20px;
+  min-width: 40px;
+  text-align: center;
+  margin-left: 8px;
+  border-radius: 8px;
+}
+
+// MATCHED USER OPTIONS
+
+.optionsMetContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.optionBox {
+  font-family: Nunito;
+  font-size: 15.4px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.07;
+  letter-spacing: 0.07px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-align: center;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  color: white;
+  
+
+  &.need {
+    background-color: #fcd432;
+  }
+
+  &.supportType{
+    background-color: #c974ff;
+  }
+
+  &.personalisation {
+    background-color: #4ecfff;
+  }
+
+}
+
+/// SERVICES
+
+.servicesContainer {
+  display: flex;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.serviceContainer {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #2e3192;
+  font-family: Nunito;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  margin-right: 40px;
+  margin-bottom: 40px;
+}
+
+.serviceName {
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1.05;
+}
+
+.serviceInfo {
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: normal;
+  flex: 1;
+  line-height: 1.22;
+}
+
+.serviceButton {
+  border-radius: 8px;
+  background-color: #2e3192;
+}
+
+.serviceContactBoxes {
+  justify-self: flex-end;
+}
+
+// ORG DETAILS
+
+.orgDetailsContainer {
+  display: flex;
+  background-color: #2e3192;
+  color: white;
+  padding: 16px;
+  margin-top: auto;
+}
+
+.contactDetailsContainer{ 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-family: Nunito;
+  font-size: 18px;
+}
+
+.orgDetailsTitle{
+  font-family: Nunito;
+  font-size: 21px;
+  font-weight: bold;
+  max-width: 200px;
+  padding-left: 16px;
+}
+
+// Expand button
+
+.expandButtonContainer {
+  font-size: 44px;
+  display: flex;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+	color: inherit;
+	border: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+  outline: inherit;
+  
+}
+
+.expandIcon{
+  background-color: #fcd432;
+  color: #2e3192;
+  border-radius: 500px;
+
+  &.disabled {
+    background-color: lightgrey;
+  }
+}
+
+.expander {
+  flex: 1;
+}

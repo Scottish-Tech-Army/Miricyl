@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { IoIosArrowDropleft } from "react-icons/io";
 import "../styles/global.css";
+import Header from "./Header";
+import SubHeader from "./SubHeader";
+import BackButton from "./BackButton";
 
 const TextBoxQuestion = ({
   onComplete,
@@ -27,20 +29,12 @@ const TextBoxQuestion = ({
     <div className={`question-${backgroundToUse}-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
-          <h1 className="question-title">
-            Search mental health resources & services that can help you feel
-            better
-          </h1>
-          <h2 className="question-page-detail-text">
-            Boost is here for you if you need trusted guidance on accessing
-            resources and services that can positively impact your mental
-            health. We will guide you in finding the treatment and help you
-            need.
-          </h2>
+          <Header />
+          <SubHeader />
         </div>
         <div>
           <div className="select-container-q4">
-            <p className="question-text">
+            <p className="question-text" id="question-title">
               Enter the first part of your postcode to find services and support
               in your area
             </p>
@@ -51,19 +45,19 @@ const TextBoxQuestion = ({
               value={text}
               onChange={handleChange}
               placeholder="Enter your postcode"
+              id="text-input-field"
             ></input>
 
             <br />
           </div>
 
           <div className="bottom-navigation">
-            {onBackClicked && (
-              <IoIosArrowDropleft
-                className="back-button"
-                onClick={onBackClicked}
-              />
-            )}
-            <button className="next-button" onClick={() => onComplete(text)}>
+            {onBackClicked && <BackButton onBackClicked={onBackClicked} />}
+            <button
+              className="next-button"
+              onClick={() => onComplete(text)}
+              id="next-button"
+            >
               Next
             </button>
           </div>

@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const express = require("express");
 const app = express();
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 let development = process.env.NODE_ENV == "development";
@@ -13,7 +13,7 @@ if (development) {
     password: process.env.dbpassword,
     database: "Miricyl",
     host: "localhost",
-    port: "3306",
+    port: "3306"
   });
 } else {
   var pool = mysql.createPool({
@@ -23,6 +23,7 @@ if (development) {
     database: "__database__",
     host: "__host__",
     port: "3306",
+    ssl: true,
   });
 }
 
@@ -37,10 +38,10 @@ miricyldb.needs = () => {
         if (err) {
           return reject(err);
         }
-
         return resolve(results);
       }
     );
+
   });
 };
 
@@ -58,7 +59,9 @@ miricyldb.types = () => {
 
 miricyldb.personalisations = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+    // pool.query(`SELECT * FROM Personalisation`, (err, results) => {
+    pool.query(`SELECT distinct UserOption  FROM Personalisation`, (err, results) => {
+
       if (err) {
         return reject(err);
       }
@@ -80,6 +83,16 @@ miricyldb.charities = () => {
   });
 };
 
+miricyldb.organisations = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Organisation`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+};
 
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];

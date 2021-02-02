@@ -31,7 +31,14 @@
 }
 .navbar-logo {
   height: 50px;
+  font-family: "clone-rounded-latin", sans-serif;
+  color: white;
+  text-decoration: none;
 }
+.navbar-link {
+  text-decoration: none;
+}
+
 .help-button {
   font-family: "clone-rounded-latin", sans-serif;
   color: #2e3192;
@@ -139,16 +146,15 @@
   opacity: 0.9;
   width: 570px;
   background-image: linear-gradient(to bottom, #ffffff00 93%, #ffffff 98%);
+  -ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .select-container::-webkit-scrollbar {
   display: none;
 }
 /* Hide scrollbar for IE, Edge and Firefox */
-.select-container {
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
-}
+
 
 .select-container-q4 {
   margin-top: 85px;
@@ -354,7 +360,6 @@ scrollbar-width: none;  /* Firefox */
 
 .question-subtext {
   font-family: "Nunito", sans-serif;
-  color: #bcbcbc;
   font-size: 21px;
   font-weight: normal;
   font-stretch: normal;
@@ -426,7 +431,49 @@ scrollbar-width: none;  /* Firefox */
   color: #bcbcbc;
 }
 
+.filter-panel {
+  border: 2px solid #2e3192;
+  border-radius: 21px;
+  background-color: white;
+}
 
+.filter-header {
+  font-size: 29px;
+  min-height: 42px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-section-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-section-subtitle{
+  font-size: 24px;
+  color: #2e3192;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item-container {
+  display: flex;
+}
+
+  /* Footer css */
+
+  .footer-wrapper {
+    font-family: "clone-rounded-latin", sans-serif;
+    color: white;
+    font-size: small;
+    margin-top: 15em;
+    margin-left: 1em;
+  }
  
 
 /* MOBILE RESPONSIVE RULES */
@@ -442,6 +489,9 @@ scrollbar-width: none;  /* Firefox */
   }
   .navbar-logo {
     height: 37px;
+    font-family: "clone-rounded-latin", sans-serif;
+    color: white;
+    text-decoration: none;
   }
   .help-button {
     padding: 3px 7px 6px 8px;
@@ -508,7 +558,6 @@ scrollbar-width: none;  /* Firefox */
 
   .question-text {
     font-size: 18px;
-    letter-spacing: 0.08px;
     line-height: 1.28;
     letter-spacing: 0.08px;
     padding: 0;
@@ -620,7 +669,7 @@ scrollbar-width: none;  /* Firefox */
     font-weight: bold;
     font-size: 16px;
     letter-spacing: 0.36px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     margin: 13px 15px 15px 0;
     padding: 4px 13px 6px 9px;
     border-radius: 8px;
