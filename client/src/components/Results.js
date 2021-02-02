@@ -8,7 +8,6 @@ import { BiMap } from "react-icons/bi";
 import { withRouter } from "react-router-dom";
 import { IoIosArrowDropleft } from "react-icons/io";
 import ReactStars from "react-rating-stars-component";
-import nodeServer from "../api/nodeServer";
 
 const Results = ({
   onBackClicked,
@@ -30,21 +29,16 @@ const Results = ({
   }, [allCharities]);
 
   const sortCharities = () => {
-    // Sort by number of needs met
-    // then by support types
-    // then by personalisations
-    // then by postcode
-
     let filteredCharities = allCharities;
 
-    if (selectedSupportTypes.length > 0) {
-      filteredCharities = filteredCharities.filter(
-        (charity) =>
-          charity.typesOfSupportOffered.filter((supportType) =>
-            selectedSupportTypes.includes(supportType)
-          ).length > 0
-      );
-    }
+    // if (selectedSupportTypes.length > 0) {
+    //   filteredCharities = filteredCharities.filter(
+    //     (charity) =>
+    //       charity.typesOfSupportOffered.filter((supportType) =>
+    //         selectedSupportTypes.includes(supportType)
+    //       ).length > 0
+    //   );
+    // }
 
     if (selectedNeeds.length > 0) {
       filteredCharities = filteredCharities.filter((charity) => {
@@ -60,31 +54,33 @@ const Results = ({
 
     const prioritisedCharities = filteredCharities
       .filter((charity) => charity.NationalService === "YES" || postcode != "")
-      .sort((a, b) => a.OrgName.localeCompare(b.OrgName));
-    // .sort(
-    //   (a, b) =>
-    //     needsMet(a, b) ||
-    //     supportTypes(a, b) ||
-    //     ((a, b) => a.OrgName.localeCompare(b.OrgName)) ||
-    //     personalisations(a, b)
-    // );
+      .sort(
+        (a, b) =>
+          noOfMatchedSupportTypesAndPersonalisations(a, b) ||
+          noOfMatchedPersonalisations(a, b) ||
+          noOfMatchedSupportTypes(a, b) ||
+          alphabetical(a, b)
+      );
 
     setprioritisedResults(prioritisedCharities);
   };
 
-  const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
+  const noOfMatchedSupportTypesAndPersonalisations = (a, b) =>
+    b.servicesWithMatchedPersonalisationsAndSupportTypes.length -
+    a.servicesWithMatchedPersonalisationsAndSupportTypes.length;
 
-  const supportTypes = (a, b) =>
-    b.typesOfSupportOffered.length - a.typesOfSupportOffered.length;
+  const noOfMatchedSupportTypes = (a, b) =>
+    b.matchedTypesOfSupportOffered.length -
+    a.matchedTypesOfSupportOffered.length;
 
-  const personalisations = (a, b) =>
-    b.personalisationsMet.length - a.personalisationsMet.length;
+  const noOfMatchedPersonalisations = (a, b) =>
+    b.matchedPersonalisations.length - a.matchedPersonalisations.length;
+
+  const alphabetical = (a, b) => a.OrgName.localeCompare(b.OrgName);
+
+  // const needsMet = (a, b) => b.needsMet.length - a.needsMet.length;
 
   const constructCharityObjects = () => {
-    // get unique org ids
-    // because of the structure of the data we should sort it so that NationalServices of yes is first
-    // this way the set will contain the correct value for this
-
     let locationSortedCharities;
 
     if (postcode == "") {
@@ -109,11 +105,6 @@ const Results = ({
       ...new Set(locationSortedCharities.map((charity) => charity.OrgID)),
     ];
 
-    // for each org generate list of
-    // userOption (needs)
-    // UserOption_Type (types of support)
-    // personalisation
-
     const charityObjects = uniqueOrgIds.map((orgId) => {
       const charity = charities.find((charity) => charity.OrgID === orgId);
       let servicesFromCharity = charities.filter((charity) => {
@@ -126,11 +117,7 @@ const Results = ({
       });
 
       // This filtering logic will need to be changed once the use filter interface is implemented
-      // as for now it deleted any unselected filters which the user may wish to enable
-
-      // the problem in UC 8 occurs because the org offers CA&B and DoLfE but only offeres Talk to Somone for one of these, not both.
-      // this means that we must filter out services (types of support offered) which dont meet needs
-      // the problem is that we need to validate that the SAME service is available for BOTH NEEDS
+      // as for now it deletes any unselected filters which the user may wish to enable
 
       const needsMet = [
         ...new Set(servicesFromCharity.map((service) => service.UserOption)),
@@ -141,9 +128,19 @@ const Results = ({
           servicesFromCharity.map((service) => service.UserOption_Type)
         ),
       ];
-      // .filter((supportType) => selectedSupportTypes.includes(supportType));
-      // removed the filter as I think we should show all services?
-      // this is a business question
+
+      const matchedTypesOfSupportOffered = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
+                selectedSupportTypes.includes(service.UserOption_Type)
+            )
+            .map((matchedService) => matchedService.UserOption_Type)
+        ),
+      ];
 
       const personalisationsMet = [
         ...new Set(
@@ -151,16 +148,47 @@ const Results = ({
         ),
       ];
 
-      delete charity.TypeOfSupport;
-      delete charity.UserOption_Type;
-      delete charity.UserOption;
-      delete charity.Personalisation;
+      const matchedPersonalisations = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
+                selectedPersonalisations.includes(service.Personalisation)
+            )
+            .map((matchedService) => matchedService.Personalisation)
+        ),
+      ];
+
+      const servicesWithMatchedPersonalisationsAndSupportTypes = [
+        ...new Set(
+          servicesFromCharity
+            .filter(
+              (service) =>
+                (selectedNeeds.includes(service.UserOption) ||
+                  selectedNeeds.length === 0) &&
+                selectedPersonalisations.includes(service.Personalisation) &&
+                selectedSupportTypes.includes(service.UserOption_Type)
+            )
+            .map((matchedService) => matchedService.Personalisation)
+        ),
+      ];
+
+      // This stuff is causing pass by reference issues currently
+      // delete charity.TypeOfSupport;
+      // delete charity.UserOption_Type;
+      // delete charity.UserOption;
+      // delete charity.Personalisation;
 
       return {
         ...charity,
         needsMet,
         typesOfSupportOffered,
+        matchedTypesOfSupportOffered,
         personalisationsMet,
+        matchedPersonalisations,
+        servicesWithMatchedPersonalisationsAndSupportTypes,
       };
     });
 
@@ -190,9 +218,9 @@ const Results = ({
             <p className="results-list-title">{charity.OrgName}</p>
           )}
 
-          <p className="results-list-service-description">
+          {/* <p className="results-list-service-description">
             {charity.ServiceDescription}
-          </p>
+          </p> */}
           {charity.googleRating ? (
             <p>
               {" "}

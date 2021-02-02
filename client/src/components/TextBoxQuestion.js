@@ -9,13 +9,12 @@ const TextBoxQuestion = ({
   backgroundToUse = "one",
   postcode,
 }) => {
-  const [text, setText] = useState("Enter your postcode");
+  const [text, setText] = useState("");
   const checkPostcode = () => {
     if (postcode) {
-      setText(`${postcode}`)
+      setText(`${postcode}`);
     }
-  }
-
+  };
 
   useEffect(() => {
     checkPostcode();
@@ -51,7 +50,7 @@ const TextBoxQuestion = ({
               type="text"
               value={text}
               onChange={handleChange}
-              placeholder={text}
+              placeholder="Enter your postcode"
             ></input>
 
             <br />

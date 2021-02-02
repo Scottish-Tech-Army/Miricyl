@@ -1,14 +1,16 @@
 const mysql = require("mysql");
 const express = require("express");
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 
 let development = process.env.NODE_ENV == "development";
 
 if (development) {
   var pool = mysql.createPool({
     connectionLimit: 10,
-    user: "root",
-    password: "example",
+    user: process.env.dbuser,
+    password: process.env.dbpassword,
     database: "Miricyl",
     host: "localhost",
     port: "3306",

@@ -1,7 +1,7 @@
 *** Settings ***
 
 Resource        ../pageobjects/index.robot
-Resource        ../pageobjects/serviceTypes.robot
+Resource        ../pageobjects/servicetypes.robot
 Resource        ../resources/common.robot
 
 Test Setup  begin test

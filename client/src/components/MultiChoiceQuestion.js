@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/global.css";
 import { IoIosArrowDropleft } from "react-icons/io";
+import { withRouter } from "react-router-dom";
 
 const MultiChoiceQuestion = ({
   optionsList,
@@ -10,6 +11,7 @@ const MultiChoiceQuestion = ({
   selected,
   backgroundToUse = "one",
 }) => {
+
   const [options, setOptions] = useState([]);
 
   const handleOptionClicked = (selectedOption) => {
@@ -55,6 +57,7 @@ const MultiChoiceQuestion = ({
           }
           value={option.value}
           key={option.value}
+          id={option.value}
         >
           {option.value}
         </button>
@@ -113,4 +116,4 @@ const MultiChoiceQuestion = ({
   );
 };
 
-export default MultiChoiceQuestion;
+export default withRouter(MultiChoiceQuestion);

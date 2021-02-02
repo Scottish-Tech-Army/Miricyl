@@ -21,7 +21,7 @@ ${NUMBERS}          123456789
 ${ALPHANUMERIC}     ${LETTERS}${NUMBERS}
 
 
-${DEVURL} =  https://devmiricylclient.azurewebsites.net/
+${DEVURL} =  https://dev.miricyl.org/
 ${TSTURL} =
 ${LIVE} =
 
