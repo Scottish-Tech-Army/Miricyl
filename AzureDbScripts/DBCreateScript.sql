@@ -1,5 +1,4 @@
 -- MySQL Workbench Forward Engineering
--- Check Only Int Branch is being updated by this push
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -126,7 +125,10 @@ CREATE TABLE IF NOT EXISTS `__dbname__`.`OrgService` (
   `Country_CountryID` INT NULL DEFAULT NULL,
   `NationalService` TINYINT NULL DEFAULT '0',  
   `FaceBookURL` VARCHAR(200) NULL DEFAULT NULL,  
-  `ChatURL` VARCHAR(200) NULL DEFAULT NULL,      
+  `ChatURL` VARCHAR(200) NULL DEFAULT NULL,    
+  `Latitude` DECIMAL(10,8) NULL DEFAULT NULL,
+  `Longitude` DECIMAL(11,8) NULL DEFAULT NULL,
+  `ServicePriority` INT NULL DEFAULT NULL,
   PRIMARY KEY (`OrgServiceID`),
   UNIQUE INDEX `OrgServiceID_UNIQUE` (`OrgServiceID` ASC) VISIBLE,
   INDEX `fk_OrgService_Organisation_idx` (`Organisation_OrgID` ASC) VISIBLE,
@@ -336,8 +338,11 @@ SELECT distinct
     T.Description as TypeOfSupport,
 	T.UserOption_Type,
     P.Description as Personalisation,
+	P.UserOption as UserOption_Personal,
     OS.FaceBookURL,
-	OS.ChatURL
+	OS.ChatURL,
+    O.OrgPriority,
+    OS.ServicePriority
 
 FROM __dbname__.ServiceNeeds SN
 INNER JOIN __dbname__.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
@@ -652,3 +657,4 @@ GRANT SELECT on `__dbname__`.* to appuser;
 
 -- -----------------------------------------------------
 FLUSH PRIVILEGES;
+

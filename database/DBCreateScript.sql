@@ -126,6 +126,9 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`OrgService` (
   `NationalService` TINYINT NULL DEFAULT '0',  
   `FaceBookURL` VARCHAR(200) NULL DEFAULT NULL,  
   `ChatURL` VARCHAR(200) NULL DEFAULT NULL,    
+  `Latitude` DECIMAL(10,8) NULL DEFAULT NULL,
+  `Longitude` DECIMAL(11,8) NULL DEFAULT NULL,
+  `ServicePriority` INT NULL DEFAULT NULL,
   PRIMARY KEY (`OrgServiceID`),
   UNIQUE INDEX `OrgServiceID_UNIQUE` (`OrgServiceID` ASC) VISIBLE,
   INDEX `fk_OrgService_Organisation_idx` (`Organisation_OrgID` ASC) VISIBLE,
@@ -335,8 +338,11 @@ SELECT distinct
     T.Description as TypeOfSupport,
 	T.UserOption_Type,
     P.Description as Personalisation,
+	P.UserOption as UserOption_Personal,
     OS.FaceBookURL,
-	OS.ChatURL
+	OS.ChatURL,
+    O.OrgPriority,
+    OS.ServicePriority
 
 FROM Miricyl.ServiceNeeds SN
 INNER JOIN Miricyl.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
@@ -639,6 +645,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+
 -- -----------------------------------------------------
 -- Create A User for App
 -- -----------------------------------------------------
@@ -647,7 +654,7 @@ CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE 
 -- -----------------------------------------------------
 -- Grant appuser to AppReader role
 -- -----------------------------------------------------
-GRANT SELECT on `Miricyl`.* to appuser;
+GRANT SELECT on `__dbname__`.* to appuser;
 
 -- -----------------------------------------------------
 FLUSH PRIVILEGES;
