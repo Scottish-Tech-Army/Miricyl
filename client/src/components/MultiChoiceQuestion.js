@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Header from "./Header";
 import SubHeader from "./SubHeader";
 import BackButton from "./BackButton";
+import Footer from "./Footer";
 
 const MultiChoiceQuestion = ({
   optionsList,
@@ -23,8 +24,7 @@ const MultiChoiceQuestion = ({
           }
           value={option.value}
           key={option.value}
-          id={option.value}
-          test-id={option.value.replace(/\s/g, "-")}
+          id={option.value.replace(/\s/g, "-")}
         >
           {option.value}
         </button>
@@ -42,10 +42,10 @@ const MultiChoiceQuestion = ({
 
         <div>
           <div className="select-container">
-            <p className="question-text" test-id="question-title">
+            <p className="question-text" id="question-title">
               {questionTitle}
             </p>
-            <p className="question-subtext" test-id="question-subtitle">
+            <p className="question-subtext" id="question-subtitle">
               select all that apply
             </p>
 
@@ -58,13 +58,14 @@ const MultiChoiceQuestion = ({
             <button
               className="next-button"
               onClick={onComplete}
-              test-id="next-button"
+              id="next-button"
             >
               Next
             </button>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { IoIosArrowDropleft } from "react-icons/io";
 const BackButton = ({ onBackClicked }) => {
   return (
     <IoIosArrowDropleft
-      test-id="back-button"
+      id="back-button"
       className="back-button"
       onClick={() => onBackClicked()}
     />

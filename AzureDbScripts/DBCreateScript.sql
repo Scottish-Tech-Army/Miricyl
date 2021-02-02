@@ -437,7 +437,11 @@ CREATE TABLE `__dbname__`.`Serv_Import` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- Table `__dbname__`.`Serv_Import`
+=======
+-- Table `__dbname__`.`Org_Import`
+>>>>>>> develop
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `__dbname__`.`Org_Import` ;
 CREATE TABLE `__dbname__`.`Org_Import` (

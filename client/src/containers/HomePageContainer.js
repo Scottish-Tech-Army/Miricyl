@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
-import TextBoxQuestion from "../components/TextBoxQuestion";
 import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
@@ -31,6 +30,10 @@ const HomePageContainer = ({ history }) => {
 
   useEffect(() => {
     getAllOptionsFromServer();
+  }, []);
+
+  useEffect(() => {
+    document.title = "Miricyl";
   }, []);
 
   // QUESTION - 1: Needs
@@ -71,7 +74,8 @@ const HomePageContainer = ({ history }) => {
 
     nodeServer.get("/personalisations").then((res) => {
       const personalisationsResponse = res.data
-        .map((personalisation) => personalisation.Description)
+        // .map((personalisation) => personalisation.Description)
+        .map((personalisation) => personalisation.UserOption)
         .filter((personalisation) => personalisation !== "");
       const UserPersonalisations = personalisationsResponse.map(
         (personalisation) => {
@@ -79,6 +83,7 @@ const HomePageContainer = ({ history }) => {
         }
       );
       setPersonalisations(UserPersonalisations);
+      console.log(personalisationsResponse);
     });
   };
 
@@ -155,7 +160,8 @@ const HomePageContainer = ({ history }) => {
         .filter((personalisation) => personalisation.isSelected)
         .map((personalisation) => personalisation.value)
     );
-    history.push("/postcode");
+    // history.push("/postcode");
+    history.push("/results");
   };
 
   // QUESTION 4 - Postcode:
@@ -223,14 +229,14 @@ const HomePageContainer = ({ history }) => {
               backgroundToUse="three"
             />
           </Route>
-          <Route exact path="/postcode">
+          {/* <Route exact path="/postcode">
             <TextBoxQuestion
               onComplete={handlePostcodeSearchCompleted}
               onBackClicked={onBackClicked}
               backgroundToUse="four"
               postcode={postcode}
             />
-          </Route>
+          </Route> */}
           <Route exact path="/results">
             <Results
               onBackClicked={onBackClicked}

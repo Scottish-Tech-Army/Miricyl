@@ -120,7 +120,7 @@
 }
 
 .serviceContainer {
-  min-width: 40%;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
   color: #2e3192;
@@ -207,4 +207,8 @@
   &.disabled {
     background-color: lightgrey;
   }
+}
+
+.expander {
+  flex: 1;
 }

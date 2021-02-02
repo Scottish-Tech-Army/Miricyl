@@ -50,7 +50,7 @@ Values(115, 'Eating disorders', 'Body image or Eating disorders');
 Insert into Miricyl.Needs
 Values(116, 'Feeling low', 'Low, Depressed or Lonely');
 Insert into Miricyl.Needs
-Values(117, 'Gender identity', '');
+Values(117, 'Gender identity', 'LGBTQ+ or Gender identity');
 Insert into Miricyl.Needs
 Values(118, 'General Mental Health', '');
 Insert into Miricyl.Needs
@@ -58,7 +58,7 @@ Values(119, 'Into work /unemployment', 'Debt or Looking for Employment');
 Insert into Miricyl.Needs
 Values(120, 'Involved in crime', 'Victim or Involved in Crime');
 Insert into Miricyl.Needs
-Values(121, 'I was in care(foster/home)', '');
+Values(121, 'I was in care(foster/home)', 'LGBTQ+ or Gender identity');
 Insert into Miricyl.Needs
 Values(122, 'Loneliness', 'Low, Depressed or Lonely');
 Insert into Miricyl.Needs

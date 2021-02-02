@@ -24,11 +24,11 @@ Insert into __dbname__.Needs Values(113,'Domestic Abuse','Domestic abuse or Sexu
 Insert into __dbname__.Needs Values(114,'Drugs','Addiction');
 Insert into __dbname__.Needs Values(115,'Eating disorders','Body image or Eating disorders');
 Insert into __dbname__.Needs Values(116,'Feeling low','Low, Depressed or Lonely');
-Insert into __dbname__.Needs Values(117,'Gender identity','');
+Insert into __dbname__.Needs Values(117,'Gender identity','LGBTQ+ or Gender identity');
 Insert into __dbname__.Needs Values(118,'General Mental Health','');
 Insert into __dbname__.Needs Values(119,'Into work /unemployment','Debt or Looking for Employment');
 Insert into __dbname__.Needs Values(120,'Involved in crime','Victim or Involved in Crime');
-Insert into __dbname__.Needs Values(121,'I was in care(foster/home)','');
+Insert into __dbname__.Needs Values(121,'I was in care(foster/home)','LGBTQ+ or Gender identity');
 Insert into __dbname__.Needs Values(122,'Loneliness','Low, Depressed or Lonely');
 Insert into __dbname__.Needs Values(123,'Money','Debt or Looking for Employment');
 Insert into __dbname__.Needs Values(124,'New parent','Parenting');

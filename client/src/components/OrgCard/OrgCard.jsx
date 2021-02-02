@@ -7,16 +7,14 @@ import { BiEnvelope } from "react-icons/bi";
 import { BiChat } from "react-icons/bi";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
-import ReactStars from "react-rating-stars-component";
-
 const OrgCard = ({ charity }) => {
   const [isExapnded, setIsExpanded] = useState(false);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id={charity.OrgID}>
       <OrgOverview charity={charity} />
       <OptionsMet services={charity.Services} />
-      <div className={styles.servicesContainer}>
+      <div className={styles.servicesContainer} id="services-container">
         {charity.Services.slice(
           0,
           isExapnded ? charity.Services.length : 2
@@ -24,22 +22,27 @@ const OrgCard = ({ charity }) => {
           <Service service={service} />
         ))}
       </div>
-      <OrgDetails
-        email={charity.Email}
-        phone={charity.PhoneNo}
-        address={charity.Address}
-      />
+      {charity.Email || charity.PhoneNo || charity.Address ? (
+        <OrgDetails
+          email={charity.Email}
+          phone={charity.PhoneNo}
+          address={charity.Address}
+        />
+      ) : (
+        <div className={styles.expander} />
+      )}
       <button
         className={styles.expandButtonContainer}
         onClick={() => {
           setIsExpanded(!isExapnded);
         }}
         disabled={charity.Services.length <= 2}
+        id="expand-button"
       >
         {isExapnded ? (
-          <MdKeyboardArrowDown className={`${styles.expandIcon}`} />
+          <MdKeyboardArrowUp className={`${styles.expandIcon}`} />
         ) : (
-          <MdKeyboardArrowUp
+          <MdKeyboardArrowDown
             className={`${styles.expandIcon} ${
               charity.Services.length <= 2 && styles.disabled
             }`}
@@ -53,7 +56,7 @@ const OrgCard = ({ charity }) => {
 const OrgOverview = ({ charity }) => {
   return (
     <div className={styles.overviewContainer}>
-      <div className={styles.logoContainer}>
+      <div className={styles.logoContainer} id="org-logo">
         <a href={charity.OrgURL} target="_blank">
           <img
             className={styles.orgLogo}
@@ -63,11 +66,15 @@ const OrgOverview = ({ charity }) => {
         </a>
       </div>
       <div className={styles.overviewInformationContainer}>
-        <span className={styles.orgName}>{charity.OrgName}</span>
-        <span className={styles.orgDescription}>{charity.OrgDescription}</span>
-        <span>Ratings placeholder</span>
+        <span className={styles.orgName} id="org-name">
+          <a href={charity.OrgURL} target="_blank">
+            {charity.OrgName}
+          </a>
+        </span>
+        <span className={styles.orgDescription} id="org-description">
+          {charity.OrgDescription}
+        </span>
       </div>
-      <div className={styles.distanceBox}>tbi</div>
     </div>
   );
 };
@@ -106,13 +113,25 @@ const OptionsMet = ({ services }) => {
 const Service = ({ service }) => {
   return (
     <div className={styles.serviceContainer}>
-      <span className={styles.serviceName}>{service.ServiceName}</span>
-      <span className={styles.serviceInfo}>{service.PhoneNo}</span>
-      <span className={styles.serviceInfo}>{service.OpeningTimes}</span>
-      <span className={styles.serviceInfo}>{service.PhysicalAddress}</span>
+      <span className={styles.serviceName} id="service-name">
+        {service.ServiceName}
+      </span>
+      <span className={styles.serviceInfo} id="service-phone">
+        {service.PhoneNo}
+      </span>
+      <span className={styles.serviceInfo} id="service-opening">
+        {service.OpeningTimes}
+      </span>
+      <span className={styles.serviceInfo} id="service-address">
+        {service.PhysicalAddress}
+      </span>
       <div className={styles.serviceContactBoxes}>
         {service.PhoneNo && (
-          <button className="results-list-button" type="button">
+          <button
+            className="results-list-button"
+            type="button"
+            id="call-button"
+          >
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
             >
@@ -124,19 +143,23 @@ const Service = ({ service }) => {
         )}
 
         {service.ServiceUrl && (
-          <button className="results-list-button" type="button">
+          <button className="results-list-button" type="button" id="web-button">
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
             >
               <a href={service.ServiceUrl} target="_blank">
-                <BiChat /> Chat{" "}
+                <BiChat /> Web{" "}
               </a>
             </IconContext.Provider>
           </button>
         )}
 
         {service.EmailAddress && (
-          <button className="results-list-button" type="button">
+          <button
+            className="results-list-button"
+            type="button"
+            id="mail-button"
+          >
             <IconContext.Provider
               value={{ className: "results-react-button-icon" }}
             >
@@ -153,20 +176,26 @@ const Service = ({ service }) => {
 
 const OrgDetails = ({ phone, email, address }) => {
   return (
-    <div className={styles.orgDetailsContainer}>
+    <div className={styles.orgDetailsContainer} id="org-details">
       <span className={styles.orgDetailsTitle}>
         Organisation contact details:
       </span>
       <div className={styles.contactDetailsContainer}>
-        <span>
-          <b>Phone:</b> {email ?? "placeholder"}
-        </span>
-        <span>
-          <b>Email:</b> {phone ?? "placeholder"}
-        </span>
-        <span>
-          <b>Address:</b> {address ?? "placeholder"}
-        </span>
+        {email && (
+          <span id="org-email">
+            <b>Email:</b> {email}
+          </span>
+        )}
+        {phone && (
+          <span id="org-phone">
+            <b>Phone:</b> {phone}
+          </span>
+        )}
+        {address && (
+          <span id="org-address">
+            <b>Address:</b> {address}
+          </span>
+        )}
       </div>
     </div>
   );

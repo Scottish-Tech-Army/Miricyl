@@ -2,6 +2,7 @@ import React from "react";
 
 import Filter from "../Filter/Filter";
 import OrgCard from "../OrgCard/OrgCard";
+import Footer from "../Footer";
 
 import * as styles from "./results.module.scss";
 
@@ -55,7 +56,7 @@ const Results = ({
       allCharities = allCharities.filter((charity) => {
         return (
           charity.Services.filter((service) =>
-            selectedNeeds.every((selectedNeed) =>
+            selectedNeeds.some((selectedNeed) =>
               service.Needs.includes(selectedNeed)
             )
           ).length > 0
@@ -112,7 +113,8 @@ const Results = ({
         (a, b) =>
           noOfMatchedPersonalisations(a, b) ||
           noOfMatchedSupportTypes(a, b) ||
-          alphabetical(a, b)
+          sortByServicePiority(a, b) ||
+          alphabeticalService(a, b)
       );
 
       return {
@@ -128,7 +130,64 @@ const Results = ({
   const noOfMatchedSupportTypes = (a, b) =>
     b.matchedTypesOfSupport.length - a.matchedTypesOfSupport.length;
 
-  const alphabetical = (a, b) => a.ServiceName.localeCompare(b.ServiceName);
+  const noOfMatchedNeeds = (a, b) =>
+    b.matchedNeeds.length - a.matchedNeeds.length;
+
+  const sortByServicePiority = (a, b) => b.ServicePriority - a.ServicePriority;
+
+  const sortByOrgPiority = (a, b) => b.OrgPriority - a.OrgPriority;
+
+  const alphabeticalService = (a, b) =>
+    a.ServiceName.localeCompare(b.ServiceName);
+
+  const alphabeticalOrg = (a, b) => a.OrgName.localeCompare(b.OrgName);
+
+  const flattenUserOptionsForSorting = (charities) => {
+    return charities.map((charity) => {
+      const allMatchedNeeds = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedNeeds;
+          })
+        ),
+      ];
+
+      const allMatchedPersonalisations = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedPersonalisations;
+          })
+        ),
+      ];
+
+      const allMatchedSupportTypes = [
+        ...new Set(
+          ...charity.Services.map((service) => {
+            return service.matchedTypesOfSupport;
+          })
+        ),
+      ];
+
+      return {
+        ...charity,
+        matchedNeeds: allMatchedNeeds,
+        matchedPersonalisations: allMatchedPersonalisations,
+        matchedTypesOfSupport: allMatchedSupportTypes,
+      };
+    });
+  };
+
+  const prioritiseCharities = (charities) => {
+    // we're going to flatten all the services like before in order to sort
+    return charities.sort(
+      (a, b) =>
+        noOfMatchedNeeds(a, b) ||
+        noOfMatchedPersonalisations(a, b) ||
+        noOfMatchedSupportTypes(a, b) ||
+        sortByOrgPiority(a, b) ||
+        alphabeticalOrg(a, b)
+    );
+  };
 
   let sortedObjects = filteredCharitiesByNeedsMet(charities);
   sortedObjects = enhanceServicesWithSupportTypesAndPersonalisationsMet(
@@ -136,6 +195,8 @@ const Results = ({
   );
 
   sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
+  sortedObjects = flattenUserOptionsForSorting(sortedObjects);
+  sortedObjects = prioritiseCharities(sortedObjects);
 
   return (
     <div className={styles.container}>
@@ -153,6 +214,7 @@ const Results = ({
           return <OrgCard charity={org} />;
         })}
       </div>
+      <Footer />
     </div>
   );
 };
