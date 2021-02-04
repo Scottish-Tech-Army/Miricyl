@@ -7,7 +7,7 @@ locals{
     pipeline_email           = "__email__"                  //token __email__
     pipeline_zone            = "__zone__"                   //token __zone__
     pipeline_dbadminpassword = "__dbadminpassword__"        //token __dbadminpassword__
-    pipeline_dbadmin         = "__pipeline_dbadmin__"       //token __pipeline_dbadmin__
+    pipeline_dbadmin         = "__dbadmin__"                //token __dbadmin__
     zone                     = "np"                         //token __zone__
 # The 'zone' is either p for Production np for non-production
 # The zone is populated by the pipeline allowing the same code to be used in both zones 
