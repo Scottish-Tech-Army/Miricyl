@@ -29,8 +29,8 @@ Title is Miricyl
 
 Go to the MIRICYL home page
     [Documentation]  User is taken to the landing page
-    #go to  ${DEVSITE}
-    go to  https://dev.miricyl.org/
+    #go to  ${devurl}
+    #go to  https://dev.miricyl.org/
 
 
 Header of the home page is as expected
