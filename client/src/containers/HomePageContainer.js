@@ -207,7 +207,10 @@ const HomePageContainer = ({ history }) => {
           appInsights = getAppInsights();
         }}
       >
-        <NavBar onHelpButtonPressed={handleHelpButtonPressed} />
+        <NavBar
+          onHelpButtonPressed={handleHelpButtonPressed}
+          showHelpButton={!helpMode}
+        />
         <Switch>
           <Route exact path="/">
             <MultiChoiceQuestion

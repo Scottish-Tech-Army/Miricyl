@@ -191,9 +191,16 @@ const Results = ({
   };
 
   const getHelpNowCharities = (charities) => {
-    return charities.filter(
-      (charity) => charity.OrgID === 1276 || charity.OrgID === 1298
-    );
+    return charities
+      .filter((charity) => charity.OrgID === 1276 || charity.OrgID === 1298)
+      .map((charity) => {
+        return {
+          ...charity,
+          matchedNeeds: [],
+          matchedPersonalisations: [],
+          matchedTypesOfSupport: [],
+        };
+      });
   };
 
   let sortedObjects;
@@ -207,6 +214,7 @@ const Results = ({
     sortedObjects = prioritiseCharities(sortedObjects);
   } else {
     sortedObjects = getHelpNowCharities(charities);
+    console.log(sortedObjects);
   }
 
   return (
