@@ -214,7 +214,6 @@ const Results = ({
     sortedObjects = prioritiseCharities(sortedObjects);
   } else {
     sortedObjects = getHelpNowCharities(charities);
-    console.log(sortedObjects);
   }
 
   return (
