@@ -81,14 +81,16 @@ const OrgOverview = ({ charity }) => {
 
 const OptionsMet = ({ services }) => {
   const uniqueMatchedNeeds = [
-    ...new Set(...services.map((service) => service.matchedNeeds)),
+    ...new Set(services.map((service) => service.matchedNeeds).flat()),
   ];
 
   const uniqueMatchedSupportTypes = [
-    ...new Set(...services.map((service) => service.matchedTypesOfSupport)),
+    ...new Set(services.map((service) => service.matchedTypesOfSupport).flat()),
   ];
   const uniqueMatchedPersonalisations = [
-    ...new Set(...services.map((service) => service.matchedPersonalisations)),
+    ...new Set(
+      services.map((service) => service.matchedPersonalisations).flat()
+    ),
   ];
 
   return (

@@ -11,9 +11,9 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    database: "Miricyl",
+    database: "__dbname__",
     host: "localhost",
-    port: "3306"
+    port: "3306",
   });
 } else {
   var pool = mysql.createPool({
@@ -41,7 +41,6 @@ miricyldb.needs = () => {
         return resolve(results);
       }
     );
-
   });
 };
 

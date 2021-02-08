@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import nodeServer from "../api/nodeServer";
 import MultiChoiceQuestion from "../components/MultiChoiceQuestion";
+import NavBar from "../components/Navbar";
+
 import Results from "../components/Results/Results";
 import { getAppInsights } from "../telemetry/TelemetryService";
 import TelemetryProvider from "../telemetry/telemetry-provider";
@@ -10,6 +12,8 @@ const HomePageContainer = ({ history }) => {
   const [needs, setNeeds] = useState([]);
   const [supportTypes, setSupportTypes] = useState([]);
   const [personalisations, setPersonalisations] = useState([]);
+
+  const [helpMode, setHelpMode] = useState(false);
 
   const [charities, setCharities] = useState([]);
 
@@ -164,13 +168,13 @@ const HomePageContainer = ({ history }) => {
 
   // QUESTION 4 - Postcode:
 
-  const handlePostcodeSearchCompleted = (text) => {
-    if (text === "Enter your postcode") {
-      text = "";
-    }
-    setPostcode(text);
-    history.push("/results");
-  };
+  // const handlePostcodeSearchCompleted = (text) => {
+  //   if (text === "Enter your postcode") {
+  //     text = "";
+  //   }
+  //   setPostcode(text);
+  //   history.push("/results");
+  // };
 
   const clearAllUserSelections = () => {
     setNeeds(
@@ -190,6 +194,11 @@ const HomePageContainer = ({ history }) => {
     );
   };
 
+  const handleHelpButtonPressed = () => {
+    setHelpMode(true);
+    history.push("/results");
+  };
+
   return (
     <>
       <TelemetryProvider
@@ -198,6 +207,7 @@ const HomePageContainer = ({ history }) => {
           appInsights = getAppInsights();
         }}
       >
+        <NavBar onHelpButtonPressed={handleHelpButtonPressed} />
         <Switch>
           <Route exact path="/">
             <MultiChoiceQuestion
@@ -247,6 +257,7 @@ const HomePageContainer = ({ history }) => {
               onToggleSupportTypeSelected={onToggleSupportTypeSelected}
               onTogglePersonalisationSelected={onTogglePersonalisationSelected}
               onClearAllUserSelections={clearAllUserSelections}
+              isHelpMode={helpMode}
             />
           </Route>
         </Switch>

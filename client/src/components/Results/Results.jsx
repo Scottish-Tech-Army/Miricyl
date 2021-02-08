@@ -16,6 +16,7 @@ const Results = ({
   onToggleSupportTypeSelected,
   onTogglePersonalisationSelected,
   onClearAllUserSelections,
+  isHelpMode = false,
 }) => {
   const selectedNeeds = needs
     .filter((need) => need.isSelected)
@@ -142,29 +143,29 @@ const Results = ({
 
   const alphabeticalOrg = (a, b) => a.OrgName.localeCompare(b.OrgName);
 
-  const flattenUserOptionsForSorting = (charities) => {
+  const flattenUserOptionsForSorting = (charities, i) => {
     return charities.map((charity) => {
       const allMatchedNeeds = [
         ...new Set(
-          ...charity.Services.map((service) => {
+          charity.Services.map((service) => {
             return service.matchedNeeds;
-          })
+          }).flat()
         ),
       ];
 
       const allMatchedPersonalisations = [
         ...new Set(
-          ...charity.Services.map((service) => {
+          charity.Services.map((service) => {
             return service.matchedPersonalisations;
-          })
+          }).flat()
         ),
       ];
 
       const allMatchedSupportTypes = [
         ...new Set(
-          ...charity.Services.map((service) => {
+          charity.Services.map((service) => {
             return service.matchedTypesOfSupport;
-          })
+          }).flat()
         ),
       ];
 
@@ -189,26 +190,38 @@ const Results = ({
     );
   };
 
-  let sortedObjects = filteredCharitiesByNeedsMet(charities);
-  sortedObjects = enhanceServicesWithSupportTypesAndPersonalisationsMet(
-    sortedObjects
-  );
+  const getHelpNowCharities = (charities) => {
+    return charities.filter(
+      (charity) => charity.OrgID === 1276 || charity.OrgID === 1298
+    );
+  };
 
-  sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
-  sortedObjects = flattenUserOptionsForSorting(sortedObjects);
-  sortedObjects = prioritiseCharities(sortedObjects);
+  let sortedObjects;
+  if (!isHelpMode) {
+    sortedObjects = filteredCharitiesByNeedsMet(charities);
+    sortedObjects = enhanceServicesWithSupportTypesAndPersonalisationsMet(
+      sortedObjects
+    );
+    sortedObjects = prioritiseServicesWithinCharities(sortedObjects);
+    sortedObjects = flattenUserOptionsForSorting(sortedObjects);
+    sortedObjects = prioritiseCharities(sortedObjects);
+  } else {
+    sortedObjects = getHelpNowCharities(charities);
+  }
 
   return (
     <div className={styles.container}>
-      <Filter
-        needs={needs}
-        supportTypes={supportTypes}
-        personalisations={personalisations}
-        onToggleNeedSelected={onToggleNeedSelected}
-        onToggleSupportTypeSelected={onToggleSupportTypeSelected}
-        onTogglePersonalisationSelected={onTogglePersonalisationSelected}
-        onClearAllClicked={onClearAllUserSelections}
-      />
+      {!isHelpMode && (
+        <Filter
+          needs={needs}
+          supportTypes={supportTypes}
+          personalisations={personalisations}
+          onToggleNeedSelected={onToggleNeedSelected}
+          onToggleSupportTypeSelected={onToggleSupportTypeSelected}
+          onTogglePersonalisationSelected={onTogglePersonalisationSelected}
+          onClearAllClicked={onClearAllUserSelections}
+        />
+      )}
       <div className={styles.cardList}>
         {sortedObjects.map((org) => {
           return <OrgCard charity={org} />;
