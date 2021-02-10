@@ -92,4 +92,43 @@ router.get("/googleratings/:id", async (req, res) => {
   }
 });
 
+router.get("/updates", async (req, res, next) => {
+
+  try {
+    var results = []
+    let organisations = await db.organisationsTest();
+    var updateDetails = []
+
+
+
+    let update = organisations.map(async (org) => {
+      key = process.env.googleapi
+
+      if (org.PlaceID) {
+        key = process.env.googleapi
+        let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${org.PlaceID}&fields=rating&key=${key}`;
+        results = await axios.get(url).then((res) => {
+          rating = res.data.result.rating;
+          const tempUpdate = { id: org.OrgID, GoogleRating: rating }
+          updateDetails.push(tempUpdate)
+          console.log(updateDetails);
+          return tempUpdate
+        });
+        // const tempUpdate = { id: org.OrgID, rating: results.rating }
+        // updateDetails.push(tempUpdate)
+        return null
+      }
+    })
+    Promise.all(update).then((results) => {
+      console.log('ud', updateDetails);
+      console.log('res', results);
+      res.json(updateDetails);
+    })
+    // res.json(updateDetails);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;

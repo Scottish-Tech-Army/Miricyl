@@ -94,6 +94,17 @@ miricyldb.organisations = () => {
   });
 };
 
+miricyldb.organisationsTest = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Organisation LIMIT 5`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+};
+
 miricyldb.charitySelect = (tags) => {
   let finalResults = [];
   let finalTags = [];

@@ -24,7 +24,8 @@ if (development) {
 
 
 console.log(corsOptions);
-app.use(cors(corsOptions));
+app.use(cors());
+// app.use(cors(corsOptions));
 app.use("/api", apiRouter);
 
 
