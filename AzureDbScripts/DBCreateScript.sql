@@ -640,6 +640,22 @@ LEFT JOIN __dbname__.personalisation P1
 END$$
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- Table `__dbname__`.`RatingImport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `__dbname__`.`RatingImport` ;
+
+  CREATE TABLE IF NOT EXISTS `__dbname__`.`RatingImport` (
+  `Organisation_OrgID` INT NOT NULL,
+  `GoogleRating` DECIMAL(5,2) NULL DEFAULT NULL,
+  `FaceBookRating` DECIMAL(5,2) NULL DEFAULT NULL,
+    CONSTRAINT `fk_RatingImport_Organisation`
+    FOREIGN KEY (`Organisation_OrgID`)
+    REFERENCES `Miricyl`.`Organisation` (`OrgID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin; 
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

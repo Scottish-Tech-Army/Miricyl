@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/global.css";
 import Logo from "../assets/BoostLogo.png";
 
-const NavBar = () => {
+const NavBar = ({ showHelpButton = true, onHelpButtonPressed }) => {
   return (
     <>
       <div className="navbar-container">
@@ -20,9 +20,15 @@ const NavBar = () => {
 
           </div>
 
-          <button className="help-button" id="help-button">
-            Help Now!
-          </button>
+          {showHelpButton && (
+            <button
+              className="help-button"
+              id="help-button"
+              onClick={() => onHelpButtonPressed()}
+            >
+              Help Now!
+            </button>
+          )}
         </div>
       </div>
     </>
