@@ -259,8 +259,8 @@ VALUES (2500,'Directory of support groups','Directory of support groups','',NULL
 (2756,'Webchat','Webchat','',NULL,'','','','Monday and Thursday 1800-2000',1302,NULL,'https://www.lgbtyouth.org.uk/groups-and-support/digital-support/','',101,1,NULL,NULL,NULL,NULL,4),
 (2757,'Text 07984 356 512','Text 07984 356 512','',NULL,'','','','',1302,NULL,'https://www.lgbtyouth.org.uk/groups-and-support/digital-support/','',101,1,NULL,NULL,NULL,NULL,3),
 (2758,'Email support','Email support','',NULL,'','','','',1302,NULL,'https://www.lgbtyouth.org.uk/groups-and-support/digital-support/','info@lgbtyouth.org.uk',101,1,NULL,NULL,NULL,NULL,5),
-(2759,'Information and advice','Information and advice','',NULL,'','','','',1302,NULL,'https://www.lgbtyouth.org.uk/groups-and-support/lgbt-advice-centre/','',101,1,NULL,NULL,NULL,NULL,2);
- 
+(2759,'Information and advice','Information and advice','',NULL,'','','','',1302,NULL,'https://www.lgbtyouth.org.uk/groups-and-support/lgbt-advice-centre/','',101,1,NULL,NULL,NULL,NULL,2),
+(2760,'If you\'re in immediate danger call 999','If you\'re in immediate danger call 999','',NULL,'','','999','',1295,NULL,'','',NULL,1,NULL,NULL,NULL,NULL,1);
  
  
 INSERT INTO `Miricyl`.`ServiceNeeds` 
