@@ -261,7 +261,7 @@ resource "azurerm_app_service" "client" {
     name       = "Prevent direct external access"
     ip_address = "AzureCloud"
     priority   = 500
-    action     = "allow"
+    action     = [Allow]
     }
   }
 }
@@ -289,7 +289,7 @@ resource "azurerm_app_service" "server" {
     name       = "Prevent direct external access"
     ip_address = "AzureCloud"
     priority   = 500
-    action     = "Allow"
+    action     = [Allow]
     }
    
   }
