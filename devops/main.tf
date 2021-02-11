@@ -258,9 +258,9 @@ resource "azurerm_app_service" "client" {
     app_command_line  = "npm run start"
   // Terraform issue prevents this being done via code currently - This needs to be *manually* done
   ip_restriction {
-    name       = "Prevent direct external access"
-    ip_address = "AzureCloud"
-    priority   = 500
+    name        = "Prevent direct external access"
+    service_tag = "AzureCloud"
+    priority    = 500
     }
   }
 }
@@ -285,9 +285,9 @@ resource "azurerm_app_service" "server" {
     
    // Terraform issue prevents this being done via code currently
   ip_restriction {
-    name       = "Prevent direct external access"
-    ip_address = "AzureCloud"
-    priority   = 500
+    name        = "Prevent direct external access"
+    service_tag = "AzureCloud"
+    priority    = 500
     }
    
   }
