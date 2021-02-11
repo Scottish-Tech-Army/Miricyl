@@ -256,14 +256,13 @@ resource "azurerm_app_service" "client" {
   site_config {
     linux_fx_version  = "PHP|7.3"
     app_command_line  = "npm run start"
-  /* // Terraform issue prevents this being done via code currently - This needs to be *manually* done
+  // Terraform issue prevents this being done via code currently - This needs to be *manually* done
   ip_restriction {
     name       = "Prevent direct external access"
     ip_address = "AzureCloud"
     priority   = 500
     action     = "allow"
     }
-  */
   }
 }
 
@@ -285,14 +284,14 @@ resource "azurerm_app_service" "server" {
     linux_fx_version = "NODE|10.10"
     app_command_line = "npm run start"
     
-  /* // Terraform issue prevents this being done via code currently
+   // Terraform issue prevents this being done via code currently
   ip_restriction {
     name       = "Prevent direct external access"
     ip_address = "AzureCloud"
     priority   = 500
     action     = "Allow"
     }
-    */
+   
   }
 }
 
