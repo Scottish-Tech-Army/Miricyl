@@ -347,6 +347,7 @@ resource "azurerm_mysql_firewall_rule" "primary_server" {
   end_ip_address      = "0.0.0.0"
 }
 
+/* This is done via the script
 # A database is created in each environment
 resource "azurerm_mysql_database" "webapp_db" {
   for_each            = lookup(local.environments, local.zone)
@@ -356,6 +357,8 @@ resource "azurerm_mysql_database" "webapp_db" {
   charset             = "utf8"
   collation           = "utf8_bin"
 }
+*/
+
 
 # A Resource group is created logging and analytics components in each zone
 resource "azurerm_resource_group" "logging" {
