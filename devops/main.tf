@@ -852,7 +852,7 @@ dynamic "backend_http_settings" {
   }
 }
 ssl_certificate {
-    name                  = "miricyl-wildcard"
+    name                  = "help-miricyl-org"
     key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl.secret_id
   }
 }
