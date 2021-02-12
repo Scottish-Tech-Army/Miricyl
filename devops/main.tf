@@ -626,10 +626,9 @@ resource "azurerm_key_vault_access_policy" "appgateway" {
 
 # This retrieves the IDs of all the certificates in the vault
 data "azurerm_key_vault_certificate" "miricyl" {
-  name         = "help-miricyl-org"
+  name         = "miricyl-wildcard"
   key_vault_id = azurerm_key_vault.appgateway.id
 }
-
 
 # User Assisgned Identity for Application Gateway
 resource "azurerm_user_assigned_identity" "appgateway" {
