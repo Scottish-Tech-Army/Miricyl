@@ -631,7 +631,6 @@ data "azurerm_key_vault_certificate" "miricyl" {
 }
 
 
-
 # User Assisgned Identity for Application Gateway
 resource "azurerm_user_assigned_identity" "appgateway" {
   location            = local.primary_location
