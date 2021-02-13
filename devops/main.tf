@@ -754,7 +754,7 @@ frontend_ip_configuration {
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
     host_name                      = "${http_listener.value}.${local.prefix}.org"
-    ssl_certificate_name           = "${local.environments}-miricyl-org"
+    ssl_certificate_name           = "${local.environments[each.value]}-miricyl-org"
   }
  }
 /* --remove
