@@ -53,27 +53,8 @@
   justify-self: right;
   cursor: pointer;
 }
-.question-one-container {
-  background-image: url(../assets/bg1.png);
-  margin: 0;
-  min-height: 100vh;
-  padding: 15px 0px 75px 0px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.question-two-container {
-  background-image: url(../assets/bg2.png);
-  margin: 0;
-  min-height: 100vh;
-  padding: 15px 0px 75px 0px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.question-three-container {
-  background-image: url(../assets/bg3.png);
-  margin: 0;
+
+.question-container {
   min-height: 100vh;
   padding: 15px 0px 75px 0px;
   background-position: center;
@@ -81,58 +62,22 @@
   background-size: cover;
 }
 
-.question-four-container {
-  background-image: url(../assets/bg4.png);
-  margin: 0;
-  min-height: 100vh;
-  padding: 15px 0px 75px 0px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+.title-description-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
 
-.results-page-container {
-  background-image: url(../assets/bg1.png);
-  margin: 0;
-  min-height: 100vh;
-  padding: 15px 0px 75px 0px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.results-wrapper {
-  margin-top: 85px;
 }
 
 .question-grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
   margin-top: 50px;
+  align-items: center;
 }
 
-.question-title {
-  font-family: "clone-rounded-latin", sans-serif;
-  font-size: 57px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: 1.27px;
-  color: #ffffff;
-  margin: 85px 80px 0px 100px;
+.ui-container{
 }
-.question-page-detail-text {
-  margin: 40px 80px 0px 100px;
-  font-family: "Nunito", sans-serif;
-  font-size: 27px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 0.6px;
-  color: #2e3192;
-}
+
 .select-container {
   margin-top: 85px;
   margin-right: 100px;
@@ -146,26 +91,53 @@
   width: 570px;
   background-image: linear-gradient(to bottom, #ffffff00 93%, #ffffff 98%);
   -ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
+  scrollbar-width: none;  /* Firefox */
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
-.select-container::-webkit-scrollbar {
-  display: none;
+
+.question-title {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 57px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 1.27px;
+  color: #ffffff;
+  margin: 85px 80px 0px 100px;
 }
-/* Hide scrollbar for IE, Edge and Firefox */
 
+.question-page-detail-text {
+  margin: 40px 80px 0px 100px;
+  font-family: "Nunito", sans-serif;
+  font-size: 27px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  color: #2e3192;
+}
 
-.select-container-q4 {
-  margin-top: 85px;
-  margin-right: 100px;
-  background-color: #ffffff;
-  border-radius: 40px;
+.next-button {
+  font-family: "clone-rounded-latin", sans-serif;
+  font-size: 29px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  color: #2e3192;
   text-align: center;
-  padding: 38px 30px 0px 38px;
-  height: 320px;
-  opacity: 0.95;
-  width: 570px;
+  border-radius: 30px;
+  border: solid 1px #ffffff;
+  background-color: #ffffff;
+  width: 153px;
+  letter-spacing: 0.64px;
+  float: right;
+  cursor: pointer;
+  margin: 30px 100px 0px 0px;
+  padding: 5px 44px 13px 45px;
 }
+
 .question-button {
   color: #2e3192;
   text-align: center;
@@ -184,23 +156,139 @@ scrollbar-width: none;  /* Firefox */
   margin: 0 0 22px;
   padding: 16px 10px 13px 10px;
 }
+
 .question-button-selected {
   color: #ffffff;
-  text-align: center;
-  border-radius: 40px;
-  border: solid 1px #2e3192;
   background-color: #2e3192;
-  font-family: "Nunito", sans-serif;
-  font-size: 22.4px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 0.5px;
-  width: 100%;
-  cursor: pointer;
-  margin: 0 0 22px;
-  padding: 16px 10px 13px 10px;  
+}
+
+
+@media screen and (max-width: 1300px) {
+  .question-grid-container {
+    flex-direction: column;
+  }
+
+  .select-container {
+    margin: 0px;
+  }
+
+  .question-title {
+    font-size: 48px;
+  }
+
+  .next-button {
+    margin: 0px;
+    margin-top: 30px;
+  }
+
+  .ui-container{
+    padding: 40px;
+  }
+
+  .question-page-detail-text{
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 808px) {
+  .question-title {
+    font-size: 32px;
+  }
+
+  .question-page-detail-text{
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 712px) {
+  .select-container {
+    width: auto;
+  }
+
+  .question-title {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .question-page-detail-text{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .select-container {
+    padding: 20px;
+  }
+
+  .ui-container {
+    padding: 20px 20px;
+  }
+
+  .navbar-container {
+    height: 80px;
+  }
+  .navbar-wrapper {
+    margin-top: 23px;
+    margin-left: 26px;
+    margin-right: 28px;
+  }
+  .navbar-logo {
+    height: 37px;
+    font-family: "clone-rounded-latin", sans-serif;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.question-one-container {
+  background-image: url(../assets/bg1.png);
+
+}
+.question-two-container {
+  background-image: url(../assets/bg2.png);
+
+}
+.question-three-container {
+  background-image: url(../assets/bg3.png);
+}
+
+.question-four-container {
+  background-image: url(../assets/bg4.png);
+}
+
+.results-page-container {
+  background-image: url(../assets/bg1.png);
+  margin: 0;
+  min-height: 100vh;
+  padding: 15px 0px 75px 0px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.results-wrapper {
+  margin-top: 85px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.select-container::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+
+
+.select-container-q4 {
+  margin-top: 85px;
+  margin-right: 100px;
+  background-color: #ffffff;
+  border-radius: 40px;
+  text-align: center;
+  padding: 38px 30px 0px 38px;
+  height: 320px;
+  opacity: 0.95;
+  width: 570px;
 }
 
 .results-page-display {
@@ -243,18 +331,6 @@ scrollbar-width: none;  /* Firefox */
 
 .results-list-title-service {
   padding-left: 30px;
-}
-
-.results-list-service-description {
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  letter-spacing: 0.25px;
-  line-height: 13px;
-  color: #6f7e8b;
-  margin: 10px 0px 13px 0px;
 }
 
 .results-list-sub-title {
@@ -303,46 +379,6 @@ scrollbar-width: none;  /* Firefox */
   text-decoration: none;
 }
 
-.results-list-logo {
-  max-width: 100px;
-  max-height: 80px;
-  /* height: 100%;
-  width: 100%;
-  object-fit: contain; */
-}
-.results-list-needs-tag {
-  font-family: "Nunito", sans-serif;
-  color: #2e3192;
-  font-size: 14.2px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  letter-spacing: 0.06px;
-  text-align: center;
-  border-radius: 19px;
-  background-color: #fcd432;
-  width: fit-content;
-  margin: 30px 0px 9px 0px;
-  padding: 6px 15px 6px 15px;
-}
-.results-list-personalisation-tag {
-  font-family: "Nunito", sans-serif;
-  color: #2e3192;
-  font-size: 14.2px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  letter-spacing: 0.06px;
-  text-align: center;
-  border-radius: 19px;
-  background-color: #4ecfff;
-  width: fit-content;
-  margin: 15px 0px 30px 0px;
-  padding: 6px 15px 6px 15px;  
-}
-
 .question-text {
   font-family: "Nunito", sans-serif;
   font-size: 29px;
@@ -370,41 +406,11 @@ scrollbar-width: none;  /* Firefox */
   margin: 8px 0px 20px 0px;
 }
 
-.next-button {
-  font-family: "clone-rounded-latin", sans-serif;
-  font-size: 29px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  color: #2e3192;
-  text-align: center;
-  border-radius: 30px;
-  border: solid 1px #ffffff;
-  background-color: #ffffff;
-  width: 153px;
-  letter-spacing: 0.64px;
-  float: right;
-  cursor: pointer;
-  margin: 30px 100px 0px 0px;
-  padding: 5px 44px 13px 45px;
-}
-
 .back-button {
   width: 80px;
   height: 80px;
   color: white;
   margin-top: 20px;
-  cursor: pointer;
-}
-
-.back-button-results {
-  width: 80px;
-  height: 80px;
-  color: white;
-  margin-left: 100px;
-  /* float: left; */
-  padding-bottom: 2rem;
   cursor: pointer;
 }
 
@@ -430,40 +436,6 @@ scrollbar-width: none;  /* Firefox */
   color: #bcbcbc;
 }
 
-.filter-panel {
-  border: 2px solid #2e3192;
-  border-radius: 21px;
-  background-color: white;
-}
-
-.filter-header {
-  font-size: 29px;
-  min-height: 42px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.filter-section-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.filter-section-subtitle{
-  font-size: 24px;
-  color: #2e3192;
-}
-
-.filters-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.filter-item-container {
-  display: flex;
-}
-
   /* Footer css */
 
   .footer-wrapper {
@@ -478,20 +450,7 @@ scrollbar-width: none;  /* Firefox */
 /* MOBILE RESPONSIVE RULES */
 
 @media screen and (max-width: 450px) {
-  .navbar-container {
-    height: 80px;
-  }
-  .navbar-wrapper {
-    margin-top: 23px;
-    margin-left: 26px;
-    margin-right: 28px;
-  }
-  .navbar-logo {
-    height: 37px;
-    font-family: "clone-rounded-latin", sans-serif;
-    color: white;
-    text-decoration: none;
-  }
+
   .help-button {
     padding: 3px 7px 6px 8px;
     border-radius: 16px;
@@ -519,7 +478,7 @@ scrollbar-width: none;  /* Firefox */
   }
 
   .question-grid-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     margin-top: 40px;
   }
 
@@ -539,12 +498,12 @@ scrollbar-width: none;  /* Firefox */
   .question-page-detail-text {
     display: none;
   }
+
   .select-container {
-    margin: 32px auto 25px auto;
     border-radius: 25px;
-    padding: 21px 15px 0 15px;
+    padding: 16px 12px 0 12px;
     height: 420px;
-    width: 300px;
+    width:auto;
   }
   .select-container-q4 {
     margin: 32px auto 25px auto;
@@ -635,11 +594,7 @@ scrollbar-width: none;  /* Firefox */
     align-items: center;
     margin: 0px 0px 10px 0px;
   }
-  .results-list-logo {
-    object-fit: contain;
-    max-width: 75px;
-    padding: 5px;
-  }
+
   .results-list-title-service {
     padding-left: 20px;
   }
@@ -648,19 +603,7 @@ scrollbar-width: none;  /* Firefox */
     letter-spacing: 0.09px;
     line-height: 22px;
   }
-  .results-list-service-description {
-    font-size: 12px;
-    letter-spacing: 0.19px;
-    line-height: 13px;
-    color: #6f7e8b;
-    margin: 0;
-    padding-top: 10px;
-  }
-  .results-button-container {
-    display: flex;
-    justify-content: left;
-    margin-top: 12px;
-  }
+
   .results-list-button {
     width: auto;
     height: 33px;
@@ -668,7 +611,6 @@ scrollbar-width: none;  /* Firefox */
     font-size: 16px;
     letter-spacing: 0.36px;
     /* margin-right: 10px; */
-    margin: 13px 15px 15px 0;
     padding: 4px 13px 6px 9px;
     border-radius: 8px;
   }
@@ -677,29 +619,5 @@ scrollbar-width: none;  /* Firefox */
     line-height: 1.33;
     margin: 10px 0px 3px 0px;
   }
-  .results-list-service-detail {
-    font-size: 12px;
-    line-height: 1.33;
-  }
-  .results-list-needs-tag {
-    border-radius: 16px;
-    margin: 15px 6px 0px 0;
-    font-size: 12px;
-    letter-spacing: 0.05px;
-    padding: 5px 12px 5px 12px;
-  }
 
-  .results-list-personalisation-tag {
-    border-radius: 16px;
-    font-size: 12px;
-    letter-spacing: 0.05px;
-    margin: 10px 6px 3px 0;
-    padding: 5px 12px 5px 12px;
-  }
-  .back-button-results {
-    width: 45px;
-    height: 45px;
-    margin-top: 7px;
-    margin-left: 26px;
-  }
 }
