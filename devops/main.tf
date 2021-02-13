@@ -753,7 +753,7 @@ frontend_ip_configuration {
     frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
-    host_name                      = "${http_listener.value}.${local.prefix}.org"
+    host_name                      = "${http_listener.value}.${local.zone}.${local.prefix}.org"
     ssl_certificate_name           = "${http_listener.value}-miricyl-org"
   }
  }
