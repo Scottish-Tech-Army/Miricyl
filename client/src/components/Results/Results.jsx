@@ -192,7 +192,12 @@ const Results = ({
 
   const getHelpNowCharities = (charities) => {
     return charities
-      .filter((charity) => charity.OrgID === 1276 || charity.OrgID === 1298)
+      .filter(
+        (charity) =>
+          charity.OrgID === 1276 ||
+          charity.OrgID === 1298 ||
+          charity.OrgID === 1295
+      )
       .map((charity) => {
         return {
           ...charity,
