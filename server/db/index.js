@@ -18,7 +18,7 @@ if (development) {
 } else {
   var pool = mysql.createPool({
     connectionLimit: 10,
-    user: "__dbadmin__",
+    user: "__user__",
     password: "__dbadminpassword__",
     database: "__database__",
     host: "__host__",
