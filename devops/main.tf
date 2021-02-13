@@ -855,7 +855,7 @@ dynamic "backend_http_settings" {
     probe_name            = "${backend_http_settings.value}-logos-probe"
   }
 }
-dynamic "ssl_certificate " {
+dynamic "ssl_certificate" {
     for_each              = lookup(local.environments, local.zone)
    content {
     name                  = "${local.environments[each.value]}-miricyl-org"
