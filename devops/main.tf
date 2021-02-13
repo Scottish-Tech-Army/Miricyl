@@ -858,8 +858,8 @@ dynamic "backend_http_settings" {
 dynamic "ssl_certificate" {
     for_each              = lookup(local.environments, local.zone)
    content {
-    name                  = "${local.environments[each.value]}-miricyl-org"
-    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[each.key].secret_id
+    name                  = "${ssl_certificate.value}-miricyl-org"
+    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[ssl_certificate.value].secret_id
   }
 }
 }
