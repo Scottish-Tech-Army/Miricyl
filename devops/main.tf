@@ -754,7 +754,7 @@ frontend_ip_configuration {
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
     host_name                      = "${http_listener.value}.${local.prefix}.org"
-    ssl_certificate_name           = data.azurerm_key_vault_certificate.miricyl.name
+    ssl_certificate_name           = data.azurerm_key_vault_certificate.miricyl[each.key].name
   }
  }
 /* --remove
@@ -855,12 +855,14 @@ dynamic "backend_http_settings" {
     probe_name            = "${backend_http_settings.value}-logos-probe"
   }
 }
-ssl_certificate {
-    name                  = "help-miricyl-org"
-    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl.secret_id
+dynamic "ssl_certificate " {
+    for_each              = lookup(local.environments, local.zone)
+   content {
+    name                  = "${local.environments[each.value]}-miricyl-org"
+    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[each.key].secret_id
   }
 }
-
+}
 # Enable diagnostics for back end web service in each environment
 resource "azurerm_monitor_diagnostic_setting" "appgateway" {
   name                       = "logging"
