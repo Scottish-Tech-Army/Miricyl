@@ -92,7 +92,7 @@ resource "azurerm_dns_cname_record" "miricyl" {
   zone_name           = azurerm_dns_zone.miricyl.name
   resource_group_name = azurerm_resource_group.networking.name
   ttl                 = 300
-  record              = azurerm_public_ip.appgateway.domain_name_label
+  record              = "${azurerm_public_ip.appgateway.domain_name_label}.${local.primary_location}.cloudapp.azure.com"
 }
 
 # A Vnet is deployed in the Primary location (Server Source Vnet) per zone
