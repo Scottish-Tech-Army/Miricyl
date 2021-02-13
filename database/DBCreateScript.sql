@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `Miricyl`.`Organisation` (
   `OrgOpeningTime` VARCHAR(500) NULL DEFAULT NULL,  
   `OrgCharityNumber` VARCHAR(500) NULL DEFAULT NULL,
   `OrgPriority` INT NULL DEFAULT NULL,
+  `EmergencyService` CHAR(1) NULL DEFAULT 'N',
   
   PRIMARY KEY (`OrgID`),
   UNIQUE INDEX `OrgID_UNIQUE` (`OrgID` ASC) VISIBLE,
@@ -301,6 +302,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
+-- -----------------------------------------------------
+-- Table `Miricyl`.`RatingImport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Miricyl`.`RatingImport` ;
+
+  CREATE TABLE IF NOT EXISTS `Miricyl`.`RatingImport` (
+  `Organisation_OrgID` INT NOT NULL,
+  `GoogleRating` DECIMAL(5,2) NULL DEFAULT NULL,
+  `FaceBookRating` DECIMAL(5,2) NULL DEFAULT NULL,
+    CONSTRAINT `fk_RatingImport_Organisation`
+    FOREIGN KEY (`Organisation_OrgID`)
+    REFERENCES `Miricyl`.`Organisation` (`OrgID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin; 
+
+
 USE `Miricyl` ;
 
 -- -----------------------------------------------------
@@ -342,7 +360,9 @@ SELECT distinct
     OS.FaceBookURL,
 	OS.ChatURL,
     O.OrgPriority,
-    OS.ServicePriority
+    OS.ServicePriority,
+	RI.GoogleRating,
+	RI.FaceBookRating
 
 FROM Miricyl.ServiceNeeds SN
 INNER JOIN Miricyl.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
@@ -352,6 +372,7 @@ LEFT JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
 INNER JOIN Miricyl.Needs N on N.NeedsID = SN.Needs_NeedsID
 LEFT JOIN Miricyl.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
 LEFT JOIN Miricyl.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
+LEFT JOIN Miricyl.RatingImport RI on RI.Organisation_OrgID = O.OrgID
 WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 
 
@@ -640,22 +661,48 @@ LEFT JOIN Miricyl.personalisation P1
 END$$
 DELIMITER ;
 
--- -----------------------------------------------------
--- Table `Miricyl`.`RatingImport`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Miricyl`.`RatingImport` ;
 
-  CREATE TABLE IF NOT EXISTS `Miricyl`.`RatingImport` (
-  `Organisation_OrgID` INT NOT NULL,
-  `GoogleRating` DECIMAL(5,2) NULL DEFAULT NULL,
-  `FaceBookRating` DECIMAL(5,2) NULL DEFAULT NULL,
-    CONSTRAINT `fk_RatingImport_Organisation`
-    FOREIGN KEY (`Organisation_OrgID`)
-    REFERENCES `Miricyl`.`Organisation` (`OrgID`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_bin; 
+ 
+-- -----------------------------------------------------
+-- View `Miricyl`.`ServiceDetails`
+-- -----------------------------------------------------
+ 
+DROP VIEW IF EXISTS `Miricyl`.`EmergencyServices` ;
+USE `Miricyl`;
+CREATE  OR REPLACE VIEW `EmergencyServices` AS
 
+SELECT distinct 
+	O.OrgID,
+	O.OrgName, 
+    CASE WHEN OS.NationalService THEN 'YES' ELSE 'NO' END NationalService,
+    C.Name SpecificArea,
+    CONCAT(OS.OuterCode,' ',OS.InnerCode) PostCode,
+    OS.OuterCode,
+    OS.InnerCode,
+    O.PlaceID,
+    O.LogoURl as Logo,
+    O.OrgDesc as OrgDescription,
+	OS.ServiceName as ServiceName,
+    OS.Description AS ServiceDescription,
+    IF(ISNULL(OS.Address2),Address1,CONCAT(OS.Address1, ', ', OS.Address2 )) AS PhysicalAddress,
+    OS.ServiceEmail as EmailAddress,
+    OS.ServiceURL ,
+    OS.PhoneNo,
+    OS.OpeningTime,
+    G.Gender,
+    OS.FaceBookURL,
+	OS.ChatURL,
+    O.OrgPriority,
+    OS.ServicePriority,
+	RI.GoogleRating,
+	RI.FaceBookRating	
+
+FROM Miricyl.Organisation O
+INNER JOIN Miricyl.OrgService OS on OS.Organisation_OrgID = O.OrgID
+LEFT JOIN Miricyl.Country C on C.CountryID = OS.Country_CountryID
+LEFT JOIN Miricyl.Gender G on G.GenderID = OS.Gender_GenderID
+LEFT JOIN Miricyl.RatingImport RI on RI.Organisation_OrgID = O.OrgID
+WHERE O.EmergencyService = 'Y';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -670,7 +717,7 @@ CREATE USER IF NOT EXISTS 'appuser'  IDENTIFIED BY 'Mi@0r!9c)l' PASSWORD EXPIRE 
 -- -----------------------------------------------------
 -- Grant appuser to AppReader role
 -- -----------------------------------------------------
-GRANT SELECT on `__dbname__`.* to appuser;
+GRANT SELECT on `Miricyl`.* to appuser;
 
 -- -----------------------------------------------------
 FLUSH PRIVILEGES;
