@@ -754,7 +754,7 @@ frontend_ip_configuration {
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
     host_name                      = "${http_listener.value}.${local.prefix}.org"
-    ssl_certificate_name           = data.azurerm_key_vault_certificate.miricyl[each.key].name
+    ssl_certificate_name           = data.azurerm_key_vault_certificate.miricyl.name
   }
  }
 /* --remove
