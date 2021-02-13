@@ -859,7 +859,7 @@ dynamic "ssl_certificate" {
     for_each              = lookup(local.environments, local.zone)
    content {
     name                  = "${ssl_certificate.value}-miricyl-org"
-    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[ssl_certificate.value].secret_id
+    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[ssl_certificate.key].secret_id
   }
 }
 }
