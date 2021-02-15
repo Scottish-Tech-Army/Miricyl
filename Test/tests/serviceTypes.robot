@@ -11,6 +11,7 @@ Test Teardown  end test
 *** Test Cases ***
 
 
+
 Service Types page has the logo and help button on the header
     [Documentation]  Checks if header on the Service Types page is visible and the text is "Search mental health resources & services that can help you feel better" and is
     [Tags]  Smoke  functional  end-2-end
@@ -36,7 +37,7 @@ Service Types page has the question and the help text
 
 All the 'Service Types' are listed on the service page
     [Documentation]  Checks if all the services are listed on the page. Also checks if the back and the next button on this page works
-    [Tags]  Smoke  functional  end-2-end  current
+    [Tags]  Smoke  functional  end-2-end
     Index.Go to the MIRICYL home page
     Index.Click on the next button
     ServiceTypes.Service Types are listed on the page
@@ -53,9 +54,10 @@ Users are able to select all the service types
     ServiceTypes.Click on the Next button
 
 
-Service Type page has footer section
+Ensure footer sertion is present in on the 'Service type' page
     [Documentation]  Checks if footer data is is intact
     [Tags]  Smoke  functional  end-2end
     Index.Go to the MIRICYL home page
-    Index.Ensure feedback text and link in present
-    Index.Ensure Miricyl Address and Privacy Policy is present
+    Index.Click on the next button
+    ServiceTypes.Ensure feedback text and link in present on the service type page
+    ServiceTypes.Ensure Miricyl Address and Privacy Policy is present on the service type page

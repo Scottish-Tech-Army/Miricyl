@@ -19,7 +19,7 @@ if (development) {
   var pool = mysql.createPool({
     connectionLimit: 10,
     user: "__user__",
-    password: "__password__",
+    password: "__dbadminpassword__",
     database: "__database__",
     host: "__host__",
     port: "3306",
