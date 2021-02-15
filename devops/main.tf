@@ -35,9 +35,7 @@ locals{
           np = {
               1 = "dev"
               2 = "int"
-              3 = "pre" 
-              4 = "dem"
-              5 = "uat"
+              3 = "pre"
           }
           p = {
               1  = "help"
