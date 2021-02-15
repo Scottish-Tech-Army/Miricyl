@@ -19,9 +19,9 @@ const MultiChoiceQuestion = ({
       return (
         <button
           onClick={() => onToggleItemSelected(option)}
-          className={
-            option.isSelected ? "question-button-selected" : "question-button"
-          }
+          className={`question-button ${
+            option.isSelected && "question-button-selected"
+          }`}
           value={option.value}
           key={option.value}
           id={option.value.replace(/\s/g, "-")}
@@ -33,14 +33,13 @@ const MultiChoiceQuestion = ({
   };
 
   return (
-    <div className={`question-${backgroundToUse}-container`}>
+    <div className={`question-${backgroundToUse}-container question-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
           <Header />
           <SubHeader />
         </div>
-
-        <div>
+        <div className="ui-container">
           <div className="select-container">
             <p className="question-text" id="question-title">
               {questionTitle}

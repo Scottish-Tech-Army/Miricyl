@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `__dbname__`.`Organisation` (
   `OrgOpeningTime` VARCHAR(500) NULL DEFAULT NULL,  
   `OrgCharityNumber` VARCHAR(500) NULL DEFAULT NULL,
   `OrgPriority` INT NULL DEFAULT NULL,
+  `EmergencyService` CHAR(1) NULL DEFAULT 'N',
   
   PRIMARY KEY (`OrgID`),
   UNIQUE INDEX `OrgID_UNIQUE` (`OrgID` ASC) VISIBLE,
@@ -301,6 +302,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_bin;
 
+-- -----------------------------------------------------
+-- Table `__dbname__`.`RatingImport`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `__dbname__`.`RatingImport` ;
+
+  CREATE TABLE IF NOT EXISTS `__dbname__`.`RatingImport` (
+  `Organisation_OrgID` INT NOT NULL,
+  `GoogleRating` DECIMAL(5,2) NULL DEFAULT NULL,
+  `FaceBookRating` DECIMAL(5,2) NULL DEFAULT NULL,
+    CONSTRAINT `fk_RatingImport_Organisation`
+    FOREIGN KEY (`Organisation_OrgID`)
+    REFERENCES `__dbname__`.`Organisation` (`OrgID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin; 
+
+
 USE `__dbname__` ;
 
 -- -----------------------------------------------------
@@ -342,7 +360,9 @@ SELECT distinct
     OS.FaceBookURL,
 	OS.ChatURL,
     O.OrgPriority,
-    OS.ServicePriority
+    OS.ServicePriority,
+	RI.GoogleRating,
+	RI.FaceBookRating
 
 FROM __dbname__.ServiceNeeds SN
 INNER JOIN __dbname__.OrgService OS on OS.OrgServiceID = SN.OrgService_OrgServiceID
@@ -352,6 +372,7 @@ LEFT JOIN __dbname__.Gender G on G.GenderID = OS.Gender_GenderID
 INNER JOIN __dbname__.Needs N on N.NeedsID = SN.Needs_NeedsID
 LEFT JOIN __dbname__.Type T on T.ServiceTypeID = SN.Type_ServiceTypeID
 LEFT JOIN __dbname__.Personalisation P on P.PersonalisationID= SN.Personalisation_PersonalisationID
+LEFT JOIN __dbname__.RatingImport RI on RI.Organisation_OrgID = O.OrgID
 WHERE (NULLIF(`N`.`UserOption`, '') IS NOT NULL);
 
 
@@ -437,7 +458,7 @@ CREATE TABLE `__dbname__`.`Serv_Import` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- -----------------------------------------------------
--- Table `__dbname__`.`Org_Import`
+-- Table `__dbname__`.`Serv_Import`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `__dbname__`.`Org_Import` ;
 CREATE TABLE `__dbname__`.`Org_Import` (
@@ -641,9 +662,52 @@ END$$
 DELIMITER ;
 
 
+ 
+-- -----------------------------------------------------
+-- View `__dbname__`.`ServiceDetails`
+-- -----------------------------------------------------
+ 
+DROP VIEW IF EXISTS `__dbname__`.`EmergencyServices` ;
+USE `__dbname__`;
+CREATE  OR REPLACE VIEW `EmergencyServices` AS
+
+SELECT distinct 
+	O.OrgID,
+	O.OrgName, 
+    CASE WHEN OS.NationalService THEN 'YES' ELSE 'NO' END NationalService,
+    C.Name SpecificArea,
+    CONCAT(OS.OuterCode,' ',OS.InnerCode) PostCode,
+    OS.OuterCode,
+    OS.InnerCode,
+    O.PlaceID,
+    O.LogoURl as Logo,
+    O.OrgDesc as OrgDescription,
+	OS.ServiceName as ServiceName,
+    OS.Description AS ServiceDescription,
+    IF(ISNULL(OS.Address2),Address1,CONCAT(OS.Address1, ', ', OS.Address2 )) AS PhysicalAddress,
+    OS.ServiceEmail as EmailAddress,
+    OS.ServiceURL ,
+    OS.PhoneNo,
+    OS.OpeningTime,
+    G.Gender,
+    OS.FaceBookURL,
+	OS.ChatURL,
+    O.OrgPriority,
+    OS.ServicePriority,
+	RI.GoogleRating,
+	RI.FaceBookRating	
+
+FROM __dbname__.Organisation O
+INNER JOIN __dbname__.OrgService OS on OS.Organisation_OrgID = O.OrgID
+LEFT JOIN __dbname__.Country C on C.CountryID = OS.Country_CountryID
+LEFT JOIN __dbname__.Gender G on G.GenderID = OS.Gender_GenderID
+LEFT JOIN __dbname__.RatingImport RI on RI.Organisation_OrgID = O.OrgID
+WHERE O.EmergencyService = 'Y';
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 -- -----------------------------------------------------
 -- Create A User for App
@@ -657,4 +721,3 @@ GRANT SELECT on `__dbname__`.* to appuser;
 
 -- -----------------------------------------------------
 FLUSH PRIVILEGES;
-

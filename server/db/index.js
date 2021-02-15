@@ -11,15 +11,15 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    database: "Miricyl",
+    database: "__dbname__",
     host: "localhost",
-    port: "3306"
+    port: "3306",
   });
 } else {
   var pool = mysql.createPool({
     connectionLimit: 10,
     user: "__user__",
-    password: "__password__",
+    password: "__dbadminpassword__",
     database: "__database__",
     host: "__host__",
     port: "3306",
@@ -41,7 +41,6 @@ miricyldb.needs = () => {
         return resolve(results);
       }
     );
-
   });
 };
 
@@ -86,6 +85,17 @@ miricyldb.charities = () => {
 miricyldb.organisations = () => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM Organisation`, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+};
+
+miricyldb.organisationsTest = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM Organisation LIMIT 5`, (err, results) => {
       if (err) {
         return reject(err);
       }

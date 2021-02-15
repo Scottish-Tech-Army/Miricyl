@@ -29,8 +29,7 @@ Title is Miricyl
 
 Go to the MIRICYL home page
     [Documentation]  User is taken to the landing page
-    go to  ${DEVSITE}
-
+    go to  ${devurl}
 
 Header of the home page is as expected
     [Documentation]  Checks if the header is "Search mental health resources & services that can help you feel better"
@@ -39,8 +38,9 @@ Header of the home page is as expected
 
 Logo is present
     [Documentation]  Checks the Boost logo
-    element should be visible  css:#root > div.navbar-container > div > div > a > h1
-    element text should be  css:#root > div.navbar-container > div > div > a > h1  Miricyl
+    #element should be visible  css:#root > div.navbar-container > div > div > a > h1
+    element should be visible  css:#root > div > div.navbar-container > div > div > a > h1
+    element text should be  css:#root > div > div.navbar-container > div > div > a > h1  Miricyl
 
 Help button is present
     [Documentation]  Checks if the Help button is present
@@ -61,14 +61,14 @@ Purpose text on the page
 
 Home Page has the question and the prompt
     [Documentation]  Checks if the home has the question 'What can we help you with?' and the prompt 'select all that apply'
-    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]
-    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]  What can we help you with?
+    element should be visible  id:question-title
+    element text should be  id:question-title  What can we help you with?
     Prompt for the question is present
 
 Prompt for the question is present
     [Documentation]  Checks the prompt under the needs question
-    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[2]
-    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[2]  select all that apply
+    element should be visible  id:question-subtitle
+    element text should be  id:question-subtitle  select all that apply
 
 Ensure all the 'Needs' are listed on the home page
     [Documentation]  Checks if all the available 'Needs' are listed on the homepage
@@ -228,22 +228,21 @@ Ensure feedback text and link in present
 
 Feedback text is present
     [Documentation]  Checks the text on feedback
-    element should be visible  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-feedback-text
-    element text should be  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-feedback-text  Whilst we cannot provide support if you have any comments please email us feedback
+    element should be visible  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-feedback-text
+    element text should be  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-feedback-text  Whilst we cannot provide support if you have any comments please email us feedback
 
 Ensure feedback link is present
-    element should be visible  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-feedback-text > a
-    element text should be  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-feedback-text > a  feedback
+    element should be visible  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-feedback-text > a
+    element text should be  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-feedback-text > a  feedback
 
 Ensure Miricyl Address and Privacy Policy is present
     Charity info is present
     Privay policy link is present
 
 Charity info is present
-    element should be visible  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-address-text
-    element text should be  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-address-text  Miricyl SCIO Charity Number SC047522 Address 2 Eglinton Crescent, Edinburgh, EH12 5DH · Privacy Policy - Miricyl
+    element should be visible  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-address-text
+    element text should be  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-address-text  Miricyl SCIO Charity Number SC047522 Address 2 Eglinton Crescent, Edinburgh, EH12 5DH · Privacy Policy - Miricyl
 
 Privay policy link is present
-    element should be visible  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-address-text > a
-    element text should be  css:#root > div:nth-child(2) > div > div.footer-wrapper > p.footer-address-text > a  Privacy Policy - Miricyl
-
+    element should be visible  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-address-text > a
+    element text should be  css:#root > div > div.question-one-container > div.footer-wrapper > p.footer-address-text > a  Privacy Policy - Miricyl
