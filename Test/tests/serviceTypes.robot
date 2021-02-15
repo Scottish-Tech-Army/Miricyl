@@ -11,7 +11,7 @@ Test Teardown  end test
 *** Test Cases ***
 
 
-Service Types page has the logo and help button on the header
+#Service Types page has the logo and help button on the header
 #    [Documentation]  Checks if header on the Service Types page is visible and the text is "Search mental health resources & services that can help you feel better" and is
 #    [Tags]  Smoke  functional  end-2-end
 #    Index.Go to the MIRICYL home page
