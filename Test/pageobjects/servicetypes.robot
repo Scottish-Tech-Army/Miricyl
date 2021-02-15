@@ -25,10 +25,15 @@ Purpose text on the service type page
     element text should be   css:#root > div.question-two-container > div > div.title-description-container > h2  Boost is here for you if you need trusted guidance on accessing resources and services that can positively impact your mental health. We will guide you in finding the treatment and help you need.
 
 Service Types question and the prompt is present
-    [Documentation]  Checks if the service type question is present
-    element should be visible  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]
-    element text should be  xpath://*[@id="root"]/div[2]/div/div/div[2]/div[1]/p[1]  What types of support are you looking for?
+    [Documentation]  Checks if the service type question and the prompt is present
+    Service type question
     Prompt for the question in service types page
+
+Service type question
+    [Documentation]  Checks if the the service type question is present and has the right wording
+    element should be visible  id:question-title
+    element text should be  id:question-title  What types of support are you looking for?
+
 
 Prompt for the question in service types page
     [Documentation]  Checks the prompt under the needs question
@@ -122,3 +127,32 @@ Click on the back button
 Click on the Next button
     [Documentation]  CLicks on the next button on the Next buttom on the service type page
     Index.Click on the next button
+
+######Footer Section###############
+
+
+Ensure feedback text and link in present on the service type page
+
+    Feedback text is present on the 'Service Type' page
+    Ensure feedback link is present on the 'Service Type' page
+
+Feedback text is present on the 'Service Type' page
+    [Documentation]  Checks the text on feedback
+    element should be visible  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-feedback-text
+    element text should be  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-feedback-text  Whilst we cannot provide support if you have any comments please email us feedback
+
+Ensure feedback link is present on the 'Service Type' page
+    element should be visible  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-feedback-text > a
+    element text should be  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-feedback-text > a  feedback
+
+Ensure Miricyl Address and Privacy Policy is present on the service type page
+    Charity info is present on the 'Service Type' page
+    Privay policy link is present on the 'Service Type' page
+
+Charity info is present on the 'Service Type' page
+    element should be visible  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-address-text
+    element text should be  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-address-text  Miricyl SCIO Charity Number SC047522 Address 2 Eglinton Crescent, Edinburgh, EH12 5DH · Privacy Policy - Miricyl
+
+Privay policy link is present on the 'Service Type' page
+    element should be visible  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-address-text > a
+    element text should be  css:#root > div > div.question-two-container.question-container > div.footer-wrapper > p.footer-address-text > a  Privacy Policy - Miricyl
