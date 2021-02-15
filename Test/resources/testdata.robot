@@ -21,7 +21,7 @@ ${NUMBERS}          123456789
 ${ALPHANUMERIC}     ${LETTERS}${NUMBERS}
 
 
-${DEVURL} =  https://dev.miricyl.org/
+${DEVURL} =  __url__
 ${TSTURL} =
 ${LIVE} =
 

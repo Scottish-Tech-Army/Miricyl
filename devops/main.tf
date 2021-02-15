@@ -92,7 +92,7 @@ resource "azurerm_dns_cname_record" "miricyl" {
   zone_name           = azurerm_dns_zone.miricyl.name
   resource_group_name = azurerm_resource_group.networking.name
   ttl                 = 300
-  record              = azurerm_public_ip.appgateway.domain_name_label
+  record              = "${azurerm_public_ip.appgateway.domain_name_label}.${local.primary_location}.cloudapp.azure.com"
 }
 
 # A Vnet is deployed in the Primary location (Server Source Vnet) per zone
@@ -256,14 +256,12 @@ resource "azurerm_app_service" "client" {
   site_config {
     linux_fx_version  = "PHP|7.3"
     app_command_line  = "npm run start"
-  /* // Terraform issue prevents this being done via code currently - This needs to be *manually* done
+  // Terraform issue prevents this being done via code currently - This needs to be *manually* done
   ip_restriction {
-    name       = "Prevent direct external access"
-    ip_address = "AzureCloud"
-    priority   = 500
-    action     = "allow"
+    name        = "Prevent direct external access"
+    service_tag = "AzureCloud"
+    priority    = 500
     }
-  */
   }
 }
 
@@ -285,14 +283,13 @@ resource "azurerm_app_service" "server" {
     linux_fx_version = "NODE|10.10"
     app_command_line = "npm run start"
     
-  /* // Terraform issue prevents this being done via code currently
+   // Terraform issue prevents this being done via code currently
   ip_restriction {
-    name       = "Prevent direct external access"
-    ip_address = "AzureCloud"
-    priority   = 500
-    action     = "Allow"
+    name        = "Prevent direct external access"
+    service_tag = "AzureCloud"
+    priority    = 500
     }
-    */
+   
   }
 }
 
@@ -350,6 +347,7 @@ resource "azurerm_mysql_firewall_rule" "primary_server" {
   end_ip_address      = "0.0.0.0"
 }
 
+/* This is done via the script
 # A database is created in each environment
 resource "azurerm_mysql_database" "webapp_db" {
   for_each            = lookup(local.environments, local.zone)
@@ -359,6 +357,8 @@ resource "azurerm_mysql_database" "webapp_db" {
   charset             = "utf8"
   collation           = "utf8_bin"
 }
+*/
+
 
 # A Resource group is created logging and analytics components in each zone
 resource "azurerm_resource_group" "logging" {
@@ -629,10 +629,10 @@ resource "azurerm_key_vault_access_policy" "appgateway" {
 
 # This retrieves the IDs of all the certificates in the vault
 data "azurerm_key_vault_certificate" "miricyl" {
-  name         = "miricyl-wildcard"
+for_each       = lookup(local.environments, local.zone)
+  name         = "${each.value}-np-miricyl-org"
   key_vault_id = azurerm_key_vault.appgateway.id
 }
-
 
 # User Assisgned Identity for Application Gateway
 resource "azurerm_user_assigned_identity" "appgateway" {
@@ -753,8 +753,8 @@ frontend_ip_configuration {
     frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
-    host_name                      = "${http_listener.value}.${local.prefix}.org"
-    ssl_certificate_name           = data.azurerm_key_vault_certificate.miricyl.name
+    host_name                      = "${http_listener.value}.${local.zone}.${local.prefix}.org"
+    ssl_certificate_name           = "${http_listener.value}-miricyl-org"
   }
  }
 /* --remove
@@ -855,12 +855,14 @@ dynamic "backend_http_settings" {
     probe_name            = "${backend_http_settings.value}-logos-probe"
   }
 }
-ssl_certificate {
-    name                  = "miricyl-wildcard"
-    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl.secret_id
+dynamic "ssl_certificate" {
+    for_each              = lookup(local.environments, local.zone)
+   content {
+    name                  = "${ssl_certificate.value}-miricyl-org"
+    key_vault_secret_id   = data.azurerm_key_vault_certificate.miricyl[ssl_certificate.key].secret_id
   }
 }
-
+}
 # Enable diagnostics for back end web service in each environment
 resource "azurerm_monitor_diagnostic_setting" "appgateway" {
   name                       = "logging"

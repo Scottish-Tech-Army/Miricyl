@@ -26,7 +26,7 @@ const TextBoxQuestion = ({
   };
 
   return (
-    <div className={`question-${backgroundToUse}-container`}>
+    <div className={`question-container`}>
       <div className="question-grid-container">
         <div className="title-description-container">
           <Header />

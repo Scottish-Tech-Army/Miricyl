@@ -3,6 +3,8 @@ const express = require("express");
 const axios = require("axios");
 const db = require("../db");
 const dotenv = require("dotenv");
+const { Parser } = require('json2csv');
+fs = require('fs');
 
 const createCharityObjects = require("../charityHelper");
 dotenv.config();
@@ -86,6 +88,45 @@ router.get("/googleratings/:id", async (req, res) => {
     let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.params.id}&fields=rating&key=${key}`;
     let results = await axios.get(url);
     res.json(results.data.result);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+router.get("/updates", async (req, res, next) => {
+
+  try {
+    var results = []
+    let organisations = await db.organisationsTest();
+    var updateDetails = []
+
+
+
+    let update = organisations.map(async (org) => {
+      key = process.env.googleapi
+
+      if (org.PlaceID) {
+        key = process.env.googleapi
+        let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${org.PlaceID}&fields=rating&key=${key}`;
+        results = await axios.get(url).then((res) => {
+          rating = res.data.result.rating;
+          const tempUpdate = { id: org.OrgID, GoogleRating: rating }
+          updateDetails.push(tempUpdate)
+          return tempUpdate
+        });
+        return null
+      }
+    })
+    Promise.all(update).then((results) => {
+      const json2csvParser = new Parser();
+      const csv = json2csvParser.parse(updateDetails);
+      fs.writeFile('ratings.csv', csv, function (err) {
+        if (err) throw err;
+        console.log('file saved');
+        res.attachment('ratings.csv').send(csv)
+      });
+    })
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

@@ -13,6 +13,10 @@
   @media(max-width: 900px){
     width: 100%;
   }
+
+  @media(max-width: 660px){
+    padding: 12px;
+  }
 }
 
 // OVERVIEW
@@ -20,6 +24,16 @@
 .overviewContainer {
   display: flex;
   margin-bottom: 32px;
+
+  @media(max-width: 660px){
+    margin-bottom: 20px;
+  }
+
+  
+  @media(max-width: 460px) {
+    margin-bottom: 8px;
+
+  }
 }
 
 .logoContainer {
@@ -43,6 +57,14 @@
   line-height: 29px;
   color: #2e3192;
   margin-bottom: 12px;
+
+  @media(max-width: 1150px) {
+    font-size: 24px;
+  }
+
+  @media(max-width: 460px) {
+    font-size: 20px;
+  }
 }
 
 .orgDescription {
@@ -130,12 +152,21 @@
   letter-spacing: normal;
   margin-right: 40px;
   margin-bottom: 40px;
+
+  @media(max-width: 460px) {
+    margin-bottom: 16px;
+
+  }
 }
 
 .serviceName {
   font-size: 21px;
   font-weight: bold;
   line-height: 1.05;
+
+  @media(max-width: 460px) {
+    font-size: 18px;
+  }
 }
 
 .serviceInfo {
@@ -144,6 +175,10 @@
   font-weight: normal;
   flex: 1;
   line-height: 1.22;
+
+  @media(max-width: 460px) {
+    font-size: 16px;
+  }
 }
 
 .serviceButton {
@@ -163,6 +198,10 @@
   color: white;
   padding: 16px;
   margin-top: auto;
+
+  @media(max-width: 613px){
+    flex-direction: column;
+  }
 }
 
 .contactDetailsContainer{ 
@@ -171,6 +210,11 @@
   flex-direction: column;
   font-family: Nunito;
   font-size: 18px;
+  word-wrap: break-word;
+
+  @media(max-width: 460px) {
+    font-size: 16px;
+  }
 }
 
 .orgDetailsTitle{
@@ -178,7 +222,11 @@
   font-size: 21px;
   font-weight: bold;
   max-width: 200px;
-  padding-left: 16px;
+  padding-bottom: 32px;
+
+  @media(max-width: 460px) {
+    font-size: 20px;
+  }
 }
 
 // Expand button
