@@ -108,14 +108,29 @@ router.get("/updates", async (req, res, next) => {
 
       if (org.PlaceID) {
         key = process.env.googleapi
-        let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${org.PlaceID}&fields=rating&key=${key}`;
-        results = await axios.get(url).then((res) => {
-          rating = res.data.result.rating;
-          const tempUpdate = { id: org.OrgID, GoogleRating: rating }
-          updateDetails.push(tempUpdate)
-          return tempUpdate
-        });
-        return null
+        try {
+          let url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${org.PlaceID}&fields=rating&key=${key}`;
+          results = await axios.get(url).then((res) => {
+            rating = res.data.result.rating;
+            // console.log(org.OrgID, rating);
+            if (rating) {
+              const tempUpdate = { id: org.OrgID, GoogleRating: rating }
+              updateDetails.push(tempUpdate)
+
+              // const tempUpdate = { id: org.OrgID, GoogleRating: rating }
+              // updateDetails.push(tempUpdate)
+              // console.log('rating', rating);
+            }
+            return null
+          });
+          return null
+        } catch (e) {
+          console.log(e);
+          console.log(org.OrgID);
+          console.log(res.data.result.rating);
+          res.sendStatus(500);
+        }
+
       }
     })
     Promise.all(update).then((results) => {

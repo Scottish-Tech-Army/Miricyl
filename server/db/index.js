@@ -11,7 +11,7 @@ if (development) {
     connectionLimit: 10,
     user: process.env.dbuser,
     password: process.env.dbpassword,
-    database: "__dbname__",
+    database: "Miricyl",
     host: "localhost",
     port: "3306",
   });
@@ -95,7 +95,7 @@ miricyldb.organisations = () => {
 
 miricyldb.organisationsTest = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM Organisation LIMIT 5`, (err, results) => {
+    pool.query(`SELECT * FROM Organisation LIMIT 12`, (err, results) => {
       if (err) {
         return reject(err);
       }

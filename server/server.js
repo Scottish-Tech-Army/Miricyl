@@ -11,7 +11,7 @@ var corsOptions = {}
 // test
 if (development) {
   corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
