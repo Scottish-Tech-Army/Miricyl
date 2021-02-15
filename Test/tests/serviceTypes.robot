@@ -56,7 +56,7 @@ Users are able to select all the service types
 
 Ensure footer sertion is present in on the 'Service type' page
     [Documentation]  Checks if footer data is is intact
-    [Tags]  Smoke  functional  end-2end  current
+    [Tags]  Smoke  functional  end-2end
     Index.Go to the MIRICYL home page
     Index.Click on the next button
     ServiceTypes.Ensure feedback text and link in present on the service type page
