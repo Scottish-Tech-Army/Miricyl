@@ -41,22 +41,6 @@ locals{
               1  = "help"
           }
     }
-
-# --remove
-    /*
-    custom_domain = {
-      np = {
-        npmiricyltesting = "testing.miricyl.org"
-        devmiricylclient = "dev.miricyl.org"
-        intmiricylclient = "int.miricyl.org"
-        premiricylclient = "pre.np.miricyl.org"
-        uatmiricylclient = "uat.miricyl.org"
-      }
-      p = {
-        prodmiricylclient = "help.miricyl.org"
-      }
-    }
-    */
     tags = {
       zone = local.zone
     }
@@ -325,13 +309,9 @@ resource "azurerm_mysql_server" "primary_server" {
   auto_grow_enabled                 = true
   backup_retention_days             = 7
   geo_redundant_backup_enabled      = false
-  # Enable encryption in prod  --remove
   infrastructure_encryption_enabled = false
-  # Requires a higher tier to take to make internal  -remove
   public_network_access_enabled     = true
   ssl_enforcement_enabled           = true
- # ssl_minimal_tls_version_enforced = "TLS1_2"  --remove 
- # ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"  -remove
   tags                              = local.tags
 }
 
@@ -344,19 +324,6 @@ resource "azurerm_mysql_firewall_rule" "primary_server" {
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "0.0.0.0"
 }
-
-/* This is done via the script
-# A database is created in each environment
-resource "azurerm_mysql_database" "webapp_db" {
-  for_each            = lookup(local.environments, local.zone)
-  name                = "${each.value}-miricyl"
-  resource_group_name = azurerm_resource_group.primary_database.name
-  server_name         = azurerm_mysql_server.primary_server.name
-  charset             = "utf8"
-  collation           = "utf8_bin"
-}
-*/
-
 
 # A Resource group is created logging and analytics components in each zone
 resource "azurerm_resource_group" "logging" {
@@ -520,7 +487,6 @@ resource "azurerm_monitor_diagnostic_setting" "server" {
   }
 }
 
-
 # We create an application insights workspace per zone
 resource "azurerm_application_insights" "appin01" {
   name                = "${local.zone}-${local.prefix}-${local.primary_location}-appinsight01"
@@ -592,13 +558,6 @@ resource "azurerm_key_vault" "appgateway" {
   soft_delete_retention_days = 90
   purge_protection_enabled   = false
   sku_name                   = "standard"
-
-# --remove
-  # network_acls {
-  #   default_action = "Allow"
-  #   bypass         = "AzureServices"
-  # }
-
   tags = local.tags
 }
 
@@ -619,7 +578,6 @@ resource "azurerm_key_vault_access_policy" "appgateway" {
   key_vault_id = azurerm_key_vault.appgateway.id
   tenant_id    = data.azurerm_client_config.miricyl.tenant_id
   object_id    = azurerm_user_assigned_identity.appgateway.principal_id
-
   secret_permissions = [
     "get"
   ]
@@ -628,7 +586,7 @@ resource "azurerm_key_vault_access_policy" "appgateway" {
 # This retrieves the IDs of all the certificates in the vault
 data "azurerm_key_vault_certificate" "miricyl" {
 for_each       = lookup(local.environments, local.zone)
-  name         = "${each.value}-np-miricyl-org"
+  name         = local.zone == "np" ? "${each.value}-np-miricyl-org" : "${each.value}-miricyl-org"
   key_vault_id = azurerm_key_vault.appgateway.id
 }
 
@@ -676,16 +634,6 @@ resource "azurerm_application_gateway" "miricyl" {
     name        = "${local.zone}-${local.prefix}-${local.primary_location}-configuration"
     subnet_id   = azurerm_subnet.appgateway.id
   }
-
-/* --remove
-dynamic "frontend_port" {
-  for_each = lookup(local.environments, local.zone)
-  content {
-    name = "${frontend_port.value}-${local.prefix}-${local.primary_location}-client-feport"
-    port = 443
-  }
-}
-*/
 
 frontend_port {
     name = "${local.prefix}-${local.primary_location}-feport"
@@ -737,13 +685,6 @@ frontend_ip_configuration {
 
   }
 
-/* --remove
-  backend_address_pool {
-    name  = "${local.zone}-${local.prefix}-${local.primary_location}-backendaddresspool"
-    fqdns = ["intmiricylclient.azurewebsites.net"]
-  }
-*/
-
  dynamic "http_listener"  {
    for_each                        = lookup(local.environments, local.zone)
   content {
@@ -751,23 +692,10 @@ frontend_ip_configuration {
     frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
-    host_name                      = "${http_listener.value}.${local.zone}.${local.prefix}.org"
+    host_name                      = local.zone == "np" ? "${http_listener.value}.${local.zone}.${local.prefix}.org" : "${http_listener.value}.${local.prefix}.org"
     ssl_certificate_name           = "${http_listener.value}-miricyl-org"
   }
  }
-/* --remove
-  dynamic "http_listener"  {
-   for_each                        = lookup(local.environments, local.zone)
-  content {
-    name                           = "${http_listener.value}-${local.prefix}-${local.primary_location}-listener-http"
-    frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
-    frontend_port_name             = "${local.prefix}-${local.primary_location}-feport-http"
-    protocol                       = "http"
-   
-  }
- }
-
-*/
 
  dynamic "http_listener"  {
    for_each                         = lookup(local.environments, local.zone)
@@ -776,17 +704,10 @@ frontend_ip_configuration {
     frontend_ip_configuration_name  = "${azurerm_public_ip.appgateway.name}-ipconfig"
     frontend_port_name              = "${local.prefix}-${local.primary_location}-feport-http"
     protocol                        = "http"
-    host_name                       = "${http_listener.value}.${local.zone}.${local.prefix}.org"
+    host_name                       = local.zone == "np" ? "${http_listener.value}.${local.zone}.${local.prefix}.org" : "${http_listener.value}.${local.prefix}.org"
   }
  }
-/* --remove
-http_listener  {
-    name                           = "${local.prefix}-${local.primary_location}-listener-http"
-    frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
-    frontend_port_name             = "${local.prefix}-${local.primary_location}-feport-http"
-    protocol                       = "http"
-}
-*/
+
 dynamic "request_routing_rule" {
     for_each                   = lookup(local.environments, local.zone)
     content {
@@ -978,90 +899,6 @@ resource "azurerm_function_app" "certbot" {
   }
 }
 
-
-/*  --remove
-
-Function appgateway
-
-
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
-        "siteConfig": {
-          "appSettings": [
-            {
-              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-              "value": "[concat('InstrumentationKey=', reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2015-05-01').InstrumentationKey, ';EndpointSuffix=', variables('appInsightsEndpoints')[environment().name])]"
-            },
-            {
-              "name": "AzureWebJobsStorage",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'), '2018-11-01').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
-            },
-            {
-              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'), '2018-11-01').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
-            },
-            {
-              "name": "WEBSITE_CONTENTSHARE",
-              "value": "[toLower(variables('functionAppName'))]"
-            },
-            {
-              "name": "WEBSITE_RUN_FROM_PACKAGE",
-              "value": "https://shibayan.blob.core.windows.net/azure-keyvault-letsencrypt/v3/latest.zip"
-            },
-            {
-              "name": "FUNCTIONS_EXTENSION_VERSION",
-              "value": "~3"
-            },
-            {
-              "name": "FUNCTIONS_WORKER_RUNTIME",
-              "value": "dotnet"
-            },
-            {
-              "name": "Acmebot:AzureDns:SubscriptionId",
-              "value": "[subscription().subscriptionId]"
-            },
-            {
-              "name": "Acmebot:Contacts",
-              "value": "[variables('mailAddress')]"
-            },
-            {
-              "name": "Acmebot:Endpoint",
-              "value": "[variables('acmeEndpoint')]"
-            },
-            {
-              "name": "Acmebot:VaultBaseUrl",
-              "value": "[if(parameters('createWithKeyVault'), concat('https://', variables('keyVaultName'), environment().suffixes.keyvaultDns), variables('vaultBaseUrl'))]"
-            },
-            {
-              "name": "Acmebot:Environment",
-              "value": "[environment().name]"
-            }
-          ],
-          "clientAffinityEnabled": false
-        },
-        "ftpsState": "Disabled",
-        "httpsOnly": true
-      },
-*/
-
-
-/*
-  # azurerm_subnet.primary_services will be updated in-place
-  ~ resource "azurerm_subnet" "primary_services" {
-        address_prefix                                 = "10.0.1.0/24"
-        address_prefixes                               = [
-            "10.0.1.0/24",
-        ]
-      ~ enforce_private_link_endpoint_network_policies = true -> false
-        enforce_private_link_service_network_policies  = false
-        id                                             = "/subscriptions/aebe7290-6bdc-4539-93c0-d5b66a087a46/resourceGroups/np-miricyl-az-network-rg/providers/Microsoft.Network/virtualNetworks/np-miricyl-vnet-uksouth-services/subnets/np-az-p-vnet-uksouth-services"
-        name                                           = "np-az-p-vnet-uksouth-services"
-        resource_group_name                            = "np-miricyl-az-network-rg"
-        service_endpoints                              = []
-        virtual_network_name                           = "np-miricyl-vnet-uksouth-services"
-*/
-
-
 # Resource group for API Management
 resource "azurerm_resource_group" "apimanagement" {
   name                  = "${local.zone}-${local.prefix}-az-apimanagement-rg"
@@ -1078,19 +915,6 @@ resource "azurerm_api_management" "miricyl" {
   publisher_email     = local.pipeline_email
   sku_name            = "Consumption_0"
   tags                = local.tags
-/* --remove
-  policy {
-    xml_content = <<XML
-    <policies>
-      <inbound />
-      <backend />
-      <outbound />
-      <on-error />
-    </policies>
-XML
-
-  }
-  */
 }
 
 resource "azurerm_api_management_backend" "miricyl" {
