@@ -67,6 +67,10 @@ locals{
       np  = "miricyl-devops-np"
       p   = "miricyl-devops-p"
     }
+    listener_construct = {
+      np  = "${http_listener.value}.${local.zone}.${local.prefix}.org"
+      p   = "${http_listener.value}.${local.prefix}.org"
+    }
   }
 
 # Resource group is created for networking per zone
@@ -751,7 +755,7 @@ frontend_ip_configuration {
     frontend_ip_configuration_name = "${azurerm_public_ip.appgateway.name}-ipconfig"
     frontend_port_name             = "${local.prefix}-${local.primary_location}-feport"
     protocol                       = "https"
-    host_name                      = "${http_listener.value}.${local.zone}.${local.prefix}.org"
+    host_name                      = lookup(local.listener_construct, local.zone)
     ssl_certificate_name           = "${http_listener.value}-miricyl-org"
   }
  }
