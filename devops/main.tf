@@ -586,7 +586,7 @@ resource "azurerm_key_vault_access_policy" "appgateway" {
 # This retrieves the IDs of all the certificates in the vault
 data "azurerm_key_vault_certificate" "miricyl" {
 for_each       = lookup(local.environments, local.zone)
-  name         = "${each.value}-np-miricyl-org"
+  name         = local.zone == "np" ? "${each.value}-np-miricyl-org" : "${each.value}-miricyl-org"
   key_vault_id = azurerm_key_vault.appgateway.id
 }
 
